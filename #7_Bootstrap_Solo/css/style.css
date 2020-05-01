@@ -1,0 +1,6 @@
+.bg-image {
+  background-image: url("https://picsum.photos/id/911/2000/1300");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
