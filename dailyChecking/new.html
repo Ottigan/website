@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Product</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <header>
+        <nav style="
+                  background-color: rgb(35, 83, 83);
+                  height: 40px;
+                  font-size: xx-large;
+                " class="flex jc-c ai-c">
+            <ul class="container flex jc-se ls-none">
+                <li><a href="main.html">Daily Checking</a></li>
+                <li><a href="tracking.html">Tracking DB</a></li>
+                <li><a href="new.html">Add New Table/Casino</a></li>
+            </ul>
+        </nav>
+    </header>
+    <hr>
+    <section style="margin-top: 50px;" class="flex jc-c">
+        <div class="flex vertical">
+            <div class="container-new flex js-c ai-c jc-sb">
+                <form action="" style="width: 100%;" class="flex">
+                    <div style="margin: 0 3px;" class="flex flex-grow vertical">
+                        <label for="new-table">Add Table</label>
+                        <input type="text" id="new-table" class="flex-grow">
+                    </div>
+                    <button style="height: 52%; width: 10%; align-self: flex-end;" type="button"
+                        id="add-table">Add</button>
+                </form>
+                <form action="" style="width: 100%;" class="flex">
+                    <div style="margin: 0 3px;" class="flex flex-grow vertical">
+                        <label for="new-casino">Add Casino</label>
+                        <input type="text" name="" id="new-casino" class="flex-grow">
+                    </div>
+                    <button style="height: 52%; width: 10%; align-self: flex-end;" type="button"
+                        id="add-casino">Add</button>
+                </form>
+            </div>
+            <div style="margin-top: 20px;" class="flex">
+                <div style="width: 50%; padding-left: 3px;">
+                    <ul id="table-list" class="ls-none flex vertical">
+                    </ul>
+                </div>
+                <div style=" width: 50%; padding-left: 3px;">
+                    <ul id="casino-list" class="ls-none"></ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script src="js/new.js"></script>
+</body>
+
+</html>
