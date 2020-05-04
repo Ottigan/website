@@ -1,6 +1,87 @@
-.bg-image {
-  background-image: url("https://picsum.photos/id/911/2000/1300");
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+}
+
+nav a:hover {
+  background-color: darkcyan;
+}
+
+.location {
+  text-decoration: underline;
+}
+
+.container {
+  width: 1200px;
+}
+
+.flex {
+  display: flex;
+}
+
+.vertical {
+  flex-direction: column;
+}
+
+.flex-grow {
+  flex: 1 0 0;
+}
+
+.jc-c {
+  justify-content: center;
+}
+
+.jc-sb {
+  justify-content: space-between;
+}
+
+.jc-se {
+  justify-content: space-evenly;
+}
+
+.jc-sa {
+  justify-content: space-around;
+}
+
+.js-c {
+  justify-self: center;
+}
+
+.js-fe {
+  justify-self: flex-end;
+}
+
+.ai-c {
+  align-items: center;
+}
+
+.vh100 {
+  height: 100vh;
+}
+
+.ls-none {
+  list-style: none;
+}
+
+.l-decoration {
+  border: 1px solid rgb(153, 151, 151);
+  margin: 2px 0;
+}
+
+li a {
+  padding: 2px 0;
+}
+
+.invalid {
+  outline-color: red !important;
+}
+
+.valid {
+  background-color: rgb(126, 189, 126);
 }
