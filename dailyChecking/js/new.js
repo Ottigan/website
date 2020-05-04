@@ -63,4 +63,41 @@ const removeOperation = (event) => {
 };
 
 tableList.addEventListener("click", removeOperation);
+
 casinoList.addEventListener("click", removeOperation);
+
+newTable.addEventListener("keypress", function (e) {
+  if (e.key === "Enter") {
+    event.preventDefault();
+    let newTableValue = newTable.value;
+    let empty = newTableValue.trim();
+
+    if (!empty) {
+      alert("Empty Value!");
+      newTable.classList.add("invalid");
+      newTable.focus();
+    } else {
+      newTable.value = "";
+      newTable.classList.remove("invalid");
+      addTableListItem(newTableValue);
+    }
+  }
+});
+
+newCasino.addEventListener("keypress", function (e) {
+  if (e.key === "Enter") {
+    event.preventDefault();
+    let newCasinoValue = newCasino.value;
+    let empty = newCasinoValue.trim();
+
+    if (!empty) {
+      alert("Empty Value!");
+      newCasino.classList.add("invalid");
+      newCasino.focus();
+    } else {
+      newCasino.value = "";
+      newCasino.classList.remove("invalid");
+      addCasinoListItem(newCasinoValue);
+    }
+  }
+});
