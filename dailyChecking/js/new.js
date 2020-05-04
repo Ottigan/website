@@ -26,8 +26,8 @@ const addTableListItem = (item) => {
   const listItem = document.createElement("li");
   listItem.innerText = item;
   listItem.style.paddingLeft = "2px";
-  listItem.classList.add("l-decoration", "flex", "jc-sb", "ai-c");
-  listItem.innerHTML = `${item} <button style="width: 10%" type="button">x</button>`;
+  listItem.classList.add("l-decoration", "flex", "jc-sb", "ai-c", "list-item");
+  listItem.innerHTML = `${item} <button type="button" style="width: 10%" class="remove">x</button>`;
   tableList.prepend(listItem);
 };
 
@@ -50,7 +50,17 @@ const addCasinoListItem = (item) => {
   const listItem = document.createElement("li");
   listItem.innerText = item;
   listItem.style.paddingLeft = "2px";
-  listItem.classList.add("l-decoration", "flex", "jc-sb", "ai-c");
-  listItem.innerHTML = `${item} <button style="width: 10%" type="button">x</button>`;
+  listItem.classList.add("l-decoration", "flex", "jc-sb", "ai-c", "list-item");
+  listItem.innerHTML = `${item} <button type="button" style="width: 10%" class="remove">x</button>`;
   casinoList.prepend(listItem);
 };
+
+const removeOperation = (event) => {
+  let target = event.target;
+  if (target.classList.contains("remove")) {
+    target.closest(".list-item").remove();
+  }
+};
+
+tableList.addEventListener("click", removeOperation);
+casinoList.addEventListener("click", removeOperation);
