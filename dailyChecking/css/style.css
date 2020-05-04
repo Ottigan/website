@@ -13,12 +13,12 @@ nav a:hover {
   background-color: darkcyan;
 }
 
-.container {
-  width: 1200px;
+.location {
+  text-decoration: underline;
 }
 
-.container-new {
-  width: 1600px;
+.container {
+  width: 1200px;
 }
 
 .flex {
@@ -53,6 +53,10 @@ nav a:hover {
   justify-self: center;
 }
 
+.js-fe {
+  justify-self: flex-end;
+}
+
 .ai-c {
   align-items: center;
 }
@@ -66,10 +70,18 @@ nav a:hover {
 }
 
 .l-decoration {
-  border: 1px solid black;
+  border: 1px solid rgb(153, 151, 151);
   margin: 2px 0;
 }
 
 li a {
   padding: 2px 0;
+}
+
+.invalid {
+  outline-color: red !important;
+}
+
+.valid {
+  background-color: rgb(126, 189, 126);
 }

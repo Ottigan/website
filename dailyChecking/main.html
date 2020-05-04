@@ -16,9 +16,9 @@
           font-size: xx-large;
         " class="flex jc-c ai-c">
       <ul class="container flex jc-se ls-none">
-        <li><a href="main.html">Daily Checking</a></li>
-        <li><a href="tracking.html">Tracking DB</a></li>
-        <li><a href="new.html">Add New Table/Casino</a></li>
+        <li><a id="dc" href="main.html">Daily Checking</a></li>
+        <li><a id="tracking" href="tracking.html">Tracking DB</a></li>
+        <li><a id="new-product" href="new.html">Add New Table/Casino</a></li>
       </ul>
     </nav>
   </header>
@@ -28,7 +28,7 @@
       <form action="" style="width: 100%;" class="flex jc-c">
         <div style="margin: 0 3px;">
           <label for="table-list">Game Table</label><br />
-          <input type="text" id="table-list">
+          <input type="text" id="table-list" />
         </div>
         <div style="margin: 0 3px;">
           <label for="platform">Platform</label><br />
@@ -44,19 +44,32 @@
         </div>
         <div style="margin: 0 3px;">
           <label for="casino">Casino</label><br />
-          <input type="text" name="" id="casino">
+          <input type="text" name="" id="casino" />
         </div>
-        <span id="counter1"
-          style="height: 52%; width: 21px; align-self: flex-end; text-align: center; border: 1px solid rgb(138, 138, 138); padding: 0 2px; margin: 0 3px; font-size: 15px;">0</span>
-        <input type="text" id="" placeholder="10" maxlength="2"
-          style="height: 52%; width: 21px; align-self: flex-end; text-align: center; margin: 0 3px;">
+        <span id="counter1" style="
+              height: 52%;
+              width: 21px;
+              align-self: flex-end;
+              text-align: center;
+              border: 1px solid rgb(138, 138, 138);
+              padding: 0 2px;
+              margin: 0 3px;
+              font-size: 15px;
+            ">0</span>
+        <input type="text" id="target1" placeholder="10" maxlength="2" style="
+              height: 52%;
+              width: 21px;
+              align-self: flex-end;
+              text-align: center;
+              margin: 0 3px;
+            " />
         <button id="addbutton1" style="height: 52%; align-self: flex-end; margin-left: 3px;" type="button">
           Submit
         </button>
       </form>
       <form action="" style="width: 100%; margin-top: 5px;" class="flex jc-c">
         <div style="margin: 0 3px;">
-          <input type="text" id="table-list">
+          <input type="text" id="table-list" />
         </div>
         <div style="margin: 0 3px;">
           <input list="platforms" />
@@ -70,19 +83,32 @@
           </datalist>
         </div>
         <div style="margin: 0 3px;">
-          <input type="text" name="" id="casino">
+          <input type="text" name="" id="casino" />
         </div>
-        <span id="counter2"
-          style="height: 52%; width: 21px; align-self: flex-end; text-align: center; border: 1px solid rgb(138, 138, 138); padding: 0 2px; margin: 0 3px; font-size: 15px;">0</span>
-        <input type="text" id="" placeholder="10" maxlength="2"
-          style="height: 52%; width: 21px; align-self: flex-end; text-align: center; margin: 0 3px;">
+        <span id="counter2" style="
+              height: 52%;
+              width: 21px;
+              align-self: flex-end;
+              text-align: center;
+              border: 1px solid rgb(138, 138, 138);
+              padding: 0 2px;
+              margin: 0 3px;
+              font-size: 15px;
+            ">0</span>
+        <input type="text" id="target2" placeholder="10" maxlength="2" style="
+              height: 52%;
+              width: 21px;
+              align-self: flex-end;
+              text-align: center;
+              margin: 0 3px;
+            " />
         <button id="addbutton2" style="height: 52%; align-self: flex-end; margin-left: 3px;" type="button">
           Submit
         </button>
       </form>
       <form action="" style="width: 100%; margin-top: 5px;" class="flex jc-c">
         <div style="margin: 0 3px;">
-          <input type="text" id="table-list">
+          <input type="text" id="table-list" />
         </div>
         <div style="margin: 0 3px;">
           <input list="platforms" />
@@ -96,19 +122,32 @@
           </datalist>
         </div>
         <div style="margin: 0 3px;">
-          <input type="text" name="" id="casino">
+          <input type="text" name="" id="casino" />
         </div>
-        <span id="counter3"
-          style="height: 52%; width: 21px; align-self: flex-end; text-align: center; border: 1px solid rgb(138, 138, 138); padding: 0 2px; margin: 0 3px; font-size: 15px;">0</span>
-        <input type="text" id="" placeholder="10" maxlength="2"
-          style="height: 52%; width: 21px; align-self: flex-end; text-align: center; margin: 0 3px;">
+        <span id="counter3" style="
+              height: 52%;
+              width: 21px;
+              align-self: flex-end;
+              text-align: center;
+              border: 1px solid rgb(138, 138, 138);
+              padding: 0 2px;
+              margin: 0 3px;
+              font-size: 15px;
+            ">0</span>
+        <input type="text" id="target3" placeholder="10" maxlength="2" style="
+              height: 52%;
+              width: 21px;
+              align-self: flex-end;
+              text-align: center;
+              margin: 0 3px;
+            " />
         <button id="addbutton3" style="height: 52%; align-self: flex-end; margin-left: 3px;" type="button">
           Submit
         </button>
       </form>
       <form action="" style="width: 100%; margin-top: 5px;" class="flex jc-c">
         <div style="margin: 0 3px;">
-          <input type="text" id="table-list">
+          <input type="text" id="table-list" />
         </div>
         <div style="margin: 0 3px;">
           <input list="platforms" />
@@ -122,12 +161,25 @@
           </datalist>
         </div>
         <div style="margin: 0 3px;">
-          <input type="text" name="" id="casino">
+          <input type="text" name="" id="casino" />
         </div>
-        <span id="counter4"
-          style="height: 52%; width: 21px; align-self: flex-end; text-align: center; border: 1px solid rgb(138, 138, 138); padding: 0 2px; margin: 0 3px; font-size: 15px;">0</span>
-        <input type="text" id="" placeholder="10" maxlength="2"
-          style="height: 52%; width: 21px; align-self: flex-end; text-align: center; margin: 0 3px;">
+        <span id="counter4" style="
+              height: 52%;
+              width: 21px;
+              align-self: flex-end;
+              text-align: center;
+              border: 1px solid rgb(138, 138, 138);
+              padding: 0 2px;
+              margin: 0 3px;
+              font-size: 15px;
+            ">0</span>
+        <input type="text" id="target4" placeholder="10" maxlength="2" style="
+              height: 52%;
+              width: 21px;
+              align-self: flex-end;
+              text-align: center;
+              margin: 0 3px;
+            " />
         <button id="addbutton4" style="height: 52%; align-self: flex-end; margin-left: 3px;" type="button">
           Submit
         </button>
@@ -136,6 +188,7 @@
   </section>
 
   <script src="js/dc.js" defer></script>
+  <script src="js/main.js"></script>
 </body>
 
 </html>

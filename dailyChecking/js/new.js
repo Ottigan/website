@@ -13,9 +13,11 @@ addTableBtn.onclick = function () {
 
   if (!empty) {
     alert("Empty Value!");
+    newTable.classList.add("invalid");
     newTable.focus();
   } else {
     newTable.value = "";
+    newTable.classList.remove("invalid");
     addTableListItem(newTableValue);
   }
 };
@@ -26,17 +28,29 @@ const addTableListItem = (item) => {
   listItem.style.paddingLeft = "2px";
   listItem.classList.add("l-decoration", "flex", "jc-sb", "ai-c");
   listItem.innerHTML = `${item} <button style="width: 10%" type="button">x</button>`;
-  tableList.append(listItem);
+  tableList.prepend(listItem);
 };
 
 addCasinoBtn.onclick = function () {
   let newCasinoValue = newCasino.value;
-  addCasinoLiItem(newCasinoValue);
+  let empty = newCasinoValue.trim();
+
+  if (!empty) {
+    alert("Empty Value!");
+    newCasino.classList.add("invalid");
+    newCasino.focus();
+  } else {
+    newCasino.value = "";
+    newCasino.classList.remove("invalid");
+    addCasinoListItem(newCasinoValue);
+  }
 };
 
-const addCasinoLiItem = (item) => {
-  const liItem = document.createElement("li");
-  liItem.innerText = item;
-  // liItem.classList.add("");
-  casinoList.append(liItem);
+const addCasinoListItem = (item) => {
+  const listItem = document.createElement("li");
+  listItem.innerText = item;
+  listItem.style.paddingLeft = "2px";
+  listItem.classList.add("l-decoration", "flex", "jc-sb", "ai-c");
+  listItem.innerHTML = `${item} <button style="width: 10%" type="button">x</button>`;
+  casinoList.prepend(listItem);
 };
