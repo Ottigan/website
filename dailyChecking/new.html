@@ -29,16 +29,18 @@
                 <form action="" style="width: 45%; margin: 0 3px 0 0;" class="flex">
                     <div class="flex flex-grow vertical">
                         <label for="new-table">Add Table</label>
-                        <input id="new-table" type="text" name="" class="flex-grow" />
+                        <input id="new-table" name="new-table" type="text" placeholder="Game Table Name"
+                            pattern="[a-zA-Z 0-9]+" class="flex-grow" />
                     </div>
-                    <button style="height: 52%; width: 10%; align-self: flex-end;" type="button" id="add-table">
+                    <button style="height: 52%; width: 10%; align-self: flex-end;" type="button" id="add-table"
+                        name="add-table">
                         Add
                     </button>
                 </form>
                 <form action="" style="width: 45%;" class="flex">
                     <div class="flex flex-grow vertical">
                         <label for="new-casino">Add Casino</label>
-                        <input id="new-casino" type="text" name="" class="flex-grow" />
+                        <input id="new-casino" type="text" name="" placeholder="Casino Name" class="flex-grow" />
                     </div>
                     <button style="height: 52%; width: 10%; align-self: flex-end;" type="button" id="add-casino">
                         Add

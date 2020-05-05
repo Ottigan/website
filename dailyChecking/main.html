@@ -25,14 +25,14 @@
   <hr />
   <section style="margin-top: 50px;" class="flex jc-c">
     <div class="container flex vertical jc-c js-c ai-c">
-      <form action="" style="width: 100%;" class="flex jc-c">
+      <form action="" method="" style="width: 100%;" class="flex jc-c">
         <div style="margin: 0 3px;">
           <label for="table-list">Game Table</label><br />
-          <input type="text" id="table-list" />
+          <input type="text" name="text" pattern="[a-zA-Z0-9]+" id="table-list" />
         </div>
         <div style="margin: 0 3px;">
           <label for="platform">Platform</label><br />
-          <input list="platforms" />
+          <input id="platform" name="platform" type="text" list="platforms" />
           <datalist id="platforms">
             <option value="iOS MHTML5"></option>
             <option value="Android MHTML5"></option>
@@ -56,9 +56,9 @@
               margin: 0 3px;
               font-size: 15px;
             ">0</span>
-        <input type="text" id="target1" placeholder="10" maxlength="2" style="
+        <input type="number" id="target1" placeholder="10" maxlength="2" min="1" max="12" style="
               height: 52%;
-              width: 21px;
+              width: 40px;
               align-self: flex-end;
               text-align: center;
               margin: 0 3px;
@@ -67,12 +67,12 @@
           Submit
         </button>
       </form>
-      <form action="" style="width: 100%; margin-top: 5px;" class="flex jc-c">
+      <form action="" method="" style="width: 100%; margin-top: 5px;" class="flex jc-c">
         <div style="margin: 0 3px;">
           <input type="text" id="table-list" />
         </div>
         <div style="margin: 0 3px;">
-          <input list="platforms" />
+          <input id="platform1" name="platform1" type="text" list="platforms" />
           <datalist id="platforms">
             <option value="iOS MHTML5"></option>
             <option value="Android MHTML5"></option>
@@ -95,9 +95,9 @@
               margin: 0 3px;
               font-size: 15px;
             ">0</span>
-        <input type="text" id="target2" placeholder="10" maxlength="2" style="
+        <input type="number" id="target2" placeholder="10" maxlength="2" min="1" max="12" style="
               height: 52%;
-              width: 21px;
+              width: 40px;
               align-self: flex-end;
               text-align: center;
               margin: 0 3px;
@@ -106,12 +106,12 @@
           Submit
         </button>
       </form>
-      <form action="" style="width: 100%; margin-top: 5px;" class="flex jc-c">
+      <form action="" method="" style="width: 100%; margin-top: 5px;" class="flex jc-c">
         <div style="margin: 0 3px;">
           <input type="text" id="table-list" />
         </div>
         <div style="margin: 0 3px;">
-          <input list="platforms" />
+          <input id="platform2" name="platform2" type="text" list="platforms" />
           <datalist id="platforms">
             <option value="iOS MHTML5"></option>
             <option value="Android MHTML5"></option>
@@ -134,9 +134,9 @@
               margin: 0 3px;
               font-size: 15px;
             ">0</span>
-        <input type="text" id="target3" placeholder="10" maxlength="2" style="
+        <input type="number" id="target3" placeholder="10" maxlength="2" min="1" max="12" style="
               height: 52%;
-              width: 21px;
+              width: 40px;
               align-self: flex-end;
               text-align: center;
               margin: 0 3px;
@@ -145,12 +145,12 @@
           Submit
         </button>
       </form>
-      <form action="" style="width: 100%; margin-top: 5px;" class="flex jc-c">
+      <form action="" method="" style="width: 100%; margin-top: 5px;" class="flex jc-c">
         <div style="margin: 0 3px;">
           <input type="text" id="table-list" />
         </div>
         <div style="margin: 0 3px;">
-          <input list="platforms" />
+          <input id="platform3" name="platform3" type="text" list="platforms" />
           <datalist id="platforms">
             <option value="iOS MHTML5"></option>
             <option value="Android MHTML5"></option>
@@ -173,9 +173,9 @@
               margin: 0 3px;
               font-size: 15px;
             ">0</span>
-        <input type="text" id="target4" placeholder="10" maxlength="2" style="
+        <input type="number" id="target4" placeholder="10" maxlength="2" min="1" max="12" style="
               height: 52%;
-              width: 21px;
+              width: 40px;
               align-self: flex-end;
               text-align: center;
               margin: 0 3px;
