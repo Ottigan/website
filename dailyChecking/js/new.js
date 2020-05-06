@@ -24,7 +24,7 @@ addTableBtn.onclick = function () {
 
 const addTableListItem = (item) => {
   const listItem = document.createElement("li");
-  listItem.innerText = item;
+  // listItem.innerText = item;
   listItem.style.paddingLeft = "2px";
   listItem.classList.add("l-decoration", "flex", "jc-sb", "ai-c", "list-item");
   listItem.innerHTML = `${item}<button type="button" style="width: 10%" class="remove">x</button>`;
@@ -48,7 +48,7 @@ addCasinoBtn.onclick = function () {
 
 const addCasinoListItem = (item) => {
   const listItem = document.createElement("li");
-  listItem.innerText = item;
+  // listItem.innerText = item;
   listItem.style.paddingLeft = "2px";
   listItem.classList.add("l-decoration", "flex", "jc-sb", "ai-c", "list-item");
   listItem.innerHTML = `${item}<button type="button" style="width: 10%" class="remove">x</button>`;
