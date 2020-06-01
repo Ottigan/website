@@ -5,7 +5,8 @@ const newTable = document.querySelector("#new-table"),
   addTableBtn = document.querySelector("#add-table"),
   addCasinoBtn = document.querySelector("#add-casino"),
   tableList = document.querySelector("#table-list"),
-  casinoList = document.querySelector("#casino-list");
+  casinoList = document.querySelector("#casino-list"),
+  db = firebase.firestore();
 
 addTableBtn.onclick = function () {
   let newTableValue = newTable.value;
@@ -19,6 +20,15 @@ addTableBtn.onclick = function () {
     newTable.value = "";
     newTable.classList.remove("invalid");
     addTableListItem(newTableValue);
+    db.collection("dailyChecking").doc("tables").update({
+      names: firebase.firestore.FieldValue.arrayUnion(newTableValue)
+    })
+      .then(function () {
+        console.log("New Table added");
+      })
+      .catch(function (error) {
+        console.error("Error adding document: ", error);
+      });
   }
 };
 
@@ -43,6 +53,15 @@ addCasinoBtn.onclick = function () {
     newCasino.value = "";
     newCasino.classList.remove("invalid");
     addCasinoListItem(newCasinoValue);
+    db.collection("dailyChecking").doc("casinos").update({
+      names: firebase.firestore.FieldValue.arrayUnion(newCasinoValue)
+    })
+      .then(function () {
+        console.log("New Casino added");
+      })
+      .catch(function (error) {
+        console.error("Error adding document: ", error);
+      });
   }
 };
 
@@ -55,16 +74,45 @@ const addCasinoListItem = (item) => {
   casinoList.prepend(listItem);
 };
 
-const removeOperation = (event) => {
+const removeTableOperation = (event) => {
   let target = event.target;
+  let listInner = target.closest(".list-item").innerHTML;
+  let listValue = listInner.substring(0, listInner.indexOf("<", 0));
   if (target.classList.contains("remove")) {
-    target.closest(".list-item").remove();
+    db.collection("dailyChecking").doc("tables").update({
+      names: firebase.firestore.FieldValue.arrayRemove(listValue)
+    })
+      .then(function () {
+        target.closest(".list-item").remove();
+      })
+      .catch(function (error) {
+        console.error("Error adding document: ", error);
+      });
+
   }
 };
 
-tableList.addEventListener("click", removeOperation);
+const removeCasinoOperation = (event) => {
+  let target = event.target;
+  let listInner = target.closest(".list-item").innerHTML;
+  let listValue = listInner.substring(0, listInner.indexOf("<", 0));
+  if (target.classList.contains("remove")) {
+    db.collection("dailyChecking").doc("casinos").update({
+      names: firebase.firestore.FieldValue.arrayRemove(listValue)
+    })
+      .then(function () {
+        target.closest(".list-item").remove();
+      })
+      .catch(function (error) {
+        console.error("Error adding document: ", error);
+      });
 
-casinoList.addEventListener("click", removeOperation);
+  }
+};
+
+tableList.addEventListener("click", removeTableOperation);
+
+casinoList.addEventListener("click", removeCasinoOperation);
 
 newTable.addEventListener("keypress", function (e) {
   if (e.key === "Enter") {
@@ -80,6 +128,15 @@ newTable.addEventListener("keypress", function (e) {
       newTable.value = "";
       newTable.classList.remove("invalid");
       addTableListItem(newTableValue);
+      db.collection("dailyChecking").doc("tables").update({
+        names: firebase.firestore.FieldValue.arrayUnion(newTableValue)
+      })
+        .then(function () {
+          console.log("New Table added");
+        })
+        .catch(function (error) {
+          console.error("Error adding document: ", error);
+        });
     }
   }
 });
@@ -98,6 +155,42 @@ newCasino.addEventListener("keypress", function (e) {
       newCasino.value = "";
       newCasino.classList.remove("invalid");
       addCasinoListItem(newCasinoValue);
+      db.collection("dailyChecking").doc("casinos").update({
+        names: firebase.firestore.FieldValue.arrayUnion(newCasinoValue)
+      })
+        .then(function () {
+          console.log("New Casino added");
+        })
+        .catch(function (error) {
+          console.error("Error adding document: ", error);
+        });
     }
   }
 });
+
+window.addEventListener('load', function () {
+  db.collection("dailyChecking").doc("tables").get()
+    .then(function (doc) {
+      if (doc.exists) {
+        let data = doc.data();
+        data.names.forEach((value) => addTableListItem(value));
+      } else {
+        // doc.data() will be undefined in this case
+        console.log("No such document!");
+      }
+    }).catch(function (error) {
+      console.log("Error getting document:", error);
+    });
+  db.collection("dailyChecking").doc("casinos").get()
+    .then(function (doc) {
+      if (doc.exists) {
+        let data = doc.data();
+        data.names.forEach((value) => addCasinoListItem(value));
+      } else {
+        // doc.data() will be undefined in this case
+        console.log("No such document!");
+      }
+    }).catch(function (error) {
+      console.log("Error getting document:", error);
+    });
+})
