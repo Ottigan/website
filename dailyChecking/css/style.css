@@ -15,8 +15,10 @@ nav a:hover {
 }
 
 #row-manipulator {
-  width: 54%;
+  width: 55%;
+  padding-left: 4px;
   margin-top: 5px;
+  margin-bottom: 20px;
 }
 
 #main-row {

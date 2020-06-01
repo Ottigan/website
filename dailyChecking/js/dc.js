@@ -1,8 +1,6 @@
 `use strict`;
 
-const submitButtons = document.querySelectorAll('.submitButton'),
-    checkRows = document.querySelector('#checkRows'),
-    mainRow = document.querySelector('#main-row'),
+const checkRows = document.querySelector('#checkRows'),
     rowManip = document.querySelector('#row-manipulator'),
     db = firebase.firestore();
 
@@ -51,32 +49,33 @@ const manipRows = (event) => {
 checkRows.addEventListener('click', manipRows);
 
 const updateCounter = (event) => {
-    let target = event.target,
-        counter = target.previousElementSibling.previousElementSibling,
-        goal = target.previousElementSibling,
-        x = counter.innerHTML,
-        y = goal.value,
-        z = goal.placeholder;
-    x++;
-    counter.innerHTML = x;
-    console.log(counter);
-    if (y > 0) {
-        if (x >= y) {
-            counter.classList.add('valid');
-        }
-    } else {
-        if (x >= z) {
-            counter.classList.add('valid');
+    let target = event.target;
+
+    //following IF statement meant to limit event interaction
+    if (target.classList.contains("submitButton")) {
+        let counter = target.previousElementSibling.previousElementSibling,
+            goal = target.previousElementSibling,
+            x = counter.innerHTML,
+            y = goal.value,
+            z = goal.placeholder;
+        x++;
+        counter.innerHTML = x;
+        if (y > 0) {
+            if (x >= y) {
+                counter.classList.add('valid');
+            }
+        } else {
+            if (x >= z) {
+                counter.classList.add('valid');
+            }
         }
     }
 };
 
-submitButtons.forEach((button) => {
-    button.addEventListener('click', updateCounter);
-});
+//Added another eventlistener due to DOM Event delegation
+checkRows.addEventListener('click', updateCounter);
 
-//
-
+// Loading previous number of rows, based the DB counter
 window.addEventListener('load', function () {
     db.collection('dailyChecking')
         .doc('rows')

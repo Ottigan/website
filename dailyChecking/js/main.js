@@ -13,18 +13,9 @@ body.onload = function () {
 
   if (dcUri == current) {
     dc.classList.add("location");
-    // If COOKIES added
-    // tracking.classList.remove("location");
-    // newProduct.classList.remove("location");
   } else if (trackingUri == current) {
     tracking.classList.add("location");
-    // If COOKIES added
-    // dc.classList.remove("location");
-    // newProduct.classList.remove("location");
   } else if (newProductUri == current) {
     newProduct.classList.add("location");
-    // If COOKIES added
-    // dc.classList.remove("location");
-    // tracking.classList.remove("location");
   }
 };
