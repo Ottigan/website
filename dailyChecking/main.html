@@ -24,8 +24,8 @@
   </header>
   <hr />
   <section style="margin-top: 50px;" class="flex jc-c">
-    <div class="container flex vertical jc-c js-c ai-c">
-      <form action="" method="" style="width: 100%;" class="flex jc-c">
+    <div id="checkRows" class="container flex vertical jc-c js-c ai-c">
+      <form id="main-row" action="" method="" class="flex jc-c">
         <div style="margin: 0 3px;">
           <label for="table-list">Game Table</label><br />
           <input type="text" name="text" pattern="[a-zA-Z0-9]+" id="table-list" />
@@ -46,147 +46,39 @@
           <label for="casino">Casino</label><br />
           <input type="text" name="" id="casino" />
         </div>
-        <span id="counter1" style="
-              height: 52%;
-              width: 21px;
-              align-self: flex-end;
-              text-align: center;
-              border: 1px solid rgb(138, 138, 138);
-              padding: 0 2px;
-              margin: 0 3px;
-              font-size: 15px;
-            ">0</span>
-        <input type="number" id="target1" placeholder="10" maxlength="2" min="1" max="12" style="
-              height: 52%;
-              width: 40px;
-              align-self: flex-end;
-              text-align: center;
-              margin: 0 3px;
-            " />
-        <button id="addbutton1" style="height: 52%; align-self: flex-end; margin-left: 3px;" type="button">
+        <span class="counter">0</span>
+        <input type="number" class="target" placeholder="10" maxlength="2" min="1" max="12" / />
+        <button class="submitButton" type="button">
           Submit
         </button>
       </form>
-      <form action="" method="" style="width: 100%; margin-top: 5px;" class="flex jc-c">
-        <div style="margin: 0 3px;">
-          <input type="text" id="table-list" />
-        </div>
-        <div style="margin: 0 3px;">
-          <input id="platform1" name="platform1" type="text" list="platforms" />
-          <datalist id="platforms">
-            <option value="iOS MHTML5"></option>
-            <option value="Android MHTML5"></option>
-            <option value="Windows Chrome"></option>
-            <option value="MacOS Safari"></option>
-            <option value="iOS Native"></option>
-            <option value="Android Native"></option>
-          </datalist>
-        </div>
-        <div style="margin: 0 3px;">
-          <input type="text" name="" id="casino" />
-        </div>
-        <span id="counter2" style="
-              height: 52%;
-              width: 21px;
-              align-self: flex-end;
-              text-align: center;
-              border: 1px solid rgb(138, 138, 138);
-              padding: 0 2px;
-              margin: 0 3px;
-              font-size: 15px;
-            ">0</span>
-        <input type="number" id="target2" placeholder="10" maxlength="2" min="1" max="12" style="
-              height: 52%;
-              width: 40px;
-              align-self: flex-end;
-              text-align: center;
-              margin: 0 3px;
-            " />
-        <button id="addbutton2" style="height: 52%; align-self: flex-end; margin-left: 3px;" type="button">
-          Submit
-        </button>
-      </form>
-      <form action="" method="" style="width: 100%; margin-top: 5px;" class="flex jc-c">
-        <div style="margin: 0 3px;">
-          <input type="text" id="table-list" />
-        </div>
-        <div style="margin: 0 3px;">
-          <input id="platform2" name="platform2" type="text" list="platforms" />
-          <datalist id="platforms">
-            <option value="iOS MHTML5"></option>
-            <option value="Android MHTML5"></option>
-            <option value="Windows Chrome"></option>
-            <option value="MacOS Safari"></option>
-            <option value="iOS Native"></option>
-            <option value="Android Native"></option>
-          </datalist>
-        </div>
-        <div style="margin: 0 3px;">
-          <input type="text" name="" id="casino" />
-        </div>
-        <span id="counter3" style="
-              height: 52%;
-              width: 21px;
-              align-self: flex-end;
-              text-align: center;
-              border: 1px solid rgb(138, 138, 138);
-              padding: 0 2px;
-              margin: 0 3px;
-              font-size: 15px;
-            ">0</span>
-        <input type="number" id="target3" placeholder="10" maxlength="2" min="1" max="12" style="
-              height: 52%;
-              width: 40px;
-              align-self: flex-end;
-              text-align: center;
-              margin: 0 3px;
-            " />
-        <button id="addbutton3" style="height: 52%; align-self: flex-end; margin-left: 3px;" type="button">
-          Submit
-        </button>
-      </form>
-      <form action="" method="" style="width: 100%; margin-top: 5px;" class="flex jc-c">
-        <div style="margin: 0 3px;">
-          <input type="text" id="table-list" />
-        </div>
-        <div style="margin: 0 3px;">
-          <input id="platform3" name="platform3" type="text" list="platforms" />
-          <datalist id="platforms">
-            <option value="iOS MHTML5"></option>
-            <option value="Android MHTML5"></option>
-            <option value="Windows Chrome"></option>
-            <option value="MacOS Safari"></option>
-            <option value="iOS Native"></option>
-            <option value="Android Native"></option>
-          </datalist>
-        </div>
-        <div style="margin: 0 3px;">
-          <input type="text" name="" id="casino" />
-        </div>
-        <span id="counter4" style="
-              height: 52%;
-              width: 21px;
-              align-self: flex-end;
-              text-align: center;
-              border: 1px solid rgb(138, 138, 138);
-              padding: 0 2px;
-              margin: 0 3px;
-              font-size: 15px;
-            ">0</span>
-        <input type="number" id="target4" placeholder="10" maxlength="2" min="1" max="12" style="
-              height: 52%;
-              width: 40px;
-              align-self: flex-end;
-              text-align: center;
-              margin: 0 3px;
-            " />
-        <button id="addbutton4" style="height: 52%; align-self: flex-end; margin-left: 3px;" type="button">
-          Submit
-        </button>
-      </form>
+      <div id="row-manipulator" class="d-flex jc-fs">
+        <button>Add</button>
+        <button>Remove</button>
+      </div>
     </div>
   </section>
-  
+  <!-- The core Firebase JS SDK is always required and must be listed first -->
+  <script src="https://www.gstatic.com/firebasejs/7.14.6/firebase-app.js"></script>
+
+  <!-- TODO: Add SDKs for Firebase products that you want to use
+           https://firebase.google.com/docs/web/setup#available-libraries -->
+  <script src="https://www.gstatic.com/firebasejs/7.14.6/firebase-database.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.14.6/firebase-firestore.js"></script>
+  <script>
+    // Your web app's Firebase configuration
+    var firebaseConfig = {
+      apiKey: "AIzaSyCOiJc8EKT9DyXyuAKPeKpJLnvYs_vINFU",
+      authDomain: "starlit-braid-276207.firebaseapp.com",
+      databaseURL: "https://starlit-braid-276207.firebaseio.com",
+      projectId: "starlit-braid-276207",
+      storageBucket: "starlit-braid-276207.appspot.com",
+      messagingSenderId: "30277815528",
+      appId: "1:30277815528:web:517d7d0743d3d5530a4d5d"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+  </script>
   <script src="js/dc.js" defer></script>
   <script src="js/main.js"></script>
 </body>

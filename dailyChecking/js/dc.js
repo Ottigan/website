@@ -1,102 +1,122 @@
 `use strict`;
 
-const addBtn1 = document.querySelector("#addbutton1"),
-  counter1 = document.querySelector("#counter1"),
-  target1 = document.querySelector("#target1"),
-  addBtn2 = document.querySelector("#addbutton2"),
-  counter2 = document.querySelector("#counter2"),
-  target2 = document.querySelector("#target2"),
-  addBtn3 = document.querySelector("#addbutton3"),
-  counter3 = document.querySelector("#counter3"),
-  target3 = document.querySelector("#target3"),
-  addBtn4 = document.querySelector("#addbutton4"),
-  counter4 = document.querySelector("#counter4"),
-  target4 = document.querySelector("#target4");
+const submitButtons = document.querySelectorAll('.submitButton'),
+    checkRows = document.querySelector('#checkRows'),
+    mainRow = document.querySelector('#main-row'),
+    rowManip = document.querySelector('#row-manipulator'),
+    db = firebase.firestore();
 
-addBtn1.onclick = function () {
-  let counterValue = counter1.innerHTML;
-  updatecounter1(counterValue);
+const manipRows = (event) => {
+    let target = event.target;
+    let row = target.parentElement.previousElementSibling;
+    if (target.innerHTML === 'Remove' && row.classList.contains('table-row')) {
+        row.remove();
+        db.collection('dailyChecking')
+            .doc('rows').update({
+                rowcount: firebase.firestore.FieldValue.increment(-1)
+            });
+    } else if (target.innerHTML === 'Add') {
+        const rowItem = document.createElement('form');
+        rowItem.classList.add('flex', 'jc-c', 'table-row');
+        rowItem.innerHTML = `<div style="margin: 0 3px;">
+          <input type="text" id="table-list" />
+        </div>
+        <div style="margin: 0 3px;">
+          <input name="platform" type="text" list="platforms" />
+          <datalist id="platforms">
+            <option value="iOS MHTML5"></option>
+            <option value="Android MHTML5"></option>
+            <option value="Windows Chrome"></option>
+            <option value="MacOS Safari"></option>
+            <option value="iOS Native"></option>
+            <option value="Android Native"></option>
+          </datalist>
+        </div>
+        <div style="margin: 0 3px;">
+          <input type="text" name="" id="casino" />
+        </div>
+        <span class="counter">0</span>
+        <input type="number" class="target" placeholder="10" maxlength="2" min="1" max="12" />
+        <button class="submitButton" type="button">
+          Submit
+        </button>`;
+        rowManip.before(rowItem);
+        db.collection('dailyChecking')
+            .doc('rows').update({
+                rowcount: firebase.firestore.FieldValue.increment(1)
+            });
+    }
 };
 
-function updatecounter1(value) {
-  let x = value;
-  let y = target1.value;
-  let z = target1.placeholder;
-  x++;
-  counter1.innerHTML = x;
-  if (y > 0) {
-    if (x >= y) {
-      counter1.classList.add("valid");
-    }
-  } else {
-    if (x >= z) {
-      counter1.classList.add("valid");
-    }
-  }
-}
+checkRows.addEventListener('click', manipRows);
 
-addBtn2.onclick = function () {
-  let counterValue = counter2.innerHTML;
-  updatecounter2(counterValue);
+const updateCounter = (event) => {
+    let target = event.target,
+        counter = target.previousElementSibling.previousElementSibling,
+        goal = target.previousElementSibling,
+        x = counter.innerHTML,
+        y = goal.value,
+        z = goal.placeholder;
+    x++;
+    counter.innerHTML = x;
+    console.log(counter);
+    if (y > 0) {
+        if (x >= y) {
+            counter.classList.add('valid');
+        }
+    } else {
+        if (x >= z) {
+            counter.classList.add('valid');
+        }
+    }
 };
 
-function updatecounter2(value) {
-  let x = value;
-  let y = target2.value;
-  let z = target2.placeholder;
-  x++;
-  counter2.innerHTML = x;
-  if (y > 0) {
-    if (x >= y) {
-      counter2.classList.add("valid");
-    }
-  } else {
-    if (x >= z) {
-      counter2.classList.add("valid");
-    }
-  }
-}
+submitButtons.forEach((button) => {
+    button.addEventListener('click', updateCounter);
+});
 
-addBtn3.onclick = function () {
-  let counterValue = counter3.innerHTML;
-  updatecounter3(counterValue);
-};
+//
 
-function updatecounter3(value) {
-  let x = value;
-  let y = target3.value;
-  let z = target3.placeholder;
-  x++;
-  counter3.innerHTML = x;
-  if (y > 0) {
-    if (x >= y) {
-      counter3.classList.add("valid");
-    }
-  } else {
-    if (x >= z) {
-      counter3.classList.add("valid");
-    }
-  }
-}
-
-addBtn4.onclick = function () {
-  let counterValue = counter4.innerHTML;
-  updatecounter4(counterValue);
-};
-
-function updatecounter4(value) {
-  let x = value;
-  let y = target4.value;
-  let z = target4.placeholder;
-  x++;
-  counter4.innerHTML = x;
-  if (y > 0) {
-    if (x >= y) {
-      counter4.classList.add("valid");
-    }
-  } else {
-    if (x >= z) {
-      counter4.classList.add("valid");
-    }
-  }
-}
+window.addEventListener('load', function () {
+    db.collection('dailyChecking')
+        .doc('rows')
+        .get()
+        .then(function (doc) {
+            if (doc.exists) {
+                let data = doc.data().rowcount;
+                for (let index = 0; index < data; index++) {
+                    const rowItem = document.createElement('form');
+                    rowItem.classList.add('flex', 'jc-c', 'table-row');
+                    rowItem.innerHTML = `<div style="margin: 0 3px;">
+          <input type="text" id="table-list" />
+        </div>
+        <div style="margin: 0 3px;">
+          <input name="platform" type="text" list="platforms" />
+          <datalist id="platforms">
+            <option value="iOS MHTML5"></option>
+            <option value="Android MHTML5"></option>
+            <option value="Windows Chrome"></option>
+            <option value="MacOS Safari"></option>
+            <option value="iOS Native"></option>
+            <option value="Android Native"></option>
+          </datalist>
+        </div>
+        <div style="margin: 0 3px;">
+          <input type="text" name="" id="casino" />
+        </div>
+        <span class="counter">0</span>
+        <input type="number" class="target" placeholder="10" maxlength="2" min="1" max="12" />
+        <button class="submitButton" type="button">
+          Submit
+        </button>`;
+                    rowManip.before(rowItem);
+                }
+            } else {
+                // doc.data() will be undefined in this case
+                console.log('No such document!');
+            }
+        })
+        .catch(function (error) {
+            console.log('Error getting document:', error);
+        });
+});

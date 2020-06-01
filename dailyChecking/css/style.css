@@ -7,11 +7,50 @@
 nav a {
   color: white;
   text-decoration-line: none;
-  font-family: "Indie Flower", cursive;
+  font-family: 'Indie Flower', cursive;
 }
 
 nav a:hover {
   background-color: darkcyan;
+}
+
+#row-manipulator {
+  width: 54%;
+  margin-top: 5px;
+}
+
+#main-row {
+  width: 100%;
+}
+
+.table-row {
+  width: 100%;
+  margin-top: 5px;
+}
+
+.counter {
+  height: 52%;
+  width: 21px;
+  align-self: flex-end;
+  text-align: center;
+  border: 1px solid rgb(138, 138, 138);
+  padding: 0 2px;
+  margin: 0 3px;
+  font-size: 15px;
+}
+
+.target {
+  height: 52%;
+  width: 40px;
+  align-self: flex-end;
+  text-align: center;
+  margin: 0 3px;
+}
+
+.submitButton {
+  height: 52%;
+  align-self: flex-end;
+  margin-left: 3px;
 }
 
 .location {
@@ -36,6 +75,10 @@ nav a:hover {
 
 .jc-c {
   justify-content: center;
+}
+
+.jc-fs {
+  justify-content: flex-start;
 }
 
 .jc-sb {
