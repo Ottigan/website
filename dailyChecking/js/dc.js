@@ -1,6 +1,6 @@
 `use strict`;
 
-const checkRows = document.querySelector('#checkRows'),
+const checkRows = document.querySelector('#checkrows'),
   rowManip = document.querySelector('#row-manipulator'),
   db = firebase.firestore();
 
@@ -14,7 +14,6 @@ const manipRows = (event) => {
       .then(function (doc) {
         let data = doc.data().rowcount;
         let objectArray = doc.data().rowObjects;
-        objectArray.forEach((value) => console.log(value))
         let deleteObject = objectArray.find(value => value.id === data);
         if (data > 0) {
           db.collection('dailyChecking')
@@ -39,13 +38,18 @@ const manipRows = (event) => {
         rowcount: firebase.firestore.FieldValue.increment(1)
       })
       .then(function () {
-        const rowItem = document.createElement('form');
-        rowItem.classList.add('flex', 'jc-c', 'table-row');
-        rowItem.innerHTML = `<div style="margin: 0 3px;">
-          <input type="text" id="table-list" />
+        db.collection('dailyChecking')
+          .doc('rows')
+          .get()
+          .then(function (doc) {
+            let data = doc.data().rowcount;
+            const rowItem = document.createElement('form');
+            rowItem.classList.add('flex', 'jc-c', 'table-row');
+            rowItem.innerHTML = `<div style="margin: 0 3px;">
+          <input type="text" name="table" pattern="[a-zA-Z0-9]+" id="table-${data }" required />
         </div>
         <div style="margin: 0 3px;">
-          <input name="platform" type="text" list="platforms" />
+          <input id="platform-${data }" name="platform" type="text" list="platforms" required />
           <datalist id="platforms">
             <option value="iOS MHTML5"></option>
             <option value="Android MHTML5"></option>
@@ -56,19 +60,14 @@ const manipRows = (event) => {
           </datalist>
         </div>
         <div style="margin: 0 3px;">
-          <input type="text" name="" id="casino" />
+          <input type="text" name="casino" id="casino-${data }" required />
         </div>
         <span class="counter">0</span>
         <input type="number" class="target" placeholder="10" maxlength="2" min="1" max="12" />
-        <button class="submitButton" type="button">
+        <button id="${data }" class="submitButton" type="button">
           Submit
         </button>`;
-        rowManip.before(rowItem);
-        db.collection('dailyChecking')
-          .doc('rows')
-          .get()
-          .then(function (doc) {
-            let data = doc.data().rowcount;
+            rowManip.before(rowItem);
             db.collection('dailyChecking')
               .doc('rows')
               .update({
@@ -103,6 +102,35 @@ const updateCounter = (event) => {
 
   //following IF statement meant to limit event interaction
   if (target.classList.contains("submitButton")) {
+    let tableName = document.querySelector(`#table-${ target.id }`).value;
+    platform = document.querySelector(`#platform-${ target.id }`).value,
+      casino = document.querySelector(`#casino-${ target.id }`).value;
+
+    console.log(tableName);
+    db.collection('dailyChecking')
+      .doc('rows')
+      .get()
+      .then(function (doc) {
+        let rowObjects = doc.data().rowObjects;
+        let update = rowObjects[target.id]
+        update.casino = casino;
+        update.name = tableName;
+        update.platform = platform;
+        rowObjects[target.id] = update;
+        db.collection('dailyChecking')
+          .doc('rows').update({
+            rowObjects: rowObjects
+          })
+          .then(function () {
+            console.log("Success!");
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+      }).catch((error) => {
+        console.log(error);
+      })
+
     let counter = target.previousElementSibling.previousElementSibling,
       goal = target.previousElementSibling,
       x = counter.innerHTML,
@@ -125,44 +153,50 @@ const updateCounter = (event) => {
 //Added another eventlistener due to DOM Event delegation
 checkRows.addEventListener('click', updateCounter);
 
-// Loading previous number of rows, based the DB counter
+// Loading previous number of rows, based on the DB counter with the previous DATA
 window.addEventListener('load', function () {
   db.collection('dailyChecking')
     .doc('rows')
     .get()
     .then(function (doc) {
       if (doc.exists) {
-        let data = doc.data().rowcount;
-        for (let index = 0; index < data; index++) {
-          const rowItem = document.createElement('form');
-          rowItem.classList.add('flex', 'jc-c', 'table-row');
-          rowItem.innerHTML = `<div style="margin: 0 3px;">
-          <input type="text" id="table-list" />
+        let rows = doc.data().rowcount;
+        let rowObjects = doc.data().rowObjects;
+        let i = 0;
+        do {
+          if (i === 0) {
+            document.querySelector(`#table-${ i }`).value = rowObjects[i].name;
+            document.querySelector(`#platform-${ i }`).value = rowObjects[i].platform;
+            document.querySelector(`#casino-${ i }`).value = rowObjects[i].casino;
+          } else if (i > 0) {
+            const rowItem = document.createElement('form');
+            rowItem.classList.add('flex', 'jc-c', 'table-row');
+            rowItem.innerHTML = `<div style="margin: 0 3px;">
+          <input type="text" name="table" pattern="[a-zA-Z0-9 ]+" id="table-${rowObjects[i].id }" value="${ rowObjects[i].name }" required />
         </div>
         <div style="margin: 0 3px;">
-          <input name="platform" type="text" list="platforms" />
-          <datalist id="platforms">
-            <option value="iOS MHTML5"></option>
-            <option value="Android MHTML5"></option>
-            <option value="Windows Chrome"></option>
-            <option value="MacOS Safari"></option>
-            <option value="iOS Native"></option>
-            <option value="Android Native"></option>
-          </datalist>
-        </div>
-        <div style="margin: 0 3px;">
-          <input type="text" name="" id="casino" />
-        </div>
-        <span class="counter">0</span>
-        <input type="number" class="target" placeholder="10" maxlength="2" min="1" max="12" />
-        <button class="submitButton" type="button">
-          Submit
+              <input id="platform-${rowObjects[i].id }" value="${ rowObjects[i].platform }" name="platform" type="text" list="platforms" required />
+              <datalist id="platforms">
+                <option value="iOS MHTML5"></option>
+                <option value="Android MHTML5"></option>
+                <option value="Windows Chrome"></option>
+                <option value="MacOS Safari"></option>
+                <option value="iOS Native"></option>
+                <option value="Android Native"></option>
+              </datalist>
+            </div>
+            <div style="margin: 0 3px;">
+              <input type="text" name="casino" id="casino-${rowObjects[i].id }" value="${ rowObjects[i].casino }" required />
+            </div>
+            <span class="counter">0</span>
+            <input type="number" class="target" placeholder="10" maxlength="2" min="1" max="12" />
+            <button id="${rowObjects[i].id }" class="submitButton" type="button">
+              Submit
         </button>`;
-          rowManip.before(rowItem);
-        }
-      } else {
-        // doc.data() will be undefined in this case
-        console.log('No such document!');
+            rowManip.before(rowItem);
+          }
+          i++;
+        } while (i <= rows);
       }
     })
     .catch(function (error) {

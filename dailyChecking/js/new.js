@@ -72,7 +72,6 @@ addCasinoBtn.onclick = function () {
 const addCasinoListItem = (item) => {
   const listItem = document.createElement('li');
   // listItem.innerText = item;
-  listItem.style.paddingLeft = '2px';
   listItem.classList.add('l-decoration', 'flex', 'jc-sb', 'ai-c', 'list-item');
   listItem.innerHTML = `${ item }<button type="button" style="width: 10%" class="remove">x</button>`;
   casinoList.prepend(listItem);
@@ -202,7 +201,6 @@ window.addEventListener('load', function () {
         let data = doc.data();
         data.names.forEach((value) => addCasinoListItem(value));
       } else {
-        // doc.data() will be undefined in this case
         console.log('No such document!');
       }
     })

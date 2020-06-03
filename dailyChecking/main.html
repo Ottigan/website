@@ -24,15 +24,15 @@
   </header>
   <hr />
   <section style="margin-top: 50px;" class="flex jc-c">
-    <div id="checkRows" class="container flex vertical jc-c js-c ai-c">
+    <div id="checkrows" class="container flex vertical jc-c js-c ai-c">
       <form id="main-row" action="" method="" class="flex jc-c">
         <div style="margin: 0 3px;">
-          <label for="table-list">Game Table</label><br />
-          <input type="text" name="text" pattern="[a-zA-Z0-9]+" id="table-list" />
+          <label for="table">Game Table</label><br />
+          <input type="text" name="table" pattern="[a-zA-Z0-9 ]+" id="table-0" required />
         </div>
         <div style="margin: 0 3px;">
           <label for="platform">Platform</label><br />
-          <input id="platform" name="platform" type="text" list="platforms" />
+          <input id="platform-0" name="platform" type="text" list="platforms" required />
           <datalist id="platforms">
             <option value="iOS MHTML5"></option>
             <option value="Android MHTML5"></option>
@@ -44,11 +44,11 @@
         </div>
         <div style="margin: 0 3px;">
           <label for="casino">Casino</label><br />
-          <input type="text" name="" id="casino" />
+          <input type="text" name="casino" id="casino-0" required />
         </div>
         <span class="counter">0</span>
         <input type="number" class="target" placeholder="10" maxlength="2" min="1" max="12" / />
-        <button class="submitButton" type="button">
+        <button id="0" class="submitButton" type="button">
           Submit
         </button>
       </form>
