@@ -108,13 +108,13 @@ const updateCounter = event => {
 		(platform = document.querySelector(`#platform-${target.id}`).value),
 			(casino = document.querySelector(`#casino-${target.id}`).value);
 
-		console.log(tableName);
 		db.collection('dailyChecking')
 			.doc('rows')
 			.get()
 			.then(function (doc) {
 				let rowObjects = doc.data().rowObjects;
 				let update = rowObjects[target.id];
+				let clientTime = new Date();
 				update.casino = casino;
 				update.name = tableName;
 				update.platform = platform;
@@ -125,7 +125,24 @@ const updateCounter = event => {
 						rowObjects: rowObjects,
 					})
 					.then(function () {
-						console.log('Success!');
+						if (tableName != '' && platform != '' && casino != '') {
+							db.collection('dailyChecking')
+								.doc('database')
+								.update({
+									tracking: firebase.firestore.FieldValue.arrayUnion({
+										name: tableName,
+										platform: platform,
+										casino: casino,
+										when: clientTime,
+									}),
+								})
+								.then(function () {
+									console.log('Tracking DB updated');
+								})
+								.catch(function (error) {
+									console.error('Error updating DB: ', error);
+								});
+						}
 					})
 					.catch(function (error) {
 						console.log(error);
