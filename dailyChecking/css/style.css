@@ -1,130 +1,130 @@
 * {
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
 }
 
 nav a {
-  color: white;
-  text-decoration-line: none;
-  font-family: 'Indie Flower', cursive;
+	color: white;
+	text-decoration-line: none;
+	font-family: 'Indie Flower', cursive;
 }
 
 nav a:hover {
-  background-color: darkcyan;
+	background-color: darkcyan;
 }
 
 #row-manipulator {
-  width: 55%;
-  padding-left: 4px;
-  margin-top: 5px;
-  margin-bottom: 20px;
+	width: 55%;
+	padding-left: 4px;
+	margin-top: 5px;
+	margin-bottom: 20px;
 }
 
 #main-row {
-  width: 100%;
+	width: 100%;
 }
 
 .table-row {
-  width: 100%;
-  margin-top: 5px;
+	width: 100%;
+	margin-top: 5px;
 }
 
 .counter {
-  height: 52%;
-  width: 21px;
-  align-self: flex-end;
-  text-align: center;
-  border: 1px solid rgb(138, 138, 138);
-  padding: 0 2px;
-  margin: 0 3px;
-  font-size: 15px;
+	height: 52%;
+	width: 21px;
+	align-self: flex-end;
+	text-align: center;
+	border: 1px solid rgb(138, 138, 138);
+	padding: 0 2px;
+	margin: 0 3px;
+	font-size: 15px;
 }
 
 .target {
-  height: 52%;
-  width: 40px;
-  align-self: flex-end;
-  text-align: center;
-  margin: 0 3px;
+	height: 52%;
+	width: 40px;
+	align-self: flex-end;
+	text-align: center;
+	margin: 0 3px;
 }
 
 .submitButton {
-  height: 52%;
-  align-self: flex-end;
-  margin-left: 3px;
+	height: 52%;
+	align-self: flex-end;
+	margin-left: 3px;
 }
 
 .location {
-  text-decoration: underline;
+	text-decoration: underline;
 }
 
 .container {
-  width: 1200px;
+	width: 1200px;
 }
 
 .flex {
-  display: flex;
+	display: flex;
 }
 
 .vertical {
-  flex-direction: column;
+	flex-direction: column;
 }
 
 .flex-grow {
-  flex: 1 0 0;
+	flex: 1 0 0;
 }
 
 .jc-c {
-  justify-content: center;
+	justify-content: center;
 }
 
 .jc-fs {
-  justify-content: flex-start;
+	justify-content: flex-start;
 }
 
 .jc-sb {
-  justify-content: space-between;
+	justify-content: space-between;
 }
 
 .jc-se {
-  justify-content: space-evenly;
+	justify-content: space-evenly;
 }
 
 .jc-sa {
-  justify-content: space-around;
+	justify-content: space-around;
 }
 
 .js-c {
-  justify-self: center;
+	justify-self: center;
 }
 
 .js-fe {
-  justify-self: flex-end;
+	justify-self: flex-end;
 }
 
 .ai-c {
-  align-items: center;
+	align-items: center;
 }
 
 .vh100 {
-  height: 100vh;
+	height: 100vh;
 }
 
 .ls-none {
-  list-style: none;
+	list-style: none;
 }
 
 .l-decoration {
-  border: 1px solid rgb(153, 151, 151);
-  margin: 2px 0;
-  padding-left: 2px;
+	border: 1px solid rgb(153, 151, 151);
+	margin: 2px 0;
+	padding-left: 2px;
 }
 
 .invalid {
-  outline-color: red !important;
+	outline-color: red !important;
 }
 
 .valid {
-  background-color: rgb(126, 189, 126);
+	background-color: rgb(126, 189, 126);
 }
