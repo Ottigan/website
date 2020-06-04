@@ -39,10 +39,116 @@ trackingSearchBtn.onclick = function () {
 
 		// added 10800 seconds to adjust for GMT+3
 		let objectSeconds = object.when.seconds + 10800;
-		let fromSeconds = Date.parse(trackingFrom.value) / 1000;
-		let toSeconds = Date.parse(trackingTo.value) / 1000;
+		let fromSeconds =
+			Date.parse(trackingFrom.value) / 1000 ||
+			new Date().setDate(new Date().getDate() - 1) / 1000;
+		let toSeconds =
+			Date.parse(trackingTo.value) / 1000 ||
+			new Date().setDate(new Date().getDate() + 1) / 1000;
 
-		if (fromSeconds <= objectSeconds && objectSeconds <= toSeconds) {
+		if (
+			fromSeconds <= objectSeconds &&
+			objectSeconds <= toSeconds &&
+			trackingName.value === object.name &&
+			trackingPlatform.value === object.platform &&
+			trackingCasino.value === object.casino
+		) {
+			const rowElement = document.createElement('tr');
+			rowElement.classList.add('flex');
+			rowElement.innerHTML = `<td>${object.name}</td>
+								<td>${object.platform}</td>
+								<td>${object.casino}</td>
+								<td>PLACEHOLDER</td>
+                                <td>${timeToString}</td>`;
+			tableBody.append(rowElement);
+		} else if (
+			fromSeconds <= objectSeconds &&
+			objectSeconds <= toSeconds &&
+			trackingName.value === object.name &&
+			trackingPlatform.value === object.platform
+		) {
+			const rowElement = document.createElement('tr');
+			rowElement.classList.add('flex');
+			rowElement.innerHTML = `<td>${object.name}</td>
+								<td>${object.platform}</td>
+								<td>${object.casino}</td>
+								<td>PLACEHOLDER</td>
+                                <td>${timeToString}</td>`;
+			tableBody.append(rowElement);
+		} else if (
+			fromSeconds <= objectSeconds &&
+			objectSeconds <= toSeconds &&
+			trackingCasino.value === object.casino &&
+			trackingPlatform.value === object.platform
+		) {
+			const rowElement = document.createElement('tr');
+			rowElement.classList.add('flex');
+			rowElement.innerHTML = `<td>${object.name}</td>
+								<td>${object.platform}</td>
+								<td>${object.casino}</td>
+								<td>PLACEHOLDER</td>
+                                <td>${timeToString}</td>`;
+			tableBody.append(rowElement);
+		} else if (
+			fromSeconds <= objectSeconds &&
+			objectSeconds <= toSeconds &&
+			trackingName.value === object.name &&
+			trackingCasino.value === object.casino
+		) {
+			const rowElement = document.createElement('tr');
+			rowElement.classList.add('flex');
+			rowElement.innerHTML = `<td>${object.name}</td>
+								<td>${object.platform}</td>
+								<td>${object.casino}</td>
+								<td>PLACEHOLDER</td>
+                                <td>${timeToString}</td>`;
+			tableBody.append(rowElement);
+		} else if (
+			fromSeconds <= objectSeconds &&
+			objectSeconds <= toSeconds &&
+			trackingName.value === object.name
+		) {
+			const rowElement = document.createElement('tr');
+			rowElement.classList.add('flex');
+			rowElement.innerHTML = `<td>${object.name}</td>
+								<td>${object.platform}</td>
+								<td>${object.casino}</td>
+								<td>PLACEHOLDER</td>
+                                <td>${timeToString}</td>`;
+			tableBody.append(rowElement);
+		} else if (
+			fromSeconds <= objectSeconds &&
+			objectSeconds <= toSeconds &&
+			trackingCasino.value === object.casino
+		) {
+			const rowElement = document.createElement('tr');
+			rowElement.classList.add('flex');
+			rowElement.innerHTML = `<td>${object.name}</td>
+								<td>${object.platform}</td>
+								<td>${object.casino}</td>
+								<td>PLACEHOLDER</td>
+                                <td>${timeToString}</td>`;
+			tableBody.append(rowElement);
+		} else if (
+			fromSeconds <= objectSeconds &&
+			objectSeconds <= toSeconds &&
+			trackingPlatform.value === object.platform
+		) {
+			const rowElement = document.createElement('tr');
+			rowElement.classList.add('flex');
+			rowElement.innerHTML = `<td>${object.name}</td>
+								<td>${object.platform}</td>
+								<td>${object.casino}</td>
+								<td>PLACEHOLDER</td>
+                                <td>${timeToString}</td>`;
+			tableBody.append(rowElement);
+		} else if (
+			fromSeconds <= objectSeconds &&
+			objectSeconds <= toSeconds &&
+			!trackingName.value &&
+			!trackingPlatform.value &&
+			!trackingCasino.value
+		) {
 			const rowElement = document.createElement('tr');
 			rowElement.classList.add('flex');
 			rowElement.innerHTML = `<td>${object.name}</td>
