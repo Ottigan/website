@@ -14,11 +14,58 @@ nav a:hover {
 	background-color: darkcyan;
 }
 
+form div {
+	margin: 0 3px;
+}
+
+#db-form div input,
+button {
+	height: 24px;
+}
+
+#db-body {
+	height: 100vh;
+}
+
+#db-data {
+	margin-top: 50px;
+	width: 878px;
+}
+
+tbody {
+	height: 600px;
+	overflow-y: scroll;
+}
+
+tbody tr:nth-child(odd) td {
+	background-color: rgb(182, 182, 182);
+}
+
+td:nth-child(even) {
+	margin-left: 2px;
+	margin-right: 2px;
+}
+
+td {
+	border: 1px solid black;
+	width: 20%;
+	text-align: center;
+	margin-bottom: 2px;
+}
+
+thead tr td:last-child {
+	width: 193px;
+}
+
 #row-manipulator {
-	width: 55%;
-	padding-left: 4px;
+	width: 100%;
+	padding-left: 270px;
 	margin-top: 5px;
 	margin-bottom: 20px;
+}
+
+#row-manipulator button {
+	margin-left: 4px;
 }
 
 #main-row {
@@ -71,10 +118,6 @@ nav a:hover {
 	flex-direction: column;
 }
 
-.flex-grow {
-	flex: 1 0 0;
-}
-
 .jc-c {
 	justify-content: center;
 }
@@ -105,6 +148,18 @@ nav a:hover {
 
 .ai-c {
 	align-items: center;
+}
+
+.ai-fe {
+	align-items: flex-end;
+}
+
+.ai-fs {
+	align-items: flex-start;
+}
+
+.as-fe {
+	align-self: flex-end;
 }
 
 .vh100 {

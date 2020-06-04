@@ -47,10 +47,10 @@ const manipRows = event => {
 						let data = doc.data().rowcount;
 						const rowItem = document.createElement('form');
 						rowItem.classList.add('flex', 'jc-c', 'table-row');
-						rowItem.innerHTML = `<div style="margin: 0 3px;">
+						rowItem.innerHTML = `<div>
           <input type="text" name="table" pattern="[a-zA-Z0-9]+" id="table-${data}" required />
         </div>
-        <div style="margin: 0 3px;">
+        <div>
           <input id="platform-${data}" name="platform" type="text" list="platforms" required />
           <datalist id="platforms">
             <option value="iOS MHTML5"></option>
@@ -61,7 +61,7 @@ const manipRows = event => {
             <option value="Android Native"></option>
           </datalist>
         </div>
-        <div style="margin: 0 3px;">
+        <div>
           <input type="text" name="casino" id="casino-${data}" required />
         </div>
         <span class="counter">0</span>
@@ -193,10 +193,10 @@ window.addEventListener('load', function () {
 					} else if (i > 0) {
 						const rowItem = document.createElement('form');
 						rowItem.classList.add('flex', 'jc-c', 'table-row');
-						rowItem.innerHTML = `<div style="margin: 0 3px;">
+						rowItem.innerHTML = `<div>
           <input type="text" name="table" pattern="[a-zA-Z0-9 ]+" id="table-${rowObjects[i].id}" value="${rowObjects[i].name}" required />
         </div>
-        <div style="margin: 0 3px;">
+        <div>
               <input id="platform-${rowObjects[i].id}" value="${rowObjects[i].platform}" name="platform" type="text" list="platforms" required />
               <datalist id="platforms">
                 <option value="iOS MHTML5"></option>
@@ -207,7 +207,7 @@ window.addEventListener('load', function () {
                 <option value="Android Native"></option>
               </datalist>
             </div>
-            <div style="margin: 0 3px;">
+            <div>
               <input type="text" name="casino" id="casino-${rowObjects[i].id}" value="${rowObjects[i].casino}" required />
             </div>
             <span class="counter">0</span>

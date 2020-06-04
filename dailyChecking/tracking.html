@@ -11,7 +11,7 @@
 		<link rel="stylesheet" href="css/style.css" />
 	</head>
 
-	<body>
+	<body class="db-body">
 		<header>
 			<nav
 				style="background-color: rgb(35, 83, 83); font-size: xx-large;"
@@ -25,9 +25,95 @@
 			</nav>
 		</header>
 		<hr />
-		<div style="height: 90vh;" class="flex jc-c ai-c">
-			<img src="img/Construction.gif" alt="" />
-		</div>
+		<section style="margin-top: 50px;" class="flex jc-c">
+			<div class="container flex vertical jc-c js-c ai-c">
+				<form id="db-form" action="" method="" class="flex ai-fs">
+					<div>
+						<label for="from">From</label><br />
+						<input id="tracking-from" type="date" name="from" />
+					</div>
+					<div>
+						<label for="to">To</label><br />
+						<input id="tracking-to" type="date" name="to" id="" />
+					</div>
+					<div>
+						<label for="name">Table Name</label><br />
+						<input
+							id="tracking-name"
+							type="text"
+							name="name"
+							pattern="a-zA-Z0-9 "
+						/>
+					</div>
+					<div>
+						<label for="platform">Platform</label><br />
+						<input
+							id="tracking-platform"
+							name="platform"
+							type="text"
+							list="platforms"
+						/>
+						<datalist>
+							<option value="iOS MHTML5"></option>
+							<option value="Android MHTML5"></option>
+							<option value="Windows Chrome"></option>
+							<option value="MacOS Safari"></option>
+							<option value="iOS Native"></option>
+							<option value="Android Native"></option>
+						</datalist>
+					</div>
+					<div>
+						<label for="casino">Casino</label><br />
+						<input
+							id="tracking-casino"
+							type="text"
+							name="casino"
+							pattern="[a-zA-Z0-9]"
+						/>
+					</div>
+					<button id="tracking-button" class="flex as-fe" type="button">
+						Search
+					</button>
+				</form>
+				<hr />
+				<div id="db-data">
+					<table class="flex vertical">
+						<thead>
+							<tr class="flex">
+								<td>Game Table</td>
+								<td>Platform</td>
+								<td>Casino</td>
+								<td>QA</td>
+								<td>Timestamp</td>
+							</tr>
+						</thead>
+						<tbody></tbody>
+					</table>
+				</div>
+			</div>
+		</section>
+		<!-- The core Firebase JS SDK is always required and must be listed first -->
+		<script src="https://www.gstatic.com/firebasejs/7.14.6/firebase-app.js"></script>
+
+		<!-- TODO: Add SDKs for Firebase products that you want to use
+           https://firebase.google.com/docs/web/setup#available-libraries -->
+		<script src="https://www.gstatic.com/firebasejs/7.14.6/firebase-database.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/7.14.6/firebase-firestore.js"></script>
+		<script>
+			// Your web app's Firebase configuration
+			var firebaseConfig = {
+				apiKey: 'AIzaSyCOiJc8EKT9DyXyuAKPeKpJLnvYs_vINFU',
+				authDomain: 'starlit-braid-276207.firebaseapp.com',
+				databaseURL: 'https://starlit-braid-276207.firebaseio.com',
+				projectId: 'starlit-braid-276207',
+				storageBucket: 'starlit-braid-276207.appspot.com',
+				messagingSenderId: '30277815528',
+				appId: '1:30277815528:web:517d7d0743d3d5530a4d5d',
+			};
+			// Initialize Firebase
+			firebase.initializeApp(firebaseConfig);
+		</script>
+		<script src="js/tracking.js"></script>
 		<script src="js/main.js"></script>
 	</body>
 </html>
