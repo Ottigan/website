@@ -74,11 +74,12 @@ thead tr td:last-child {
 
 .table-row {
 	width: 100%;
-	margin-top: 5px;
+	height: 20px;
+	margin-top: 3px;
 }
 
 .counter {
-	height: 52%;
+	height: 100%;
 	width: 21px;
 	align-self: flex-end;
 	text-align: center;
@@ -89,17 +90,27 @@ thead tr td:last-child {
 }
 
 .target {
-	height: 52%;
+	height: 100%;
 	width: 40px;
 	align-self: flex-end;
-	text-align: center;
+	text-align: left;
 	margin: 0 3px;
 }
 
 .submitButton {
-	height: 52%;
+	height: 100%;
 	align-self: flex-end;
 	margin-left: 3px;
+}
+
+#main-row .counter,
+.target,
+.submitButton {
+	height: 20px;
+}
+
+form .inputElement {
+	height: 20px;
 }
 
 .location {
@@ -182,4 +193,8 @@ thead tr td:last-child {
 
 .valid {
 	background-color: rgb(126, 189, 126);
+}
+
+.flex-grow {
+	flex-grow: 1;
 }

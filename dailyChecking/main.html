@@ -31,34 +31,52 @@
 					<div>
 						<label for="table">Game Table</label><br />
 						<input
+							id="table-0"
 							type="text"
 							name="table"
+							list="names"
+							class="inputElement"
+							autocomplete="off"
 							pattern="[a-zA-Z0-9 ]+"
-							id="table-0"
-							required
 						/>
+						<datalist id="names"> </datalist>
 					</div>
 					<div>
 						<label for="platform">Platform</label><br />
 						<input
 							id="platform-0"
-							name="platform"
 							type="text"
+							name="platform"
 							list="platforms"
-							required
+							class="inputElement"
+							autocomplete="off"
 						/>
 						<datalist id="platforms">
-							<option value="iOS MHTML5"></option>
 							<option value="Android MHTML5"></option>
-							<option value="Windows Chrome"></option>
-							<option value="MacOS Safari"></option>
-							<option value="iOS Native"></option>
 							<option value="Android Native"></option>
+							<option value="Android Wrapper"></option>
+							<option value="iOS MHTML5"></option>
+							<option value="iOS Native"></option>
+							<option value="iOS Wrapper"></option>
+							<option value="MacOS Chrome"></option>
+							<option value="MacOS Firefox"></option>
+							<option value="MacOS Safari"></option>
+							<option value="Windows Chrome"></option>
+							<option value="Windows Download"></option>
+							<option value="Windows Firefox"></option>
 						</datalist>
 					</div>
 					<div>
 						<label for="casino">Casino</label><br />
-						<input type="text" name="casino" id="casino-0" required />
+						<input
+							id="casino-0"
+							type="text"
+							name="casino"
+							list="casinos"
+							class="inputElement"
+							autocomplete="off"
+						/>
+						<datalist id="casinos"> </datalist>
 					</div>
 					<span class="counter">0</span>
 					<input type="number" class="target" placeholder="10" maxlength="2"

@@ -2,7 +2,13 @@
 
 const checkRows = document.querySelector('#checkrows'),
 	rowManip = document.querySelector('#row-manipulator'),
+	gameTableNames = document.getElementById('names'),
+	casinoNames = document.getElementById('casinos'),
 	db = firebase.firestore();
+
+let tablesDB;
+let casinosDB;
+let inputElements = document.querySelectorAll('.inputElement');
 
 const manipRows = event => {
 	let target = event.target;
@@ -48,10 +54,10 @@ const manipRows = event => {
 						const rowItem = document.createElement('form');
 						rowItem.classList.add('flex', 'jc-c', 'table-row');
 						rowItem.innerHTML = `<div>
-          <input type="text" name="table" pattern="[a-zA-Z0-9]+" id="table-${data}" required />
+          <input type="text" name="table" pattern="[a-zA-Z0-9]+" id="table-${data}"/>
         </div>
         <div>
-          <input id="platform-${data}" name="platform" type="text" list="platforms" required />
+          <input id="platform-${data}" name="platform" type="text" list="platforms"/>
           <datalist id="platforms">
             <option value="iOS MHTML5"></option>
             <option value="Android MHTML5"></option>
@@ -62,7 +68,7 @@ const manipRows = event => {
           </datalist>
         </div>
         <div>
-          <input type="text" name="casino" id="casino-${data}" required />
+          <input type="text" name="casino" id="casino-${data}"/>
         </div>
         <span class="counter">0</span>
         <input type="number" class="target" placeholder="10" maxlength="2" min="1" max="12" />
@@ -99,11 +105,42 @@ const manipRows = event => {
 
 checkRows.addEventListener('click', manipRows);
 
-const updateCounter = event => {
+const updateCounterAndOptions = event => {
 	let target = event.target;
 
-	//following IF statement meant to limit event interaction
+	document.getElementById('names').innerHTML = '';
+	if (
+		target.classList.contains('inputElement') &&
+		event.type === 'keyup' &&
+		event.key.length === 1
+	) {
+		gameTableNames.innerHTML = '';
+		tablesDB.forEach(value => {
+			if (
+				gameTableNames.childElementCount <= 10 &&
+				value.toLowerCase().includes(target.value.toLowerCase())
+			) {
+				let namesOptionItem = document.createElement('option');
+				namesOptionItem.value = value;
+
+				gameTableNames.append(namesOptionItem);
+			}
+		});
+		casinoNames.innerHTML = '';
+		casinosDB.forEach(value => {
+			if (
+				casinoNames.childElementCount <= 10 &&
+				value.toLowerCase().includes(target.value.toLowerCase())
+			) {
+				let casinosOptionItem = document.createElement('option');
+				casinosOptionItem.value = value;
+
+				casinoNames.append(casinosOptionItem);
+			}
+		});
+	}
 	if (target.classList.contains('submitButton')) {
+		//following IF statement meant to limit event interaction
 		let tableName = document.querySelector(`#table-${target.id}`).value;
 		(platform = document.querySelector(`#platform-${target.id}`).value),
 			(casino = document.querySelector(`#casino-${target.id}`).value);
@@ -172,10 +209,27 @@ const updateCounter = event => {
 };
 
 //Added another eventlistener due to DOM Event delegation
-checkRows.addEventListener('click', updateCounter);
+checkRows.addEventListener('click', updateCounterAndOptions);
+checkRows.addEventListener('keyup', updateCounterAndOptions);
 
 // Loading previous number of rows, based on the DB counter with the previous DATA
 window.addEventListener('load', function () {
+	db.collection('dailyChecking')
+		.doc('tables')
+		.get()
+		.then(function (doc) {
+			tablesDB = doc.data().names;
+		})
+		.catch(function (error) {});
+
+	db.collection('dailyChecking')
+		.doc('casinos')
+		.get()
+		.then(function (doc) {
+			casinosDB = doc.data().names;
+		})
+		.catch(function (error) {});
+
 	db.collection('dailyChecking')
 		.doc('rows')
 		.get()
@@ -194,21 +248,13 @@ window.addEventListener('load', function () {
 						const rowItem = document.createElement('form');
 						rowItem.classList.add('flex', 'jc-c', 'table-row');
 						rowItem.innerHTML = `<div>
-          <input type="text" name="table" pattern="[a-zA-Z0-9 ]+" id="table-${rowObjects[i].id}" value="${rowObjects[i].name}" required />
+          <input type="text" name="table" pattern="[a-zA-Z0-9 ]+" list="names" class="inputElement" autocomplete="off" id="table-${rowObjects[i].id}" value="${rowObjects[i].name}" required />
         </div>
         <div>
-              <input id="platform-${rowObjects[i].id}" value="${rowObjects[i].platform}" name="platform" type="text" list="platforms" required />
-              <datalist id="platforms">
-                <option value="iOS MHTML5"></option>
-                <option value="Android MHTML5"></option>
-                <option value="Windows Chrome"></option>
-                <option value="MacOS Safari"></option>
-                <option value="iOS Native"></option>
-                <option value="Android Native"></option>
-              </datalist>
+              <input id="platform-${rowObjects[i].id}" value="${rowObjects[i].platform}" name="platform" type="text" list="platforms" autocomplete="off" required />
             </div>
             <div>
-              <input type="text" name="casino" id="casino-${rowObjects[i].id}" value="${rowObjects[i].casino}" required />
+              <input type="text" name="casino" list="casinos" class="inputElement" autocomplete="off" id="casino-${rowObjects[i].id}" value="${rowObjects[i].casino}" required />
             </div>
             <span class="counter">0</span>
             <input type="number" class="target" placeholder="10" maxlength="2" min="1" max="12" />
@@ -219,6 +265,7 @@ window.addEventListener('load', function () {
 					}
 					i++;
 				} while (i <= rows);
+				inputElements = document.querySelectorAll('input');
 			}
 		})
 		.catch(function (error) {
