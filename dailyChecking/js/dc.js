@@ -110,8 +110,11 @@ const updateCounterAndOptions = event => {
 	//Logic to ignore mouse clicks due to them being undefined
 	let eventKey = event.key ? event.key : 0;
 
-	gameTableNames.innerHTML = '';
-	casinoNames.innerHTML = '';
+	if (eventKey !== 'Shift') {
+		gameTableNames.innerHTML = '';
+		casinoNames.innerHTML = '';
+	}
+
 	if (
 		(target.classList.contains('inputElement') &&
 			event.type === 'keyup' &&

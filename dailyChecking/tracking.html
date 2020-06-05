@@ -37,13 +37,17 @@
 						<input id="tracking-to" type="date" name="to" id="" />
 					</div>
 					<div>
-						<label for="name">Table Name</label><br />
+						<label for="table">Table Name</label><br />
 						<input
 							id="tracking-name"
 							type="text"
-							name="name"
+							name="table"
+							list="names"
+							class="inputElement"
+							autocomplete="off"
 							pattern="a-zA-Z0-9 "
 						/>
+						<datalist id="names"> </datalist>
 					</div>
 					<div>
 						<label for="platform">Platform</label><br />
@@ -52,14 +56,21 @@
 							name="platform"
 							type="text"
 							list="platforms-tracking"
+							autocomplete="off"
 						/>
 						<datalist id="platforms-tracking">
-							<option value="iOS MHTML5"></option>
 							<option value="Android MHTML5"></option>
-							<option value="Windows Chrome"></option>
-							<option value="MacOS Safari"></option>
-							<option value="iOS Native"></option>
 							<option value="Android Native"></option>
+							<option value="Android Wrapper"></option>
+							<option value="iOS MHTML5"></option>
+							<option value="iOS Native"></option>
+							<option value="iOS Wrapper"></option>
+							<option value="MacOS Chrome"></option>
+							<option value="MacOS Firefox"></option>
+							<option value="MacOS Safari"></option>
+							<option value="Windows Chrome"></option>
+							<option value="Windows Download"></option>
+							<option value="Windows Firefox"></option>
 						</datalist>
 					</div>
 					<div>
@@ -68,8 +79,12 @@
 							id="tracking-casino"
 							type="text"
 							name="casino"
+							list="casinos"
+							class="inputElement"
+							autocomplete="off"
 							pattern="[a-zA-Z0-9]"
 						/>
+						<datalist id="casinos"> </datalist>
 					</div>
 					<button id="tracking-button" class="flex as-fe" type="button">
 						Search
