@@ -54,21 +54,13 @@ const manipRows = event => {
 						const rowItem = document.createElement('form');
 						rowItem.classList.add('flex', 'jc-c', 'table-row');
 						rowItem.innerHTML = `<div>
-          <input type="text" name="table" pattern="[a-zA-Z0-9]+" id="table-${data}"/>
+          <input type="text" name="table" list="names" class="inputElement" autocomplete="off" pattern="[a-zA-Z0-9]+" id="table-${data}" />
         </div>
         <div>
-          <input id="platform-${data}" name="platform" type="text" list="platforms"/>
-          <datalist id="platforms">
-            <option value="iOS MHTML5"></option>
-            <option value="Android MHTML5"></option>
-            <option value="Windows Chrome"></option>
-            <option value="MacOS Safari"></option>
-            <option value="iOS Native"></option>
-            <option value="Android Native"></option>
-          </datalist>
+          <input id="platform-${data}" name="platform" type="text" list="platforms" autocomplete="off"/>
         </div>
         <div>
-          <input type="text" name="casino" id="casino-${data}"/>
+          <input type="text" name="casino" id="casino-${data}" list="casinos" class="inputElement" autocomplete="off"/>
         </div>
         <span class="counter">0</span>
         <input type="number" class="target" placeholder="10" maxlength="2" min="1" max="12" />
@@ -146,7 +138,7 @@ const updateCounterAndOptions = event => {
 			}
 		});
 	}
-	if (target.classList.contains('submitButton')) {
+	if (target.classList.contains('submitButton') && event.type === 'click') {
 		//following IF statement meant to limit event interaction
 		let tableName = document.querySelector(`#table-${target.id}`).value;
 		(platform = document.querySelector(`#platform-${target.id}`).value),
@@ -255,13 +247,13 @@ window.addEventListener('load', function () {
 						const rowItem = document.createElement('form');
 						rowItem.classList.add('flex', 'jc-c', 'table-row');
 						rowItem.innerHTML = `<div>
-          <input type="text" name="table" pattern="[a-zA-Z0-9 ]+" list="names" class="inputElement" autocomplete="off" id="table-${rowObjects[i].id}" value="${rowObjects[i].name}" required />
+          <input type="text" name="table" pattern="[a-zA-Z0-9 ]+" list="names" class="inputElement" autocomplete="off" id="table-${rowObjects[i].id}" value="${rowObjects[i].name}"/>
         </div>
         <div>
-              <input id="platform-${rowObjects[i].id}" value="${rowObjects[i].platform}" name="platform" type="text" list="platforms" autocomplete="off" required />
+              <input id="platform-${rowObjects[i].id}" value="${rowObjects[i].platform}" name="platform" type="text" list="platforms" autocomplete="off"/>
             </div>
             <div>
-              <input type="text" name="casino" list="casinos" class="inputElement" autocomplete="off" id="casino-${rowObjects[i].id}" value="${rowObjects[i].casino}" required />
+              <input type="text" name="casino" list="casinos" class="inputElement" autocomplete="off" id="casino-${rowObjects[i].id}" value="${rowObjects[i].casino}"/>
             </div>
             <span class="counter">0</span>
             <input type="number" class="target" placeholder="10" maxlength="2" min="1" max="12" />
