@@ -107,12 +107,16 @@ checkRows.addEventListener('click', manipRows);
 
 const updateCounterAndOptions = event => {
 	let target = event.target;
+	//Logic to ignore mouse clicks due to them being undefined
+	let eventKey = event.key ? event.key : 0;
 
-	document.getElementById('names').innerHTML = '';
+	gameTableNames.innerHTML = '';
+	casinoNames.innerHTML = '';
 	if (
-		target.classList.contains('inputElement') &&
-		event.type === 'keyup' &&
-		event.key.length === 1
+		(target.classList.contains('inputElement') &&
+			event.type === 'keyup' &&
+			eventKey.length === 1) ||
+		eventKey === 'Backspace'
 	) {
 		gameTableNames.innerHTML = '';
 		tablesDB.forEach(value => {
