@@ -66,6 +66,13 @@ thead tr td:last-child {
 
 #row-manipulator button {
 	margin-left: 4px;
+	border: 1px solid black;
+	border-radius: 2px;
+	padding: 0 3px;
+}
+
+#row-manipulator button:hover {
+	box-shadow: 0 0 2px 2px rgba(126, 182, 189, 0.884) !important;
 }
 
 #main-row {
@@ -104,13 +111,16 @@ thead tr td:last-child {
 	margin-left: 3px;
 }
 
-#main-row .counter,
+#main-row span,
+.counter,
 .target,
 .submitButton {
 	height: 20px;
+	border: 1px solid black;
+	border-radius: 2px;
 }
 
-div form:nth-child(odd) input[type='text'] {
+#checkrows form:nth-child(odd) input[type='text'] {
 	background-color: white;
 	border: 1px solid rgb(63, 63, 63);
 	border-radius: 2px;
@@ -118,7 +128,7 @@ div form:nth-child(odd) input[type='text'] {
 	text-indent: 2px;
 }
 
-div form:nth-child(even) input[type='text'] {
+#checkrows form:nth-child(even) input[type='text'] {
 	background-color: rgb(118, 118, 118);
 	color: white;
 	border: 1px solid rgb(63, 63, 63);
@@ -127,8 +137,12 @@ div form:nth-child(even) input[type='text'] {
 	text-indent: 2px;
 }
 
+.highlight-this {
+}
+
 .highlighted-row {
-	border-color: aqua !important;
+	box-shadow: 0 0 1px 2px rgba(126, 182, 189, 0.884) !important;
+	border-radius: 2px;
 }
 
 .location {

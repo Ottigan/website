@@ -35,7 +35,7 @@
 							type="text"
 							name="table"
 							list="names"
-							class="inputElement"
+							class="inputElement highlight-this"
 							autocomplete="off"
 							pattern="[a-zA-Z0-9 ]+"
 						/>
@@ -48,6 +48,7 @@
 							name="platform"
 							type="text"
 							list="platforms"
+							class="highlight-this"
 							autocomplete="off"
 						/>
 						<datalist id="platforms">
@@ -72,15 +73,15 @@
 							type="text"
 							name="casino"
 							list="casinos"
-							class="inputElement"
+							class="inputElement highlight-this"
 							autocomplete="off"
 						/>
 						<datalist id="casinos"> </datalist>
 					</div>
-					<span class="counter">0</span>
-					<input type="number" class="target" placeholder="10" maxlength="2"
-					min="1" max="12" / />
-					<button id="0" class="submitButton" type="button">
+					<span id="counter-0" class="counter highlight-this">0</span>
+					<input id="target-0" type="number" class="target highlight-this"
+					placeholder="10" maxlength="2" min="1" max="12" / />
+					<button id="0" class="submitButton highlight-this" type="button">
 						Submit
 					</button>
 				</form>

@@ -102,7 +102,11 @@ const updateCounterAndOptions = event => {
 	//Logic to ignore mouse clicks due to them being undefined
 	let eventKey = event.key ? event.key : 0;
 
-	if (eventKey !== 'Shift') {
+	if (
+		eventKey !== 'Shift' &&
+		event.type !== 'mouseover' &&
+		event.type !== 'mouseout'
+	) {
 		gameTableNames.innerHTML = '';
 		casinoNames.innerHTML = '';
 	}
@@ -139,25 +143,30 @@ const updateCounterAndOptions = event => {
 		});
 	}
 
-	if (target.classList.contains('submitButton') && event.type === 'mouseover') {
-		let tableName = document.querySelector(`#table-${target.id}`),
-			platform = document.querySelector(`#platform-${target.id}`),
-			casino = document.querySelector(`#casino-${target.id}`);
+	if (target.classList.contains('highlight-this')) {
+		let indexID = target.id.substring(target.id.indexOf('-') + 1),
+			tableName = document.querySelector(`#table-${indexID}`),
+			platform = document.querySelector(`#platform-${indexID}`),
+			casino = document.querySelector(`#casino-${indexID}`),
+			counter = document.querySelector(`#counter-${indexID}`),
+			targetNumber = document.querySelector(`#target-${indexID}`),
+			submitButton = document.getElementById(`${indexID}`);
 
-		tableName.classList = 'highlighted-row';
-		platform.classList = 'highlighted-row';
-		casino.classList = 'highlighted-row';
-	} else if (
-		target.classList.contains('submitButton') &&
-		event.type === 'mouseout'
-	) {
-		let tableName = document.querySelector(`#table-${target.id}`),
-			platform = document.querySelector(`#platform-${target.id}`),
-			casino = document.querySelector(`#casino-${target.id}`);
-
-		tableName.classList = '';
-		platform.classList = '';
-		casino.classList = '';
+		if (event.type === 'mouseover') {
+			tableName.classList = 'inputElement highlight-this highlighted-row';
+			platform.classList = 'highlight-this highlighted-row';
+			casino.classList = 'inputElement highlight-this highlighted-row';
+			counter.classList = 'counter highlight-this highlighted-row';
+			targetNumber.classList = 'target highlight-this highlighted-row';
+			submitButton.classList = 'submitButton highlight-this highlighted-row';
+		} else if (event.type === 'mouseout') {
+			tableName.classList = 'inputElement highlight-this';
+			platform.classList = 'highlight-this';
+			casino.classList = 'inputElement highlight-this';
+			counter.classList = 'counter highlight-this';
+			targetNumber.classList = 'target highlight-this';
+			submitButton.classList = 'submitButton highlight-this';
+		}
 	}
 
 	if (target.classList.contains('submitButton') && event.type === 'click') {
@@ -271,23 +280,31 @@ window.addEventListener('load', function () {
 						const rowItem = document.createElement('form');
 						rowItem.classList.add('flex', 'jc-c', 'table-row');
 						rowItem.innerHTML = `<div>
-          <input type="text" name="table" pattern="[a-zA-Z0-9 ]+" list="names" class="inputElement" autocomplete="off" id="table-${
+          <input type="text" name="table" pattern="[a-zA-Z0-9 ]+" list="names" class="inputElement highlight-this" autocomplete="off" id="table-${
 						rowObjects[i].id
 					}" value="${rowObjects[i].name}"/>
         </div>
         <div>
-              <input id="platform-${rowObjects[i].id}" value="${
+              <input id="platform-${
+								rowObjects[i].id
+							}" class="highlight-this" value="${
 							rowObjects[i].platform
 						}" name="platform" type="text" list="platforms" autocomplete="off"/>
             </div>
             <div>
-              <input type="text" name="casino" list="casinos" class="inputElement" autocomplete="off" id="casino-${
+              <input type="text" name="casino" list="casinos" class="inputElement highlight-this" autocomplete="off" id="casino-${
 								rowObjects[i].id
 							}" value="${rowObjects[i].casino.toLowerCase()}"/>
             </div>
-            <span class="counter">0</span>
-            <input type="number" class="target" placeholder="10" maxlength="2" min="1" max="12" />
-            <button id="${rowObjects[i].id}" class="submitButton" type="button">
+            <span id="counter-${
+							rowObjects[i].id
+						}" class="counter highlight-this">0</span>
+            <input id="target-${
+							rowObjects[i].id
+						}" type="number" class="target highlight-this" placeholder="10" maxlength="2" min="1" max="12" />
+            <button id="${
+							rowObjects[i].id
+						}" class="submitButton highlight-this" type="button">
               Submit
         </button>`;
 						rowManip.before(rowItem);
