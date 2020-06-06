@@ -99,6 +99,7 @@ thead tr td:last-child {
 
 .submitButton {
 	height: 100%;
+	width: 50px;
 	align-self: flex-end;
 	margin-left: 3px;
 }
@@ -109,8 +110,25 @@ thead tr td:last-child {
 	height: 20px;
 }
 
-form .inputElement {
+div form:nth-child(odd) input[type='text'] {
+	background-color: white;
+	border: 1px solid rgb(63, 63, 63);
+	border-radius: 2px;
 	height: 20px;
+	text-indent: 2px;
+}
+
+div form:nth-child(even) input[type='text'] {
+	background-color: rgb(118, 118, 118);
+	color: white;
+	border: 1px solid rgb(63, 63, 63);
+	border-radius: 2px;
+	height: 20px;
+	text-indent: 2px;
+}
+
+.highlighted-row {
+	border-color: aqua !important;
 }
 
 .location {
