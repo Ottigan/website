@@ -1,107 +1,100 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>New Product</title>
-		<link
-			href="https://fonts.googleapis.com/css?family=Indie+Flower&display=swap"
-			rel="stylesheet"
-		/>
-		<link rel="stylesheet" href="css/style.css" />
-	</head>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>New Product</title>
+    <link
+      href="https://fonts.googleapis.com/css?family=Indie+Flower&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
 
-	<body>
-		<header>
-			<nav
-				style="background-color: rgb(35, 83, 83); font-size: xx-large;"
-				class="flex jc-c ai-c"
-			>
-				<ul class="container flex jc-se ls-none">
-					<li><a id="dc" href="main.html">Daily Checking</a></li>
-					<li><a id="tracking" href="tracking.html">Tracking DB</a></li>
-					<li><a id="new-product" href="new.html">Add New Table/Casino</a></li>
-				</ul>
-			</nav>
-		</header>
-		<hr />
-		<section style="margin-top: 50px;" class="flex jc-c">
-			<div class="flex vertical">
-				<div style="margin-bottom: 5px;" class="container flex jc-sb">
-					<form action="" style="width: 45%; margin: 0 3px 0 0;" class="flex">
-						<div class="flex flex-grow vertical">
-							<label for="new-table">Add Table</label>
-							<input
-								id="new-table"
-								name="new-table"
-								type="text"
-								placeholder="Game Table Name"
-								pattern="[a-zA-Z 0-9]+"
-								class="flex-grow"
-							/>
-						</div>
-						<button
-							style="height: 52%; width: 10%; align-self: flex-end;"
-							type="button"
-							id="add-table"
-							name="add-table"
-						>
-							Add
-						</button>
-					</form>
-					<form action="" style="width: 45%;" class="flex">
-						<div class="flex flex-grow vertical">
-							<label for="new-casino">Add Casino</label>
-							<input
-								id="new-casino"
-								type="text"
-								name=""
-								placeholder="Casino Name"
-								class="flex-grow"
-							/>
-						</div>
-						<button
-							style="height: 52%; width: 10%; align-self: flex-end;"
-							type="button"
-							id="add-casino"
-						>
-							Add
-						</button>
-					</form>
-				</div>
-				<hr />
-				<div style="margin-top: 20px;" class="flex jc-sb">
-					<div style="width: 45%;">
-						<ul id="table-list" class="ls-none"></ul>
-					</div>
-					<div style="width: 45%;">
-						<ul id="casino-list" class="ls-none"></ul>
-					</div>
-				</div>
-			</div>
-		</section>
-		<!-- The core Firebase JS SDK is always required and must be listed first -->
-		<script src="https://www.gstatic.com/firebasejs/7.14.6/firebase-app.js"></script>
+  <body>
+    <header>
+      <nav class="flex jc-c ai-c">
+        <ul class="container flex jc-se ls-none">
+          <li><a id="dc" href="main.html">Daily Checking</a></li>
+          <li><a id="tracking" href="tracking.html">Tracking DB</a></li>
+          <li><a id="new-product" href="new.html">Add New Table/Casino</a></li>
+        </ul>
+      </nav>
+    </header>
+    <section style="margin-top: 50px;" class="flex jc-c">
+      <div class="flex vertical">
+        <div style="margin-bottom: 5px;" class="container flex jc-sb">
+          <form action="" style="width: 45%; margin: 0 3px 0 0;" class="flex">
+            <div class="flex flex-grow">
+              <input
+                id="new-table"
+                class="flex-grow"
+                name="new-table"
+                type="text"
+                placeholder="Game Table Name"
+                pattern="[a-zA-Z 0-9]+"
+              />
+            </div>
+            <button
+              style="width: 10%; align-self: flex-end;"
+              type="button"
+              id="add-table"
+              name="add-table"
+            >
+              Add
+            </button>
+          </form>
+          <form action="" style="width: 45%;" class="flex">
+            <div class="flex flex-grow">
+              <input
+                id="new-casino"
+                type="text"
+                name=""
+                placeholder="Casino Name"
+                class="flex-grow"
+              />
+            </div>
+            <button
+              style="width: 10%; align-self: flex-end;"
+              type="button"
+              id="add-casino"
+            >
+              Add
+            </button>
+          </form>
+        </div>
+        <hr />
+        <div style="margin-top: 20px;" class="flex jc-sb">
+          <div style="width: 45%;">
+            <ul id="table-list" class="ls-none"></ul>
+          </div>
+          <div style="width: 45%;">
+            <ul id="casino-list" class="ls-none"></ul>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/7.14.6/firebase-app.js"></script>
 
-		<!-- TODO: Add SDKs for Firebase products that you want to use
+    <!-- TODO: Add SDKs for Firebase products that you want to use
          https://firebase.google.com/docs/web/setup#available-libraries -->
-		<script src="https://www.gstatic.com/firebasejs/7.14.6/firebase-database.js"></script>
-		<script src="https://www.gstatic.com/firebasejs/7.14.6/firebase-firestore.js"></script>
-		<script>
-			// Your web app's Firebase configuration
-			var firebaseConfig = {
-				apiKey: 'AIzaSyCOiJc8EKT9DyXyuAKPeKpJLnvYs_vINFU',
-				authDomain: 'starlit-braid-276207.firebaseapp.com',
-				databaseURL: 'https://starlit-braid-276207.firebaseio.com',
-				projectId: 'starlit-braid-276207',
-				storageBucket: 'starlit-braid-276207.appspot.com',
-				messagingSenderId: '30277815528',
-				appId: '1:30277815528:web:517d7d0743d3d5530a4d5d',
-			};
-			// Initialize Firebase
-			firebase.initializeApp(firebaseConfig);
-		</script>
-		<script src="js/new.js"></script>
-		<script src="js/main.js"></script>
-	</body>
+    <script src="https://www.gstatic.com/firebasejs/7.14.6/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.6/firebase-firestore.js"></script>
+    <script>
+      // Your web app's Firebase configuration
+      var firebaseConfig = {
+        apiKey: "AIzaSyCOiJc8EKT9DyXyuAKPeKpJLnvYs_vINFU",
+        authDomain: "starlit-braid-276207.firebaseapp.com",
+        databaseURL: "https://starlit-braid-276207.firebaseio.com",
+        projectId: "starlit-braid-276207",
+        storageBucket: "starlit-braid-276207.appspot.com",
+        messagingSenderId: "30277815528",
+        appId: "1:30277815528:web:517d7d0743d3d5530a4d5d",
+      };
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+    </script>
+    <script src="js/new.js"></script>
+  </body>
 </html>
