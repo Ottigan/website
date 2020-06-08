@@ -1,47 +1,58 @@
 * {
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
 }
 
 body {
-  background-color: rgb(24, 24, 24);
+	background-color: rgb(24, 24, 24);
 }
 
 form span {
-  background-color: white;
+	background-color: white;
 }
 
 form label {
-  color: white;
+	color: white;
 }
 
 nav {
-  background-color: rgb(33, 33, 33);
-  font-size: x-large;
-  height: 60px;
-  border-bottom: 1px solid black;
+	background-color: rgb(33, 33, 33);
+	font-size: x-large;
+	height: 80px;
 }
 
+.navSlash {
+	position: relative;
+	right: 100px;
+	height: 1px;
+	width: 114px;
+	transform: rotate(135deg);
+	background-color: rgb(3, 220, 248);
+}
+
+.navBottomBorder {
+	height: 1px;
+	background-color: rgb(3, 220, 248);
+}
 nav a {
-  color: white;
-  text-decoration-line: none;
-  font-family: Georgia, "Times New Roman", Times, serif;
-  padding: 5px 8px;
+	color: white;
+	text-decoration-line: none;
+	font-family: Georgia, 'Times New Roman', Times, serif;
+	padding: 5px 8px;
 }
 
 nav a:hover {
-  /* background-color: darkcyan; */
-  box-shadow: 0 0 2px 2px rgba(3, 220, 248, 0.884);
-  border-radius: 5px;
+	box-shadow: 0 0 2px 2px rgba(3, 220, 248, 0.884);
+	border-radius: 5px;
 }
 
 form div {
-  padding-right: 6px;
+	padding-right: 6px;
 }
 
 #db-body {
-  height: 100vh;
+	height: 100vh;
 }
 
 #db-form div input,
@@ -50,130 +61,130 @@ form div {
 #new-table,
 #add-table,
 #add-casino {
-  height: 35px;
-  font-size: larger;
-  border: 1px solid black;
-  background-color: rgb(231, 231, 231);
-  border-radius: 2px;
+	height: 35px;
+	font-size: larger;
+	border: 1px solid black;
+	background-color: rgb(231, 231, 231);
+	border-radius: 2px;
 }
 
 #tracking-from,
 #tracking-to {
-  width: 150px;
+	width: 150px;
 }
 
 #tracking-name,
 #tracking-platform,
 #tracking-casino {
-  width: 200px;
+	width: 200px;
 }
 
 #tracking-button {
-  width: 100px;
-  justify-content: center;
+	width: 100px;
+	justify-content: center;
 }
 
 #db-data {
-  margin-top: 50px;
-  width: 1030px;
+	margin-top: 50px;
+	width: 1030px;
 }
 
 tbody {
-  height: 600px;
-  overflow-y: scroll;
+	height: 600px;
+	overflow-y: scroll;
 }
 
 tbody tr:nth-child(odd) td {
-  background-color: rgb(88, 88, 88);
-  color: rgb(255, 255, 255);
-  border: 1px solid rgb(148, 142, 142);
+	background-color: rgb(88, 88, 88);
+	color: rgb(255, 255, 255);
+	border: 1px solid rgb(148, 142, 142);
 }
 
 td:nth-child(even) {
-  margin-left: 2px;
-  margin-right: 2px;
+	margin-left: 2px;
+	margin-right: 2px;
 }
 
 td {
-  border: 1px solid rgb(63, 63, 63);
-  width: 20%;
-  text-align: center;
-  margin-bottom: 2px;
+	border: 1px solid rgb(63, 63, 63);
+	width: 20%;
+	text-align: center;
+	margin-bottom: 2px;
 }
 
 thead tr td {
-  height: 34px;
-  margin-bottom: 5px;
-  font-size: larger;
-  color: rgb(114, 114, 114);
-  line-height: 34px;
-  font-weight: bolder;
+	height: 34px;
+	margin-bottom: 5px;
+	font-size: larger;
+	color: rgb(114, 114, 114);
+	line-height: 34px;
+	font-weight: bolder;
 }
 
 thead tr td:last-child {
-  width: 224px;
+	width: 224px;
 }
 
 #row-manipulator {
-  width: 100%;
-  padding-left: 270px;
-  margin-top: 5px;
-  margin-bottom: 20px;
+	width: 100%;
+	padding-left: 270px;
+	margin-top: 5px;
+	margin-bottom: 20px;
 }
 
 #row-manipulator button {
-  margin-left: 4px;
-  border: 1px solid black;
-  border-radius: 2px;
-  padding: 0 3px;
+	margin-left: 4px;
+	border: 1px solid black;
+	border-radius: 2px;
+	padding: 0 3px;
 }
 
 #row-manipulator button:hover {
-  box-shadow: 0 0 3px 2px rgba(3, 220, 248, 0.884) !important;
+	box-shadow: 0 0 3px 2px rgba(3, 220, 248, 0.884) !important;
 }
 
 #main-row {
-  width: 100%;
+	width: 100%;
 }
 
 .table-row {
-  width: 100%;
-  height: 20px;
-  margin-top: 3px;
+	width: 100%;
+	height: 20px;
+	margin-top: 3px;
 }
 
-form input[type="text"] {
-  border-radius: 2px;
-  font-family: "Roboto", sans-serif;
-  font-weight: 400;
-  height: 20px;
-  width: 200px;
-  text-indent: 2px;
+form input[type='text'] {
+	border-radius: 2px;
+	font-family: 'Roboto', sans-serif;
+	font-weight: 400;
+	height: 20px;
+	width: 200px;
+	text-indent: 2px;
 }
 
 .counter {
-  height: 100%;
-  width: 21px;
-  align-self: flex-end;
-  text-align: center;
-  padding: 0 2px;
-  margin: 0 3px;
-  font-size: 15px;
+	height: 100%;
+	width: 21px;
+	align-self: flex-end;
+	text-align: center;
+	padding: 0 2px;
+	margin: 0 3px;
+	font-size: 15px;
 }
 
 .target {
-  height: 100%;
-  width: 40px;
-  align-self: flex-end;
-  text-align: left;
-  margin: 0 3px;
+	height: 100%;
+	width: 40px;
+	align-self: flex-end;
+	text-align: left;
+	margin: 0 3px;
 }
 
 .submitButton {
-  height: 100%;
-  width: 60px;
-  align-self: flex-end;
-  margin-left: 3px;
+	height: 100%;
+	width: 60px;
+	align-self: flex-end;
+	margin-left: 3px;
 }
 
 #checkrows form:nth-child(odd) input,
@@ -181,9 +192,9 @@ form input[type="text"] {
 #checkrows form:nth-child(odd) button,
 tbody tr:nth-child(even) td,
 .l-decoration:nth-child(even) {
-  background-color: rgb(22, 22, 22);
-  color: rgb(114, 114, 114);
-  border: 1px solid rgb(63, 63, 63);
+	background-color: rgb(22, 22, 22);
+	color: rgb(114, 114, 114);
+	border: 1px solid rgb(63, 63, 63);
 }
 
 #checkrows form:nth-child(even) input,
@@ -191,103 +202,111 @@ tbody tr:nth-child(even) td,
 #checkrows form:nth-child(even) button,
 tbody tr:nth-child(odd) td,
 .l-decoration:nth-child(odd) {
-  background-color: rgb(88, 88, 88);
-  color: rgb(201, 201, 201);
-  border: 1px solid rgb(148, 142, 142);
+	background-color: rgb(88, 88, 88);
+	color: rgb(201, 201, 201);
+	border: 1px solid rgb(148, 142, 142);
 }
 
 .highlight-this {
-  border-radius: 2px;
-  height: 20px;
-  border: 1px solid black;
+	border-radius: 2px;
+	height: 20px;
+	border: 1px solid black;
 }
 
 .highlighted-row {
-  box-shadow: 0 0 2px 2px rgba(3, 220, 248, 0.884) !important;
+	box-shadow: 0 0 2px 2px rgba(3, 220, 248, 0.884) !important;
 }
 
 .location {
-  text-decoration: underline;
+	text-decoration: underline;
 }
 
 .container {
-  width: 1200px;
+	width: 1200px;
 }
 
 .flex {
-  display: flex;
+	display: flex;
 }
 
 .vertical {
-  flex-direction: column;
+	flex-direction: column;
 }
 
 .jc-c {
-  justify-content: center;
+	justify-content: center;
 }
 
 .jc-fs {
-  justify-content: flex-start;
+	justify-content: flex-start;
 }
 
 .jc-sb {
-  justify-content: space-between;
+	justify-content: space-between;
 }
 
 .jc-se {
-  justify-content: space-evenly;
+	justify-content: space-evenly;
 }
 
 .jc-sa {
-  justify-content: space-around;
+	justify-content: space-around;
 }
 
 .js-c {
-  justify-self: center;
+	justify-self: center;
 }
 
 .js-fe {
-  justify-self: flex-end;
+	justify-self: flex-end;
 }
 
 .ai-c {
-  align-items: center;
+	align-items: center;
 }
 
 .ai-fe {
-  align-items: flex-end;
+	align-items: flex-end;
 }
 
 .ai-fs {
-  align-items: flex-start;
+	align-items: flex-start;
 }
 
 .as-fe {
-  align-self: flex-end;
+	align-self: flex-end;
 }
 
 .vh100 {
-  height: 100vh;
+	height: 100vh;
 }
 
 .ls-none {
-  list-style: none;
+	list-style: none;
 }
 
 .l-decoration {
-  border: 1px solid rgb(153, 151, 151);
-  margin: 2px 0;
-  padding-left: 2px;
+	border: 1px solid rgb(153, 151, 151);
+	margin: 2px 0;
+	padding-left: 2px;
 }
 
 .invalid {
-  outline-color: red !important;
+	outline-color: red !important;
 }
 
 .valid {
-  background-color: rgb(126, 189, 126);
+	background-color: rgb(126, 189, 126);
 }
 
 .flex-grow {
-  flex-grow: 1;
+	flex-grow: 1;
+}
+
+.hide-logout {
+	visibility: hidden;
+}
+
+.show-logout {
+	visibility: visible;
 }

@@ -1,21 +1,141 @@
 `use strict`;
 
+// Your web app's Firebase configuration
+const firebaseConfig = {
+	apiKey: 'AIzaSyCOiJc8EKT9DyXyuAKPeKpJLnvYs_vINFU',
+	authDomain: 'starlit-braid-276207.firebaseapp.com',
+	databaseURL: 'https://starlit-braid-276207.firebaseio.com',
+	projectId: 'starlit-braid-276207',
+	storageBucket: 'starlit-braid-276207.appspot.com',
+	messagingSenderId: '30277815528',
+	appId: '1:30277815528:web:517d7d0743d3d5530a4d5d',
+};
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+
 const checkRows = document.querySelector("#checkrows"),
 	rowManip = document.querySelector("#row-manipulator"),
 	gameTableNames = document.getElementById("names"),
 	casinoNames = document.getElementById("casinos"),
+	loginButton = document.getElementById('login-button'),
+	logoutButton = document.getElementById('logout-button'),
+	txtUser = document.getElementById('txt-user'),
+	txtPass = document.getElementById('txt-pass'),
+	auth = firebase.auth(),
 	db = firebase.firestore();
 
+let userUID;
 let tablesDB;
 let casinosDB;
 let inputElements = document.querySelectorAll(".inputElement");
+
+//Add login event 
+loginButton.addEventListener('click', function () {
+	const user = txtUser.value;
+	const pass = txtPass.value;
+	const authPromise = auth.signInWithEmailAndPassword(user, pass);
+
+	authPromise
+		.catch(error => console.log(error.message))
+})
+
+firebase.auth().onAuthStateChanged(dailyCheckingUser => {
+	if (dailyCheckingUser) {
+		userUID = firebase.auth().currentUser.uid
+		logoutButton.classList = 'show-logout'
+
+		const getData = function () {
+			db.collection("dailyChecking")
+				.doc("tables")
+				.get()
+				.then(function (doc) {
+					tablesDB = doc.data().names;
+				})
+				.catch(function (error) {});
+
+			db.collection("dailyChecking")
+				.doc("casinos")
+				.get()
+				.then(function (doc) {
+					casinosDB = doc.data().names;
+				})
+				.catch(function (error) {});
+
+			db.collection("dailyChecking")
+				.doc(userUID)
+				.get()
+				.then(function (doc) {
+					if (doc.exists) {
+						let rows = doc.data().rowcount;
+						let rowObjects = doc.data().rowObjects;
+						let i = 0;
+						do {
+							if (i === 0) {
+								document.querySelector(`#table-${ i }`).value = rowObjects[i].name;
+								document.querySelector(`#platform-${ i }`).value =
+									rowObjects[i].platform;
+								document.querySelector(`#casino-${ i }`).value = rowObjects[i].casino;
+							} else if (i > 0) {
+								const rowItem = document.createElement("form");
+								rowItem.classList.add("flex", "jc-c", "table-row");
+								rowItem.innerHTML = `<div>
+          <input type="text" name="table" pattern="[a-zA-Z0-9 ]+" list="names" class="inputElement highlight-this" autocomplete="off" id="table-${
+									rowObjects[i].id
+									}" value="${ rowObjects[i].name }"/>
+        </div>
+        <div>
+              <input id="platform-${
+									rowObjects[i].id
+									}" class="highlight-this" value="${
+									rowObjects[i].platform
+									}" name="platform" type="text" list="platforms" autocomplete="off"/>
+            </div>
+            <div>
+              <input type="text" name="casino" list="casinos" class="inputElement highlight-this" autocomplete="off" id="casino-${
+									rowObjects[i].id
+									}" value="${ rowObjects[i].casino.toLowerCase() }"/>
+            </div>
+            <span id="counter-${
+									rowObjects[i].id
+									}" class="counter highlight-this">0</span>
+            <input id="target-${
+									rowObjects[i].id
+									}" type="number" class="target highlight-this" value="10" maxlength="2" min="1" max="12" />
+            <button id="${
+									rowObjects[i].id
+									}" class="submitButton highlight-this" type="button">
+              Submit
+        </button>`;
+								rowManip.before(rowItem);
+							}
+							i++;
+						} while (i <= rows);
+						inputElements = document.querySelectorAll("input");
+					}
+				})
+				.catch(function (error) {
+					console.log("Error getting document:", error);
+				});
+		};
+		getData();
+	} else {
+		console.log('not logged in')
+	}
+})
+
+logoutButton.addEventListener('click', function () {
+	auth.signOut()
+		.then(function () {
+			logoutButton.classList = 'hide-logout'
+		})
+})
 
 const manipRows = (event) => {
 	let target = event.target;
 	let row = target.parentElement.previousElementSibling;
 	if (target.innerHTML === "Remove" && row.classList.contains("table-row")) {
 		db.collection("dailyChecking")
-			.doc("rows")
+			.doc(userUID)
 			.get()
 			.then(function (doc) {
 				let data = doc.data().rowcount;
@@ -23,7 +143,7 @@ const manipRows = (event) => {
 				let deleteObject = objectArray.find((value) => value.id === data);
 				if (data > 0) {
 					db.collection("dailyChecking")
-						.doc("rows")
+						.doc(userUID)
 						.update({
 							rowcount: firebase.firestore.FieldValue.increment(-1),
 							rowObjects: firebase.firestore.FieldValue.arrayRemove(
@@ -33,7 +153,7 @@ const manipRows = (event) => {
 						.then(function () {
 							row.remove();
 						})
-						.catch(function (error) { });
+						.catch(function (error) {});
 				}
 			})
 			.catch(function (error) {
@@ -41,42 +161,42 @@ const manipRows = (event) => {
 			});
 	} else if (target.innerHTML === "Add") {
 		db.collection("dailyChecking")
-			.doc("rows")
+			.doc(userUID)
 			.update({
 				rowcount: firebase.firestore.FieldValue.increment(1),
 			})
 			.then(function () {
 				db.collection("dailyChecking")
-					.doc("rows")
+					.doc(userUID)
 					.get()
 					.then(function (doc) {
 						let data = doc.data().rowcount;
 						const rowItem = document.createElement("form");
 						rowItem.classList.add("flex", "jc-c", "table-row");
 						rowItem.innerHTML = `<div>
-          <input type="text" name="table" list="names" class="inputElement" autocomplete="off" pattern="[a-zA-Z0-9]+" id="table-${data}" />
+          <input type="text" name="table" list="names" class="inputElement" autocomplete="off" pattern="[a-zA-Z0-9]+" id="table-${data }" />
         </div>
         <div>
-          <input id="platform-${data}" name="platform" type="text" list="platforms" autocomplete="off"/>
+          <input id="platform-${data }" name="platform" type="text" list="platforms" autocomplete="off"/>
         </div>
         <div>
-          <input type="text" name="casino" id="casino-${data}" list="casinos" class="inputElement" autocomplete="off"/>
+          <input type="text" name="casino" id="casino-${data }" list="casinos" class="inputElement" autocomplete="off"/>
         </div>
         <span class="counter">0</span>
         <input type="number" class="target" placeholder="10" maxlength="2" min="1" max="12" />
-        <button id="${data}" class="submitButton" type="button">
+        <button id="${data }" class="submitButton" type="button">
           Submit
         </button>`;
 						rowManip.before(rowItem);
 						db.collection("dailyChecking")
-							.doc("rows")
+							.doc(userUID)
 							.update({
 								rowObjects: firebase.firestore.FieldValue.arrayUnion({
 									id: data,
 									name: "",
 									platform: "",
-									casino: "",
-								}),
+									casino: ""
+								})
 							})
 							.then(function () {
 								console.log("Row Object added");
@@ -145,12 +265,12 @@ const updateCounterAndOptions = (event) => {
 
 	if (target.classList.contains("highlight-this")) {
 		let indexID = target.id.substring(target.id.indexOf("-") + 1),
-			tableName = document.querySelector(`#table-${indexID}`),
-			platform = document.querySelector(`#platform-${indexID}`),
-			casino = document.querySelector(`#casino-${indexID}`),
-			counter = document.querySelector(`#counter-${indexID}`),
-			targetNumber = document.querySelector(`#target-${indexID}`),
-			submitButton = document.getElementById(`${indexID}`);
+			tableName = document.querySelector(`#table-${ indexID }`),
+			platform = document.querySelector(`#platform-${ indexID }`),
+			casino = document.querySelector(`#casino-${ indexID }`),
+			counter = document.querySelector(`#counter-${ indexID }`),
+			targetNumber = document.querySelector(`#target-${ indexID }`),
+			submitButton = document.getElementById(`${ indexID }`);
 
 		if (event.type === "mouseover") {
 			tableName.classList.add('highlighted-row');
@@ -171,12 +291,12 @@ const updateCounterAndOptions = (event) => {
 
 	if (target.classList.contains("submitButton") && event.type === "click") {
 		//following IF statement meant to limit event interaction
-		let tableName = document.querySelector(`#table-${target.id}`).value;
-		(platform = document.querySelector(`#platform-${target.id}`).value),
-			(casino = document.querySelector(`#casino-${target.id}`).value);
+		let tableName = document.querySelector(`#table-${ target.id }`).value;
+		(platform = document.querySelector(`#platform-${ target.id }`).value),
+			(casino = document.querySelector(`#casino-${ target.id }`).value);
 
 		db.collection("dailyChecking")
-			.doc("rows")
+			.doc(userUID)
 			.get()
 			.then(function (doc) {
 				let rowObjects = doc.data().rowObjects;
@@ -187,7 +307,7 @@ const updateCounterAndOptions = (event) => {
 				update.platform = platform;
 				rowObjects[target.id] = update;
 				db.collection("dailyChecking")
-					.doc("rows")
+					.doc(userUID)
 					.update({
 						rowObjects: rowObjects,
 					})
@@ -200,7 +320,8 @@ const updateCounterAndOptions = (event) => {
 										name: tableName,
 										platform: platform,
 										casino: casino,
-										when: clientTime,
+										qa: userUID,
+										when: clientTime
 									}),
 								})
 								.then(function () {
@@ -245,76 +366,76 @@ checkRows.addEventListener("mouseover", updateCounterAndOptions);
 checkRows.addEventListener("mouseout", updateCounterAndOptions);
 
 // Loading previous number of rows, based on the DB counter with the previous DATA
-window.addEventListener("load", function () {
-	db.collection("dailyChecking")
-		.doc("tables")
-		.get()
-		.then(function (doc) {
-			tablesDB = doc.data().names;
-		})
-		.catch(function (error) { });
+// window.addEventListener("load", function () {
+// 	db.collection("dailyChecking")
+// 		.doc("tables")
+// 		.get()
+// 		.then(function (doc) {
+// 			tablesDB = doc.data().names;
+// 		})
+// 		.catch(function (error) {});
 
-	db.collection("dailyChecking")
-		.doc("casinos")
-		.get()
-		.then(function (doc) {
-			casinosDB = doc.data().names;
-		})
-		.catch(function (error) { });
+// 	db.collection("dailyChecking")
+// 		.doc("casinos")
+// 		.get()
+// 		.then(function (doc) {
+// 			casinosDB = doc.data().names;
+// 		})
+// 		.catch(function (error) {});
 
-	db.collection("dailyChecking")
-		.doc("rows")
-		.get()
-		.then(function (doc) {
-			if (doc.exists) {
-				let rows = doc.data().rowcount;
-				let rowObjects = doc.data().rowObjects;
-				let i = 0;
-				do {
-					if (i === 0) {
-						document.querySelector(`#table-${i}`).value = rowObjects[i].name;
-						document.querySelector(`#platform-${i}`).value =
-							rowObjects[i].platform;
-						document.querySelector(`#casino-${i}`).value = rowObjects[i].casino;
-					} else if (i > 0) {
-						const rowItem = document.createElement("form");
-						rowItem.classList.add("flex", "jc-c", "table-row");
-						rowItem.innerHTML = `<div>
-          <input type="text" name="table" pattern="[a-zA-Z0-9 ]+" list="names" class="inputElement highlight-this" autocomplete="off" id="table-${
-							rowObjects[i].id
-							}" value="${rowObjects[i].name}"/>
-        </div>
-        <div>
-              <input id="platform-${
-							rowObjects[i].id
-							}" class="highlight-this" value="${
-							rowObjects[i].platform
-							}" name="platform" type="text" list="platforms" autocomplete="off"/>
-            </div>
-            <div>
-              <input type="text" name="casino" list="casinos" class="inputElement highlight-this" autocomplete="off" id="casino-${
-							rowObjects[i].id
-							}" value="${rowObjects[i].casino.toLowerCase()}"/>
-            </div>
-            <span id="counter-${
-							rowObjects[i].id
-							}" class="counter highlight-this">0</span>
-            <input id="target-${
-							rowObjects[i].id
-							}" type="number" class="target highlight-this" value="10" maxlength="2" min="1" max="12" />
-            <button id="${
-							rowObjects[i].id
-							}" class="submitButton highlight-this" type="button">
-              Submit
-        </button>`;
-						rowManip.before(rowItem);
-					}
-					i++;
-				} while (i <= rows);
-				inputElements = document.querySelectorAll("input");
-			}
-		})
-		.catch(function (error) {
-			console.log("Error getting document:", error);
-		});
-});
+// 	db.collection("dailyChecking")
+// 		.doc("rows")
+// 		.get()
+// 		.then(function (doc) {
+// 			if (doc.exists) {
+// 				let rows = doc.data().rowcount;
+// 				let rowObjects = doc.data().rowObjects;
+// 				let i = 0;
+// 				do {
+// 					if (i === 0) {
+// 						document.querySelector(`#table-${ i }`).value = rowObjects[i].name;
+// 						document.querySelector(`#platform-${ i }`).value =
+// 							rowObjects[i].platform;
+// 						document.querySelector(`#casino-${ i }`).value = rowObjects[i].casino;
+// 					} else if (i > 0) {
+// 						const rowItem = document.createElement("form");
+// 						rowItem.classList.add("flex", "jc-c", "table-row");
+// 						rowItem.innerHTML = `<div>
+//           <input type="text" name="table" pattern="[a-zA-Z0-9 ]+" list="names" class="inputElement highlight-this" autocomplete="off" id="table-${
+// 							rowObjects[i].id
+// 							}" value="${ rowObjects[i].name }"/>
+//         </div>
+//         <div>
+//               <input id="platform-${
+// 							rowObjects[i].id
+// 							}" class="highlight-this" value="${
+// 							rowObjects[i].platform
+// 							}" name="platform" type="text" list="platforms" autocomplete="off"/>
+//             </div>
+//             <div>
+//               <input type="text" name="casino" list="casinos" class="inputElement highlight-this" autocomplete="off" id="casino-${
+// 							rowObjects[i].id
+// 							}" value="${ rowObjects[i].casino.toLowerCase() }"/>
+//             </div>
+//             <span id="counter-${
+// 							rowObjects[i].id
+// 							}" class="counter highlight-this">0</span>
+//             <input id="target-${
+// 							rowObjects[i].id
+// 							}" type="number" class="target highlight-this" value="10" maxlength="2" min="1" max="12" />
+//             <button id="${
+// 							rowObjects[i].id
+// 							}" class="submitButton highlight-this" type="button">
+//               Submit
+//         </button>`;
+// 						rowManip.before(rowItem);
+// 					}
+// 					i++;
+// 				} while (i <= rows);
+// 				inputElements = document.querySelectorAll("input");
+// 			}
+// 		})
+// 		.catch(function (error) {
+// 			console.log("Error getting document:", error);
+// 		});
+// });

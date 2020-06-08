@@ -1,4 +1,16 @@
 'use strict';
+// Firebase configuration
+const firebaseConfig = {
+	apiKey: 'AIzaSyCOiJc8EKT9DyXyuAKPeKpJLnvYs_vINFU',
+	authDomain: 'starlit-braid-276207.firebaseapp.com',
+	databaseURL: 'https://starlit-braid-276207.firebaseio.com',
+	projectId: 'starlit-braid-276207',
+	storageBucket: 'starlit-braid-276207.appspot.com',
+	messagingSenderId: '30277815528',
+	appId: '1:30277815528:web:517d7d0743d3d5530a4d5d',
+};
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
 
 const newTable = document.querySelector('#new-table'),
 	newCasino = document.querySelector('#new-casino'),
@@ -39,7 +51,7 @@ const addTableListItem = item => {
 	// listItem.innerText = item;
 	listItem.style.paddingLeft = '2px';
 	listItem.classList.add('l-decoration', 'flex', 'jc-sb', 'ai-c', 'list-item');
-	listItem.innerHTML = `${item}<button type="button" style="width: 10%" class="remove">x</button>`;
+	listItem.innerHTML = `${ item }<button type="button" style="width: 10%" class="remove">x</button>`;
 	tableList.prepend(listItem);
 };
 
@@ -72,7 +84,7 @@ addCasinoBtn.onclick = function () {
 const addCasinoListItem = item => {
 	const listItem = document.createElement('li');
 	listItem.classList.add('l-decoration', 'flex', 'jc-sb', 'ai-c', 'list-item');
-	listItem.innerHTML = `${item}<button type="button" style="width: 10%" class="remove">x</button>`;
+	listItem.innerHTML = `${ item }<button type="button" style="width: 10%" class="remove">x</button>`;
 	casinoList.prepend(listItem);
 };
 

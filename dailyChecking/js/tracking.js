@@ -1,4 +1,16 @@
 'use strict';
+// Firebase configuration
+const firebaseConfig = {
+	apiKey: 'AIzaSyCOiJc8EKT9DyXyuAKPeKpJLnvYs_vINFU',
+	authDomain: 'starlit-braid-276207.firebaseapp.com',
+	databaseURL: 'https://starlit-braid-276207.firebaseio.com',
+	projectId: 'starlit-braid-276207',
+	storageBucket: 'starlit-braid-276207.appspot.com',
+	messagingSenderId: '30277815528',
+	appId: '1:30277815528:web:517d7d0743d3d5530a4d5d',
+};
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
 
 const trackingFrom = document.querySelector('#tracking-from'),
 	trackingTo = document.querySelector('#tracking-to'),
@@ -15,6 +27,13 @@ const trackingFrom = document.querySelector('#tracking-from'),
 let dbTracking;
 let tablesDB;
 let casinosDB;
+
+firebase.auth().onAuthStateChanged(dailyCheckingUser => {
+	if (dailyCheckingUser) {
+	} else {
+		console.log('not logged in')
+	}
+})
 
 const updateOptions = event => {
 	let target = event.target;
@@ -94,6 +113,21 @@ trackingSearchBtn.onclick = function () {
 	tableBody.innerHTML = '';
 
 	dbTracking.forEach(object => {
+		let qa;
+		switch (object.qa) {
+			case 'eckYksePcfdox9I4FLVwTe72bSk1':
+				qa = 'Jānis Malcāns';
+				break;
+			case '1BRPSY3Q0yOeI7ReCCrRuVx0Fdo2':
+				qa = 'Aleksandra Pancernaja';
+				break;
+			case '2Rvrq1fn5sdCWnpxZbT3lZrUbDm1':
+				qa = 'Anastasija Dmitrijeva';
+				break;
+			default:
+				qa = '';
+		}
+
 		// using toISOString because the format is the easiest to adapt for Excel
 		let timeISO = new Date((object.when.seconds + 10800) * 1000).toISOString();
 		let date = timeISO.substring(0, timeISO.indexOf('T'));
@@ -114,11 +148,11 @@ trackingSearchBtn.onclick = function () {
 
 		const rowElement = document.createElement('tr');
 		rowElement.classList.add('flex');
-		rowElement.innerHTML = `<td>${object.name}</td>
-								<td>${object.platform}</td>
-								<td>${object.casino}</td>
-								<td>PLACEHOLDER</td>
-                                <td>${timeToString}</td>`;
+		rowElement.innerHTML = `<td>${ object.name }</td>
+								<td>${object.platform }</td>
+								<td>${object.casino }</td>
+								<td>${qa }</td>
+                                <td>${timeToString }</td>`;
 
 		if (
 			fromSeconds <= objectSeconds &&
