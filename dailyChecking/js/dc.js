@@ -8,19 +8,20 @@ const firebaseConfig = {
 	projectId: 'starlit-braid-276207',
 	storageBucket: 'starlit-braid-276207.appspot.com',
 	messagingSenderId: '30277815528',
-	appId: '1:30277815528:web:517d7d0743d3d5530a4d5d',
+	appId: '1:30277815528:web:517d7d0743d3d5530a4d5d'
 };
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 
-const checkRows = document.querySelector("#checkrows"),
-	rowManip = document.querySelector("#row-manipulator"),
-	gameTableNames = document.getElementById("names"),
-	casinoNames = document.getElementById("casinos"),
+const loginForm = document.getElementById("login-form"),
 	loginButton = document.getElementById('login-button'),
 	logoutButton = document.getElementById('logout-button'),
 	txtUser = document.getElementById('txt-user'),
 	txtPass = document.getElementById('txt-pass'),
+	checkRows = document.querySelector("#checkrows"),
+	rowManip = document.querySelector("#row-manipulator"),
+	gameTableNames = document.getElementById("names"),
+	casinoNames = document.getElementById("casinos"),
 	auth = firebase.auth(),
 	db = firebase.firestore();
 
@@ -41,8 +42,36 @@ loginButton.addEventListener('click', function () {
 
 firebase.auth().onAuthStateChanged(dailyCheckingUser => {
 	if (dailyCheckingUser) {
-		userUID = firebase.auth().currentUser.uid
-		logoutButton.classList = 'show-logout'
+		//current user valid option: firebase.auth().currentUser.uid
+		userUID = dailyCheckingUser.uid;
+		let greeting = document.createElement('h6')
+		let qa;
+		switch (userUID) {
+			case 'eckYksePcfdox9I4FLVwTe72bSk1':
+				qa = 'Ottigan';
+				break;
+			case '1BRPSY3Q0yOeI7ReCCrRuVx0Fdo2':
+				qa = 'Unicorn';
+				break;
+			case '2Rvrq1fn5sdCWnpxZbT3lZrUbDm1':
+				qa = 'Martiwka';
+				break;
+			case 'w967NxXDmwUxMMhhKyQizzF5B8S2':
+				qa = 'Boss';
+				break;
+			default:
+				qa = '';
+		}
+		greeting.innerText = `Welcome, ${ qa }!`;
+		greeting.style.cssText = 'position: fixed; display: inline; color: white; visibility: visible; right: 155px; top: 37px; font-family: Georgia, "Times New Roman", Times, serif; font-weight: 400';
+		logoutButton.before(greeting);
+
+
+		logoutButton.style.visibility = 'visible';
+		txtUser.style.visibility = 'hidden';
+		txtPass.style.visibility = 'hidden';
+		loginButton.style.visibility = 'hidden';
+
 
 		const getData = function () {
 			db.collection("dailyChecking")
@@ -119,14 +148,22 @@ firebase.auth().onAuthStateChanged(dailyCheckingUser => {
 		};
 		getData();
 	} else {
-		console.log('not logged in')
+		logoutButton.style.visibility = 'hidden';
+		txtUser.style.visibility = 'visible';
+		txtPass.style.visibility = 'visible';
+		loginButton.style.visibility = 'visible';
 	}
 })
 
 logoutButton.addEventListener('click', function () {
 	auth.signOut()
 		.then(function () {
+			document.querySelector('h6').remove();
 			logoutButton.classList = 'hide-logout'
+			document.getElementById('table-0').value = '';
+			document.getElementById('platform-0').value = '';
+			document.getElementById('casino-0').value = '';
+			document.querySelectorAll('.table-row').forEach(row => row.remove())
 		})
 })
 
@@ -364,78 +401,3 @@ checkRows.addEventListener("click", updateCounterAndOptions);
 checkRows.addEventListener("keyup", updateCounterAndOptions);
 checkRows.addEventListener("mouseover", updateCounterAndOptions);
 checkRows.addEventListener("mouseout", updateCounterAndOptions);
-
-// Loading previous number of rows, based on the DB counter with the previous DATA
-// window.addEventListener("load", function () {
-// 	db.collection("dailyChecking")
-// 		.doc("tables")
-// 		.get()
-// 		.then(function (doc) {
-// 			tablesDB = doc.data().names;
-// 		})
-// 		.catch(function (error) {});
-
-// 	db.collection("dailyChecking")
-// 		.doc("casinos")
-// 		.get()
-// 		.then(function (doc) {
-// 			casinosDB = doc.data().names;
-// 		})
-// 		.catch(function (error) {});
-
-// 	db.collection("dailyChecking")
-// 		.doc("rows")
-// 		.get()
-// 		.then(function (doc) {
-// 			if (doc.exists) {
-// 				let rows = doc.data().rowcount;
-// 				let rowObjects = doc.data().rowObjects;
-// 				let i = 0;
-// 				do {
-// 					if (i === 0) {
-// 						document.querySelector(`#table-${ i }`).value = rowObjects[i].name;
-// 						document.querySelector(`#platform-${ i }`).value =
-// 							rowObjects[i].platform;
-// 						document.querySelector(`#casino-${ i }`).value = rowObjects[i].casino;
-// 					} else if (i > 0) {
-// 						const rowItem = document.createElement("form");
-// 						rowItem.classList.add("flex", "jc-c", "table-row");
-// 						rowItem.innerHTML = `<div>
-//           <input type="text" name="table" pattern="[a-zA-Z0-9 ]+" list="names" class="inputElement highlight-this" autocomplete="off" id="table-${
-// 							rowObjects[i].id
-// 							}" value="${ rowObjects[i].name }"/>
-//         </div>
-//         <div>
-//               <input id="platform-${
-// 							rowObjects[i].id
-// 							}" class="highlight-this" value="${
-// 							rowObjects[i].platform
-// 							}" name="platform" type="text" list="platforms" autocomplete="off"/>
-//             </div>
-//             <div>
-//               <input type="text" name="casino" list="casinos" class="inputElement highlight-this" autocomplete="off" id="casino-${
-// 							rowObjects[i].id
-// 							}" value="${ rowObjects[i].casino.toLowerCase() }"/>
-//             </div>
-//             <span id="counter-${
-// 							rowObjects[i].id
-// 							}" class="counter highlight-this">0</span>
-//             <input id="target-${
-// 							rowObjects[i].id
-// 							}" type="number" class="target highlight-this" value="10" maxlength="2" min="1" max="12" />
-//             <button id="${
-// 							rowObjects[i].id
-// 							}" class="submitButton highlight-this" type="button">
-//               Submit
-//         </button>`;
-// 						rowManip.before(rowItem);
-// 					}
-// 					i++;
-// 				} while (i <= rows);
-// 				inputElements = document.querySelectorAll("input");
-// 			}
-// 		})
-// 		.catch(function (error) {
-// 			console.log("Error getting document:", error);
-// 		});
-// });

@@ -8,10 +8,6 @@ body {
 	background-color: rgb(24, 24, 24);
 }
 
-form span {
-	background-color: white;
-}
-
 form label {
 	color: white;
 }
@@ -22,19 +18,10 @@ nav {
 	height: 80px;
 }
 
-.navSlash {
-	position: relative;
-	right: 100px;
-	height: 1px;
-	width: 114px;
-	transform: rotate(135deg);
-	background-color: rgb(3, 220, 248);
+#login-form {
+	width: 500px;
 }
 
-.navBottomBorder {
-	height: 1px;
-	background-color: rgb(3, 220, 248);
-}
 nav a {
 	color: white;
 	text-decoration-line: none;
@@ -45,6 +32,27 @@ nav a {
 nav a:hover {
 	box-shadow: 0 0 2px 2px rgba(3, 220, 248, 0.884);
 	border-radius: 5px;
+}
+
+.navSlash {
+	position: relative;
+	right: 100px;
+	height: 1px;
+	width: 114px;
+	transform: rotate(135deg);
+	background-color: rgba(3, 220, 248, 0.884);
+}
+
+#txt-user,
+#txt-pass,
+#login-button,
+#logout-button {
+	visibility: hidden;
+}
+
+.navBottomBorder {
+	height: 1px;
+	background-color: rgba(3, 220, 248, 0.884);
 }
 
 form div {
@@ -153,7 +161,7 @@ thead tr td:last-child {
 	margin-top: 3px;
 }
 
-form input[type='text'] {
+section form input[type='text'] {
 	border-radius: 2px;
 	font-family: 'Roboto', sans-serif;
 	font-weight: 400;
@@ -303,10 +311,6 @@ tbody tr:nth-child(odd) td,
 	flex-grow: 1;
 }
 
-.hide-logout {
-	visibility: hidden;
-}
-
-.show-logout {
-	visibility: visible;
+button:hover {
+	box-shadow: 0 0 2px 2px rgba(3, 220, 248, 0.884) !important;
 }

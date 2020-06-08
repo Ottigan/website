@@ -7,12 +7,17 @@ const firebaseConfig = {
 	projectId: 'starlit-braid-276207',
 	storageBucket: 'starlit-braid-276207.appspot.com',
 	messagingSenderId: '30277815528',
-	appId: '1:30277815528:web:517d7d0743d3d5530a4d5d',
+	appId: '1:30277815528:web:517d7d0743d3d5530a4d5d'
 };
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 
-const trackingFrom = document.querySelector('#tracking-from'),
+const loginForm = document.getElementById("login-form"),
+	loginButton = document.getElementById('login-button'),
+	logoutButton = document.getElementById('logout-button'),
+	txtUser = document.getElementById('txt-user'),
+	txtPass = document.getElementById('txt-pass'),
+	trackingFrom = document.querySelector('#tracking-from'),
 	trackingTo = document.querySelector('#tracking-to'),
 	trackingName = document.querySelector('#tracking-name'),
 	trackingPlatform = document.querySelector('#tracking-platform'),
@@ -22,17 +27,97 @@ const trackingFrom = document.querySelector('#tracking-from'),
 	gameTableNames = document.getElementById('names'),
 	casinoNames = document.getElementById('casinos'),
 	tableBody = document.querySelector('tbody'),
+	auth = firebase.auth(),
 	db = firebase.firestore();
 
+let userUID;
 let dbTracking;
 let tablesDB;
 let casinosDB;
 
+//Add login event 
+loginButton.addEventListener('click', function () {
+	const user = txtUser.value;
+	const pass = txtPass.value;
+	const authPromise = auth.signInWithEmailAndPassword(user, pass);
+
+	authPromise
+		.catch(error => console.log(error.message))
+})
+
 firebase.auth().onAuthStateChanged(dailyCheckingUser => {
 	if (dailyCheckingUser) {
+		userUID = dailyCheckingUser.uid;
+		let greeting = document.createElement('h6')
+		let qa;
+		switch (userUID) {
+			case 'eckYksePcfdox9I4FLVwTe72bSk1':
+				qa = 'Ottigan';
+				break;
+			case '1BRPSY3Q0yOeI7ReCCrRuVx0Fdo2':
+				qa = 'Unicorn';
+				break;
+			case '2Rvrq1fn5sdCWnpxZbT3lZrUbDm1':
+				qa = 'Martiwka';
+				break;
+			case 'w967NxXDmwUxMMhhKyQizzF5B8S2':
+				qa = 'Boss';
+				break;
+			default:
+				qa = '';
+		}
+		greeting.innerText = `Welcome, ${ qa }!`;
+		greeting.style.cssText = 'position: fixed; display: inline; color: white; visibility: visible; right: 155px; top: 37px; font-family: Georgia, "Times New Roman", Times, serif; font-weight: 400';
+		logoutButton.before(greeting);
+
+		logoutButton.style.visibility = 'visible';
+		txtUser.style.visibility = 'hidden';
+		txtPass.style.visibility = 'hidden';
+		loginButton.style.visibility = 'hidden';
+
+
+		const getData = function () {
+			db.collection('dailyChecking')
+				.doc('tables')
+				.get()
+				.then(function (doc) {
+					tablesDB = doc.data().names;
+				})
+				.catch(function (error) {});
+
+			db.collection('dailyChecking')
+				.doc('casinos')
+				.get()
+				.then(function (doc) {
+					casinosDB = doc.data().names;
+				})
+				.catch(function (error) {});
+
+			db.collection('dailyChecking')
+				.doc('database')
+				.get()
+				.then(function (doc) {
+					dbTracking = doc.data().tracking;
+				})
+				.catch(function (error) {
+					console.log('Error getting document:', error);
+				});
+		};
+		getData();
 	} else {
-		console.log('not logged in')
+		logoutButton.style.visibility = 'hidden';
+		txtUser.style.visibility = 'visible';
+		txtPass.style.visibility = 'visible';
+		loginButton.style.visibility = 'visible';
 	}
+})
+
+logoutButton.addEventListener('click', function () {
+	auth.signOut()
+		.then(function () {
+			document.querySelector('h6').remove();
+			logoutButton.classList = 'hide-logout'
+		})
 })
 
 const updateOptions = event => {
@@ -81,33 +166,7 @@ const updateOptions = event => {
 dbForm.addEventListener('click', updateOptions);
 dbForm.addEventListener('keyup', updateOptions);
 
-window.addEventListener('load', function () {
-	db.collection('dailyChecking')
-		.doc('tables')
-		.get()
-		.then(function (doc) {
-			tablesDB = doc.data().names;
-		})
-		.catch(function (error) {});
 
-	db.collection('dailyChecking')
-		.doc('casinos')
-		.get()
-		.then(function (doc) {
-			casinosDB = doc.data().names;
-		})
-		.catch(function (error) {});
-
-	db.collection('dailyChecking')
-		.doc('database')
-		.get()
-		.then(function (doc) {
-			dbTracking = doc.data().tracking;
-		})
-		.catch(function (error) {
-			console.log('Error getting document:', error);
-		});
-});
 
 trackingSearchBtn.onclick = function () {
 	tableBody.innerHTML = '';
