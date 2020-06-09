@@ -122,8 +122,7 @@ addTableBtn.onclick = function () {
 	let empty = newTableValue.trim();
 
 	if (!empty) {
-		alert('Empty Value!');
-		newTable.classList.add('invalid');
+		newTable.classList.add('empty-value');
 		newTable.focus();
 	} else {
 		newTable.value = '';
@@ -157,8 +156,7 @@ addCasinoBtn.onclick = function () {
 	let empty = newCasinoValue.trim();
 
 	if (!empty) {
-		alert('Empty Value!');
-		newCasino.classList.add('invalid');
+		newCasino.classList.add('empty-value');
 		newCasino.focus();
 	} else {
 		newCasino.value = '';

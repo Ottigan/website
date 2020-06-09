@@ -22,6 +22,7 @@ const loginForm = document.getElementById("login-form"),
 	rowManip = document.querySelector("#row-manipulator"),
 	gameTableNames = document.getElementById("names"),
 	casinoNames = document.getElementById("casinos"),
+	allCounters = document.querySelectorAll('.counter'),
 	auth = firebase.auth(),
 	db = firebase.firestore();
 
@@ -146,6 +147,21 @@ firebase.auth().onAuthStateChanged(dailyCheckingUser => {
 							i++;
 						} while (i <= rows);
 						inputElements = document.querySelectorAll("input");
+
+						let counter = document.querySelectorAll(`.counter`),
+							goal = document.querySelectorAll(`.target`);
+
+						for (let i = 0; i < counter.length; i++) {
+							let x = Number.parseInt(counter[i].innerHTML),
+								y = goal[i].value;
+
+							if (x >= y) {
+								counter[i].classList.add("valid");
+							} else {
+								counter[i].classList.add("invalid");
+							}
+
+						}
 					}
 				})
 				.catch(function (error) {
@@ -351,9 +367,6 @@ const updateCounterAndOptions = (event) => {
 			counter.classList.add("valid");
 		}
 
-		console.log(counter)
-		console.log(goal)
-
 		//getting the entire firestore array, because you can't update specific values in the cloud
 		db.collection("dailyChecking")
 			//changing the following userUID helps copying row state between users
@@ -397,6 +410,66 @@ const updateCounterAndOptions = (event) => {
 									console.error("Error updating DB: ", error);
 								});
 						}
+					})
+					.catch(function (error) {
+						console.log(error);
+					});
+			})
+			.catch((error) => {
+				console.log(error);
+			});
+	} else if (target.id === "save-button" && event.type === "click") {
+		let goal = document.querySelectorAll('.target');
+
+		//getting the entire firestore array, because you can't update specific values in the cloud
+		db.collection("dailyChecking")
+			//changing the following userUID helps copying row state between users
+			.doc(userUID)
+			.get()
+			.then(function (doc) {
+				let rowObjects = doc.data().rowObjects;
+				rowObjects.forEach(object => {
+					object.target = document.getElementById(`target-${ object.id }`).value
+				})
+				db.collection("dailyChecking")
+					.doc(userUID)
+					.update({
+						rowObjects: rowObjects,
+					})
+					.then(function () {
+
+					})
+					.catch(function (error) {
+						console.log(error);
+					});
+			})
+			.catch((error) => {
+				console.log(error);
+			});
+	} else if (target.id === "reset-button" && event.type === "click") {
+		let goal = document.querySelectorAll('.target');
+
+		//getting the entire firestore array, because you can't update specific values in the cloud
+		db.collection("dailyChecking")
+			//changing the following userUID helps copying row state between users
+			.doc(userUID)
+			.get()
+			.then(function (doc) {
+				let rowObjects = doc.data().rowObjects;
+				rowObjects.forEach(object => {
+					object.counter = 0;
+				})
+				db.collection("dailyChecking")
+					.doc(userUID)
+					.update({
+						rowObjects: rowObjects,
+					})
+					.then(function () {
+						document.querySelectorAll('.counter').forEach(counter => {
+							counter.innerHTML = 0;
+							counter.classList.remove('valid');
+							counter.classList.add('invalid');
+						})
 					})
 					.catch(function (error) {
 						console.log(error);

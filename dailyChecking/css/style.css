@@ -188,6 +188,26 @@ section form input[type='text'] {
 	align-items: flex-end;
 }
 
+#counter-reset-container {
+	width: 27px;
+	padding: 0;
+}
+
+#reset-button {
+	height: 20px;
+	margin: 0 3px 3px 3px;
+	padding-bottom: 5;
+	background-color: white !important;
+	color: black !important;
+	border-radius: 3px;
+}
+
+#counter-0 {
+	width: 21px;
+	margin: 0 3px;
+	align-items: center;
+}
+
 #target-save-container {
 	width: 46px;
 	padding: 0;
@@ -195,8 +215,11 @@ section form input[type='text'] {
 
 #save-button {
 	width: 40px;
+	height: 20px;
 	margin: 0 0 3px 3px;
-	border-radius: 2px;
+	background-color: white !important;
+	color: black !important;
+	border-radius: 3px;
 }
 
 section form input[type='number'] {
@@ -249,6 +272,11 @@ tbody tr:nth-child(odd) td,
 	border: 1px solid rgb(148, 142, 142);
 }
 
+#checkrows form span {
+	color: rgb(201, 201, 201) !important;
+	border: 1px solid rgb(148, 142, 142) !important;
+}
+
 .highlight-this {
 	border-radius: 2px;
 	height: 20px;
@@ -269,6 +297,10 @@ tbody tr:nth-child(odd) td,
 
 .flex {
 	display: flex;
+}
+
+.flex-grow {
+	flex-grow: 1;
 }
 
 .vertical {
@@ -333,16 +365,17 @@ tbody tr:nth-child(odd) td,
 	padding-left: 2px;
 }
 
-.invalid {
+.empty-value {
 	outline-color: red !important;
 }
 
-.valid {
-	background-color: rgb(25, 112, 25) !important;
+.invalid {
+	background-color: rgb(151, 0, 0) !important;
 }
 
-.flex-grow {
-	flex-grow: 1;
+.valid {
+	background-color: rgb(1, 133, 1) !important;
+	box-shadow: 0 0 2px 2px rgba(3, 220, 248, 0.884) !important;
 }
 
 button:hover {

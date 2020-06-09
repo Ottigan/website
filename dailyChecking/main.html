@@ -94,9 +94,13 @@
 						/>
 						<datalist id="casinos"> </datalist>
 					</div>
-					<span id="counter-0" class="counter highlight-this"></span>
+					<div id="counter-reset-container" class="flex vertical jc-sb">
+						<button id="reset-button" type="button">x</button>
+						<span id="counter-0" class="counter highlight-this"></span>
+					</div>
+
 					<div id="target-save-container" class="flex vertical jc-sb">
-						<button id="save-button">
+						<button id="save-button" type="button">
 							Save
 						</button>
 						<input id="target-0" type="number" class="target highlight-this"
@@ -107,7 +111,7 @@
 						Submit
 					</button>
 				</form>
-				<div id="row-manipulator" class="flex flex-grow">
+				<div id="row-manipulator" class="flex">
 					<button>Add</button>
 					<button>Remove</button>
 				</div>
