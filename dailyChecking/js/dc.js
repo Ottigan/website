@@ -157,10 +157,11 @@ firebase.auth().onAuthStateChanged(dailyCheckingUser => {
 
 							if (x >= y) {
 								counter[i].classList.add("valid");
+								counter[i].classList.remove("invalid");
 							} else {
 								counter[i].classList.add("invalid");
+								counter[i].classList.remove("valid");
 							}
-
 						}
 					}
 				})
@@ -186,6 +187,7 @@ logoutButton.addEventListener('click', function () {
 			document.getElementById('platform-0').value = '';
 			document.getElementById('casino-0').value = '';
 			document.getElementById('counter-0').innerHTML = '';
+			document.getElementById('counter-0').classList.remove('invalid', 'valid');
 			document.getElementById('target-0').value = '';
 			document.querySelectorAll('.table-row').forEach(row => row.remove())
 		})
@@ -365,6 +367,10 @@ const updateCounterAndOptions = (event) => {
 
 		if (x >= y) {
 			counter.classList.add("valid");
+			counter.classList.remove("invalid");
+		} else {
+			counter.classList.add("invalid");
+			counter.classList.remove("valid");
 		}
 
 		//getting the entire firestore array, because you can't update specific values in the cloud
@@ -478,6 +484,22 @@ const updateCounterAndOptions = (event) => {
 			.catch((error) => {
 				console.log(error);
 			});
+	} else if (target.classList.contains('target') && event.type === "change") {
+		let counter = document.getElementById(`counter-${ target.id.substring(target.id.indexOf("-") + 1) }`),
+			goal = target;
+
+		console.log(counter)
+
+		let x = Number.parseInt(counter.innerHTML),
+			y = goal.value;
+
+		if (x >= y) {
+			counter.classList.add("valid");
+			counter.classList.remove("invalid");
+		} else {
+			counter.classList.add("invalid");
+			counter.classList.remove("valid");
+		}
 	}
 };
 
@@ -486,3 +508,5 @@ checkRows.addEventListener("click", updateCounterAndOptions);
 checkRows.addEventListener("keyup", updateCounterAndOptions);
 checkRows.addEventListener("mouseover", updateCounterAndOptions);
 checkRows.addEventListener("mouseout", updateCounterAndOptions);
+checkRows.addEventListener("mouseout", updateCounterAndOptions);
+checkRows.addEventListener("change", updateCounterAndOptions);

@@ -196,7 +196,8 @@ section form input[type='text'] {
 #reset-button {
 	height: 20px;
 	margin: 0 3px 3px 3px;
-	padding-bottom: 5;
+	font-size: 13px;
+	padding-bottom: 1px;
 	background-color: white !important;
 	color: black !important;
 	border-radius: 3px;
@@ -217,6 +218,8 @@ section form input[type='text'] {
 	width: 40px;
 	height: 20px;
 	margin: 0 0 3px 3px;
+	font-size: 13px;
+	padding-bottom: 1px;
 	background-color: white !important;
 	color: black !important;
 	border-radius: 3px;
