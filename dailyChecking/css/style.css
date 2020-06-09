@@ -19,6 +19,8 @@ nav {
 }
 
 #login-form {
+	position: relative;
+	right: 0px;
 	width: 500px;
 }
 
@@ -43,11 +45,17 @@ nav a:hover {
 	background-color: rgba(3, 220, 248, 0.884);
 }
 
+nav form {
+	display: flex;
+	justify-content: flex-end;
+}
+
 #txt-user,
 #txt-pass,
 #login-button,
 #logout-button {
-	visibility: hidden;
+	display: none;
+	margin-left: 7px;
 }
 
 .navBottomBorder {
@@ -145,6 +153,7 @@ thead tr td:last-child {
 	border: 1px solid black;
 	border-radius: 2px;
 	padding: 0 3px;
+	height: 25px;
 }
 
 #row-manipulator button:hover {
@@ -163,11 +172,36 @@ thead tr td:last-child {
 
 section form input[type='text'] {
 	border-radius: 2px;
-	font-family: 'Roboto', sans-serif;
-	font-weight: 400;
+	text-indent: 2px;
 	height: 20px;
 	width: 200px;
+}
+
+#checkrows input,
+#checkrows span,
+#checkrows button {
+	font-family: 'Roboto', sans-serif;
+	font-weight: 400;
+}
+
+#main-row {
+	align-items: flex-end;
+}
+
+#target-save-container {
+	width: 46px;
+	padding: 0;
+}
+
+#save-button {
+	width: 40px;
+	margin: 0 0 3px 3px;
+	border-radius: 2px;
+}
+
+section form input[type='number'] {
 	text-indent: 2px;
+	font-size: 15px;
 }
 
 .counter {
@@ -304,7 +338,7 @@ tbody tr:nth-child(odd) td,
 }
 
 .valid {
-	background-color: rgb(126, 189, 126);
+	background-color: rgb(25, 112, 25) !important;
 }
 
 .flex-grow {

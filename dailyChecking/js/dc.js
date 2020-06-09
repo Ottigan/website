@@ -32,11 +32,14 @@ let inputElements = document.querySelectorAll(".inputElement");
 
 //Add login event 
 loginButton.addEventListener('click', function () {
-	const user = txtUser.value;
+	const email = txtUser.value;
 	const pass = txtPass.value;
-	const authPromise = auth.signInWithEmailAndPassword(user, pass);
+	const authPromise = auth.signInWithEmailAndPassword(email, pass);
 
 	authPromise
+		.then(
+			console.log('Login successful!')
+		)
 		.catch(error => console.log(error.message))
 })
 
@@ -63,15 +66,14 @@ firebase.auth().onAuthStateChanged(dailyCheckingUser => {
 				qa = '';
 		}
 		greeting.innerText = `Welcome, ${ qa }!`;
-		greeting.style.cssText = 'position: fixed; display: inline; color: white; visibility: visible; right: 155px; top: 37px; font-family: Georgia, "Times New Roman", Times, serif; font-weight: 400';
+		greeting.style.cssText = 'margin-bottom: -2px; align-self: flex-end; color: white; visibility: visible; font-family: Georgia, "Times New Roman", Times, serif; font-weight: 400';
 		logoutButton.before(greeting);
 
 
-		logoutButton.style.visibility = 'visible';
-		txtUser.style.visibility = 'hidden';
-		txtPass.style.visibility = 'hidden';
-		loginButton.style.visibility = 'hidden';
-
+		logoutButton.style.display = 'inline';
+		txtUser.style.display = 'none';
+		txtPass.style.display = 'none';
+		loginButton.style.display = 'none';
 
 		const getData = function () {
 			db.collection("dailyChecking")
@@ -104,6 +106,8 @@ firebase.auth().onAuthStateChanged(dailyCheckingUser => {
 								document.querySelector(`#platform-${ i }`).value =
 									rowObjects[i].platform;
 								document.querySelector(`#casino-${ i }`).value = rowObjects[i].casino;
+								document.querySelector(`#counter-${ i }`).innerHTML = rowObjects[i].counter || 0;
+								document.querySelector(`#target-${ i }`).value = rowObjects[i].target;
 							} else if (i > 0) {
 								const rowItem = document.createElement("form");
 								rowItem.classList.add("flex", "jc-c", "table-row");
@@ -126,10 +130,12 @@ firebase.auth().onAuthStateChanged(dailyCheckingUser => {
             </div>
             <span id="counter-${
 									rowObjects[i].id
-									}" class="counter highlight-this">0</span>
+									}" class="counter highlight-this">${ rowObjects[i].counter || 0 }</span>
             <input id="target-${
 									rowObjects[i].id
-									}" type="number" class="target highlight-this" value="10" maxlength="2" min="1" max="12" />
+									}" type="number" class="target highlight-this" value="${
+									rowObjects[i].target || 1
+									}" maxlength="2" min="1" max="12" />
             <button id="${
 									rowObjects[i].id
 									}" class="submitButton highlight-this" type="button">
@@ -148,10 +154,10 @@ firebase.auth().onAuthStateChanged(dailyCheckingUser => {
 		};
 		getData();
 	} else {
-		logoutButton.style.visibility = 'hidden';
-		txtUser.style.visibility = 'visible';
-		txtPass.style.visibility = 'visible';
-		loginButton.style.visibility = 'visible';
+		logoutButton.style.display = 'none';
+		txtUser.style.display = 'inline';
+		txtPass.style.display = 'inline';
+		loginButton.style.display = 'inline';
 	}
 })
 
@@ -163,6 +169,8 @@ logoutButton.addEventListener('click', function () {
 			document.getElementById('table-0').value = '';
 			document.getElementById('platform-0').value = '';
 			document.getElementById('casino-0').value = '';
+			document.getElementById('counter-0').innerHTML = '';
+			document.getElementById('target-0').value = '';
 			document.querySelectorAll('.table-row').forEach(row => row.remove())
 		})
 })
@@ -220,7 +228,7 @@ const manipRows = (event) => {
           <input type="text" name="casino" id="casino-${data }" list="casinos" class="inputElement" autocomplete="off"/>
         </div>
         <span class="counter">0</span>
-        <input type="number" class="target" placeholder="10" maxlength="2" min="1" max="12" />
+        <input type="number" class="target" maxlength="2" min="1" max="12" />
         <button id="${data }" class="submitButton" type="button">
           Submit
         </button>`;
@@ -327,26 +335,46 @@ const updateCounterAndOptions = (event) => {
 	}
 
 	if (target.classList.contains("submitButton") && event.type === "click") {
-		//following IF statement meant to limit event interaction
-		let tableName = document.querySelector(`#table-${ target.id }`).value;
-		(platform = document.querySelector(`#platform-${ target.id }`).value),
-			(casino = document.querySelector(`#casino-${ target.id }`).value);
 
+		let tableName = document.querySelector(`#table-${ target.id }`).value,
+			platform = document.querySelector(`#platform-${ target.id }`).value,
+			casino = document.querySelector(`#casino-${ target.id }`).value,
+			counter = document.querySelector(`#counter-${ target.id }`),
+			goal = document.querySelector(`#target-${ target.id }`);
+
+		let x = counter.innerHTML,
+			y = goal.value;
+		x++;
+		counter.innerHTML = x;
+
+		if (x >= y) {
+			counter.classList.add("valid");
+		}
+
+		console.log(counter)
+		console.log(goal)
+
+		//getting the entire firestore array, because you can't update specific values in the cloud
 		db.collection("dailyChecking")
+			//changing the following userUID helps copying row state between users
 			.doc(userUID)
 			.get()
 			.then(function (doc) {
 				let rowObjects = doc.data().rowObjects;
+				let rowcount = doc.data().rowcount;
 				let update = rowObjects[target.id];
 				let clientTime = new Date();
 				update.casino = casino;
 				update.name = tableName;
 				update.platform = platform;
+				update.counter = Number.parseInt(counter.innerHTML);
+				update.target = Number.parseInt(goal.value);
 				rowObjects[target.id] = update;
 				db.collection("dailyChecking")
 					.doc(userUID)
 					.update({
 						rowObjects: rowObjects,
+						rowcount: rowcount
 					})
 					.then(function () {
 						if (tableName != "" && platform != "" && casino != "") {
@@ -363,6 +391,7 @@ const updateCounterAndOptions = (event) => {
 								})
 								.then(function () {
 									console.log("Tracking DB updated");
+
 								})
 								.catch(function (error) {
 									console.error("Error updating DB: ", error);
@@ -376,23 +405,6 @@ const updateCounterAndOptions = (event) => {
 			.catch((error) => {
 				console.log(error);
 			});
-
-		let counter = target.previousElementSibling.previousElementSibling,
-			goal = target.previousElementSibling,
-			x = counter.innerHTML,
-			y = goal.value,
-			z = goal.placeholder;
-		x++;
-		counter.innerHTML = x;
-		if (y > 0) {
-			if (x >= y) {
-				counter.classList.add("valid");
-			}
-		} else {
-			if (x >= z) {
-				counter.classList.add("valid");
-			}
-		}
 	}
 };
 

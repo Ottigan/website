@@ -13,7 +13,7 @@
 
 	<body>
 		<header>
-			<nav class="flex jc-c ai-c">
+			<nav class="flex jc-se ai-c">
 				<ul class="container flex jc-se ls-none">
 					<li><a id="dc" href="main.html">Daily Checking</a></li>
 					<li><a id="tracking" href="tracking.html">Tracking DB</a></li>
@@ -33,9 +33,7 @@
 						type="password"
 						autocomplete="current-password"
 					/>
-					<button id="login-button" type="button">
-						Log In
-					</button>
+					<button id="login-button" type="button">Log In</button>
 					<button id="logout-button" type="button">
 						Log Out
 					</button>
@@ -96,9 +94,15 @@
 						/>
 						<datalist id="casinos"> </datalist>
 					</div>
-					<span id="counter-0" class="counter highlight-this">0</span>
-					<input id="target-0" type="number" class="target highlight-this"
-					value="10" maxlength="2" min="1" max="12" / />
+					<span id="counter-0" class="counter highlight-this"></span>
+					<div id="target-save-container" class="flex vertical jc-sb">
+						<button id="save-button">
+							Save
+						</button>
+						<input id="target-0" type="number" class="target highlight-this"
+						maxlength="2" min="1" max="12" / />
+					</div>
+
 					<button id="0" class="submitButton highlight-this" type="button">
 						Submit
 					</button>

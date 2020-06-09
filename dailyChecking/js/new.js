@@ -60,13 +60,14 @@ firebase.auth().onAuthStateChanged(dailyCheckingUser => {
 				qa = '';
 		}
 		greeting.innerText = `Welcome, ${ qa }!`;
-		greeting.style.cssText = 'position: fixed; display: inline; color: white; visibility: visible; right: 155px; top: 37px; font-family: Georgia, "Times New Roman", Times, serif; font-weight: 400';
+		greeting.style.cssText = 'margin-bottom: -2px; align-self: flex-end; color: white; visibility: visible; font-family: Georgia, "Times New Roman", Times, serif; font-weight: 400';
 		logoutButton.before(greeting);
 
-		logoutButton.style.visibility = 'visible';
-		txtUser.style.visibility = 'hidden';
-		txtPass.style.visibility = 'hidden';
-		loginButton.style.visibility = 'hidden';
+
+		logoutButton.style.display = 'inline';
+		txtUser.style.display = 'none';
+		txtPass.style.display = 'none';
+		loginButton.style.display = 'none';
 
 		const getData = function () {
 			db.collection('dailyChecking')
@@ -101,10 +102,10 @@ firebase.auth().onAuthStateChanged(dailyCheckingUser => {
 		};
 		getData();
 	} else {
-		logoutButton.style.visibility = 'hidden';
-		txtUser.style.visibility = 'visible';
-		txtPass.style.visibility = 'visible';
-		loginButton.style.visibility = 'visible';
+		logoutButton.style.display = 'none';
+		txtUser.style.display = 'inline';
+		txtPass.style.display = 'inline';
+		loginButton.style.display = 'inline';
 	}
 })
 
