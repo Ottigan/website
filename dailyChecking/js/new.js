@@ -35,13 +35,13 @@ loginButton.addEventListener('click', function () {
 	const authPromise = auth.signInWithEmailAndPassword(user, pass);
 
 	authPromise
-		.catch(error => console.log(error.message))
-})
+		.catch(error => console.log(error.message));
+});
 
 firebase.auth().onAuthStateChanged(dailyCheckingUser => {
 	if (dailyCheckingUser) {
 		userUID = dailyCheckingUser.uid;
-		let greeting = document.createElement('h6')
+		let greeting = document.createElement('h6');
 		let qa;
 		switch (userUID) {
 			case 'eckYksePcfdox9I4FLVwTe72bSk1':
@@ -59,7 +59,7 @@ firebase.auth().onAuthStateChanged(dailyCheckingUser => {
 			default:
 				qa = '';
 		}
-		greeting.innerText = `Welcome, ${ qa }!`;
+		greeting.innerText = `Welcome, ${qa}!`;
 		greeting.style.cssText = 'margin-bottom: -2px; align-self: flex-end; color: white; visibility: visible; font-family: Georgia, "Times New Roman", Times, serif; font-weight: 400';
 		logoutButton.before(greeting);
 
@@ -107,15 +107,15 @@ firebase.auth().onAuthStateChanged(dailyCheckingUser => {
 		txtPass.style.display = 'inline';
 		loginButton.style.display = 'inline';
 	}
-})
+});
 
 logoutButton.addEventListener('click', function () {
 	auth.signOut()
 		.then(function () {
 			document.querySelector('h6').remove();
-			logoutButton.classList = 'hide-logout'
-		})
-})
+			logoutButton.classList = 'hide-logout';
+		});
+});
 
 addTableBtn.onclick = function () {
 	let newTableValue = newTable.value;
@@ -147,7 +147,7 @@ const addTableListItem = item => {
 	// listItem.innerText = item;
 	listItem.style.paddingLeft = '2px';
 	listItem.classList.add('l-decoration', 'flex', 'jc-sb', 'ai-c', 'list-item');
-	listItem.innerHTML = `${ item }<button type="button" style="width: 10%" class="remove">x</button>`;
+	listItem.innerHTML = `${item}<button type="button" style="width: 10%" class="remove">x</button>`;
 	tableList.prepend(listItem);
 };
 
@@ -179,7 +179,7 @@ addCasinoBtn.onclick = function () {
 const addCasinoListItem = item => {
 	const listItem = document.createElement('li');
 	listItem.classList.add('l-decoration', 'flex', 'jc-sb', 'ai-c', 'list-item');
-	listItem.innerHTML = `${ item }<button type="button" style="width: 10%" class="remove">x</button>`;
+	listItem.innerHTML = `${item}<button type="button" style="width: 10%" class="remove">x</button>`;
 	casinoList.prepend(listItem);
 };
 

@@ -27,6 +27,7 @@ const loginForm = document.getElementById("login-form"),
 	db = firebase.firestore();
 
 let userUID;
+let tableRows;
 let tablesDB;
 let casinosDB;
 let inputElements = document.querySelectorAll(".inputElement");
@@ -66,7 +67,7 @@ firebase.auth().onAuthStateChanged(dailyCheckingUser => {
 			default:
 				qa = '';
 		}
-		greeting.innerText = `Welcome, ${ qa }!`;
+		greeting.innerText = `Welcome, ${qa}!`;
 		greeting.style.cssText = 'margin-bottom: -2px; align-self: flex-end; color: white; visibility: visible; font-family: Georgia, "Times New Roman", Times, serif; font-weight: 400';
 		logoutButton.before(greeting);
 
@@ -103,42 +104,42 @@ firebase.auth().onAuthStateChanged(dailyCheckingUser => {
 						let i = 0;
 						do {
 							if (i === 0) {
-								document.querySelector(`#table-${ i }`).value = rowObjects[ i ].name;
-								document.querySelector(`#platform-${ i }`).value =
-									rowObjects[ i ].platform;
-								document.querySelector(`#casino-${ i }`).value = rowObjects[ i ].casino;
-								document.querySelector(`#counter-${ i }`).innerHTML = rowObjects[ i ].counter || 0;
-								document.querySelector(`#target-${ i }`).value = rowObjects[ i ].target;
+								document.querySelector(`#table-${i}`).value = rowObjects[i].name;
+								document.querySelector(`#platform-${i}`).value =
+									rowObjects[i].platform;
+								document.querySelector(`#casino-${i}`).value = rowObjects[i].casino;
+								document.querySelector(`#counter-${i}`).innerHTML = rowObjects[i].counter || 0;
+								document.querySelector(`#target-${i}`).value = rowObjects[i].target;
 							} else if (i > 0) {
 								const rowItem = document.createElement("form");
 								rowItem.classList.add("flex", "jc-c", "table-row");
 								rowItem.innerHTML = `<div>
           <input type="text" name="table" pattern="[a-zA-Z0-9 ]+" list="names" class="inputElement highlight-this" autocomplete="off" id="table-${
-									rowObjects[ i ].id
-									}" value="${ rowObjects[ i ].name }"/>
+									rowObjects[i].id
+									}" value="${rowObjects[i].name}"/>
         </div>
         <div>
               <input id="platform-${
-									rowObjects[ i ].id
+									rowObjects[i].id
 									}" class="highlight-this" value="${
-									rowObjects[ i ].platform
+									rowObjects[i].platform
 									}" name="platform" type="text" list="platforms" autocomplete="off"/>
             </div>
             <div>
               <input type="text" name="casino" list="casinos" class="inputElement highlight-this" autocomplete="off" id="casino-${
-									rowObjects[ i ].id
-									}" value="${ rowObjects[ i ].casino.toLowerCase() }"/>
+									rowObjects[i].id
+									}" value="${rowObjects[i].casino.toLowerCase()}"/>
             </div>
             <span id="counter-${
-									rowObjects[ i ].id
-									}" class="counter highlight-this">${ rowObjects[ i ].counter || 0 }</span>
+									rowObjects[i].id
+									}" class="counter highlight-this">${rowObjects[i].counter || 0}</span>
             <input id="target-${
-									rowObjects[ i ].id
+									rowObjects[i].id
 									}" type="number" class="target highlight-this" value="${
-									rowObjects[ i ].target || 1
+									rowObjects[i].target || 1
 									}" maxlength="2" min="1" max="12" />
             <button id="${
-									rowObjects[ i ].id
+									rowObjects[i].id
 									}" class="submitButton highlight-this" type="button">
               Submit
         </button>`;
@@ -147,20 +148,21 @@ firebase.auth().onAuthStateChanged(dailyCheckingUser => {
 							i++;
 						} while (i <= rows);
 						inputElements = document.querySelectorAll("input");
+						tableRows = document.querySelectorAll(".table-row");
 
 						let counter = document.querySelectorAll(`.counter`),
 							goal = document.querySelectorAll(`.target`);
 
 						for (let i = 0; i < counter.length; i++) {
-							let x = Number.parseInt(counter[ i ].innerHTML),
-								y = goal[ i ].value;
+							let x = Number.parseInt(counter[i].innerHTML),
+								y = goal[i].value;
 
 							if (x >= y) {
-								counter[ i ].classList.add("valid");
-								counter[ i ].classList.remove("invalid");
+								counter[i].classList.add("valid");
+								counter[i].classList.remove("invalid");
 							} else {
-								counter[ i ].classList.add("invalid");
-								counter[ i ].classList.remove("valid");
+								counter[i].classList.add("invalid");
+								counter[i].classList.remove("valid");
 							}
 						}
 					}
@@ -237,17 +239,17 @@ const manipRows = (event) => {
 						const rowItem = document.createElement("form");
 						rowItem.classList.add("flex", "jc-c", "table-row");
 						rowItem.innerHTML = `<div>
-          <input type="text" name="table" list="names" class="inputElement" autocomplete="off" pattern="[a-zA-Z0-9]+" id="table-${data }" />
+          <input type="text" name="table" list="names" class="inputElement" autocomplete="off" pattern="[a-zA-Z0-9]+" id="table-${data}" />
         </div>
         <div>
-          <input id="platform-${data }" name="platform" type="text" list="platforms" autocomplete="off"/>
+          <input id="platform-${data}" name="platform" type="text" list="platforms" autocomplete="off"/>
         </div>
         <div>
-          <input type="text" name="casino" id="casino-${data }" list="casinos" class="inputElement" autocomplete="off"/>
+          <input type="text" name="casino" id="casino-${data}" list="casinos" class="inputElement" autocomplete="off"/>
         </div>
         <span class="counter">0</span>
         <input type="number" class="target" maxlength="2" min="1" max="12" />
-        <button id="${data }" class="submitButton" type="button">
+        <button id="${data}" class="submitButton" type="button">
           Submit
         </button>`;
 						rowManip.before(rowItem);
@@ -328,12 +330,12 @@ const updateCounterAndOptions = (event) => {
 
 	if (target.classList.contains("highlight-this")) {
 		let indexID = target.id.substring(target.id.indexOf("-") + 1),
-			tableName = document.querySelector(`#table-${ indexID }`),
-			platform = document.querySelector(`#platform-${ indexID }`),
-			casino = document.querySelector(`#casino-${ indexID }`),
-			counter = document.querySelector(`#counter-${ indexID }`),
-			targetNumber = document.querySelector(`#target-${ indexID }`),
-			submitButton = document.getElementById(`${ indexID }`);
+			tableName = document.querySelector(`#table-${indexID}`),
+			platform = document.querySelector(`#platform-${indexID}`),
+			casino = document.querySelector(`#casino-${indexID}`),
+			counter = document.querySelector(`#counter-${indexID}`),
+			targetNumber = document.querySelector(`#target-${indexID}`),
+			submitButton = document.getElementById(`${indexID}`);
 
 		if (event.type === "mouseover") {
 			tableName.classList.add('highlighted-row');
@@ -354,11 +356,11 @@ const updateCounterAndOptions = (event) => {
 
 	if (target.classList.contains("submitButton") && event.type === "click") {
 
-		let tableName = document.querySelector(`#table-${ target.id }`).value,
-			platform = document.querySelector(`#platform-${ target.id }`).value,
-			casino = document.querySelector(`#casino-${ target.id }`).value,
-			counter = document.querySelector(`#counter-${ target.id }`),
-			goal = document.querySelector(`#target-${ target.id }`);
+		let tableName = document.querySelector(`#table-${target.id}`).value,
+			platform = document.querySelector(`#platform-${target.id}`).value,
+			casino = document.querySelector(`#casino-${target.id}`).value,
+			counter = document.querySelector(`#counter-${target.id}`),
+			goal = document.querySelector(`#target-${target.id}`);
 
 		let x = counter.innerHTML,
 			y = goal.value;
@@ -381,14 +383,14 @@ const updateCounterAndOptions = (event) => {
 			.then(function (doc) {
 				let rowObjects = doc.data().rowObjects;
 				let rowcount = doc.data().rowcount;
-				let update = rowObjects[ target.id ];
+				let update = rowObjects[target.id];
 				let clientTime = new Date();
 				update.casino = casino;
 				update.name = tableName;
 				update.platform = platform;
 				update.counter = Number.parseInt(counter.innerHTML);
 				update.target = Number.parseInt(goal.value);
-				rowObjects[ target.id ] = update;
+				rowObjects[target.id] = update;
 				db.collection("dailyChecking")
 					.doc(userUID)
 					.update({
@@ -425,9 +427,30 @@ const updateCounterAndOptions = (event) => {
 				console.log(error);
 			});
 	} else if (target.id === "save-button" && event.type === "click") {
-		let goal = document.querySelectorAll('.target');
 
-		//getting the entire firestore array, because you can't update specific values in the cloud
+		let newTableRowOrder = [];
+
+		//Copying each node of the original array with parameter of TRUE to copy ALL the children
+		//This approach is used to deal with the deep reference issue, which can't be bypassed with
+		//Spread operator, Object.assign or JSON.parse(JSON.stringify())
+		for (let i = 0; i < tableRows.length; i++) {
+			newTableRowOrder.push(tableRows[i].cloneNode(true));
+		}
+
+		//sorting rows based on target value in a descending order
+		newTableRowOrder.sort((a, b) => Number.parseInt(b[3].value) - Number.parseInt(a[3].value)
+		);
+
+		//Re-assigning values to DOM elements
+		for (let i = 0; i < newTableRowOrder.length; i++) {
+			tableRows[i][0].value = newTableRowOrder[i][0].value;
+			tableRows[i][1].value = newTableRowOrder[i][1].value;
+			tableRows[i][2].value = newTableRowOrder[i][2].value;
+			tableRows[i].children[3].innerText = newTableRowOrder[i].children[3].innerText;
+			tableRows[i][3].value = newTableRowOrder[i][3].value;
+		}
+
+		// getting the entire firestore array, because you can't update specific values in the cloud
 		db.collection("dailyChecking")
 			//changing the following userUID helps copying row state between users
 			.doc(userUID)
@@ -435,7 +458,11 @@ const updateCounterAndOptions = (event) => {
 			.then(function (doc) {
 				let rowObjects = doc.data().rowObjects;
 				rowObjects.forEach(object => {
-					object.target = document.getElementById(`target-${ object.id }`).value;
+					object.name = document.getElementById(`table-${object.id}`).value;
+					object.platform = document.getElementById(`platform-${object.id}`).value;
+					object.casino = document.getElementById(`casino-${object.id}`).value;
+					object.counter = Number.parseInt(document.getElementById(`counter-${object.id}`).innerHTML);
+					object.target = Number.parseInt(document.getElementById(`target-${object.id}`).value);
 				});
 				db.collection("dailyChecking")
 					.doc(userUID)
@@ -485,10 +512,8 @@ const updateCounterAndOptions = (event) => {
 				console.log(error);
 			});
 	} else if (target.classList.contains('target') && event.type === "change") {
-		let counter = document.getElementById(`counter-${ target.id.substring(target.id.indexOf("-") + 1) }`),
+		let counter = document.getElementById(`counter-${target.id.substring(target.id.indexOf("-") + 1)}`),
 			goal = target;
-
-		console.log(counter);
 
 		let x = Number.parseInt(counter.innerHTML),
 			y = goal.value;
