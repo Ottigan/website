@@ -235,21 +235,21 @@ const manipRows = (event) => {
 					.doc(userUID)
 					.get()
 					.then(function (doc) {
-						let data = doc.data().rowcount;
+						let id = doc.data().rowcount;
 						const rowItem = document.createElement("form");
 						rowItem.classList.add("flex", "jc-c", "table-row");
 						rowItem.innerHTML = `<div>
-          <input type="text" name="table" list="names" class="inputElement" autocomplete="off" pattern="[a-zA-Z0-9]+" id="table-${data}" />
+          <input type="text" name="table" list="names" class="inputElement" autocomplete="off" pattern="[a-zA-Z0-9]+" id="table-${id}" />
         </div>
         <div>
-          <input id="platform-${data}" name="platform" type="text" list="platforms" autocomplete="off"/>
+          <input id="platform-${id}" name="platform" type="text" list="platforms" autocomplete="off"/>
         </div>
         <div>
-          <input type="text" name="casino" id="casino-${data}" list="casinos" class="inputElement" autocomplete="off"/>
+          <input type="text" name="casino" id="casino-${id}" list="casinos" class="inputElement" autocomplete="off"/>
         </div>
-        <span class="counter">0</span>
-        <input type="number" class="target" maxlength="2" min="1" max="12" />
-        <button id="${data}" class="submitButton" type="button">
+        <span id="counter-${id}" class="counter highlight-this invalid">0</span>
+        <input id="target-${id}" type="number" class="target highlight-this" value="1" maxlength="2" min="0" max="12" />
+        <button id="${id}" class="submitButton" type="button">
           Submit
         </button>`;
 						rowManip.before(rowItem);
@@ -257,10 +257,12 @@ const manipRows = (event) => {
 							.doc(userUID)
 							.update({
 								rowObjects: firebase.firestore.FieldValue.arrayUnion({
-									id: data,
+									id: id,
 									name: "",
 									platform: "",
-									casino: ""
+									casino: "",
+									counter: 0,
+									target: 1
 								})
 							})
 							.then(function () {
