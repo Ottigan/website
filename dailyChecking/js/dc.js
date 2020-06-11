@@ -41,14 +41,14 @@ loginButton.addEventListener('click', function () {
 		.then(
 			console.log('Login successful!')
 		)
-		.catch(error => console.log(error.message))
-})
+		.catch(error => console.log(error.message));
+});
 
 firebase.auth().onAuthStateChanged(dailyCheckingUser => {
 	if (dailyCheckingUser) {
 		//current user valid option: firebase.auth().currentUser.uid
 		userUID = dailyCheckingUser.uid;
-		let greeting = document.createElement('h6')
+		let greeting = document.createElement('h6');
 		let qa;
 		switch (userUID) {
 			case 'eckYksePcfdox9I4FLVwTe72bSk1':
@@ -83,7 +83,7 @@ firebase.auth().onAuthStateChanged(dailyCheckingUser => {
 				.then(function (doc) {
 					tablesDB = doc.data().names;
 				})
-				.catch(function (error) {});
+				.catch(function (error) { });
 
 			db.collection("dailyChecking")
 				.doc("casinos")
@@ -91,7 +91,7 @@ firebase.auth().onAuthStateChanged(dailyCheckingUser => {
 				.then(function (doc) {
 					casinosDB = doc.data().names;
 				})
-				.catch(function (error) {});
+				.catch(function (error) { });
 
 			db.collection("dailyChecking")
 				.doc(userUID)
@@ -103,42 +103,42 @@ firebase.auth().onAuthStateChanged(dailyCheckingUser => {
 						let i = 0;
 						do {
 							if (i === 0) {
-								document.querySelector(`#table-${ i }`).value = rowObjects[i].name;
+								document.querySelector(`#table-${ i }`).value = rowObjects[ i ].name;
 								document.querySelector(`#platform-${ i }`).value =
-									rowObjects[i].platform;
-								document.querySelector(`#casino-${ i }`).value = rowObjects[i].casino;
-								document.querySelector(`#counter-${ i }`).innerHTML = rowObjects[i].counter || 0;
-								document.querySelector(`#target-${ i }`).value = rowObjects[i].target;
+									rowObjects[ i ].platform;
+								document.querySelector(`#casino-${ i }`).value = rowObjects[ i ].casino;
+								document.querySelector(`#counter-${ i }`).innerHTML = rowObjects[ i ].counter || 0;
+								document.querySelector(`#target-${ i }`).value = rowObjects[ i ].target;
 							} else if (i > 0) {
 								const rowItem = document.createElement("form");
 								rowItem.classList.add("flex", "jc-c", "table-row");
 								rowItem.innerHTML = `<div>
           <input type="text" name="table" pattern="[a-zA-Z0-9 ]+" list="names" class="inputElement highlight-this" autocomplete="off" id="table-${
-									rowObjects[i].id
-									}" value="${ rowObjects[i].name }"/>
+									rowObjects[ i ].id
+									}" value="${ rowObjects[ i ].name }"/>
         </div>
         <div>
               <input id="platform-${
-									rowObjects[i].id
+									rowObjects[ i ].id
 									}" class="highlight-this" value="${
-									rowObjects[i].platform
+									rowObjects[ i ].platform
 									}" name="platform" type="text" list="platforms" autocomplete="off"/>
             </div>
             <div>
               <input type="text" name="casino" list="casinos" class="inputElement highlight-this" autocomplete="off" id="casino-${
-									rowObjects[i].id
-									}" value="${ rowObjects[i].casino.toLowerCase() }"/>
+									rowObjects[ i ].id
+									}" value="${ rowObjects[ i ].casino.toLowerCase() }"/>
             </div>
             <span id="counter-${
-									rowObjects[i].id
-									}" class="counter highlight-this">${ rowObjects[i].counter || 0 }</span>
+									rowObjects[ i ].id
+									}" class="counter highlight-this">${ rowObjects[ i ].counter || 0 }</span>
             <input id="target-${
-									rowObjects[i].id
+									rowObjects[ i ].id
 									}" type="number" class="target highlight-this" value="${
-									rowObjects[i].target || 1
+									rowObjects[ i ].target || 1
 									}" maxlength="2" min="1" max="12" />
             <button id="${
-									rowObjects[i].id
+									rowObjects[ i ].id
 									}" class="submitButton highlight-this" type="button">
               Submit
         </button>`;
@@ -152,15 +152,15 @@ firebase.auth().onAuthStateChanged(dailyCheckingUser => {
 							goal = document.querySelectorAll(`.target`);
 
 						for (let i = 0; i < counter.length; i++) {
-							let x = Number.parseInt(counter[i].innerHTML),
-								y = goal[i].value;
+							let x = Number.parseInt(counter[ i ].innerHTML),
+								y = goal[ i ].value;
 
 							if (x >= y) {
-								counter[i].classList.add("valid");
-								counter[i].classList.remove("invalid");
+								counter[ i ].classList.add("valid");
+								counter[ i ].classList.remove("invalid");
 							} else {
-								counter[i].classList.add("invalid");
-								counter[i].classList.remove("valid");
+								counter[ i ].classList.add("invalid");
+								counter[ i ].classList.remove("valid");
 							}
 						}
 					}
@@ -176,22 +176,22 @@ firebase.auth().onAuthStateChanged(dailyCheckingUser => {
 		txtPass.style.display = 'inline';
 		loginButton.style.display = 'inline';
 	}
-})
+});
 
 logoutButton.addEventListener('click', function () {
 	auth.signOut()
 		.then(function () {
 			document.querySelector('h6').remove();
-			logoutButton.classList = 'hide-logout'
+			logoutButton.classList = 'hide-logout';
 			document.getElementById('table-0').value = '';
 			document.getElementById('platform-0').value = '';
 			document.getElementById('casino-0').value = '';
 			document.getElementById('counter-0').innerHTML = '';
 			document.getElementById('counter-0').classList.remove('invalid', 'valid');
 			document.getElementById('target-0').value = '';
-			document.querySelectorAll('.table-row').forEach(row => row.remove())
-		})
-})
+			document.querySelectorAll('.table-row').forEach(row => row.remove());
+		});
+});
 
 const manipRows = (event) => {
 	let target = event.target;
@@ -216,7 +216,7 @@ const manipRows = (event) => {
 						.then(function () {
 							row.remove();
 						})
-						.catch(function (error) {});
+						.catch(function (error) { });
 				}
 			})
 			.catch(function (error) {
@@ -381,14 +381,14 @@ const updateCounterAndOptions = (event) => {
 			.then(function (doc) {
 				let rowObjects = doc.data().rowObjects;
 				let rowcount = doc.data().rowcount;
-				let update = rowObjects[target.id];
+				let update = rowObjects[ target.id ];
 				let clientTime = new Date();
 				update.casino = casino;
 				update.name = tableName;
 				update.platform = platform;
 				update.counter = Number.parseInt(counter.innerHTML);
 				update.target = Number.parseInt(goal.value);
-				rowObjects[target.id] = update;
+				rowObjects[ target.id ] = update;
 				db.collection("dailyChecking")
 					.doc(userUID)
 					.update({
@@ -435,8 +435,8 @@ const updateCounterAndOptions = (event) => {
 			.then(function (doc) {
 				let rowObjects = doc.data().rowObjects;
 				rowObjects.forEach(object => {
-					object.target = document.getElementById(`target-${ object.id }`).value
-				})
+					object.target = document.getElementById(`target-${ object.id }`).value;
+				});
 				db.collection("dailyChecking")
 					.doc(userUID)
 					.update({
@@ -464,7 +464,7 @@ const updateCounterAndOptions = (event) => {
 				let rowObjects = doc.data().rowObjects;
 				rowObjects.forEach(object => {
 					object.counter = 0;
-				})
+				});
 				db.collection("dailyChecking")
 					.doc(userUID)
 					.update({
@@ -475,7 +475,7 @@ const updateCounterAndOptions = (event) => {
 							counter.innerHTML = 0;
 							counter.classList.remove('valid');
 							counter.classList.add('invalid');
-						})
+						});
 					})
 					.catch(function (error) {
 						console.log(error);
@@ -488,7 +488,7 @@ const updateCounterAndOptions = (event) => {
 		let counter = document.getElementById(`counter-${ target.id.substring(target.id.indexOf("-") + 1) }`),
 			goal = target;
 
-		console.log(counter)
+		console.log(counter);
 
 		let x = Number.parseInt(counter.innerHTML),
 			y = goal.value;
