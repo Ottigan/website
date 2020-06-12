@@ -196,7 +196,7 @@ section form input[type='text'] {
 #checkrows span,
 #checkrows button {
 	font-family: 'Roboto', sans-serif;
-	font-weight: 400;
+	font-weight: 600;
 }
 
 #main-row {
@@ -277,7 +277,7 @@ section form input[type='number'] {
 tbody tr:nth-child(even) td,
 .l-decoration:nth-child(even) {
 	background-color: rgb(22, 22, 22);
-	color: rgb(138, 138, 138);
+	color: rgb(170, 170, 170);
 	border: 1px solid rgb(63, 63, 63);
 }
 
@@ -286,8 +286,8 @@ tbody tr:nth-child(even) td,
 #checkrows form:nth-child(even) button,
 tbody tr:nth-child(odd) td,
 .l-decoration:nth-child(odd) {
-	background-color: rgb(88, 88, 88);
-	color: rgb(201, 201, 201);
+	background-color: rgb(110, 110, 110);
+	color: rgb(0, 0, 0);
 	border: 1px solid rgb(148, 142, 142);
 }
 
