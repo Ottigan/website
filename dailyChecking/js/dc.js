@@ -195,6 +195,8 @@ logoutButton.addEventListener('click', function () {
 		});
 });
 
+//Chaining promise requests from firestore to DB info with client info
+//During the promise chaining buttons are disabled, to avoid information desync
 const manipRows = (event) => {
 	let target = event.target;
 	let row = target.parentElement.previousElementSibling;
@@ -220,11 +222,15 @@ const manipRows = (event) => {
 							row.remove();
 							target.removeAttribute('disabled');
 						})
-						.catch(function (error) { });
+						.catch(function (error) {
+							console.error('Could not update user profile:', error);
+							target.removeAttribute('disabled');
+						});
 				}
 			})
 			.catch(function (error) {
-				console.log("Error getting document:", error);
+				console.log("Failed retrieving rowcount:", error);
+				target.removeAttribute('disabled');
 			});
 	} else if (target.innerHTML === "Add") {
 		target.setAttribute('disabled', 'disabled');
@@ -274,14 +280,17 @@ const manipRows = (event) => {
 							})
 							.catch(function (error) {
 								console.error("Error adding Object row: ", error);
+								target.removeAttribute('disabled');
 							});
 					})
 					.catch(function (error) {
-						console.log("Failed retrieving rowcount:", error);
+						console.error("Failed retrieving rowcount:", error);
+						target.removeAttribute('disabled');
 					});
 			})
 			.catch(function (error) {
 				console.error("Error incrementing rowcount: ", error);
+				target.removeAttribute('disabled');
 			});
 	}
 };
