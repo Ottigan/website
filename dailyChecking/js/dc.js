@@ -39,9 +39,9 @@ loginButton.addEventListener('click', function () {
 	const authPromise = auth.signInWithEmailAndPassword(email, pass);
 
 	authPromise
-		.then(
-			console.log('Login successful!')
-		)
+		.then(function () {
+			console.log('Login successful!');
+		})
 		.catch(error => console.log(error.message));
 });
 
@@ -114,35 +114,35 @@ firebase.auth().onAuthStateChanged(dailyCheckingUser => {
 								const rowItem = document.createElement("form");
 								rowItem.classList.add("flex", "jc-c", "table-row");
 								rowItem.innerHTML = `<div>
-          <input type="text" name="table" pattern="[a-zA-Z0-9 ]+" list="names" class="inputElement highlight-this" autocomplete="off" id="table-${
+									<input type="text" name="table" pattern="[a-zA-Z0-9 ]+" list="names" class="inputElement highlight-this" autocomplete="off" id="table-${
 									rowObjects[i].id
 									}" value="${rowObjects[i].name}"/>
-        </div>
-        <div>
-              <input id="platform-${
+									</div>
+									<div>
+									<input id="platform-${
 									rowObjects[i].id
 									}" class="highlight-this" value="${
 									rowObjects[i].platform
 									}" name="platform" type="text" list="platforms" autocomplete="off"/>
-            </div>
-            <div>
-              <input type="text" name="casino" list="casinos" class="inputElement highlight-this" autocomplete="off" id="casino-${
+									</div>
+									<div>
+									<input type="text" name="casino" list="casinos" class="inputElement highlight-this" autocomplete="off" id="casino-${
 									rowObjects[i].id
 									}" value="${rowObjects[i].casino.toLowerCase()}"/>
-            </div>
-            <span id="counter-${
+									</div>
+									<span id="counter-${
 									rowObjects[i].id
 									}" class="counter highlight-this">${rowObjects[i].counter || 0}</span>
-            <input id="target-${
+									<input id="target-${
 									rowObjects[i].id
 									}" type="number" class="target highlight-this" value="${
 									rowObjects[i].target || 1
 									}" maxlength="2" min="1" max="12" />
-            <button id="${
+									<button id="${
 									rowObjects[i].id
 									}" class="submitButton highlight-this" type="button">
-              Submit
-        </button>`;
+									Submit
+									</button>`;
 								rowManip.before(rowItem);
 							}
 							i++;
@@ -199,6 +199,7 @@ const manipRows = (event) => {
 	let target = event.target;
 	let row = target.parentElement.previousElementSibling;
 	if (target.innerHTML === "Remove" && row.classList.contains("table-row")) {
+		target.setAttribute('disabled', 'disabled');
 		db.collection("dailyChecking")
 			.doc(userUID)
 			.get()
@@ -217,6 +218,7 @@ const manipRows = (event) => {
 						})
 						.then(function () {
 							row.remove();
+							target.removeAttribute('disabled');
 						})
 						.catch(function (error) { });
 				}
@@ -225,6 +227,7 @@ const manipRows = (event) => {
 				console.log("Error getting document:", error);
 			});
 	} else if (target.innerHTML === "Add") {
+		target.setAttribute('disabled', 'disabled');
 		db.collection("dailyChecking")
 			.doc(userUID)
 			.update({
@@ -239,19 +242,19 @@ const manipRows = (event) => {
 						const rowItem = document.createElement("form");
 						rowItem.classList.add("flex", "jc-c", "table-row");
 						rowItem.innerHTML = `<div>
-          <input type="text" name="table" list="names" class="inputElement" autocomplete="off" pattern="[a-zA-Z0-9]+" id="table-${id}" />
-        </div>
-        <div>
-          <input id="platform-${id}" name="platform" type="text" list="platforms" autocomplete="off"/>
-        </div>
-        <div>
-          <input type="text" name="casino" id="casino-${id}" list="casinos" class="inputElement" autocomplete="off"/>
-        </div>
-        <span id="counter-${id}" class="counter highlight-this invalid">0</span>
-        <input id="target-${id}" type="number" class="target highlight-this" value="1" maxlength="2" min="0" max="12" />
-        <button id="${id}" class="submitButton" type="button">
-          Submit
-        </button>`;
+							<input type="text" name="table" list="names" class="inputElement" autocomplete="off" pattern="[a-zA-Z0-9]+" id="table-${id}" />
+							</div>
+							<div>
+							<input id="platform-${id}" name="platform" type="text" list="platforms" autocomplete="off"/>
+							</div>
+							<div>
+							<input type="text" name="casino" id="casino-${id}" list="casinos" class="inputElement" autocomplete="off"/>
+							</div>
+							<span id="counter-${id}" class="counter highlight-this invalid">0</span>
+							<input id="target-${id}" type="number" class="target highlight-this" value="1" maxlength="2" min="0" max="12" />
+							<button id="${id}" class="submitButton" type="button">
+							Submit
+							</button>`;
 						rowManip.before(rowItem);
 						db.collection("dailyChecking")
 							.doc(userUID)
@@ -266,18 +269,19 @@ const manipRows = (event) => {
 								})
 							})
 							.then(function () {
-								console.log("Row Object added");
+								console.log('Row successfully added!');
+								target.removeAttribute('disabled');
 							})
 							.catch(function (error) {
 								console.error("Error adding Object row: ", error);
 							});
 					})
 					.catch(function (error) {
-						console.log("Error getting document:", error);
+						console.log("Failed retrieving rowcount:", error);
 					});
 			})
 			.catch(function (error) {
-				console.error("Error adding a row: ", error);
+				console.error("Error incrementing rowcount: ", error);
 			});
 	}
 };
