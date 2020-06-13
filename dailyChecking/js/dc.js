@@ -78,6 +78,9 @@ firebase.auth().onAuthStateChanged(dailyCheckingUser => {
 			case 'w967NxXDmwUxMMhhKyQizzF5B8S2':
 				qa = 'Boss';
 				break;
+			case '6pLL44pT1SaihfvEtT99tNuKDB42':
+				qa = 'Sauļuk';
+				break;
 			default:
 				qa = '';
 		}
