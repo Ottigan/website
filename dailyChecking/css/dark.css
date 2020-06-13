@@ -9,13 +9,16 @@ body {
 }
 
 form label {
-	color: white;
+	color: rgb(211, 211, 211);
+	font-family: 'Roboto', sans-serif;
+	font-weight: 800;
 }
 
 nav {
 	background-color: rgb(33, 33, 33);
 	font-size: x-large;
 	height: 80px;
+	border-bottom: 2px inset rgba(3, 220, 248, 0.884);
 }
 
 #login-form {
@@ -39,10 +42,23 @@ nav a:hover {
 .navSlash {
 	position: relative;
 	right: 100px;
-	height: 1px;
-	width: 114px;
+	height: 2px;
+	width: 120px;
 	transform: rotate(135deg);
 	background-color: rgba(3, 220, 248, 0.884);
+}
+
+#color-mode {
+	margin-right: 50px;
+}
+
+#color-mode input {
+	width: 100px;
+}
+
+#sun,
+#moon {
+	fill: rgb(219, 219, 219);
 }
 
 nav form {
@@ -66,11 +82,6 @@ nav form {
 	font-weight: 900 !important;
 	border: 1px solid black;
 	border-radius: 3px;
-}
-
-.navBottomBorder {
-	height: 1px;
-	background-color: rgba(3, 220, 248, 0.884);
 }
 
 form div {
@@ -166,13 +177,9 @@ thead tr td:last-child {
 	color: black !important;
 	border: 1px solid black;
 	border-radius: 3px;
-	margin-left: 4px;
+	margin-left: 2px;
 	padding: 0 3px;
 	height: 25px;
-}
-
-#row-manipulator button:hover {
-	box-shadow: 0 0 3px 2px rgba(3, 220, 248, 0.884) !important;
 }
 
 #main-row {
@@ -212,9 +219,9 @@ section form input[type='text'] {
 	height: 20px;
 	margin: 0 3px 5px 3px;
 	font-size: 13px;
-	padding-top: 1px;
-	background-color: white !important;
 	color: black !important;
+	padding-bottom: 3px;
+	background-color: white !important;
 	border-radius: 3px;
 }
 
@@ -227,6 +234,7 @@ section form input[type='text'] {
 #target-save-container {
 	width: 46px;
 	padding: 0;
+	margin-left: 3px;
 }
 
 #save-button {
@@ -261,7 +269,7 @@ section form input[type='number'] {
 	width: 40px;
 	align-self: flex-end;
 	text-align: left;
-	margin: 0 3px;
+	margin: 0 3px 0 6px;
 }
 
 .submitButton {
@@ -303,7 +311,7 @@ tbody tr:nth-child(odd) td,
 }
 
 .highlighted-row {
-	box-shadow: 0 0 2px 2px rgba(3, 220, 248, 0.884) !important;
+	box-shadow: 0 0 1px 2px rgba(3, 220, 248, 0.884) !important;
 }
 
 .location {

@@ -1,0 +1,418 @@
+* {
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+}
+
+body {
+	background-color: rgb(230, 230, 230);
+}
+
+form label {
+	font-family: 'Roboto', sans-serif;
+	font-weight: 800;
+	color: rgb(39, 39, 39);
+}
+
+nav {
+	background-color: rgb(146, 146, 146);
+	font-size: x-large;
+	height: 80px;
+	border-bottom: 2px inset rgb(51, 51, 51);
+}
+
+#login-form {
+	position: relative;
+	right: 50px;
+	width: 500px;
+}
+
+nav a {
+	color: rgb(0, 0, 0);
+	text-decoration-line: none;
+	font-family: Georgia, 'Times New Roman', Times, serif;
+	padding: 5px 8px;
+}
+
+nav a:hover {
+	box-shadow: 0 0 1px 2px rgb(0, 0, 0) !important;
+	border-radius: 5px;
+}
+
+.navSlash {
+	position: relative;
+	right: 100px;
+	height: 2px;
+	width: 120px;
+	transform: rotate(135deg);
+	background-color: rgb(51, 51, 51);
+}
+
+#color-mode {
+	margin-right: 50px;
+}
+
+#color-mode input {
+	width: 100px;
+}
+
+#sun,
+#moon {
+	fill: rgb(31, 31, 31);
+}
+
+nav form {
+	display: flex;
+	justify-content: flex-end;
+}
+
+#txt-user,
+#txt-pass,
+#login-button,
+#logout-button {
+	display: none;
+	margin-left: 7px;
+}
+
+#login-button,
+#logout-button {
+	padding: 0 3px;
+	font-family: 'Roboto', sans-serif;
+	font-size: 14px;
+	font-weight: 900 !important;
+	color: rgb(100, 100, 100);
+	border: 1px solid rgb(90, 90, 90);
+	border-radius: 3px;
+}
+
+form div {
+	padding-right: 6px;
+}
+
+#db-body {
+	height: 100vh;
+}
+
+#db-form div input,
+#db-form button,
+#new-casino,
+#new-table,
+#add-table,
+#add-casino {
+	height: 35px;
+	font-size: larger;
+	border: 1px solid black;
+	background-color: rgb(231, 231, 231);
+	border-radius: 2px;
+}
+
+#tracking-from,
+#tracking-to {
+	width: 150px;
+}
+
+#tracking-name,
+#tracking-platform,
+#tracking-casino {
+	width: 200px;
+}
+
+#tracking-button {
+	width: 100px;
+	justify-content: center;
+}
+
+#db-data {
+	margin-top: 50px;
+	width: 1030px;
+}
+
+tbody {
+	height: 600px;
+	overflow-y: scroll;
+}
+
+tbody tr:nth-child(odd) td {
+	background-color: rgb(88, 88, 88);
+	color: rgb(255, 255, 255);
+	border: 1px solid rgb(148, 142, 142);
+}
+
+td:nth-child(even) {
+	margin-left: 2px;
+	margin-right: 2px;
+}
+
+td {
+	border: 1px solid rgb(63, 63, 63);
+	width: 20%;
+	text-align: center;
+	margin-bottom: 2px;
+}
+
+thead tr td {
+	height: 34px;
+	margin-bottom: 5px;
+	font-size: larger;
+	color: rgb(114, 114, 114);
+	line-height: 34px;
+	font-weight: bolder;
+}
+
+thead tr td:last-child {
+	width: 224px;
+}
+
+#row-manipulator {
+	width: 100%;
+	padding-left: 219px;
+	margin-top: 5px;
+	margin-bottom: 20px;
+}
+
+#row-manipulator button {
+	font-family: 'Roboto', sans-serif;
+	font-size: 13px;
+	font-weight: 900 !important;
+	background-color: white !important;
+	color: rgb(100, 100, 100);
+	border: 1px solid rgb(90, 90, 90);
+	border-radius: 3px;
+	margin-left: 2px;
+	padding: 0 3px;
+	height: 25px;
+}
+
+#main-row {
+	width: 100%;
+}
+
+.table-row {
+	width: 100%;
+	height: 20px;
+	margin-top: 3px;
+}
+
+section form input[type='text'] {
+	border-radius: 2px;
+	text-indent: 2px;
+	height: 20px;
+	width: 200px;
+}
+
+#checkrows input,
+#checkrows span,
+#checkrows button {
+	font-family: 'Roboto', sans-serif;
+	font-weight: 600;
+}
+
+#main-row {
+	align-items: flex-end;
+}
+
+#counter-reset-container {
+	width: 27px;
+	padding: 0;
+}
+
+#reset-button {
+	height: 20px;
+	margin: 0 3px 5px 3px;
+	font-size: 13px;
+	color: rgb(100, 100, 100) !important;
+	padding-bottom: 3px;
+	background-color: white !important;
+	border-radius: 3px;
+}
+
+#counter-0 {
+	width: 21px;
+	margin: 0 3px;
+	align-items: center;
+}
+
+#target-save-container {
+	width: 46px;
+	padding: 0;
+	margin-left: 3px;
+}
+
+#save-button {
+	width: 40px;
+	height: 20px;
+	margin: 0 0 5px 3px;
+	font-family: 'Roboto', sans-serif;
+	font-size: 12px;
+	font-weight: 900 !important;
+	color: rgb(100, 100, 100) !important;
+	background-color: white !important;
+	border-radius: 3px;
+}
+
+section form input[type='number'] {
+	text-indent: 2px;
+	font-size: 15px;
+}
+
+.counter {
+	height: 100%;
+	width: 21px;
+	align-self: flex-end;
+	text-align: center;
+	padding: 0 2px;
+	margin: 0 3px;
+	font-size: 15px;
+}
+
+.target {
+	height: 100%;
+	width: 40px;
+	align-self: flex-end;
+	text-align: left;
+	margin: 0 3px 0 6px;
+}
+
+.submitButton {
+	height: 100%;
+	width: 60px;
+	align-self: flex-end;
+	margin-left: 3px;
+}
+
+#checkrows form:nth-child(odd) input,
+#checkrows form:nth-child(odd) span,
+#checkrows form:nth-child(odd) button,
+tbody tr:nth-child(even) td,
+.l-decoration:nth-child(even) {
+	background-color: rgb(170, 170, 170);
+	color: rgb(39, 39, 39);
+	border: 1px solid rgb(110, 110, 110);
+}
+
+#checkrows form:nth-child(even) input,
+#checkrows form:nth-child(even) span,
+#checkrows form:nth-child(even) button,
+tbody tr:nth-child(odd) td,
+.l-decoration:nth-child(odd) {
+	background-color: rgb(211, 211, 211);
+	color: rgb(39, 39, 39);
+	border: 1px solid rgb(148, 142, 142);
+}
+
+#checkrows form span {
+	color: rgb(201, 201, 201) !important;
+	border: 1px solid rgb(148, 142, 142) !important;
+}
+
+.highlight-this {
+	border-radius: 2px;
+	height: 20px;
+	border: 1px solid black;
+}
+
+.highlighted-row {
+	box-shadow: 0 0 1px 1px rgb(0, 0, 0) !important;
+}
+
+.location {
+	text-decoration: underline;
+}
+
+.container {
+	width: 1200px;
+}
+
+.flex {
+	display: flex;
+}
+
+.flex-grow {
+	flex-grow: 1;
+}
+
+.vertical {
+	flex-direction: column;
+}
+
+.jc-c {
+	justify-content: center;
+}
+
+.jc-fs {
+	justify-content: flex-start;
+}
+
+.jc-sb {
+	justify-content: space-between;
+}
+
+.jc-se {
+	justify-content: space-evenly;
+}
+
+.jc-sa {
+	justify-content: space-around;
+}
+
+.js-c {
+	justify-self: center;
+}
+
+.js-fe {
+	justify-self: flex-end;
+}
+
+.ai-c {
+	align-items: center;
+}
+
+.ac-c {
+	align-content: center;
+}
+
+.as-c {
+	align-self: center;
+}
+
+.ai-fe {
+	align-items: flex-end;
+}
+
+.ai-fs {
+	align-items: flex-start;
+}
+
+.as-fe {
+	align-self: flex-end;
+}
+
+.vh100 {
+	height: 100vh;
+}
+
+.ls-none {
+	list-style: none;
+}
+
+.l-decoration {
+	border: 1px solid rgb(153, 151, 151);
+	margin: 2px 0;
+	padding-left: 2px;
+}
+
+.empty-value {
+	outline-color: red !important;
+}
+
+.invalid {
+	background-color: rgb(151, 0, 0) !important;
+}
+
+.valid {
+	background-color: rgb(1, 133, 1) !important;
+}
+
+button:hover {
+	box-shadow: 0 0 1px 1px rgb(0, 0, 0) !important;
+}
