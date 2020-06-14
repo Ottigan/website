@@ -7,12 +7,14 @@ const firebaseConfig = {
 	projectId: 'starlit-braid-276207',
 	storageBucket: 'starlit-braid-276207.appspot.com',
 	messagingSenderId: '30277815528',
-	appId: '1:30277815528:web:517d7d0743d3d5530a4d5d'
+	appId: '1:30277815528:web:517d7d0743d3d5530a4d5d',
 };
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 
-const loginForm = document.getElementById("login-form"),
+const styleSheet = document.getElementById('style'),
+	styleBtn = document.getElementById('style-button'),
+	loginForm = document.getElementById('login-form'),
 	loginButton = document.getElementById('login-button'),
 	logoutButton = document.getElementById('logout-button'),
 	txtUser = document.getElementById('txt-user'),
@@ -28,14 +30,13 @@ const loginForm = document.getElementById("login-form"),
 
 let userUID;
 
-//Add login event 
+//Add login event
 loginButton.addEventListener('click', function () {
 	const user = txtUser.value;
 	const pass = txtPass.value;
 	const authPromise = auth.signInWithEmailAndPassword(user, pass);
 
-	authPromise
-		.catch(error => console.log(error.message));
+	authPromise.catch(error => console.log(error.message));
 });
 
 firebase.auth().onAuthStateChanged(dailyCheckingUser => {
@@ -60,9 +61,9 @@ firebase.auth().onAuthStateChanged(dailyCheckingUser => {
 				qa = '';
 		}
 		greeting.innerText = `Welcome, ${qa}!`;
-		greeting.style.cssText = 'margin-bottom: -2px; align-self: flex-end; color: white; visibility: visible; font-family: Georgia, "Times New Roman", Times, serif; font-weight: 400';
+		greeting.style.cssText =
+			'margin-bottom: -2px; align-self: flex-end; color: white; visibility: visible; font-family: Georgia, "Times New Roman", Times, serif; font-weight: 400';
 		logoutButton.before(greeting);
-
 
 		logoutButton.style.display = 'inline';
 		txtUser.style.display = 'none';
@@ -110,11 +111,10 @@ firebase.auth().onAuthStateChanged(dailyCheckingUser => {
 });
 
 logoutButton.addEventListener('click', function () {
-	auth.signOut()
-		.then(function () {
-			document.querySelector('h6').remove();
-			logoutButton.classList = 'hide-logout';
-		});
+	auth.signOut().then(function () {
+		document.querySelector('h6').remove();
+		logoutButton.classList = 'hide-logout';
+	});
 });
 
 addTableBtn.onclick = function () {
@@ -282,3 +282,11 @@ newCasino.addEventListener('keypress', function (e) {
 		}
 	}
 });
+
+styleBtn.onclick = function () {
+	if (styleBtn.value == 0) {
+		styleSheet.href = 'css/light.css';
+	} else {
+		styleSheet.href = 'css/dark.css';
+	}
+};

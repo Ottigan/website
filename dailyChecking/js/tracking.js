@@ -7,12 +7,14 @@ const firebaseConfig = {
 	projectId: 'starlit-braid-276207',
 	storageBucket: 'starlit-braid-276207.appspot.com',
 	messagingSenderId: '30277815528',
-	appId: '1:30277815528:web:517d7d0743d3d5530a4d5d'
+	appId: '1:30277815528:web:517d7d0743d3d5530a4d5d',
 };
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 
-const loginForm = document.getElementById("login-form"),
+const styleSheet = document.getElementById('style'),
+	styleBtn = document.getElementById('style-button'),
+	loginForm = document.getElementById('login-form'),
 	loginButton = document.getElementById('login-button'),
 	logoutButton = document.getElementById('logout-button'),
 	txtUser = document.getElementById('txt-user'),
@@ -39,14 +41,13 @@ let casinosDB;
 let csvArray = '';
 let csvButton;
 
-//Add login event 
+//Add login event
 loginButton.addEventListener('click', function () {
 	const user = txtUser.value;
 	const pass = txtPass.value;
 	const authPromise = auth.signInWithEmailAndPassword(user, pass);
 
-	authPromise
-		.catch(error => console.log(error.message));
+	authPromise.catch(error => console.log(error.message));
 });
 
 firebase.auth().onAuthStateChanged(dailyCheckingUser => {
@@ -73,16 +74,15 @@ firebase.auth().onAuthStateChanged(dailyCheckingUser => {
 			default:
 				qa = '';
 		}
-		greeting.innerText = `Welcome, ${ qa }!`;
-		greeting.style.cssText = 'margin-bottom: -2px; align-self: flex-end; color: white; visibility: visible; font-family: Georgia, "Times New Roman", Times, serif; font-weight: 400';
+		greeting.innerText = `Welcome, ${qa}!`;
+		greeting.style.cssText =
+			'margin-bottom: -2px; align-self: flex-end; color: white; visibility: visible; font-family: Georgia, "Times New Roman", Times, serif; font-weight: 400';
 		logoutButton.before(greeting);
-
 
 		logoutButton.style.display = 'inline';
 		txtUser.style.display = 'none';
 		txtPass.style.display = 'none';
 		loginButton.style.display = 'none';
-
 
 		const getData = function () {
 			db.collection('dailyChecking')
@@ -91,7 +91,7 @@ firebase.auth().onAuthStateChanged(dailyCheckingUser => {
 				.then(function (doc) {
 					tablesDB = doc.data().names;
 				})
-				.catch(function (error) { });
+				.catch(function (error) {});
 
 			db.collection('dailyChecking')
 				.doc('casinos')
@@ -99,7 +99,7 @@ firebase.auth().onAuthStateChanged(dailyCheckingUser => {
 				.then(function (doc) {
 					casinosDB = doc.data().names;
 				})
-				.catch(function (error) { });
+				.catch(function (error) {});
 
 			db.collection('dailyChecking')
 				.doc('database')
@@ -121,11 +121,10 @@ firebase.auth().onAuthStateChanged(dailyCheckingUser => {
 });
 
 logoutButton.addEventListener('click', function () {
-	auth.signOut()
-		.then(function () {
-			document.querySelector('h6').remove();
-			logoutButton.classList = 'hide-logout';
-		});
+	auth.signOut().then(function () {
+		document.querySelector('h6').remove();
+		logoutButton.classList = 'hide-logout';
+	});
 });
 
 const updateOptions = event => {
@@ -174,15 +173,13 @@ const updateOptions = event => {
 dbForm.addEventListener('click', updateOptions);
 dbForm.addEventListener('keyup', updateOptions);
 
-
-
 trackingSearchBtn.onclick = function () {
 	tableBody.innerHTML = '';
 	csvArray = '';
+	trackingSearchBtn.blur();
 	if (csvButton) {
 		csvButton.remove();
 	}
-
 
 	dbTracking.forEach(object => {
 		let qa;
@@ -223,11 +220,11 @@ trackingSearchBtn.onclick = function () {
 
 		const rowElement = document.createElement('tr');
 		rowElement.classList.add('flex');
-		rowElement.innerHTML = `<td>${ object.name }</td>
-								<td>${object.platform }</td>
-								<td>${object.casino }</td>
-								<td>${qa }</td>
-                                <td>${timeToString }</td>`;
+		rowElement.innerHTML = `<td>${object.name}</td>
+								<td>${object.platform}</td>
+								<td>${object.casino}</td>
+								<td>${qa}</td>
+                                <td>${timeToString}</td>`;
 
 		if (
 			fromSeconds <= objectSeconds &&
@@ -237,7 +234,7 @@ trackingSearchBtn.onclick = function () {
 			trackingCasino.value === object.casino
 		) {
 			tableBody.append(rowElement);
-			csvArray += `\n${ object.name };${ object.platform };${ object.casino };${ qa };${ timeToString }`;
+			csvArray += `\n${object.name};${object.platform};${object.casino};${qa};${timeToString}`;
 		} else if (
 			fromSeconds <= objectSeconds &&
 			objectSeconds <= toSeconds &&
@@ -245,7 +242,7 @@ trackingSearchBtn.onclick = function () {
 			trackingPlatform.value === object.platform
 		) {
 			tableBody.append(rowElement);
-			csvArray += `\n${ object.name };${ object.platform };${ object.casino };${ qa };${ timeToString }`;
+			csvArray += `\n${object.name};${object.platform};${object.casino};${qa};${timeToString}`;
 		} else if (
 			fromSeconds <= objectSeconds &&
 			objectSeconds <= toSeconds &&
@@ -253,7 +250,7 @@ trackingSearchBtn.onclick = function () {
 			trackingPlatform.value === object.platform
 		) {
 			tableBody.append(rowElement);
-			csvArray += `\n${ object.name };${ object.platform };${ object.casino };${ qa };${ timeToString }`;
+			csvArray += `\n${object.name};${object.platform};${object.casino};${qa};${timeToString}`;
 		} else if (
 			fromSeconds <= objectSeconds &&
 			objectSeconds <= toSeconds &&
@@ -261,28 +258,28 @@ trackingSearchBtn.onclick = function () {
 			trackingCasino.value === object.casino
 		) {
 			tableBody.append(rowElement);
-			csvArray += `\n${ object.name };${ object.platform };${ object.casino };${ qa };${ timeToString }`;
+			csvArray += `\n${object.name};${object.platform};${object.casino};${qa};${timeToString}`;
 		} else if (
 			fromSeconds <= objectSeconds &&
 			objectSeconds <= toSeconds &&
 			trackingName.value === object.name
 		) {
 			tableBody.append(rowElement);
-			csvArray += `\n${ object.name };${ object.platform };${ object.casino };${ qa };${ timeToString }`;
+			csvArray += `\n${object.name};${object.platform};${object.casino};${qa};${timeToString}`;
 		} else if (
 			fromSeconds <= objectSeconds &&
 			objectSeconds <= toSeconds &&
 			trackingCasino.value === object.casino
 		) {
 			tableBody.append(rowElement);
-			csvArray += `\n${ object.name };${ object.platform };${ object.casino };${ qa };${ timeToString }`;
+			csvArray += `\n${object.name};${object.platform};${object.casino};${qa};${timeToString}`;
 		} else if (
 			fromSeconds <= objectSeconds &&
 			objectSeconds <= toSeconds &&
 			trackingPlatform.value === object.platform
 		) {
 			tableBody.append(rowElement);
-			csvArray += `\n${ object.name };${ object.platform };${ object.casino };${ qa };${ timeToString }`;
+			csvArray += `\n${object.name};${object.platform};${object.casino};${qa};${timeToString}`;
 		} else if (
 			fromSeconds <= objectSeconds &&
 			objectSeconds <= toSeconds &&
@@ -291,7 +288,7 @@ trackingSearchBtn.onclick = function () {
 			!trackingCasino.value
 		) {
 			tableBody.append(rowElement);
-			csvArray += `\n${ object.name };${ object.platform };${ object.casino };${ qa };${ timeToString }`;
+			csvArray += `\n${object.name};${object.platform};${object.casino};${qa};${timeToString}`;
 		}
 	});
 
@@ -307,11 +304,21 @@ trackingSearchBtn.onclick = function () {
 	}
 };
 
+styleBtn.onclick = function () {
+	if (styleBtn.value == 0) {
+		styleSheet.href = 'css/light.css';
+	} else {
+		styleSheet.href = 'css/dark.css';
+	}
+};
+
 dbData.addEventListener('click', function (event) {
 	console.log(csvArray);
 	if (event.target.id === 'csv-button') {
 		let hiddenCSV = document.createElement('a');
-		hiddenCSV.href = 'data:text/csv;charset=utf-8,' + encodeURI('Game Table;Platform;Casino;QA;Timestamp' + csvArray);
+		hiddenCSV.href =
+			'data:text/csv;charset=utf-8,' +
+			encodeURI('Game Table;Platform;Casino;QA;Timestamp' + csvArray);
 		hiddenCSV.target = '_blank';
 		hiddenCSV.download = 'daily checking data.csv';
 		hiddenCSV.click();

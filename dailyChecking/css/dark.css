@@ -5,7 +5,7 @@
 }
 
 body {
-	background-color: rgb(24, 24, 24);
+	background-color: rgb(34, 34, 34);
 }
 
 form label {
@@ -15,7 +15,7 @@ form label {
 }
 
 nav {
-	background-color: rgb(33, 33, 33);
+	background-color: rgb(22, 22, 22);
 	font-size: x-large;
 	height: 80px;
 	border-bottom: 2px inset rgba(3, 220, 248, 0.884);
@@ -131,12 +131,6 @@ tbody {
 	overflow-y: scroll;
 }
 
-tbody tr:nth-child(odd) td {
-	background-color: rgb(88, 88, 88);
-	color: rgb(255, 255, 255);
-	border: 1px solid rgb(148, 142, 142);
-}
-
 td:nth-child(even) {
 	margin-left: 2px;
 	margin-right: 2px;
@@ -145,6 +139,8 @@ td:nth-child(even) {
 td {
 	border: 1px solid rgb(63, 63, 63);
 	width: 20%;
+	font-family: 'Roboto', sans-serif;
+	font-size: 14px;
 	text-align: center;
 	margin-bottom: 2px;
 }
@@ -153,7 +149,8 @@ thead tr td {
 	height: 34px;
 	margin-bottom: 5px;
 	font-size: larger;
-	color: rgb(114, 114, 114);
+	color: rgb(211, 211, 211);
+	background-color: rgb(0, 0, 0);
 	line-height: 34px;
 	font-weight: bolder;
 }
@@ -314,10 +311,6 @@ tbody tr:nth-child(odd) td,
 	box-shadow: 0 0 1px 2px rgba(3, 220, 248, 0.884) !important;
 }
 
-.location {
-	text-decoration: underline;
-}
-
 .container {
 	width: 1200px;
 }
@@ -387,6 +380,9 @@ tbody tr:nth-child(odd) td,
 }
 
 .l-decoration {
+	font-family: 'Roboto', sans-serif;
+	font-size: 14px;
+	font-weight: 600;
 	border: 1px solid rgb(153, 151, 151);
 	margin: 2px 0;
 	padding-left: 2px;

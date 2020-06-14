@@ -8,7 +8,7 @@ const firebaseConfig = {
 	projectId: 'starlit-braid-276207',
 	storageBucket: 'starlit-braid-276207.appspot.com',
 	messagingSenderId: '30277815528',
-	appId: '1:30277815528:web:517d7d0743d3d5530a4d5d'
+	appId: '1:30277815528:web:517d7d0743d3d5530a4d5d',
 };
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
@@ -33,9 +33,9 @@ let allCounters = document.querySelectorAll('.counter');
 let allTargets;
 let tablesDB;
 let casinosDB;
-let inputElements = document.querySelectorAll(".inputElement");
+let inputElements = document.querySelectorAll('.inputElement');
 
-//Add login event 
+//Add login event
 loginButton.addEventListener('click', function () {
 	const email = txtUser.value;
 	const pass = txtPass.value;
@@ -49,16 +49,20 @@ loginButton.addEventListener('click', function () {
 		})
 		.catch(error => {
 			console.error(error.message);
-			if (error.message === "There is no user record corresponding to this identifier. The user may have been deleted.") {
+			if (
+				error.message ===
+				'There is no user record corresponding to this identifier. The user may have been deleted.'
+			) {
 				txtUser.classList.add('empty-value');
 				txtUser.focus();
-			} else if (error.message === "The password is invalid or the user does not have a password.") {
+			} else if (
+				error.message ===
+				'The password is invalid or the user does not have a password.'
+			) {
 				txtPass.classList.add('empty-value');
 				txtPass.focus();
 			}
-
-		}
-		);
+		});
 });
 
 firebase.auth().onAuthStateChanged(dailyCheckingUser => {
@@ -87,9 +91,9 @@ firebase.auth().onAuthStateChanged(dailyCheckingUser => {
 				qa = '';
 		}
 		greeting.innerText = `Welcome, ${qa}!`;
-		greeting.style.cssText = 'margin-bottom: -2px; align-self: flex-end; color: white; visibility: visible; font-family: Georgia, "Times New Roman", Times, serif; font-weight: 400';
+		greeting.style.cssText =
+			'margin-bottom: -2px; align-self: flex-end; color: white; visibility: visible; font-family: Georgia, "Times New Roman", Times, serif; font-weight: 400';
 		logoutButton.before(greeting);
-
 
 		logoutButton.style.display = 'inline';
 		txtUser.style.display = 'none';
@@ -97,23 +101,23 @@ firebase.auth().onAuthStateChanged(dailyCheckingUser => {
 		loginButton.style.display = 'none';
 
 		const getData = function () {
-			db.collection("dailyChecking")
-				.doc("tables")
+			db.collection('dailyChecking')
+				.doc('tables')
 				.get()
 				.then(function (doc) {
 					tablesDB = doc.data().names;
 				})
-				.catch(function (error) { });
+				.catch(function (error) {});
 
-			db.collection("dailyChecking")
-				.doc("casinos")
+			db.collection('dailyChecking')
+				.doc('casinos')
 				.get()
 				.then(function (doc) {
 					casinosDB = doc.data().names;
 				})
-				.catch(function (error) { });
+				.catch(function (error) {});
 
-			db.collection("dailyChecking")
+			db.collection('dailyChecking')
 				.doc(userUID)
 				.get()
 				.then(function (doc) {
@@ -123,42 +127,44 @@ firebase.auth().onAuthStateChanged(dailyCheckingUser => {
 						let i = 0;
 						do {
 							if (i === 0) {
-								document.querySelector(`#table-${i}`).value = rowObjects[i].name;
+								document.querySelector(`#table-${i}`).value =
+									rowObjects[i].name;
 								document.querySelector(`#platform-${i}`).value =
 									rowObjects[i].platform;
-								document.querySelector(`#casino-${i}`).value = rowObjects[i].casino;
-								document.querySelector(`#counter-${i}`).innerHTML = rowObjects[i].counter || 0;
-								document.querySelector(`#target-${i}`).value = rowObjects[i].target;
+								document.querySelector(`#casino-${i}`).value =
+									rowObjects[i].casino;
+								document.querySelector(`#counter-${i}`).innerHTML =
+									rowObjects[i].counter || 0;
+								document.querySelector(`#target-${i}`).value =
+									rowObjects[i].target;
 							} else if (i > 0) {
-								const rowItem = document.createElement("form");
-								rowItem.classList.add("flex", "jc-c", "table-row");
+								const rowItem = document.createElement('form');
+								rowItem.classList.add('flex', 'jc-c', 'table-row');
 								rowItem.innerHTML = `<div>
 									<input type="text" name="table" pattern="[a-zA-Z0-9 ]+" list="names" class="inputElement highlight-this" autocomplete="off" id="table-${
-									rowObjects[i].id
+										rowObjects[i].id
 									}" value="${rowObjects[i].name}"/>
 									</div>
 									<div>
-									<input id="platform-${
-									rowObjects[i].id
-									}" class="highlight-this" value="${
+									<input id="platform-${rowObjects[i].id}" class="highlight-this" value="${
 									rowObjects[i].platform
-									}" name="platform" type="text" list="platforms" autocomplete="off"/>
+								}" name="platform" type="text" list="platforms" autocomplete="off"/>
 									</div>
 									<div>
 									<input type="text" name="casino" list="casinos" class="inputElement highlight-this" autocomplete="off" id="casino-${
-									rowObjects[i].id
+										rowObjects[i].id
 									}" value="${rowObjects[i].casino.toLowerCase()}"/>
 									</div>
-									<span id="counter-${
-									rowObjects[i].id
-									}" class="counter highlight-this">${rowObjects[i].counter || 0}</span>
+									<span id="counter-${rowObjects[i].id}" class="counter highlight-this">${
+									rowObjects[i].counter || 0
+								}</span>
 									<input id="target-${
-									rowObjects[i].id
+										rowObjects[i].id
 									}" type="number" class="target highlight-this" value="${
 									rowObjects[i].target || 1
-									}" maxlength="2" min="1" max="12" />
+								}" maxlength="2" min="1" max="12" />
 									<button id="${
-									rowObjects[i].id
+										rowObjects[i].id
 									}" class="submitButton highlight-this" type="button">
 									Submit
 									</button>`;
@@ -166,8 +172,8 @@ firebase.auth().onAuthStateChanged(dailyCheckingUser => {
 							}
 							i++;
 						} while (i <= rows);
-						inputElements = document.querySelectorAll("input");
-						tableRows = document.querySelectorAll(".table-row");
+						inputElements = document.querySelectorAll('input');
+						tableRows = document.querySelectorAll('.table-row');
 
 						let counter = document.querySelectorAll(`.counter`),
 							goal = document.querySelectorAll(`.target`);
@@ -177,17 +183,17 @@ firebase.auth().onAuthStateChanged(dailyCheckingUser => {
 								y = goal[i].value;
 
 							if (x >= y) {
-								counter[i].classList.add("valid");
-								counter[i].classList.remove("invalid");
+								counter[i].classList.add('valid');
+								counter[i].classList.remove('invalid');
 							} else {
-								counter[i].classList.add("invalid");
-								counter[i].classList.remove("valid");
+								counter[i].classList.add('invalid');
+								counter[i].classList.remove('valid');
 							}
 						}
 					}
 				})
 				.catch(function (error) {
-					console.log("Error getting document:", error);
+					console.log('Error getting document:', error);
 				});
 		};
 		getData();
@@ -200,37 +206,36 @@ firebase.auth().onAuthStateChanged(dailyCheckingUser => {
 });
 
 logoutButton.addEventListener('click', function () {
-	auth.signOut()
-		.then(function () {
-			document.querySelector('h6').remove();
-			logoutButton.classList = 'hide-logout';
-			document.getElementById('table-0').value = '';
-			document.getElementById('platform-0').value = '';
-			document.getElementById('casino-0').value = '';
-			document.getElementById('counter-0').innerHTML = '';
-			document.getElementById('counter-0').classList.remove('invalid', 'valid');
-			document.getElementById('target-0').value = '';
-			document.querySelectorAll('.table-row').forEach(row => row.remove());
-		});
+	auth.signOut().then(function () {
+		document.querySelector('h6').remove();
+		logoutButton.classList = 'hide-logout';
+		document.getElementById('table-0').value = '';
+		document.getElementById('platform-0').value = '';
+		document.getElementById('casino-0').value = '';
+		document.getElementById('counter-0').innerHTML = '';
+		document.getElementById('counter-0').classList.remove('invalid', 'valid');
+		document.getElementById('target-0').value = '';
+		document.querySelectorAll('.table-row').forEach(row => row.remove());
+	});
 });
 
 //Row addition and removal
 //Chaining promise requests from firestore to sync DB info with client info
 //During the promise chaining buttons are disabled, to avoid information desync
-const manipRows = (event) => {
+const manipRows = event => {
 	let target = event.target;
 	let row = target.parentElement.previousElementSibling;
-	if (target.innerHTML === "Remove" && row.classList.contains("table-row")) {
+	if (target.innerHTML === 'Remove' && row.classList.contains('table-row')) {
 		target.setAttribute('disabled', 'disabled');
-		db.collection("dailyChecking")
+		db.collection('dailyChecking')
 			.doc(userUID)
 			.get()
 			.then(function (doc) {
 				let data = doc.data().rowcount;
 				let objectArray = doc.data().rowObjects;
-				let deleteObject = objectArray.find((value) => value.id === data);
+				let deleteObject = objectArray.find(value => value.id === data);
 				if (data > 0) {
-					db.collection("dailyChecking")
+					db.collection('dailyChecking')
 						.doc(userUID)
 						.update({
 							rowcount: firebase.firestore.FieldValue.increment(-1),
@@ -240,7 +245,7 @@ const manipRows = (event) => {
 						})
 						.then(function () {
 							row.remove();
-							tableRows = document.querySelectorAll(".table-row");
+							tableRows = document.querySelectorAll('.table-row');
 							target.removeAttribute('disabled');
 						})
 						.catch(function (error) {
@@ -250,24 +255,24 @@ const manipRows = (event) => {
 				}
 			})
 			.catch(function (error) {
-				console.log("Failed retrieving rowcount:", error);
+				console.log('Failed retrieving rowcount:', error);
 				target.removeAttribute('disabled');
 			});
-	} else if (target.innerHTML === "Add") {
+	} else if (target.innerHTML === 'Add') {
 		target.setAttribute('disabled', 'disabled');
-		db.collection("dailyChecking")
+		db.collection('dailyChecking')
 			.doc(userUID)
 			.update({
 				rowcount: firebase.firestore.FieldValue.increment(1),
 			})
 			.then(function () {
-				db.collection("dailyChecking")
+				db.collection('dailyChecking')
 					.doc(userUID)
 					.get()
 					.then(function (doc) {
 						let id = doc.data().rowcount;
-						const rowItem = document.createElement("form");
-						rowItem.classList.add("flex", "jc-c", "table-row");
+						const rowItem = document.createElement('form');
+						rowItem.classList.add('flex', 'jc-c', 'table-row');
 						rowItem.innerHTML = `<div>
 							<input type="text" name="table" list="names" class="inputElement" autocomplete="off" pattern="[a-zA-Z0-9]+" id="table-${id}" />
 							</div>
@@ -283,81 +288,81 @@ const manipRows = (event) => {
 							Submit
 							</button>`;
 						rowManip.before(rowItem);
-						db.collection("dailyChecking")
+						db.collection('dailyChecking')
 							.doc(userUID)
 							.update({
 								rowObjects: firebase.firestore.FieldValue.arrayUnion({
 									id: id,
-									name: "",
-									platform: "",
-									casino: "",
+									name: '',
+									platform: '',
+									casino: '',
 									counter: 0,
-									target: 1
-								})
+									target: 1,
+								}),
 							})
 							.then(function () {
 								console.log('Row successfully added!');
-								tableRows = document.querySelectorAll(".table-row");
+								tableRows = document.querySelectorAll('.table-row');
 								target.removeAttribute('disabled');
 							})
 							.catch(function (error) {
-								console.error("Error adding Object row: ", error);
+								console.error('Error adding Object row: ', error);
 								target.removeAttribute('disabled');
 							});
 					})
 					.catch(function (error) {
-						console.error("Failed retrieving rowcount:", error);
+						console.error('Failed retrieving rowcount:', error);
 						target.removeAttribute('disabled');
 					});
 			})
 			.catch(function (error) {
-				console.error("Error incrementing rowcount: ", error);
+				console.error('Error incrementing rowcount: ', error);
 				target.removeAttribute('disabled');
 			});
 	}
 };
 
-checkRows.addEventListener("click", manipRows);
+checkRows.addEventListener('click', manipRows);
 
-const updateCounterAndOptions = (event) => {
+const updateCounterAndOptions = event => {
 	let target = event.target;
 	//Logic to ignore mouse clicks due to them being undefined
 	let eventKey = event.key ? event.key : 0;
 
 	if (
-		eventKey !== "Shift" &&
-		event.type !== "mouseover" &&
-		event.type !== "mouseout"
+		eventKey !== 'Shift' &&
+		event.type !== 'mouseover' &&
+		event.type !== 'mouseout'
 	) {
-		gameTableNames.innerHTML = "";
-		casinoNames.innerHTML = "";
+		gameTableNames.innerHTML = '';
+		casinoNames.innerHTML = '';
 	}
 
 	if (
-		(target.classList.contains("inputElement") &&
-			event.type === "keyup" &&
+		(target.classList.contains('inputElement') &&
+			event.type === 'keyup' &&
 			eventKey.length === 1) ||
-		eventKey === "Backspace"
+		eventKey === 'Backspace'
 	) {
-		gameTableNames.innerHTML = "";
-		tablesDB.forEach((value) => {
+		gameTableNames.innerHTML = '';
+		tablesDB.forEach(value => {
 			if (
 				gameTableNames.childElementCount <= 10 &&
 				value.toLowerCase().includes(target.value.toLowerCase())
 			) {
-				let namesOptionItem = document.createElement("option");
+				let namesOptionItem = document.createElement('option');
 				namesOptionItem.value = value;
 
 				gameTableNames.append(namesOptionItem);
 			}
 		});
-		casinoNames.innerHTML = "";
-		casinosDB.forEach((value) => {
+		casinoNames.innerHTML = '';
+		casinosDB.forEach(value => {
 			if (
 				casinoNames.childElementCount <= 10 &&
 				value.toLowerCase().includes(target.value.toLowerCase())
 			) {
-				let casinosOptionItem = document.createElement("option");
+				let casinosOptionItem = document.createElement('option');
 				casinosOptionItem.value = value;
 
 				casinoNames.append(casinosOptionItem);
@@ -365,8 +370,8 @@ const updateCounterAndOptions = (event) => {
 		});
 	}
 
-	if (target.classList.contains("highlight-this")) {
-		let indexID = target.id.substring(target.id.indexOf("-") + 1),
+	if (target.classList.contains('highlight-this')) {
+		let indexID = target.id.substring(target.id.indexOf('-') + 1),
 			tableName = document.querySelector(`#table-${indexID}`),
 			platform = document.querySelector(`#platform-${indexID}`),
 			casino = document.querySelector(`#casino-${indexID}`),
@@ -374,14 +379,14 @@ const updateCounterAndOptions = (event) => {
 			targetNumber = document.querySelector(`#target-${indexID}`),
 			submitButton = document.getElementById(`${indexID}`);
 
-		if (event.type === "mouseover") {
+		if (event.type === 'mouseover') {
 			tableName.classList.add('highlighted-row');
 			platform.classList.add('highlighted-row');
 			casino.classList.add('highlighted-row');
 			counter.classList.add('highlighted-row');
 			targetNumber.classList.add('highlighted-row');
 			submitButton.classList.add('highlighted-row');
-		} else if (event.type === "mouseout") {
+		} else if (event.type === 'mouseout') {
 			tableName.classList.remove('highlighted-row');
 			platform.classList.remove('highlighted-row');
 			casino.classList.remove('highlighted-row');
@@ -391,8 +396,7 @@ const updateCounterAndOptions = (event) => {
 		}
 	}
 
-	if (target.classList.contains("submitButton") && event.type === "click") {
-
+	if (target.classList.contains('submitButton') && event.type === 'click') {
 		let tableName = document.querySelector(`#table-${target.id}`).value,
 			platform = document.querySelector(`#platform-${target.id}`).value,
 			casino = document.querySelector(`#casino-${target.id}`).value,
@@ -405,15 +409,15 @@ const updateCounterAndOptions = (event) => {
 		counter.innerHTML = x;
 
 		if (x >= y) {
-			counter.classList.add("valid");
-			counter.classList.remove("invalid");
+			counter.classList.add('valid');
+			counter.classList.remove('invalid');
 		} else {
-			counter.classList.add("invalid");
-			counter.classList.remove("valid");
+			counter.classList.add('invalid');
+			counter.classList.remove('valid');
 		}
 
 		//getting the entire firestore array, because you can't update specific values in the cloud
-		db.collection("dailyChecking")
+		db.collection('dailyChecking')
 			//changing the following userUID helps copying row state between users
 			.doc(userUID)
 			.get()
@@ -428,31 +432,30 @@ const updateCounterAndOptions = (event) => {
 				update.counter = Number.parseInt(counter.innerHTML);
 				update.target = Number.parseInt(goal.value);
 				rowObjects[target.id] = update;
-				db.collection("dailyChecking")
+				db.collection('dailyChecking')
 					.doc(userUID)
 					.update({
 						rowObjects: rowObjects,
-						rowcount: rowcount
+						rowcount: rowcount,
 					})
 					.then(function () {
-						if (tableName != "" && platform != "" && casino != "") {
-							db.collection("dailyChecking")
-								.doc("database")
+						if (tableName != '' && platform != '' && casino != '') {
+							db.collection('dailyChecking')
+								.doc('database')
 								.update({
 									tracking: firebase.firestore.FieldValue.arrayUnion({
 										name: tableName,
 										platform: platform,
 										casino: casino,
 										qa: userUID,
-										when: clientTime
+										when: clientTime,
 									}),
 								})
 								.then(function () {
-									console.log("Tracking DB updated");
-
+									console.log('Tracking DB updated');
 								})
 								.catch(function (error) {
-									console.error("Error updating DB: ", error);
+									console.error('Error updating DB: ', error);
 								});
 						}
 					})
@@ -460,11 +463,10 @@ const updateCounterAndOptions = (event) => {
 						console.log(error);
 					});
 			})
-			.catch((error) => {
+			.catch(error => {
 				console.log(error);
 			});
-	} else if (target.id === "save-button" && event.type === "click") {
-
+	} else if (target.id === 'save-button' && event.type === 'click') {
 		let newTableRowOrder = [];
 
 		//Copying each node of the original array with parameter of TRUE to copy ALL the children
@@ -475,7 +477,8 @@ const updateCounterAndOptions = (event) => {
 		}
 
 		//sorting rows based on target value in a descending order
-		newTableRowOrder.sort((a, b) => Number.parseInt(b[3].value) - Number.parseInt(a[3].value)
+		newTableRowOrder.sort(
+			(a, b) => Number.parseInt(b[3].value) - Number.parseInt(a[3].value)
 		);
 
 		//Re-assigning values to DOM elements
@@ -483,7 +486,8 @@ const updateCounterAndOptions = (event) => {
 			tableRows[i][0].value = newTableRowOrder[i][0].value;
 			tableRows[i][1].value = newTableRowOrder[i][1].value;
 			tableRows[i][2].value = newTableRowOrder[i][2].value;
-			tableRows[i].children[3].innerText = newTableRowOrder[i].children[3].innerText;
+			tableRows[i].children[3].innerText =
+				newTableRowOrder[i].children[3].innerText;
 			tableRows[i][3].value = newTableRowOrder[i][3].value;
 		}
 
@@ -496,17 +500,16 @@ const updateCounterAndOptions = (event) => {
 			let y = allTargets[i].value;
 
 			if (x >= y) {
-				counter.classList.add("valid");
-				counter.classList.remove("invalid");
+				counter.classList.add('valid');
+				counter.classList.remove('invalid');
 			} else {
-				counter.classList.add("invalid");
-				counter.classList.remove("valid");
+				counter.classList.add('invalid');
+				counter.classList.remove('valid');
 			}
 		}
 
-
 		// getting the entire firestore array, because you can't update specific values in the cloud
-		db.collection("dailyChecking")
+		db.collection('dailyChecking')
 			//changing the following userUID helps copying row state between users
 			.doc(userUID)
 			.get()
@@ -514,13 +517,19 @@ const updateCounterAndOptions = (event) => {
 				let rowObjects = doc.data().rowObjects;
 				rowObjects.forEach(object => {
 					object.name = document.getElementById(`table-${object.id}`).value;
-					object.platform = document.getElementById(`platform-${object.id}`).value;
+					object.platform = document.getElementById(
+						`platform-${object.id}`
+					).value;
 					object.casino = document.getElementById(`casino-${object.id}`).value;
-					object.counter = Number.parseInt(document.getElementById(`counter-${object.id}`).innerHTML);
-					object.target = Number.parseInt(document.getElementById(`target-${object.id}`).value);
+					object.counter = Number.parseInt(
+						document.getElementById(`counter-${object.id}`).innerHTML
+					);
+					object.target = Number.parseInt(
+						document.getElementById(`target-${object.id}`).value
+					);
 				});
 
-				db.collection("dailyChecking")
+				db.collection('dailyChecking')
 					.doc(userUID)
 					.update({
 						rowObjects: rowObjects,
@@ -532,14 +541,14 @@ const updateCounterAndOptions = (event) => {
 						console.log(error);
 					});
 			})
-			.catch((error) => {
+			.catch(error => {
 				console.log(error);
 			});
-	} else if (target.id === "reset-button" && event.type === "click") {
+	} else if (target.id === 'reset-button' && event.type === 'click') {
 		let goal = document.querySelectorAll('.target');
 
 		//getting the entire firestore array, because you can't update specific values in the cloud
-		db.collection("dailyChecking")
+		db.collection('dailyChecking')
 			//changing the following userUID helps copying row state between users
 			.doc(userUID)
 			.get()
@@ -548,7 +557,7 @@ const updateCounterAndOptions = (event) => {
 				rowObjects.forEach(object => {
 					object.counter = 0;
 				});
-				db.collection("dailyChecking")
+				db.collection('dailyChecking')
 					.doc(userUID)
 					.update({
 						rowObjects: rowObjects,
@@ -565,22 +574,24 @@ const updateCounterAndOptions = (event) => {
 						console.log(error);
 					});
 			})
-			.catch((error) => {
+			.catch(error => {
 				console.log(error);
 			});
-	} else if (target.classList.contains('target') && event.type === "change") {
-		let counter = document.getElementById(`counter-${target.id.substring(target.id.indexOf("-") + 1)}`),
+	} else if (target.classList.contains('target') && event.type === 'change') {
+		let counter = document.getElementById(
+				`counter-${target.id.substring(target.id.indexOf('-') + 1)}`
+			),
 			goal = target;
 
 		let x = Number.parseInt(counter.innerHTML),
 			y = goal.value;
 
 		if (x >= y) {
-			counter.classList.add("valid");
-			counter.classList.remove("invalid");
+			counter.classList.add('valid');
+			counter.classList.remove('invalid');
 		} else {
-			counter.classList.add("invalid");
-			counter.classList.remove("valid");
+			counter.classList.add('invalid');
+			counter.classList.remove('valid');
 		}
 	}
 };
@@ -591,12 +602,11 @@ styleBtn.onclick = function () {
 	} else {
 		styleSheet.href = 'css/dark.css';
 	}
-
 };
 
 //Added another eventlistener due to DOM Event delegation
-checkRows.addEventListener("click", updateCounterAndOptions);
-checkRows.addEventListener("keyup", updateCounterAndOptions);
-checkRows.addEventListener("mouseover", updateCounterAndOptions);
-checkRows.addEventListener("mouseout", updateCounterAndOptions);
-checkRows.addEventListener("change", updateCounterAndOptions);
+checkRows.addEventListener('click', updateCounterAndOptions);
+checkRows.addEventListener('keyup', updateCounterAndOptions);
+checkRows.addEventListener('mouseover', updateCounterAndOptions);
+checkRows.addEventListener('mouseout', updateCounterAndOptions);
+checkRows.addEventListener('change', updateCounterAndOptions);
