@@ -596,17 +596,18 @@ const updateCounterAndOptions = event => {
 	}
 };
 
-styleBtn.onclick = function () {
-	if (styleBtn.value == 0) {
-		styleSheet.href = 'css/light.css';
-	} else {
-		styleSheet.href = 'css/dark.css';
-	}
-};
-
 //Added another eventlistener due to DOM Event delegation
 checkRows.addEventListener('click', updateCounterAndOptions);
 checkRows.addEventListener('keyup', updateCounterAndOptions);
 checkRows.addEventListener('mouseover', updateCounterAndOptions);
 checkRows.addEventListener('mouseout', updateCounterAndOptions);
 checkRows.addEventListener('change', updateCounterAndOptions);
+styleBtn.onclick = function () {
+	if (styleBtn.value == 0) {
+		styleSheet.href = 'css/light.css';
+		document.cookie = 'color-schema=css/light.css;max-age=695520‬';
+	} else {
+		styleSheet.href = 'css/dark.css';
+		document.cookie = 'color-schema=css/dark.css;max-age=695520';
+	}
+};

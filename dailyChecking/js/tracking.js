@@ -307,8 +307,10 @@ trackingSearchBtn.onclick = function () {
 styleBtn.onclick = function () {
 	if (styleBtn.value == 0) {
 		styleSheet.href = 'css/light.css';
+		document.cookie = 'color-schema=css/light.css;max-age=695520‬';
 	} else {
 		styleSheet.href = 'css/dark.css';
+		document.cookie = 'color-schema=css/dark.css;max-age=695520';
 	}
 };
 
