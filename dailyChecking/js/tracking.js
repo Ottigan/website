@@ -29,7 +29,6 @@ const styleSheet = document.getElementById('style'),
 	gameTableNames = document.getElementById('names'),
 	casinoNames = document.getElementById('casinos'),
 	dbData = document.getElementById('db-data'),
-	entireTable = document.querySelector('table'),
 	tableBody = document.querySelector('tbody'),
 	auth = firebase.auth(),
 	db = firebase.firestore();
@@ -84,6 +83,7 @@ firebase.auth().onAuthStateChanged(dailyCheckingUser => {
 		txtPass.style.display = 'none';
 		loginButton.style.display = 'none';
 
+		//fetching data for dynamic Table Name suggestions
 		const getData = function () {
 			db.collection('dailyChecking')
 				.doc('tables')
@@ -93,6 +93,7 @@ firebase.auth().onAuthStateChanged(dailyCheckingUser => {
 				})
 				.catch(function (error) {});
 
+			//fetching data for dynamic Casino Name suggestions
 			db.collection('dailyChecking')
 				.doc('casinos')
 				.get()
@@ -101,14 +102,24 @@ firebase.auth().onAuthStateChanged(dailyCheckingUser => {
 				})
 				.catch(function (error) {});
 
+			//fetching data from all user profiles about the check performed
 			db.collection('dailyChecking')
-				.doc('database')
+				.where('rowcount', '>=', 0)
 				.get()
-				.then(function (doc) {
-					dbTracking = doc.data().tracking;
+				.then(function (querySnapshot) {
+					querySnapshot.forEach(function (doc) {
+						// doc.data() is never undefined for query doc snapshots
+						if (doc.data().hasOwnProperty('tracking')) {
+							if (!dbTracking) {
+								dbTracking = doc.data().tracking;
+							} else {
+								dbTracking = dbTracking.concat(doc.data().tracking);
+							}
+						}
+					});
 				})
 				.catch(function (error) {
-					console.log('Error getting document:', error);
+					console.log('Error getting documents: ', error);
 				});
 		};
 		getData();
@@ -181,6 +192,9 @@ trackingSearchBtn.onclick = function () {
 		csvButton.remove();
 	}
 
+	//Sorting in ascending order the gathered check objects Oldest => Newest
+	dbTracking.sort((a, b) => a.when.seconds - b.when.seconds);
+
 	dbTracking.forEach(object => {
 		let qa;
 		switch (object.qa) {
@@ -195,6 +209,9 @@ trackingSearchBtn.onclick = function () {
 				break;
 			case 'w967NxXDmwUxMMhhKyQizzF5B8S2':
 				qa = 'Diana Anca';
+				break;
+			case '6pLL44pT1SaihfvEtT99tNuKDB42':
+				qa = 'Sanija Mikulska';
 				break;
 			default:
 				qa = '';
@@ -294,12 +311,12 @@ trackingSearchBtn.onclick = function () {
 
 	if (tableBody.childElementCount > 1) {
 		let csv = document.createElement('button');
-		csv.style.cssText = 'width: 50px; margin-top: 15px';
+		csv.style.cssText = 'width: 50px; margin-top: 10px';
 		csv.innerHTML = 'CSV';
 		csv.id = 'csv-button';
 		csv.type = 'button';
 
-		entireTable.append(csv);
+		dbData.append(csv);
 		csvButton = document.getElementById('csv-button');
 	}
 };

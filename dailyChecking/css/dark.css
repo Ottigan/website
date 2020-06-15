@@ -15,7 +15,7 @@ form label {
 }
 
 nav {
-	background-color: rgb(22, 22, 22);
+	background-color: rgb(10, 10, 10);
 	font-size: x-large;
 	height: 80px;
 	border-bottom: 2px inset rgba(3, 220, 248, 0.884);
@@ -126,6 +126,11 @@ form div {
 	width: 1030px;
 }
 
+#db-data tbody {
+	background-color: rgb(46, 46, 46);
+	border: 1px double rgb(77, 77, 77);
+}
+
 tbody {
 	height: 600px;
 	overflow-y: scroll;
@@ -142,7 +147,15 @@ td {
 	font-family: 'Roboto', sans-serif;
 	font-size: 14px;
 	text-align: center;
-	margin-bottom: 2px;
+	margin-top: 2px;
+}
+
+tbody tr td:first-child {
+	margin-left: 2px;
+}
+
+tbody tr td:last-child {
+	margin-right: 2px;
 }
 
 thead tr td {
@@ -153,10 +166,15 @@ thead tr td {
 	background-color: rgb(0, 0, 0);
 	line-height: 34px;
 	font-weight: bolder;
+	border: 1px solid rgb(77, 77, 77);
+}
+
+thead tr td:first-child {
+	width: 209px;
 }
 
 thead tr td:last-child {
-	width: 224px;
+	width: 226px;
 }
 
 #row-manipulator {
@@ -293,7 +311,7 @@ tbody tr:nth-child(odd) td,
 .l-decoration:nth-child(odd) {
 	background-color: rgb(110, 110, 110);
 	color: rgb(0, 0, 0);
-	border: 1px solid rgb(148, 142, 142);
+	border: 1px solid rgb(59, 59, 59);
 }
 
 #checkrows form span {

@@ -15,7 +15,7 @@ form label {
 }
 
 nav {
-	background-color: rgb(146, 146, 146);
+	background-color: rgb(160, 160, 160);
 	font-size: x-large;
 	height: 80px;
 	border-bottom: 2px inset rgb(51, 51, 51);
@@ -102,7 +102,7 @@ form div {
 	height: 35px;
 	font-size: larger;
 	border: 1px solid black;
-	background-color: rgb(231, 231, 231);
+	background-color: rgb(250, 250, 250);
 	border-radius: 2px;
 }
 
@@ -127,6 +127,11 @@ form div {
 	width: 1030px;
 }
 
+#db-data tbody {
+	background-color: rgb(250, 250, 250);
+	border: 1px double black;
+}
+
 tbody {
 	height: 600px;
 	overflow-y: scroll;
@@ -143,7 +148,15 @@ td {
 	font-family: 'Roboto', sans-serif;
 	font-size: 14px;
 	text-align: center;
-	margin-bottom: 2px;
+	margin-top: 2px;
+}
+
+tbody tr td:first-child {
+	margin-left: 2px;
+}
+
+tbody tr td:last-child {
+	margin-right: 2px;
 }
 
 thead tr td {
@@ -151,12 +164,18 @@ thead tr td {
 	margin-bottom: 5px;
 	font-size: larger;
 	color: rgb(39, 39, 39);
+	background-color: rgb(190, 190, 190);
 	line-height: 34px;
 	font-weight: bolder;
+	border: 1px solid black;
+}
+
+thead tr td:first-child {
+	width: 209px;
 }
 
 thead tr td:last-child {
-	width: 224px;
+	width: 226px;
 }
 
 #row-manipulator {

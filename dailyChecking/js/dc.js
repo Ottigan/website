@@ -441,7 +441,7 @@ const updateCounterAndOptions = event => {
 					.then(function () {
 						if (tableName != '' && platform != '' && casino != '') {
 							db.collection('dailyChecking')
-								.doc('database')
+								.doc(userUID)
 								.update({
 									tracking: firebase.firestore.FieldValue.arrayUnion({
 										name: tableName,
