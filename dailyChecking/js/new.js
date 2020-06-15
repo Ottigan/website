@@ -13,7 +13,9 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 
 const styleSheet = document.getElementById('style'),
-	styleBtn = document.getElementById('style-button'),
+	themeToggle = document.querySelector('.theme-label'),
+	themeSwitch = document.querySelector('#switch'),
+	theBall = document.querySelector('.ball'),
 	loginForm = document.getElementById('login-form'),
 	loginButton = document.getElementById('login-button'),
 	logoutButton = document.getElementById('logout-button'),
@@ -304,11 +306,13 @@ newCasino.addEventListener('keypress', function (e) {
 	}
 });
 
-styleBtn.onclick = function () {
-	if (styleBtn.value == 0) {
+themeToggle.onclick = function () {
+	if (themeSwitch.checked) {
+		theBall.style.transitionDuration = '0.2s';
 		styleSheet.href = 'css/light.css';
 		document.cookie = 'color-schema=css/light.css;max-age=695520‬';
 	} else {
+		theBall.style.transitionDuration = '0.2s';
 		styleSheet.href = 'css/dark.css';
 		document.cookie = 'color-schema=css/dark.css;max-age=695520';
 	}

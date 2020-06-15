@@ -8,9 +8,9 @@ window.onload = function () {
 	let prefSchemaValue = prefSchema.substring(prefSchema.indexOf('=') + 1);
 	if (prefSchemaValue === 'css/light.css') {
 		styleSheet.href = 'css/light.css';
-		styleBtn.value = 0;
+		themeSwitch.checked = false;
 	} else if (prefSchemaValue === 'css/dark.css') {
 		styleSheet.href = 'css/dark.css';
-		styleBtn.value = 1;
+		themeSwitch.checked = true;
 	}
 };
