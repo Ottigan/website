@@ -32,11 +32,32 @@ let userUID;
 
 //Add login event
 loginButton.addEventListener('click', function () {
-	const user = txtUser.value;
+	const email = txtUser.value;
 	const pass = txtPass.value;
-	const authPromise = auth.signInWithEmailAndPassword(user, pass);
+	const authPromise = auth.signInWithEmailAndPassword(email, pass);
 
-	authPromise.catch(error => console.log(error.message));
+	authPromise
+		.then(function () {
+			console.log('Login successful!');
+			txtUser.classList.remove('empty-value');
+			txtPass.classList.remove('empty-value');
+		})
+		.catch(error => {
+			console.error(error.message);
+			if (
+				error.message ===
+				'There is no user record corresponding to this identifier. The user may have been deleted.'
+			) {
+				txtUser.classList.add('empty-value');
+				txtUser.focus();
+			} else if (
+				error.message ===
+				'The password is invalid or the user does not have a password.'
+			) {
+				txtPass.classList.add('empty-value');
+				txtPass.focus();
+			}
+		});
 });
 
 firebase.auth().onAuthStateChanged(dailyCheckingUser => {
