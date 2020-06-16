@@ -218,9 +218,6 @@ logoutButton.addEventListener('click', function () {
 		document.getElementById('table-0').value = '';
 		document.getElementById('platform-0').value = '';
 		document.getElementById('casino-0').value = '';
-		document.getElementById('counter-0').innerHTML = '';
-		document.getElementById('counter-0').classList.remove('invalid', 'valid');
-		document.getElementById('target-0').value = '';
 		document.querySelectorAll('.table-row').forEach(row => row.remove());
 	});
 });
