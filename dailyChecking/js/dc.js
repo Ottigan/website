@@ -95,6 +95,9 @@ firebase.auth().onAuthStateChanged(dailyCheckingUser => {
 			case 'a6CtpqvK26SqM1sulP86gCL5jYB2':
 				qa = 'Sette e Mezzo';
 				break;
+			case 'Y9MfBHGQ0YdC8k2XHBbQtgRQ6m72':
+				qa = '4chan.org/g/audio_god';
+				break;
 			default:
 				qa = '';
 		}
