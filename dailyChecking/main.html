@@ -73,7 +73,7 @@
 		</header>
 		<section style="margin-top: 50px;" class="flex jc-c">
 			<div id="checkrows" class="container flex vertical jc-c js-c ai-c">
-				<form id="main-row" action="" method="" class="flex jc-c">
+				<form id="main-row" action="" method="" class="flex jc-c ai-fe">
 					<div>
 						<label for="table-0">Game Table</label><br />
 						<input
@@ -81,7 +81,7 @@
 							type="text"
 							name="table"
 							list="names"
-							class="inputElement highlight-this"
+							class="inputElement highlight-this table-name"
 							autocomplete="off"
 							pattern="[a-zA-Z0-9 ]+"
 						/>
@@ -94,7 +94,7 @@
 							name="platform"
 							type="text"
 							list="platforms"
-							class="highlight-this"
+							class="highlight-this platform-name"
 							autocomplete="off"
 						/>
 						<datalist id="platforms">
@@ -114,30 +114,25 @@
 						</datalist>
 					</div>
 					<div>
-						<label for="casino">Casino</label><br />
+						<label for="casino-0">Casino</label><br />
 						<input
 							id="casino-0"
 							type="text"
 							name="casino"
 							list="casinos"
-							class="inputElement highlight-this"
+							class="inputElement highlight-this casino-name"
 							autocomplete="off"
 						/>
 						<datalist id="casinos"> </datalist>
 					</div>
-					<div id="counter-reset-container" class="flex vertical jc-sb">
-						<button id="reset-button" type="button">x</button>
-						<span id="counter-0" class="counter highlight-this"></span>
-					</div>
-
-					<div id="target-save-container" class="flex vertical jc-sb">
+					<div id="hidden-menu" class="flex ai-c jc-sb">
+						<button id="reset-button" type="button">Reset</button>
 						<button id="save-button" type="button">
-							SORT
+							Sort
 						</button>
-						<input id="target-0" type="number" class="target highlight-this"
-						maxlength="2" min="1" max="12" / />
+						<button id="undo-button" type="button">Undo</button>
 					</div>
-
+					<button id="menu-toggle" type="button">Options</button>
 					<button id="0" class="submitButton highlight-this" type="button">
 						Submit
 					</button>
@@ -148,6 +143,7 @@
 				</div>
 			</div>
 		</section>
+		<div id="overlay" class="flex jc-c ai-c"></div>
 		<script src="https://www.gstatic.com/firebasejs/7.14.6/firebase-app.js"></script>
 		<script src="https://www.gstatic.com/firebasejs/7.14.6/firebase-auth.js"></script>
 		<script src="https://www.gstatic.com/firebasejs/7.14.6/firebase-firestore.js"></script>

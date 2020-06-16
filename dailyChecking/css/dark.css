@@ -206,6 +206,58 @@ thead tr td:last-child {
 	width: 226px;
 }
 
+#main-row input,
+#main-row button {
+	height: 35px;
+	background-color: rgb(255, 255, 255) !important;
+	border-radius: 3px;
+	font-size: 15px;
+	color: black !important;
+}
+
+#overlay {
+	position: fixed;
+	display: none;
+	top: 0;
+	background-color: rgba(0, 0, 0, 0.8);
+	height: 100%;
+	width: 100%;
+	z-index: 1;
+}
+
+#hidden-menu {
+	position: absolute;
+	visibility: hidden;
+	width: 132px;
+	height: 26px;
+	left: 1195px;
+	top: 110px;
+	padding: 2px;
+	border: 1px solid rgb(255, 255, 255);
+	border-radius: 3px;
+	background-color: rgb(255, 255, 255);
+	z-index: 2;
+	opacity: 0;
+	transition: visibility 0.5s opacity 0.5s linear;
+}
+
+#hidden-menu button {
+	width: 40px;
+	height: 20px;
+	font-family: 'Roboto', sans-serif;
+	font-size: 12px;
+	font-weight: 900 !important;
+	background-color: white;
+	border-radius: 3px;
+	font-size: 13px;
+}
+
+#menu-toggle {
+	width: 70px;
+	margin-left: 3px;
+	margin-right: 3px;
+}
+
 #row-manipulator {
 	width: 100%;
 	padding-left: 219px;
@@ -224,10 +276,6 @@ thead tr td:last-child {
 	margin-left: 2px;
 	padding: 0 3px;
 	height: 25px;
-}
-
-#main-row {
-	width: 100%;
 }
 
 .table-row {
@@ -250,47 +298,10 @@ section form input[type='text'] {
 	font-weight: 600;
 }
 
-#main-row {
-	align-items: flex-end;
-}
-
-#counter-reset-container {
-	width: 27px;
-	padding: 0;
-}
-
-#reset-button {
-	height: 20px;
-	margin: 0 3px 5px 3px;
-	font-size: 13px;
-	color: black !important;
-	padding-bottom: 3px;
-	background-color: white !important;
-	border-radius: 3px;
-}
-
 #counter-0 {
 	width: 21px;
 	margin: 0 3px;
 	align-items: center;
-}
-
-#target-save-container {
-	width: 46px;
-	padding: 0;
-	margin-left: 3px;
-}
-
-#save-button {
-	width: 40px;
-	height: 20px;
-	margin: 0 0 5px 3px;
-	font-family: 'Roboto', sans-serif;
-	font-size: 12px;
-	font-weight: 900 !important;
-	background-color: white !important;
-	color: black !important;
-	border-radius: 3px;
 }
 
 section form input[type='number'] {
@@ -355,7 +366,7 @@ tbody tr:nth-child(odd) td,
 }
 
 .highlighted-row {
-	box-shadow: 0 0 1px 2px rgba(3, 220, 248, 0.884) !important;
+	box-shadow: 0 0 1px 2px rgba(3, 220, 248, 0.884);
 }
 
 .container {
@@ -449,5 +460,5 @@ tbody tr:nth-child(odd) td,
 }
 
 button:hover {
-	box-shadow: 0 0 2px 2px rgba(3, 220, 248, 0.884) !important;
+	box-shadow: 0 0 1px 2px rgba(3, 220, 248, 0.884);
 }
