@@ -8,7 +8,7 @@
 			href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap"
 			rel="stylesheet"
 		/>
-		<link id="style" rel="stylesheet" href="css/dark.css" />
+		<link id="style" rel="stylesheet" href="css/light.css" />
 		<script src="js/cookies.js"></script>
 	</head>
 
@@ -21,6 +21,26 @@
 					<li><a id="new-product" href="new.html">Add New Table/Casino</a></li>
 				</ul>
 				<div class="navSlash"></div>
+				<form id="login-form" action="" method="">
+					<input
+						id="txt-user"
+						name="user"
+						type="text"
+						placeholder="e-mail"
+						autocomplete="username"
+					/>
+					<input
+						id="txt-pass"
+						name="pass"
+						type="password"
+						placeholder="password"
+						autocomplete="current-password"
+					/>
+					<button id="login-button" type="button">Log In</button>
+					<button id="logout-button" type="button">
+						Log Out
+					</button>
+				</form>
 				<div class="toggle-container">
 					<input type="checkbox" id="switch" name="theme" />
 					<label for="switch" class="theme-label">
@@ -49,26 +69,6 @@
 						<div class="ball"></div>
 					</label>
 				</div>
-				<form id="login-form" action="" method="">
-					<input
-						id="txt-user"
-						name="user"
-						type="text"
-						placeholder="e-mail"
-						autocomplete="username"
-					/>
-					<input
-						id="txt-pass"
-						name="pass"
-						type="password"
-						placeholder="password"
-						autocomplete="current-password"
-					/>
-					<button id="login-button" type="button">Log In</button>
-					<button id="logout-button" type="button">
-						Log Out
-					</button>
-				</form>
 			</nav>
 		</header>
 		<section style="margin-top: 50px;" class="flex jc-c">

@@ -21,13 +21,6 @@ nav {
 	border-bottom: 2px inset rgba(3, 220, 248, 0.884);
 }
 
-#login-form {
-	position: relative;
-	right: 200px;
-	width: 500px;
-	height: 29px;
-}
-
 nav a {
 	color: white;
 	text-decoration-line: none;
@@ -36,17 +29,46 @@ nav a {
 }
 
 nav a:hover {
-	box-shadow: 0 0 2px 2px rgba(3, 220, 248, 0.884);
-	border-radius: 5px;
+	color: rgb(3, 220, 248);
 }
 
 .navSlash {
 	position: absolute;
-	right: 700px;
+	right: 660px;
 	height: 2px;
 	width: 114px;
 	transform: rotate(135deg);
 	background-color: rgba(3, 220, 248, 0.884);
+}
+
+nav form {
+	display: flex;
+	justify-content: flex-end;
+}
+
+#login-form {
+	position: absolute;
+	right: 200px;
+	width: 500px;
+	height: 29px;
+}
+
+#txt-user,
+#txt-pass,
+#login-button,
+#logout-button {
+	display: none;
+	margin-left: 7px;
+}
+
+#login-button,
+#logout-button {
+	padding: 0 3px;
+	font-family: 'Roboto', sans-serif;
+	font-size: 14px;
+	font-weight: 900 !important;
+	border: 1px solid black;
+	border-radius: 3px;
 }
 
 #switch {
@@ -62,7 +84,7 @@ nav a:hover {
 	position: relative;
 	height: 29px;
 	width: 64px;
-	left: 530px;
+	right: 50px;
 	padding: 3px;
 	border-radius: 29px;
 	border: 2px solid rgb(3, 220, 248);
@@ -88,29 +110,6 @@ nav a:hover {
 #sun,
 #moon {
 	fill: rgb(255, 255, 255);
-}
-
-nav form {
-	display: flex;
-	justify-content: flex-end;
-}
-
-#txt-user,
-#txt-pass,
-#login-button,
-#logout-button {
-	display: none;
-	margin-left: 7px;
-}
-
-#login-button,
-#logout-button {
-	padding: 0 3px;
-	font-family: 'Roboto', sans-serif;
-	font-size: 14px;
-	font-weight: 900 !important;
-	border: 1px solid black;
-	border-radius: 3px;
 }
 
 form div {
