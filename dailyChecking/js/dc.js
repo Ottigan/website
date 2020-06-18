@@ -579,6 +579,12 @@ const updateCounterAndOptions = event => {
 			.get()
 			.then(function (doc) {
 				let rowObjects = doc.data().rowObjects;
+				let tracking = doc.data().tracking;
+				let time7daysAgo = new Date().getTime() / 1000 - 604800;
+				let newTracking = tracking.filter(
+					item => item.when.seconds > time7daysAgo
+				);
+
 				rowObjects.forEach(object => {
 					object.counter = 0;
 				});
@@ -586,6 +592,7 @@ const updateCounterAndOptions = event => {
 					.doc(userUID)
 					.update({
 						rowObjects: rowObjects,
+						tracking: newTracking,
 					})
 					.then(function () {
 						document.querySelectorAll('.counter').forEach(counter => {
