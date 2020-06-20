@@ -87,6 +87,16 @@ body {
 		border-radius: 3px;
 	}
 
+	#pop-out {
+		fill: rgb(255, 255, 255);
+		position: absolute;
+		right: 140px;
+	}
+
+	#pop-out:hover {
+		fill: rgb(0, 0, 0);
+	}
+
 	#switch {
 		opacity: 0;
 		position: absolute;
@@ -96,11 +106,14 @@ body {
 		transform: translateX(35px);
 	}
 
+	.toggle-container {
+		margin-right: 50px;
+	}
+
 	.theme-label {
 		position: relative;
 		height: 29px;
 		width: 64px;
-		right: 50px;
 		padding: 3px;
 		border-radius: 29px;
 		border: 2px solid black;
@@ -237,6 +250,10 @@ body {
 		border-radius: 3px;
 	}
 
+	#pop-out {
+		display: none;
+	}
+
 	#switch {
 		opacity: 0;
 		position: absolute;
@@ -246,11 +263,14 @@ body {
 		transform: translateX(35px);
 	}
 
+	.toggle-container {
+		margin-right: 50px;
+	}
+
 	.theme-label {
 		position: relative;
 		height: 29px;
 		width: 64px;
-		right: 50px;
 		padding: 3px;
 		border-radius: 29px;
 		border: 2px solid black;

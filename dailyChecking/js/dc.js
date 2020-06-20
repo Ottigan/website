@@ -13,15 +13,16 @@ const firebaseConfig = {
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 
-const styleSheet = document.getElementById('style'),
-	themeToggle = document.querySelector('.theme-label'),
-	themeSwitch = document.querySelector('#switch'),
-	theBall = document.querySelector('.ball'),
-	loginForm = document.getElementById('login-form'),
+const loginForm = document.getElementById('login-form'),
 	loginButton = document.getElementById('login-button'),
 	logoutButton = document.getElementById('logout-button'),
 	txtUser = document.getElementById('txt-user'),
 	txtPass = document.getElementById('txt-pass'),
+	popOutBtn = document.getElementById('pop-out'),
+	styleSheet = document.getElementById('style'),
+	themeToggle = document.querySelector('.theme-label'),
+	themeSwitch = document.querySelector('#switch'),
+	theBall = document.querySelector('.ball'),
 	checkRows = document.querySelector('#checkrows'),
 	menuToggleBtn = document.querySelector('#menu-toggle'),
 	hiddenMenu = document.querySelector('#hidden-menu'),
@@ -718,6 +719,18 @@ checkRows.addEventListener('keyup', updateCounterAndOptions);
 checkRows.addEventListener('mouseover', updateCounterAndOptions);
 checkRows.addEventListener('mouseout', updateCounterAndOptions);
 checkRows.addEventListener('change', updateCounterAndOptions);
+
+popOutBtn.onclick = function () {
+	window.open(
+		document.URL,
+		'targetWindow',
+		`width=990,
+		height=982,
+		left=2842,
+		top=0`
+	);
+};
+
 themeToggle.onclick = function () {
 	if (themeSwitch.checked) {
 		theBall.style.transitionDuration = '0.2s';

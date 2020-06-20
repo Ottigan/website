@@ -86,6 +86,16 @@ body {
 		border-radius: 3px;
 	}
 
+	#pop-out {
+		fill: white;
+		position: absolute;
+		right: 140px;
+	}
+
+	#pop-out:hover {
+		fill: rgb(3, 220, 248);
+	}
+
 	#switch {
 		opacity: 0;
 		position: absolute;
@@ -95,11 +105,14 @@ body {
 		transform: translateX(35px);
 	}
 
+	.toggle-container {
+		margin-right: 50px;
+	}
+
 	.theme-label {
 		position: relative;
 		height: 29px;
 		width: 64px;
-		right: 50px;
 		padding: 3px;
 		border-radius: 29px;
 		border: 2px solid rgb(3, 220, 248);
@@ -107,8 +120,46 @@ body {
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
-		box-shadow: 0 0 30px 5px rgba(3, 220, 248, 0.884),
-			0 0 1px 0px rgb(3, 220, 248) inset;
+		animation-name: theme-btn-glow;
+		animation-duration: 2.5s;
+		animation-iteration-count: infinite;
+		animation-timing-function: linear;
+	}
+
+	@keyframes theme-btn-glow {
+		0% {
+			box-shadow: 0 0 3px 1px rgb(3, 220, 248);
+		}
+		10% {
+			box-shadow: 0 0 4px 2px rgb(3, 220, 248);
+		}
+		20% {
+			box-shadow: 0 0 5px 3px rgb(3, 220, 248);
+		}
+		30% {
+			box-shadow: 0 0 6px 4px rgb(3, 220, 248);
+		}
+		40% {
+			box-shadow: 0 0 7px 5px rgb(3, 220, 248);
+		}
+		50% {
+			box-shadow: 0 0 8px 6px rgb(3, 220, 248);
+		}
+		60% {
+			box-shadow: 0 0 7px 5px rgb(3, 220, 248);
+		}
+		70% {
+			box-shadow: 0 0 6px 4px rgb(3, 220, 248);
+		}
+		80% {
+			box-shadow: 0 0 5px 3px rgb(3, 220, 248);
+		}
+		90% {
+			box-shadow: 0 0 4px 2px rgb(3, 220, 248);
+		}
+		100% {
+			box-shadow: 0 0 3px 1px rgb(3, 220, 248);
+		}
 	}
 
 	.ball {
@@ -234,6 +285,10 @@ body {
 		border-radius: 3px;
 	}
 
+	#pop-out {
+		display: none;
+	}
+
 	#switch {
 		opacity: 0;
 		position: absolute;
@@ -243,11 +298,14 @@ body {
 		transform: translateX(35px);
 	}
 
+	.toggle-container {
+		margin-right: 50px;
+	}
+
 	.theme-label {
 		position: relative;
 		height: 29px;
 		width: 64px;
-		right: 50px;
 		padding: 3px;
 		border-radius: 29px;
 		border: 2px solid rgb(3, 220, 248);
@@ -255,8 +313,46 @@ body {
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
-		box-shadow: 0 0 30px 5px rgba(3, 220, 248, 0.884),
-			0 0 1px 0px rgb(3, 220, 248) inset;
+		animation-name: theme-btn-glow;
+		animation-duration: 2.5s;
+		animation-iteration-count: infinite;
+		animation-timing-function: linear;
+	}
+
+	@keyframes theme-btn-glow {
+		0% {
+			box-shadow: 0 0 3px 1px rgb(3, 220, 248);
+		}
+		10% {
+			box-shadow: 0 0 4px 2px rgb(3, 220, 248);
+		}
+		20% {
+			box-shadow: 0 0 5px 3px rgb(3, 220, 248);
+		}
+		30% {
+			box-shadow: 0 0 6px 4px rgb(3, 220, 248);
+		}
+		40% {
+			box-shadow: 0 0 7px 5px rgb(3, 220, 248);
+		}
+		50% {
+			box-shadow: 0 0 8px 6px rgb(3, 220, 248);
+		}
+		60% {
+			box-shadow: 0 0 7px 5px rgb(3, 220, 248);
+		}
+		70% {
+			box-shadow: 0 0 6px 4px rgb(3, 220, 248);
+		}
+		80% {
+			box-shadow: 0 0 5px 3px rgb(3, 220, 248);
+		}
+		90% {
+			box-shadow: 0 0 4px 2px rgb(3, 220, 248);
+		}
+		100% {
+			box-shadow: 0 0 3px 1px rgb(3, 220, 248);
+		}
 	}
 
 	.ball {
