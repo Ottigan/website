@@ -14,12 +14,26 @@
 
 	<body class="db-body">
 		<header>
-			<nav class="flex jc-sb ai-c">
-				<ul class="container flex jc-se ls-none">
-					<li><a id="dc" href="main.html">Daily Checking</a></li>
-					<li><a id="tracking" href="tracking.html">Tracking DB</a></li>
-					<li><a id="new-product" href="new.html">Add New Table/Casino</a></li>
-				</ul>
+			<nav>
+				<div id="burger-container">
+					<input type="checkbox" id="menu-checkbox" />
+					<div id="burger-menu">
+						<div class="burger-line"></div>
+						<div class="burger-line"></div>
+						<div class="burger-line"></div>
+					</div>
+					<ul class="nav-list">
+						<li><a id="dc" href="main.html">Daily Checking</a></li>
+						<li>
+							<a id="tracking" href="#" style="text-decoration: underline;"
+								>Tracking DB</a
+							>
+						</li>
+						<li>
+							<a id="new-product" href="new.html">Add New Table/Casino</a>
+						</li>
+					</ul>
+				</div>
 				<div class="navSlash"></div>
 				<form id="login-form" action="" method="">
 					<input

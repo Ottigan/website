@@ -14,12 +14,26 @@
 
 	<body>
 		<header>
-			<nav class="flex jc-sb ai-c">
-				<ul class="container flex jc-se ls-none">
-					<li><a id="dc" href="main.html">Daily Checking</a></li>
-					<li><a id="tracking" href="tracking.html">Tracking DB</a></li>
-					<li><a id="new-product" href="new.html">Add New Table/Casino</a></li>
-				</ul>
+			<nav>
+				<div id="burger-container">
+					<input type="checkbox" id="menu-checkbox" />
+					<div id="burger-menu">
+						<div class="burger-line"></div>
+						<div class="burger-line"></div>
+						<div class="burger-line"></div>
+					</div>
+					<ul class="nav-list">
+						<li>
+							<a id="dc" href="#" style="text-decoration: underline;"
+								>Daily Checking</a
+							>
+						</li>
+						<li><a id="tracking" href="tracking.html">Tracking DB</a></li>
+						<li>
+							<a id="new-product" href="new.html">Add New Table/Casino</a>
+						</li>
+					</ul>
+				</div>
 				<div class="navSlash"></div>
 				<form id="login-form" action="" method="">
 					<input
@@ -125,12 +139,14 @@
 						/>
 						<datalist id="casinos"> </datalist>
 					</div>
-					<div id="hidden-menu" class="flex ai-c jc-sb">
-						<button id="reset-button" type="button">Reset</button>
-						<button id="save-button" type="button">
-							Sort
-						</button>
-						<button id="undo-button" type="button">Undo</button>
+					<div style="position: absolute;">
+						<div id="hidden-menu" class="flex ai-c jc-sb">
+							<button id="reset-button" type="button">Reset</button>
+							<button id="save-button" type="button">
+								Sort
+							</button>
+							<button id="undo-button" type="button">Undo</button>
+						</div>
 					</div>
 					<button id="menu-toggle" type="button">Options</button>
 					<button id="0" class="submitButton highlight-this" type="button">

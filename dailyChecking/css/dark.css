@@ -8,201 +8,282 @@ body {
 	background-color: rgb(34, 34, 34);
 }
 
-form label {
-	color: rgb(211, 211, 211);
-	font-family: 'Roboto', sans-serif;
-	font-weight: 800;
+@media screen and (min-width: 1830px) {
+	.navSlash {
+		position: absolute;
+		right: 660px;
+		height: 2px;
+		width: 85px;
+		transform: rotate(135deg);
+		background-color: rgba(3, 220, 248, 0.884);
+	}
 }
 
-nav {
-	background-color: rgb(20, 20, 20);
-	font-size: x-large;
-	height: 80px;
-	border-bottom: 2px inset rgba(3, 220, 248, 0.884);
+@media screen and (min-width: 1500px) {
+	#burger-menu {
+		display: none;
+	}
+
+	#menu-checkbox {
+		display: none;
+	}
+
+	nav {
+		background-color: rgb(20, 20, 20);
+		font-size: x-large;
+		height: 60px;
+		border-bottom: 2px inset rgba(3, 220, 248, 0.884);
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
+
+	nav ul {
+		width: 1100px;
+		display: flex;
+		justify-content: space-evenly;
+		list-style: none;
+	}
+
+	nav a {
+		color: rgb(255, 255, 255);
+		text-decoration-line: none;
+		font-family: Georgia, 'Times New Roman', Times, serif;
+		padding: 5px 8px;
+	}
+
+	nav a:hover {
+		color: rgb(3, 220, 248);
+	}
+
+	nav form {
+		display: flex;
+		justify-content: flex-end;
+	}
+
+	#login-form {
+		position: absolute;
+		right: 200px;
+		width: 500px;
+		height: 29px;
+	}
+
+	#txt-user,
+	#txt-pass,
+	#login-button,
+	#logout-button {
+		display: none;
+		margin-left: 7px;
+	}
+
+	#login-button,
+	#logout-button {
+		padding: 0 3px;
+		font-family: 'Roboto', sans-serif;
+		font-size: 14px;
+		font-weight: 900 !important;
+		border: 1px solid black;
+		border-radius: 3px;
+	}
+
+	#switch {
+		opacity: 0;
+		position: absolute;
+	}
+
+	#switch:checked + .theme-label .ball {
+		transform: translateX(35px);
+	}
+
+	.theme-label {
+		position: relative;
+		height: 29px;
+		width: 64px;
+		right: 50px;
+		padding: 3px;
+		border-radius: 29px;
+		border: 2px solid rgb(3, 220, 248);
+		background-color: rgb(71, 71, 71);
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		box-shadow: 0 0 30px 5px rgba(3, 220, 248, 0.884),
+			0 0 1px 0px rgb(3, 220, 248) inset;
+	}
+
+	.ball {
+		position: absolute;
+		top: 2px;
+		left: 2px;
+		height: 21px;
+		width: 21px;
+		border-radius: 50%;
+		background-color: black;
+		transition: transform linear;
+	}
+
+	#sun,
+	#moon {
+		fill: rgb(255, 255, 255);
+	}
 }
 
-nav a {
-	color: white;
-	text-decoration-line: none;
-	font-family: Georgia, 'Times New Roman', Times, serif;
-	padding: 5px 8px;
-}
+@media screen and (max-width: 1499px) {
+	#burger-menu {
+		position: relative;
+		left: 15px;
+		display: flex;
+		flex-direction: column;
+	}
 
-nav a:hover {
-	color: rgb(3, 220, 248);
-}
+	#menu-checkbox {
+		position: absolute;
+		top: 5px;
+		left: 15px;
+		width: 60px;
+		height: 50px;
+		z-index: 1;
+		opacity: 0;
+	}
 
-.navSlash {
-	position: absolute;
-	right: 660px;
-	height: 2px;
-	width: 114px;
-	transform: rotate(135deg);
-	background-color: rgba(3, 220, 248, 0.884);
-}
+	#menu-checkbox:hover {
+		cursor: pointer;
+	}
 
-nav form {
-	display: flex;
-	justify-content: flex-end;
-}
+	#burger-container:hover .burger-line {
+		background-color: rgb(3, 220, 248);
+	}
 
-#login-form {
-	position: absolute;
-	right: 200px;
-	width: 500px;
-	height: 29px;
-}
+	.burger-line {
+		display: inline-block;
+		height: 5px;
+		width: 50px;
+		margin: 5px;
+		background-color: rgb(255, 255, 255);
+		border-radius: 3px;
+	}
 
-#txt-user,
-#txt-pass,
-#login-button,
-#logout-button {
-	display: none;
-	margin-left: 7px;
-}
+	nav {
+		position: relative;
+		background-color: rgb(20, 20, 20);
+		font-size: x-large;
+		height: 60px;
+		border-bottom: 2px inset rgba(3, 220, 248, 0.884);
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
 
-#login-button,
-#logout-button {
-	padding: 0 3px;
-	font-family: 'Roboto', sans-serif;
-	font-size: 14px;
-	font-weight: 900 !important;
-	border: 1px solid black;
-	border-radius: 3px;
-}
+	#menu-checkbox:checked ~ .nav-list {
+		transform: translateX(268px);
+	}
 
-#switch {
-	opacity: 0;
-	position: absolute;
-}
+	.nav-list {
+		display: inline-flex;
+		flex-direction: column;
+		justify-content: space-around;
+		list-style: none;
+		position: absolute;
+		top: 60px;
+		left: -270px;
+		height: 110px;
+		background-color: rgb(22, 22, 22);
+		border: 2px solid rgba(3, 220, 248, 0.884);
+		border-top: none;
+		transition: transform linear 0.2s;
+	}
 
-#switch:checked + .theme-label .ball {
-	transform: translateX(35px);
-}
+	nav a {
+		color: rgb(255, 255, 255);
+		text-decoration-line: none;
+		font-family: Georgia, 'Times New Roman', Times, serif;
+		padding: 5px 8px;
+	}
 
-.theme-label {
-	position: relative;
-	height: 29px;
-	width: 64px;
-	right: 50px;
-	padding: 3px;
-	border-radius: 29px;
-	border: 2px solid rgb(3, 220, 248);
-	background-color: rgb(71, 71, 71);
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	box-shadow: 0 0 30px 5px rgba(3, 220, 248, 0.884),
-		0 0 1px 0px rgb(3, 220, 248) inset;
-}
+	nav a:hover {
+		color: rgb(3, 220, 248);
+	}
 
-.ball {
-	position: absolute;
-	top: 2px;
-	left: 2px;
-	height: 21px;
-	width: 21px;
-	border-radius: 50%;
-	background-color: black;
-	transition: transform linear;
-}
+	nav form {
+		display: flex;
+		justify-content: flex-end;
+	}
 
-#sun,
-#moon {
-	fill: rgb(255, 255, 255);
+	#login-form {
+		position: absolute;
+		right: 200px;
+		width: 500px;
+		height: 29px;
+	}
+
+	#txt-user,
+	#txt-pass,
+	#login-button,
+	#logout-button {
+		display: none;
+		margin-left: 7px;
+	}
+
+	#login-button,
+	#logout-button {
+		padding: 0 3px;
+		font-family: 'Roboto', sans-serif;
+		font-size: 14px;
+		font-weight: 900 !important;
+		border: 1px solid black;
+		border-radius: 3px;
+	}
+
+	#switch {
+		opacity: 0;
+		position: absolute;
+	}
+
+	#switch:checked + .theme-label .ball {
+		transform: translateX(35px);
+	}
+
+	.theme-label {
+		position: relative;
+		height: 29px;
+		width: 64px;
+		right: 50px;
+		padding: 3px;
+		border-radius: 29px;
+		border: 2px solid rgb(3, 220, 248);
+		background-color: rgb(71, 71, 71);
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		box-shadow: 0 0 30px 5px rgba(3, 220, 248, 0.884),
+			0 0 1px 0px rgb(3, 220, 248) inset;
+	}
+
+	.ball {
+		position: absolute;
+		top: 2px;
+		left: 2px;
+		height: 21px;
+		width: 21px;
+		border-radius: 50%;
+		background-color: black;
+		transition: transform linear;
+	}
+
+	#sun,
+	#moon {
+		fill: rgb(255, 255, 255);
+	}
 }
 
 form div {
 	padding-right: 6px;
 }
 
-#db-body {
-	height: 100vh;
-}
-
-#db-form div input,
-#db-form button,
-#new-casino,
-#new-table,
-#add-table,
-#add-casino {
-	height: 35px;
-	font-size: larger;
-	border: 1px solid black;
-	background-color: rgb(231, 231, 231);
-	border-radius: 2px;
-}
-
-#tracking-from,
-#tracking-to {
-	width: 150px;
-}
-
-#tracking-name,
-#tracking-platform,
-#tracking-casino {
-	width: 200px;
-}
-
-#tracking-button {
-	width: 100px;
-	justify-content: center;
-}
-
-#db-data {
-	margin-top: 50px;
-	width: 1030px;
-}
-
-#db-data tbody {
-	background-color: rgb(46, 46, 46);
-	border: 1px double rgb(77, 77, 77);
-}
-
-tbody {
-	height: 600px;
-	overflow-y: scroll;
-}
-
-td:nth-child(even) {
-	margin-left: 2px;
-	margin-right: 2px;
-}
-
-td {
-	border: 1px solid rgb(63, 63, 63);
-	width: 20%;
-	font-family: 'Roboto', sans-serif;
-	font-size: 14px;
-	text-align: center;
-	margin-top: 2px;
-}
-
-tbody tr td:first-child {
-	margin-left: 2px;
-}
-
-tbody tr td:last-child {
-	margin-right: 2px;
-}
-
-thead tr td {
-	height: 34px;
-	margin-bottom: 5px;
-	font-size: larger;
+form label {
 	color: rgb(211, 211, 211);
-	background-color: rgb(0, 0, 0);
-	line-height: 34px;
-	font-weight: bolder;
-	border: 1px solid rgb(77, 77, 77);
-}
-
-thead tr td:first-child {
-	width: 209px;
-}
-
-thead tr td:last-child {
-	width: 226px;
+	font-family: 'Roboto', sans-serif;
+	font-weight: 800;
 }
 
 #main-row input,
@@ -225,12 +306,12 @@ thead tr td:last-child {
 }
 
 #hidden-menu {
-	position: absolute;
+	position: relative;
+	left: 248px;
+	bottom: 40px;
 	visibility: hidden;
 	width: 132px;
 	height: 26px;
-	left: 1195px;
-	top: 110px;
 	padding: 2px;
 	border: 1px solid rgb(255, 255, 255);
 	border-radius: 3px;
@@ -370,6 +451,95 @@ tbody tr:nth-child(odd) td,
 
 .container {
 	width: 1200px;
+}
+
+#db-body {
+	height: 100vh;
+}
+
+#db-form div input,
+#db-form button,
+#new-casino,
+#new-table,
+#add-table,
+#add-casino {
+	height: 35px;
+	font-size: larger;
+	border: 1px solid black;
+	background-color: rgb(231, 231, 231);
+	border-radius: 2px;
+}
+
+#tracking-from,
+#tracking-to {
+	width: 150px;
+}
+
+#tracking-name,
+#tracking-platform,
+#tracking-casino {
+	width: 200px;
+}
+
+#tracking-button {
+	width: 100px;
+	justify-content: center;
+}
+
+#db-data {
+	margin-top: 50px;
+	width: 1030px;
+}
+
+#db-data tbody {
+	background-color: rgb(46, 46, 46);
+	border: 1px double rgb(77, 77, 77);
+}
+
+tbody {
+	height: 600px;
+	overflow-y: scroll;
+}
+
+td:nth-child(even) {
+	margin-left: 2px;
+	margin-right: 2px;
+}
+
+td {
+	border: 1px solid rgb(63, 63, 63);
+	width: 20%;
+	font-family: 'Roboto', sans-serif;
+	font-size: 14px;
+	text-align: center;
+	margin-top: 2px;
+}
+
+tbody tr td:first-child {
+	margin-left: 2px;
+}
+
+tbody tr td:last-child {
+	margin-right: 2px;
+}
+
+thead tr td {
+	height: 34px;
+	margin-bottom: 5px;
+	font-size: larger;
+	color: rgb(211, 211, 211);
+	background-color: rgb(0, 0, 0);
+	line-height: 34px;
+	font-weight: bolder;
+	border: 1px solid rgb(77, 77, 77);
+}
+
+thead tr td:first-child {
+	width: 209px;
+}
+
+thead tr td:last-child {
+	width: 226px;
 }
 
 .flex {
