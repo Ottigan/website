@@ -149,6 +149,8 @@ firebase.auth().onAuthStateChanged(dailyCheckingUser => {
 									rowObjects[i].platform;
 								document.querySelector(`#casino-${ i }`).value =
 									rowObjects[i].casino;
+								document.querySelector(`#counter-${ i }`).innerHTML =
+									rowObjects[i].counter;
 							} else if (i > 0) {
 								const rowItem = document.createElement('form');
 								rowItem.classList.add('flex', 'jc-c', 'table-row');
@@ -230,7 +232,7 @@ logoutButton.addEventListener('click', function () {
 	});
 });
 
-function addToaster(text, type) {
+function newToaster(text, type) {
 	let SpanToaster = document.createElement('span');
 	SpanToaster.innerHTML = text;
 	if (type === 'success') {
@@ -243,7 +245,7 @@ function addToaster(text, type) {
 
 	setTimeout(function () {
 		SpanToaster.remove();
-	}, 2000);
+	}, 3000);
 }
 
 //Row addition and removal
@@ -431,22 +433,20 @@ const updateCounterAndOptions = event => {
 		let tableName = document.querySelector(`#table-${ target.id }`).value,
 			platform = document.querySelector(`#platform-${ target.id }`).value,
 			casino = document.querySelector(`#casino-${ target.id }`).value,
-			counter = document.querySelector(`#counter-${ target.id }`) || 'None',
-			goal = document.querySelector(`#target-${ target.id }`) || 'None';
+			counter = document.querySelector(`#counter-${ target.id }`),
+			goal = document.querySelector(`#target-${ target.id }`);
 
-		if (counter != 'None' && goal != 'None') {
-			let x = counter.innerHTML,
-				y = goal.value;
-			x++;
-			counter.innerHTML = x;
+		let x = counter.innerHTML,
+			y = goal.value;
+		x++;
+		counter.innerHTML = x;
 
-			if (x >= y) {
-				counter.classList.add('valid');
-				counter.classList.remove('invalid');
-			} else {
-				counter.classList.add('invalid');
-				counter.classList.remove('valid');
-			}
+		if (x >= y) {
+			counter.classList.add('valid');
+			counter.classList.remove('invalid');
+		} else {
+			counter.classList.add('invalid');
+			counter.classList.remove('valid');
 		}
 
 		//getting the entire firestore array, because you can't update specific values in the cloud
@@ -509,19 +509,12 @@ const updateCounterAndOptions = event => {
 							console.error(error);
 						});
 				}
-				let SpanToaster = document.createElement('span');
-				SpanToaster.innerHTML = 'Added';
-				SpanToaster.classList = 'successSubmitToaster';
-				header.append(SpanToaster);
-
-				setTimeout(function () {
-					SpanToaster.remove();
-				}, 2000);
+				newToaster('Added', 'success')
 			})
 			.catch(error => {
 				console.error(error);
 
-				addToaster('Added', 'success')
+				newToaster('Failed', 'success')
 			});
 
 		target.removeAttribute('disabled');
@@ -683,7 +676,7 @@ const updateCounterAndOptions = event => {
 					let lastTracked = tracking.pop();
 
 					//updating row counter value in the DB
-					let i = 1;
+					let i = 0;
 					do {
 						if (
 							lastTracked.name === rowObjects[i].name &&
@@ -708,7 +701,7 @@ const updateCounterAndOptions = event => {
 							let allCasinos = document.querySelectorAll('.casino-name');
 
 							//i = 1 to ignore main-row
-							let i = 1;
+							let i = 0;
 
 							do {
 								if (
@@ -731,21 +724,25 @@ const updateCounterAndOptions = event => {
 										matchedCounter.classList.remove('valid');
 									}
 
-									addToaster('Removed', 'success')
-
+									newToaster('Removed', 'success')
 									target.removeAttribute('disabled');
 									break;
 								}
 								i++;
 							} while (i < allGameTables.length - 1);
 						})
-						.catch(function (error) {
+						.catch(error => {
+							target.removeAttribute('disabled');
 							console.log(error);
 						});
 				})
 				.catch(error => {
+					target.removeAttribute('disabled');
 					console.log(error);
 				});
+		} else {
+			newToaster('Invalid', 'fail')
+			target.removeAttribute('disabled');
 		}
 	}
 };
