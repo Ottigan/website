@@ -13,7 +13,8 @@ const firebaseConfig = {
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 
-const loginForm = document.getElementById('login-form'),
+const header = document.querySelector('header'),
+	loginForm = document.getElementById('login-form'),
 	loginButton = document.getElementById('login-button'),
 	logoutButton = document.getElementById('logout-button'),
 	txtUser = document.getElementById('txt-user'),
@@ -405,6 +406,8 @@ const updateCounterAndOptions = event => {
 	}
 
 	if (target.classList.contains('submitButton') && event.type === 'click') {
+		target.setAttribute('disabled', 'disabled');
+
 		let tableName = document.querySelector(`#table-${target.id}`).value,
 			platform = document.querySelector(`#platform-${target.id}`).value,
 			casino = document.querySelector(`#casino-${target.id}`).value,
@@ -486,10 +489,29 @@ const updateCounterAndOptions = event => {
 							console.error(error);
 						});
 				}
+				let SpanToaster = document.createElement('span');
+				SpanToaster.innerHTML = 'Added';
+				SpanToaster.classList = 'successSubmitToaster';
+				header.append(SpanToaster);
+
+				setTimeout(function () {
+					SpanToaster.remove();
+				}, 2000);
 			})
 			.catch(error => {
 				console.error(error);
+
+				let SpanToaster = document.createElement('span');
+				SpanToaster.innerHTML = 'Failed';
+				SpanToaster.classList = 'failSubmitToaster';
+				header.append(SpanToaster);
+
+				setTimeout(function () {
+					SpanToaster.remove();
+				}, 2000);
 			});
+
+		target.removeAttribute('disabled');
 	} else if (target.id === 'save-button' && event.type === 'click') {
 		let newTableRowOrder = [];
 
