@@ -267,17 +267,18 @@ body {
 		justify-content: space-around;
 		list-style: none;
 		position: absolute;
-		top: 57.5px;
-		left: -267px;
+		top: 58px;
+		left: -287px;
 		height: 150px;
 		background-color: rgb(20, 20, 20);
 		border: 2px solid rgba(3, 220, 248, 0.884);
 		border-top: none;
+		box-shadow: -2px -4px 2px rgb(20, 20, 20);
 		transition: transform linear 0.2s;
 	}
 
 	#menu-checkbox:checked ~ .nav-list {
-		transform: translateX(265px);
+		transform: translateX(285px);
 	}
 
 	#login-form {
