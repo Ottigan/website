@@ -423,18 +423,16 @@ form label {
 
 #hidden-menu {
 	position: relative;
-	left: 248px;
+	left: 246px;
 	bottom: 40px;
 	visibility: hidden;
-	width: 132px;
-	height: 26px;
-	padding: 2px;
+	width: 136px;
+	height: 30px;
+	padding: 3px;
 	border: 1px solid rgb(255, 255, 255);
 	border-radius: 3px;
 	background-color: rgb(255, 255, 255);
 	z-index: 2;
-	opacity: 0;
-	transition: visibility 0.5s opacity 0.5s linear;
 }
 
 #hidden-menu button {

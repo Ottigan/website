@@ -735,12 +735,24 @@ const updateCounterAndOptions = event => {
 	}
 };
 
+const clearInputValues = event => {
+	if (
+		event.target.classList.contains('platform-name') ||
+		event.target.id === 'table-0'
+	) {
+		event.target.value = '';
+	}
+};
+
 //Added another eventlistener due to DOM Event delegation
 checkRows.addEventListener('click', updateCounterAndOptions);
 checkRows.addEventListener('keyup', updateCounterAndOptions);
 checkRows.addEventListener('mouseover', updateCounterAndOptions);
 checkRows.addEventListener('mouseout', updateCounterAndOptions);
 checkRows.addEventListener('change', updateCounterAndOptions);
+//using focusin over focus because the it bubbles through the checkRows,
+//thus there is no need to assign multiple elements
+checkRows.addEventListener('focusin', clearInputValues);
 
 popOutBtn.onclick = function () {
 	window.open(
@@ -766,9 +778,9 @@ themeToggle.onclick = function () {
 };
 
 menuToggleBtn.onclick = function () {
-	overlay.style.display = 'block';
-	hiddenMenu.style.visibility = 'visible';
-	hiddenMenu.style.opacity = 1;
+	// overlay.style.display = 'block';
+	hiddenMenu.style.visibility =
+		hiddenMenu.style.visibility != 'visible' ? 'visible' : 'hidden';
 	menuToggleBtn.blur();
 };
 
