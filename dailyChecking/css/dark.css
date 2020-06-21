@@ -404,15 +404,14 @@ form label {
 
 #checkrows input:hover,
 #checkrows button:hover {
-	border: 1px solid rgb(3, 220, 248) !important;
-	box-shadow: 0 0 2px 1px rgb(3, 220, 248);
+	box-shadow: 0 0 2px 2px rgb(3, 220, 248);
 }
 
 #checkrows input:focus,
 #checkrows button:focus {
 	outline: none;
 	border: 1px solid rgb(3, 220, 248) !important;
-	box-shadow: 0 0 2px 2px rgb(3, 220, 248), 0 0 1px 1px rgb(0, 0, 0) inset;
+	box-shadow: 0 0 2px 2px rgb(3, 220, 248), 0 0 3px 0px rgb(0, 0, 0) inset;
 }
 
 #main-row input,
@@ -615,7 +614,6 @@ tbody tr:nth-child(odd) td,
 }
 
 .highlighted-row {
-	border: 1px solid rgb(3, 220, 248) !important;
 	box-shadow: 0 0 2px 1px rgb(3, 220, 248);
 }
 
@@ -799,6 +797,5 @@ thead tr td:last-child {
 }
 
 button:hover {
-	border: 1px solid rgb(3, 220, 248) !important;
 	box-shadow: 0 0 2px 1px rgb(3, 220, 248);
 }
