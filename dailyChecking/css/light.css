@@ -330,6 +330,17 @@ form label {
 	color: rgb(39, 39, 39);
 }
 
+#checkrows input:hover,
+#checkrows button:hover {
+	box-shadow: 0 0 2px 1px rgb(0, 0, 0);
+}
+
+#checkrows input:focus,
+#checkrows button:focus {
+	outline: none;
+	box-shadow: 0 0 2px 2px rgb(0, 0, 0), 0 0 1px 0px rgb(0, 0, 0) inset;
+}
+
 #main-row input,
 #main-row button {
 	height: 35px;
@@ -450,7 +461,6 @@ form label {
 }
 
 .table-row {
-	width: 100%;
 	height: 20px;
 	margin-top: 3px;
 }
@@ -531,7 +541,7 @@ tbody tr:nth-child(odd) td,
 }
 
 .highlighted-row {
-	box-shadow: 0 0 1px 2px rgb(0, 0, 0);
+	box-shadow: 0 0 2px 1px rgb(0, 0, 0);
 }
 
 .container {
@@ -721,5 +731,5 @@ thead tr td:last-child {
 }
 
 button:hover {
-	box-shadow: 0 0 1px 2px rgb(0, 0, 0);
+	box-shadow: 0 0 2px 1px rgb(0, 0, 0);
 }

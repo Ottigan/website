@@ -5,7 +5,7 @@
 }
 
 body {
-	background-color: rgb(34, 34, 34);
+	background-color: rgb(22, 22, 22);
 }
 
 @media screen and (min-width: 1830px) {
@@ -402,6 +402,19 @@ form label {
 	font-weight: 800;
 }
 
+#checkrows input:hover,
+#checkrows button:hover {
+	border: 1px solid rgb(3, 220, 248) !important;
+	box-shadow: 0 0 2px 1px rgb(3, 220, 248);
+}
+
+#checkrows input:focus,
+#checkrows button:focus {
+	outline: none;
+	border: 1px solid rgb(3, 220, 248) !important;
+	box-shadow: 0 0 2px 2px rgb(3, 220, 248), 0 0 1px 1px rgb(0, 0, 0) inset;
+}
+
 #main-row input,
 #main-row button {
 	height: 35px;
@@ -522,7 +535,6 @@ form label {
 }
 
 .table-row {
-	width: 100%;
 	height: 20px;
 	margin-top: 3px;
 }
@@ -539,12 +551,6 @@ section form input[type='text'] {
 #checkrows button {
 	font-family: 'Roboto', sans-serif;
 	font-weight: 600;
-}
-
-#counter-0 {
-	width: 21px;
-	margin: 0 3px;
-	align-items: center;
 }
 
 section form input[type='number'] {
@@ -609,7 +615,8 @@ tbody tr:nth-child(odd) td,
 }
 
 .highlighted-row {
-	box-shadow: 0 0 1px 2px rgba(3, 220, 248, 0.884);
+	border: 1px solid rgb(3, 220, 248) !important;
+	box-shadow: 0 0 2px 1px rgb(3, 220, 248);
 }
 
 .container {
@@ -788,9 +795,10 @@ thead tr td:last-child {
 
 .valid {
 	background-color: rgb(1, 133, 1) !important;
-	box-shadow: 0 0 2px 2px rgba(3, 220, 248, 0.884) !important;
+	box-shadow: 0 0 2px 2px rgb(3, 220, 248) !important;
 }
 
 button:hover {
-	box-shadow: 0 0 1px 2px rgba(3, 220, 248, 0.884);
+	border: 1px solid rgb(3, 220, 248) !important;
+	box-shadow: 0 0 2px 1px rgb(3, 220, 248);
 }
