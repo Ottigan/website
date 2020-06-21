@@ -99,10 +99,13 @@ firebase.auth().onAuthStateChanged(dailyCheckingUser => {
 			case 'Y9MfBHGQ0YdC8k2XHBbQtgRQ6m72':
 				qa = '4chan.org/g/audio_god';
 				break;
+			case 'B1sw8yVyBfTuguw1tKizaHy7AFY2':
+				qa = 'Falcon';
+				break;
 			default:
 				qa = '';
 		}
-		greeting.innerText = `Welcome, ${qa}!`;
+		greeting.innerText = `Welcome, ${ qa }!`;
 		greeting.style.cssText =
 			'margin-bottom: -2px; align-self: flex-end; color: white; visibility: visible; font-family: Georgia, "Times New Roman", Times, serif; font-weight: 400';
 		logoutButton.before(greeting);
@@ -120,7 +123,7 @@ firebase.auth().onAuthStateChanged(dailyCheckingUser => {
 				.then(function (doc) {
 					tablesDB = doc.data().names;
 				})
-				.catch(function (error) {});
+				.catch(function (error) { });
 
 			//fetching data for dynamic Casino Name suggestions
 			db.collection('dailyChecking')
@@ -129,7 +132,7 @@ firebase.auth().onAuthStateChanged(dailyCheckingUser => {
 				.then(function (doc) {
 					casinosDB = doc.data().names;
 				})
-				.catch(function (error) {});
+				.catch(function (error) { });
 
 			//fetching data from all user profiles about the check performed
 			db.collection('dailyChecking')
@@ -221,8 +224,8 @@ trackingSearchBtn.onclick = function () {
 		csvButton.remove();
 	}
 
-	//Sorting in ascending order the gathered check objects Oldest => Newest
-	dbTracking.sort((a, b) => a.when.seconds - b.when.seconds);
+	//Sorting in descending order the gathered check objects Oldest => Newest
+	dbTracking.sort((a, b) => b.when.seconds - a.when.seconds);
 
 	dbTracking.forEach(object => {
 		let qa;
@@ -248,6 +251,9 @@ trackingSearchBtn.onclick = function () {
 			case 'Y9MfBHGQ0YdC8k2XHBbQtgRQ6m72':
 				qa = 'Antons Cinakovs';
 				break;
+			case 'B1sw8yVyBfTuguw1tKizaHy7AFY2':
+				qa = 'Vladislavs Sokols';
+				break;
 			default:
 				qa = '';
 		}
@@ -272,11 +278,11 @@ trackingSearchBtn.onclick = function () {
 
 		const rowElement = document.createElement('tr');
 		rowElement.classList.add('flex');
-		rowElement.innerHTML = `<td>${object.name}</td>
-								<td>${object.platform}</td>
-								<td>${object.casino}</td>
-								<td>${qa}</td>
-                                <td>${timeToString}</td>`;
+		rowElement.innerHTML = `<td>${ object.name }</td>
+								<td>${object.platform }</td>
+								<td>${object.casino }</td>
+								<td>${qa }</td>
+                                <td>${timeToString }</td>`;
 
 		if (
 			fromSeconds <= objectSeconds &&
@@ -286,7 +292,7 @@ trackingSearchBtn.onclick = function () {
 			trackingCasino.value === object.casino
 		) {
 			tableBody.append(rowElement);
-			csvArray += `\n${object.name};${object.platform};${object.casino};${qa};${timeToString}`;
+			csvArray += `\n${ object.name };${ object.platform };${ object.casino };${ qa };${ timeToString }`;
 		} else if (
 			fromSeconds <= objectSeconds &&
 			objectSeconds <= toSeconds &&
@@ -294,7 +300,7 @@ trackingSearchBtn.onclick = function () {
 			trackingPlatform.value === object.platform
 		) {
 			tableBody.append(rowElement);
-			csvArray += `\n${object.name};${object.platform};${object.casino};${qa};${timeToString}`;
+			csvArray += `\n${ object.name };${ object.platform };${ object.casino };${ qa };${ timeToString }`;
 		} else if (
 			fromSeconds <= objectSeconds &&
 			objectSeconds <= toSeconds &&
@@ -302,7 +308,7 @@ trackingSearchBtn.onclick = function () {
 			trackingPlatform.value === object.platform
 		) {
 			tableBody.append(rowElement);
-			csvArray += `\n${object.name};${object.platform};${object.casino};${qa};${timeToString}`;
+			csvArray += `\n${ object.name };${ object.platform };${ object.casino };${ qa };${ timeToString }`;
 		} else if (
 			fromSeconds <= objectSeconds &&
 			objectSeconds <= toSeconds &&
@@ -310,28 +316,28 @@ trackingSearchBtn.onclick = function () {
 			trackingCasino.value === object.casino
 		) {
 			tableBody.append(rowElement);
-			csvArray += `\n${object.name};${object.platform};${object.casino};${qa};${timeToString}`;
+			csvArray += `\n${ object.name };${ object.platform };${ object.casino };${ qa };${ timeToString }`;
 		} else if (
 			fromSeconds <= objectSeconds &&
 			objectSeconds <= toSeconds &&
 			trackingName.value === object.name
 		) {
 			tableBody.append(rowElement);
-			csvArray += `\n${object.name};${object.platform};${object.casino};${qa};${timeToString}`;
+			csvArray += `\n${ object.name };${ object.platform };${ object.casino };${ qa };${ timeToString }`;
 		} else if (
 			fromSeconds <= objectSeconds &&
 			objectSeconds <= toSeconds &&
 			trackingCasino.value === object.casino
 		) {
 			tableBody.append(rowElement);
-			csvArray += `\n${object.name};${object.platform};${object.casino};${qa};${timeToString}`;
+			csvArray += `\n${ object.name };${ object.platform };${ object.casino };${ qa };${ timeToString }`;
 		} else if (
 			fromSeconds <= objectSeconds &&
 			objectSeconds <= toSeconds &&
 			trackingPlatform.value === object.platform
 		) {
 			tableBody.append(rowElement);
-			csvArray += `\n${object.name};${object.platform};${object.casino};${qa};${timeToString}`;
+			csvArray += `\n${ object.name };${ object.platform };${ object.casino };${ qa };${ timeToString }`;
 		} else if (
 			fromSeconds <= objectSeconds &&
 			objectSeconds <= toSeconds &&
@@ -340,7 +346,7 @@ trackingSearchBtn.onclick = function () {
 			!trackingCasino.value
 		) {
 			tableBody.append(rowElement);
-			csvArray += `\n${object.name};${object.platform};${object.casino};${qa};${timeToString}`;
+			csvArray += `\n${ object.name };${ object.platform };${ object.casino };${ qa };${ timeToString }`;
 		}
 	});
 

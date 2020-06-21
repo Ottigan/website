@@ -86,10 +86,13 @@ firebase.auth().onAuthStateChanged(dailyCheckingUser => {
 			case 'Y9MfBHGQ0YdC8k2XHBbQtgRQ6m72':
 				qa = '4chan.org/g/audio_god';
 				break;
+			case 'B1sw8yVyBfTuguw1tKizaHy7AFY2':
+				qa = 'Falcon';
+				break;
 			default:
 				qa = '';
 		}
-		greeting.innerText = `Welcome, ${qa}!`;
+		greeting.innerText = `Welcome, ${ qa }!`;
 		greeting.style.cssText =
 			'margin-bottom: -2px; align-self: flex-end; color: white; visibility: visible; font-family: Georgia, "Times New Roman", Times, serif; font-weight: 400';
 		logoutButton.before(greeting);
@@ -176,7 +179,7 @@ const addTableListItem = item => {
 	// listItem.innerText = item;
 	listItem.style.paddingLeft = '2px';
 	listItem.classList.add('l-decoration', 'flex', 'jc-sb', 'ai-c', 'list-item');
-	listItem.innerHTML = `${item}<button type="button" style="width: 10%" class="remove">x</button>`;
+	listItem.innerHTML = `${ item }<button type="button" style="width: 10%" class="remove">x</button>`;
 	tableList.prepend(listItem);
 };
 
@@ -208,7 +211,7 @@ addCasinoBtn.onclick = function () {
 const addCasinoListItem = item => {
 	const listItem = document.createElement('li');
 	listItem.classList.add('l-decoration', 'flex', 'jc-sb', 'ai-c', 'list-item');
-	listItem.innerHTML = `${item}<button type="button" style="width: 10%" class="remove">x</button>`;
+	listItem.innerHTML = `${ item }<button type="button" style="width: 10%" class="remove">x</button>`;
 	casinoList.prepend(listItem);
 };
 

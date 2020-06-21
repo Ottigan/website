@@ -231,8 +231,8 @@ body {
 		justify-content: space-around;
 		list-style: none;
 		position: absolute;
-		top: 58px;
-		left: -270px;
+		top: 57.5px;
+		left: -267px;
 		height: 150px;
 		background-color: rgb(160, 160, 160);
 		border: 2px solid black;
@@ -241,7 +241,7 @@ body {
 	}
 
 	#menu-checkbox:checked ~ .nav-list {
-		transform: translateX(268px);
+		transform: translateX(265px);
 	}
 
 	#login-form {
@@ -549,7 +549,7 @@ tbody tr:nth-child(odd) td,
 }
 
 #db-body {
-	height: 100vh;
+	min-height: 100vh;
 }
 
 #db-form div input,
@@ -582,7 +582,7 @@ tbody tr:nth-child(odd) td,
 }
 
 #db-data {
-	margin-top: 50px;
+	margin: 50px 0;
 	width: 1030px;
 }
 
