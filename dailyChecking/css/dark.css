@@ -5,7 +5,7 @@
 }
 
 body {
-	background-color: rgb(22, 22, 22);
+	background-color: rgb(34, 34, 34);
 }
 
 @media screen and (min-width: 1830px) {
@@ -262,7 +262,7 @@ body {
 	}
 
 	#menu-checkbox:checked + #burger-menu .burger-line:nth-child(3) {
-		transform: rotate(135deg);
+		transform: rotate(-45deg);
 		position: absolute;
 		top: 0px;
 	}
@@ -274,16 +274,17 @@ body {
 		list-style: none;
 		position: absolute;
 		top: 58px;
-		left: -270px;
+		left: -287px;
 		height: 150px;
-		background-color: rgb(22, 22, 22);
+		background-color: rgb(20, 20, 20);
 		border: 2px solid rgba(3, 220, 248, 0.884);
 		border-top: none;
+		box-shadow: -2px -4px 2px rgb(20, 20, 20);
 		transition: transform linear 0.2s;
 	}
 
 	#menu-checkbox:checked ~ .nav-list {
-		transform: translateX(268px);
+		transform: translateX(285px);
 	}
 
 	#login-form {
@@ -410,14 +411,15 @@ form label {
 
 #checkrows input:hover,
 #checkrows button:hover {
-	box-shadow: 0 0 2px 2px rgb(3, 220, 248);
+	border: 1px solid rgb(3, 220, 248) !important;
+	box-shadow: 0 0 2px 1px rgb(3, 220, 248);
 }
 
 #checkrows input:focus,
 #checkrows button:focus {
 	outline: none;
 	border: 1px solid rgb(3, 220, 248) !important;
-	box-shadow: 0 0 2px 2px rgb(3, 220, 248), 0 0 3px 0px rgb(0, 0, 0) inset;
+	box-shadow: 0 0 2px 2px rgb(3, 220, 248), 0 0 2px 1px rgb(0, 0, 0) inset;
 }
 
 #main-row input,
@@ -487,7 +489,7 @@ form label {
 	border: 2px solid rgb(255, 255, 255);
 	box-shadow: 0 0 2px 1px rgb(255, 255, 255);
 	border-radius: 7px;
-	animation: opacity 1s;
+	animation: opacity 3s;
 }
 
 .failSubmitToaster {
@@ -507,15 +509,15 @@ form label {
 	border: 2px solid rgb(255, 255, 255);
 	box-shadow: 0 0 2px 1px rgb(255, 255, 255);
 	border-radius: 7px;
-	animation: opacity 1s;
+	animation: opacity 3s;
 }
 
 @keyframes opacity {
 	from {
-		opacity: 0;
+		opacity: 1;
 	}
 	to {
-		opacity: 1;
+		opacity: 0;
 	}
 }
 
@@ -620,6 +622,7 @@ tbody tr:nth-child(odd) td,
 }
 
 .highlighted-row {
+	border: 1px solid rgb(3, 220, 248) !important;
 	box-shadow: 0 0 2px 1px rgb(3, 220, 248);
 }
 
@@ -628,7 +631,7 @@ tbody tr:nth-child(odd) td,
 }
 
 #db-body {
-	height: 100vh;
+	min-height: 100vh;
 }
 
 #db-form div input,
@@ -661,7 +664,7 @@ tbody tr:nth-child(odd) td,
 }
 
 #db-data {
-	margin-top: 50px;
+	margin: 50px 0;
 	width: 1030px;
 }
 

@@ -11,7 +11,7 @@ body {
 @media screen and (min-width: 1830px) {
 	.navSlash {
 		position: absolute;
-		right: 680px;
+		right: 660px;
 		height: 2px;
 		width: 85px;
 		transform: rotate(135deg);
@@ -226,7 +226,7 @@ body {
 	}
 
 	#menu-checkbox:checked + #burger-menu .burger-line:nth-child(3) {
-		transform: rotate(135deg);
+		transform: rotate(-45deg);
 		position: absolute;
 		top: 0px;
 	}
@@ -237,17 +237,18 @@ body {
 		justify-content: space-around;
 		list-style: none;
 		position: absolute;
-		top: 58px;
-		left: -270px;
+		top: 60px;
+		left: -287px;
 		height: 150px;
 		background-color: rgb(160, 160, 160);
 		border: 2px solid black;
 		border-top: none;
+		box-shadow: -2px -4px 2px rgb(160, 160, 160);
 		transition: transform 0.2s;
 	}
 
 	#menu-checkbox:checked ~ .nav-list {
-		transform: translateX(268px);
+		transform: translateX(285px);
 	}
 
 	#login-form {
@@ -414,7 +415,7 @@ form label {
 	border: 2px solid rgb(0, 0, 0);
 	box-shadow: 0 0 2px 1px rgb(255, 255, 255);
 	border-radius: 7px;
-	animation: opacity 1s;
+	animation: opacity 3s;
 }
 
 .failSubmitToaster {
@@ -434,15 +435,15 @@ form label {
 	border: 2px solid rgb(0, 0, 0);
 	box-shadow: 0 0 2px 1px rgb(255, 255, 255);
 	border-radius: 7px;
-	animation: opacity 1s;
+	animation: opacity 3s;
 }
 
 @keyframes opacity {
 	from {
-		opacity: 0;
+		opacity: 1;
 	}
 	to {
-		opacity: 1;
+		opacity: 0;
 	}
 }
 
@@ -555,7 +556,7 @@ tbody tr:nth-child(odd) td,
 }
 
 #db-body {
-	height: 100vh;
+	min-height: 100vh;
 }
 
 #db-form div input,
@@ -588,7 +589,7 @@ tbody tr:nth-child(odd) td,
 }
 
 #db-data {
-	margin-top: 50px;
+	margin: 50px 0;
 	width: 1030px;
 }
 

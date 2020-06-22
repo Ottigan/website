@@ -102,10 +102,13 @@ firebase.auth().onAuthStateChanged(dailyCheckingUser => {
 			case 'Y9MfBHGQ0YdC8k2XHBbQtgRQ6m72':
 				qa = '4chan.org/g/audio_god';
 				break;
+			case 'B1sw8yVyBfTuguw1tKizaHy7AFY2':
+				qa = 'Falcon';
+				break;
 			default:
 				qa = '';
 		}
-		greeting.innerText = `Welcome, ${qa}!`;
+		greeting.innerText = `Welcome, ${ qa }!`;
 		greeting.style.cssText =
 			'margin-bottom: 3px; align-self: flex-end; color: white; visibility: visible; font-family: Georgia, "Times New Roman", Times, serif; font-weight: 400';
 		logoutButton.before(greeting);
@@ -122,7 +125,7 @@ firebase.auth().onAuthStateChanged(dailyCheckingUser => {
 				.then(function (doc) {
 					tablesDB = doc.data().names;
 				})
-				.catch(function (error) {});
+				.catch(function (error) { });
 
 			db.collection('dailyChecking')
 				.doc('casinos')
@@ -130,7 +133,7 @@ firebase.auth().onAuthStateChanged(dailyCheckingUser => {
 				.then(function (doc) {
 					casinosDB = doc.data().names;
 				})
-				.catch(function (error) {});
+				.catch(function (error) { });
 
 			db.collection('dailyChecking')
 				.doc(userUID)
@@ -142,42 +145,44 @@ firebase.auth().onAuthStateChanged(dailyCheckingUser => {
 						let i = 0;
 						do {
 							if (i === 0) {
-								document.querySelector(`#table-${i}`).value =
+								document.querySelector(`#table-${ i }`).value =
 									rowObjects[i].name;
-								document.querySelector(`#platform-${i}`).value =
+								document.querySelector(`#platform-${ i }`).value =
 									rowObjects[i].platform;
-								document.querySelector(`#casino-${i}`).value =
+								document.querySelector(`#casino-${ i }`).value =
 									rowObjects[i].casino;
+								document.querySelector(`#counter-${ i }`).innerHTML =
+									rowObjects[i].counter;
 							} else if (i > 0) {
 								const rowItem = document.createElement('form');
 								rowItem.classList.add('flex', 'jc-c', 'table-row');
 								rowItem.innerHTML = `<div>
 									<input type="text" name="table" pattern="[a-zA-Z0-9 ]+" list="names" class="inputElement highlight-this table-name" autocomplete="off" id="table-${
-										rowObjects[i].id
-									}" value="${rowObjects[i].name}"/>
+									rowObjects[i].id
+									}" value="${ rowObjects[i].name }"/>
 									</div>
 									<div>
 									<input id="platform-${
-										rowObjects[i].id
+									rowObjects[i].id
 									}" class="highlight-this platform-name" value="${
 									rowObjects[i].platform
-								}" name="platform" type="text" list="platforms" autocomplete="off"/>
+									}" name="platform" type="text" list="platforms" autocomplete="off"/>
 									</div>
 									<div>
 									<input type="text" name="casino" list="casinos" class="inputElement highlight-this casino-name" autocomplete="off" id="casino-${
-										rowObjects[i].id
-									}" value="${rowObjects[i].casino.toLowerCase()}"/>
+									rowObjects[i].id
+									}" value="${ rowObjects[i].casino.toLowerCase() }"/>
 									</div>
-									<span id="counter-${rowObjects[i].id}" class="counter highlight-this">${
+									<span id="counter-${rowObjects[i].id }" class="counter highlight-this">${
 									rowObjects[i].counter || 0
-								}</span>
+									}</span>
 									<input id="target-${
-										rowObjects[i].id
+									rowObjects[i].id
 									}" type="number" class="target highlight-this" value="${
 									rowObjects[i].target || 1
-								}" maxlength="2" min="1" max="12" />
+									}" maxlength="2" min="1" max="12" />
 									<button id="${
-										rowObjects[i].id
+									rowObjects[i].id
 									}" class="submitButton highlight-this" type="button">
 									Submit
 									</button>`;
@@ -228,6 +233,22 @@ logoutButton.addEventListener('click', function () {
 		document.querySelectorAll('.table-row').forEach(row => row.remove());
 	});
 });
+
+function newToaster(text, type) {
+	let SpanToaster = document.createElement('span');
+	SpanToaster.innerHTML = text;
+	if (type === 'success') {
+		SpanToaster.classList = 'successSubmitToaster';
+	} else if (type === 'fail') {
+		SpanToaster.classList = 'failSubmitToaster';
+	}
+
+	header.append(SpanToaster);
+
+	setTimeout(function () {
+		SpanToaster.remove();
+	}, 3000);
+}
 
 //Row addition and removal
 //Chaining promise requests from firestore to sync DB info with client info
@@ -284,17 +305,17 @@ const manipRows = event => {
 						const rowItem = document.createElement('form');
 						rowItem.classList.add('flex', 'jc-c', 'table-row');
 						rowItem.innerHTML = `<div>
-							<input type="text" name="table" list="names" class="inputElement" autocomplete="off" pattern="[a-zA-Z0-9]+" id="table-${id}" />
+							<input type="text" name="table" list="names" class="inputElement" autocomplete="off" pattern="[a-zA-Z0-9]+" id="table-${id }" />
 							</div>
 							<div>
-							<input id="platform-${id}" name="platform" type="text" list="platforms" autocomplete="off"/>
+							<input id="platform-${id }" name="platform" type="text" list="platforms" autocomplete="off"/>
 							</div>
 							<div>
-							<input type="text" name="casino" id="casino-${id}" list="casinos" class="inputElement" autocomplete="off"/>
+							<input type="text" name="casino" id="casino-${id }" list="casinos" class="inputElement" autocomplete="off"/>
 							</div>
-							<span id="counter-${id}" class="counter highlight-this invalid">0</span>
-							<input id="target-${id}" type="number" class="target highlight-this" value="1" maxlength="2" min="0" max="12" />
-							<button id="${id}" class="submitButton" type="button">
+							<span id="counter-${id }" class="counter highlight-this invalid">0</span>
+							<input id="target-${id }" type="number" class="target highlight-this" value="1" maxlength="2" min="0" max="12" />
+							<button id="${id }" class="submitButton" type="button">
 							Submit
 							</button>`;
 						rowManip.before(rowItem);
@@ -382,18 +403,19 @@ const updateCounterAndOptions = event => {
 
 	if (target.classList.contains('highlight-this')) {
 		let indexID = target.id.substring(target.id.indexOf('-') + 1),
-			tableName = document.querySelector(`#table-${indexID}`),
-			platform = document.querySelector(`#platform-${indexID}`),
-			casino = document.querySelector(`#casino-${indexID}`),
-			counter = document.querySelector(`#counter-${indexID}`) || menuToggleBtn,
+			tableName = document.querySelector(`#table-${ indexID }`),
+			platform = document.querySelector(`#platform-${ indexID }`),
+			casino = document.querySelector(`#casino-${ indexID }`),
+			counter = document.querySelector(`#counter-${ indexID }`) || menuToggleBtn,
 			targetNumber =
-				document.querySelector(`#target-${indexID}`) || menuToggleBtn,
-			submitButton = document.getElementById(`${indexID}`);
+				document.querySelector(`#target-${ indexID }`) || menuToggleBtn,
+			submitButton = document.getElementById(`${ indexID }`);
 
 		if (event.type === 'mouseover') {
 			tableName.classList.add('highlighted-row');
 			platform.classList.add('highlighted-row');
 			casino.classList.add('highlighted-row');
+			counter.classList.add('highlighted-row');
 			counter.classList.add('highlighted-row');
 			targetNumber.classList.add('highlighted-row');
 			submitButton.classList.add('highlighted-row');
@@ -410,25 +432,23 @@ const updateCounterAndOptions = event => {
 	if (target.classList.contains('submitButton') && event.type === 'click') {
 		target.setAttribute('disabled', 'disabled');
 
-		let tableName = document.querySelector(`#table-${target.id}`).value,
-			platform = document.querySelector(`#platform-${target.id}`).value,
-			casino = document.querySelector(`#casino-${target.id}`).value,
-			counter = document.querySelector(`#counter-${target.id}`) || 'None',
-			goal = document.querySelector(`#target-${target.id}`) || 'None';
+		let tableName = document.querySelector(`#table-${ target.id }`).value,
+			platform = document.querySelector(`#platform-${ target.id }`).value,
+			casino = document.querySelector(`#casino-${ target.id }`).value,
+			counter = document.querySelector(`#counter-${ target.id }`),
+			goal = document.querySelector(`#target-${ target.id }`);
 
-		if (counter != 'None' && goal != 'None') {
-			let x = counter.innerHTML,
-				y = goal.value;
-			x++;
-			counter.innerHTML = x;
+		let x = counter.innerHTML,
+			y = goal.value;
+		x++;
+		counter.innerHTML = x;
 
-			if (x >= y) {
-				counter.classList.add('valid');
-				counter.classList.remove('invalid');
-			} else {
-				counter.classList.add('invalid');
-				counter.classList.remove('valid');
-			}
+		if (x >= y) {
+			counter.classList.add('valid');
+			counter.classList.remove('invalid');
+		} else {
+			counter.classList.add('invalid');
+			counter.classList.remove('valid');
 		}
 
 		//getting the entire firestore array, because you can't update specific values in the cloud
@@ -491,26 +511,12 @@ const updateCounterAndOptions = event => {
 							console.error(error);
 						});
 				}
-				let SpanToaster = document.createElement('span');
-				SpanToaster.innerHTML = 'Added';
-				SpanToaster.classList = 'successSubmitToaster';
-				header.append(SpanToaster);
-
-				setTimeout(function () {
-					SpanToaster.remove();
-				}, 2000);
+				newToaster('Added', 'success')
 			})
 			.catch(error => {
 				console.error(error);
 
-				let SpanToaster = document.createElement('span');
-				SpanToaster.innerHTML = 'Failed';
-				SpanToaster.classList = 'failSubmitToaster';
-				header.append(SpanToaster);
-
-				setTimeout(function () {
-					SpanToaster.remove();
-				}, 2000);
+				newToaster('Failed', 'success')
 			});
 
 		target.removeAttribute('disabled');
@@ -564,17 +570,17 @@ const updateCounterAndOptions = event => {
 			.then(function (doc) {
 				let rowObjects = doc.data().rowObjects;
 				rowObjects.forEach(object => {
-					object.name = document.getElementById(`table-${object.id}`).value;
+					object.name = document.getElementById(`table-${ object.id }`).value;
 					object.platform = document.getElementById(
-						`platform-${object.id}`
+						`platform-${ object.id }`
 					).value;
-					object.casino = document.getElementById(`casino-${object.id}`).value;
+					object.casino = document.getElementById(`casino-${ object.id }`).value;
 					if (object.id > 0) {
 						object.counter = Number.parseInt(
-							document.getElementById(`counter-${object.id}`).innerHTML
+							document.getElementById(`counter-${ object.id }`).innerHTML
 						);
 						object.target = Number.parseInt(
-							document.getElementById(`target-${object.id}`).value
+							document.getElementById(`target-${ object.id }`).value
 						);
 					}
 				});
@@ -636,8 +642,8 @@ const updateCounterAndOptions = event => {
 			});
 	} else if (target.classList.contains('target') && event.type === 'change') {
 		let counter = document.getElementById(
-				`counter-${target.id.substring(target.id.indexOf('-') + 1)}`
-			),
+			`counter-${ target.id.substring(target.id.indexOf('-') + 1) }`
+		),
 			goal = target;
 
 		let x = Number.parseInt(counter.innerHTML),
@@ -672,7 +678,7 @@ const updateCounterAndOptions = event => {
 					let lastTracked = tracking.pop();
 
 					//updating row counter value in the DB
-					let i = 1;
+					let i = 0;
 					do {
 						if (
 							lastTracked.name === rowObjects[i].name &&
@@ -697,7 +703,7 @@ const updateCounterAndOptions = event => {
 							let allCasinos = document.querySelectorAll('.casino-name');
 
 							//i = 1 to ignore main-row
-							let i = 1;
+							let i = 0;
 
 							do {
 								if (
@@ -705,9 +711,9 @@ const updateCounterAndOptions = event => {
 									lastTracked.platform === allPlatforms[i].value &&
 									lastTracked.casino === allCasinos[i].value
 								) {
-									let matchedCounter = document.getElementById(`counter-${i}`);
+									let matchedCounter = document.getElementById(`counter-${ i }`);
 									let matchedCountersTarget = document.getElementById(
-										`target-${i}`
+										`target-${ i }`
 									);
 
 									matchedCounter.innerHTML--;
@@ -720,27 +726,36 @@ const updateCounterAndOptions = event => {
 										matchedCounter.classList.remove('valid');
 									}
 
+									newToaster('Removed', 'success')
 									target.removeAttribute('disabled');
 									break;
 								}
 								i++;
 							} while (i < allGameTables.length - 1);
 						})
-						.catch(function (error) {
+						.catch(error => {
+							target.removeAttribute('disabled');
 							console.log(error);
 						});
 				})
 				.catch(error => {
+					target.removeAttribute('disabled');
 					console.log(error);
 				});
+		} else {
+			newToaster('Invalid', 'fail')
+			target.removeAttribute('disabled');
 		}
 	}
 };
 
 const clearInputValues = event => {
 	if (
-		event.target.classList.contains('platform-name') ||
-		event.target.id === 'table-0'
+		event.target.classList.contains('platform-name')
+		&& event.target.id !== 'platform-0'
+		|| event.target.id === 'table-0'
+		|| event.target.classList.contains('casino-name')
+		&& event.target.id !== 'casino-0'
 	) {
 		event.target.value = '';
 	}
