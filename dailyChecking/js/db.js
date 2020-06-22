@@ -17,10 +17,12 @@ const styleSheet = document.getElementById('style'),
 	themeSwitch = document.querySelector('#switch'),
 	theBall = document.querySelector('.ball'),
 	loginForm = document.getElementById('login-form'),
-	loginButton = document.getElementById('login-button'),
-	logoutButton = document.getElementById('logout-button'),
+	emailDiv = document.getElementById('email-div'),
+	passwordDiv = document.getElementById('password-div'),
 	txtUser = document.getElementById('txt-user'),
 	txtPass = document.getElementById('txt-pass'),
+	loginButton = document.getElementById('login-button'),
+	logoutButton = document.getElementById('logout-button'),
 	trackingFrom = document.querySelector('#tracking-from'),
 	trackingTo = document.querySelector('#tracking-to'),
 	trackingName = document.querySelector('#tracking-name'),
@@ -104,12 +106,12 @@ firebase.auth().onAuthStateChanged(dailyCheckingUser => {
 		}
 		greeting.innerText = `Welcome, ${qa}!`;
 		greeting.style.cssText =
-			'margin-bottom: -2px; align-self: flex-end; color: white; visibility: visible; font-family: Georgia, "Times New Roman", Times, serif; font-weight: 400';
+			'margin-bottom: 3px; align-self: flex-end; color: white; visibility: visible; font-family: Georgia, "Times New Roman", Times, serif; font-weight: 400';
 		logoutButton.before(greeting);
 
 		logoutButton.style.display = 'inline';
-		txtUser.style.display = 'none';
-		txtPass.style.display = 'none';
+		emailDiv.style.display = 'none';
+		passwordDiv.style.display = 'none';
 		loginButton.style.display = 'none';
 
 		//fetching data for dynamic Table Name suggestions
@@ -154,8 +156,8 @@ firebase.auth().onAuthStateChanged(dailyCheckingUser => {
 		getData();
 	} else {
 		logoutButton.style.display = 'none';
-		txtUser.style.display = 'inline';
-		txtPass.style.display = 'inline';
+		emailDiv.style.display = 'flex';
+		passwordDiv.style.display = 'flex';
 		loginButton.style.display = 'inline';
 	}
 });
