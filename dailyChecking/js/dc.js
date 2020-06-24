@@ -45,8 +45,12 @@ let casinosDB;
 let inputElements = document.querySelectorAll('.inputElement');
 
 //Add login event
+<<<<<<< HEAD
 loginForm.addEventListener('submit', event => {
 	event.preventDefault();
+=======
+loginButton.addEventListener('click', function () {
+>>>>>>> 2a22ac25a43b3a3724ab3ca10b984dcec61eb01a
 	const email = txtUser.value;
 	const pass = txtPass.value;
 	const authPromise = auth.signInWithEmailAndPassword(email, pass);
