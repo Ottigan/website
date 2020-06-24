@@ -103,6 +103,8 @@ firebase.auth().onAuthStateChanged(dailyCheckingUser => {
 				break;
 			case 'B1sw8yVyBfTuguw1tKizaHy7AFY2':
 				qa = 'Falcon';
+			case 'sBQRKGFdyiXkTgkxOJzEEUfF8m32':
+				qa = 'Mr.Ponytail';
 				break;
 			default:
 				qa = '';
@@ -256,6 +258,8 @@ trackingSearchBtn.onclick = function () {
 			case 'B1sw8yVyBfTuguw1tKizaHy7AFY2':
 				qa = 'Vladislavs Sokols';
 				break;
+			case 'sBQRKGFdyiXkTgkxOJzEEUfF8m32':
+				qa = 'Marks Lubinskis';
 			default:
 				qa = '';
 		}

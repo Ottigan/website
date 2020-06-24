@@ -45,7 +45,8 @@ let casinosDB;
 let inputElements = document.querySelectorAll('.inputElement');
 
 //Add login event
-loginButton.addEventListener('click', function () {
+loginForm.addEventListener('submit', event => {
+	event.preventDefault();
 	const email = txtUser.value;
 	const pass = txtPass.value;
 	const authPromise = auth.signInWithEmailAndPassword(email, pass);
@@ -104,6 +105,9 @@ firebase.auth().onAuthStateChanged(dailyCheckingUser => {
 				break;
 			case 'B1sw8yVyBfTuguw1tKizaHy7AFY2':
 				qa = 'Falcon';
+				break;
+			case 'sBQRKGFdyiXkTgkxOJzEEUfF8m32':
+				qa = 'Mr.Ponytail';
 				break;
 			default:
 				qa = '';
@@ -438,18 +442,7 @@ const updateCounterAndOptions = event => {
 			counter = document.querySelector(`#counter-${ target.id }`),
 			goal = document.querySelector(`#target-${ target.id }`);
 
-		let x = counter.innerHTML,
-			y = goal.value;
-		x++;
-		counter.innerHTML = x;
-
-		if (x >= y) {
-			counter.classList.add('valid');
-			counter.classList.remove('invalid');
-		} else {
-			counter.classList.add('invalid');
-			counter.classList.remove('valid');
-		}
+		let counterNumber = Number.parseInt(counter.innerHTML) + 1;
 
 		//getting the entire firestore array, because you can't update specific values in the cloud
 		db.collection('dailyChecking')
@@ -465,7 +458,7 @@ const updateCounterAndOptions = event => {
 					update.casino = casino;
 					update.name = tableName;
 					update.platform = platform;
-					update.counter = Number.parseInt(counter.innerHTML);
+					update.counter = counterNumber;
 					update.target = Number.parseInt(goal.value);
 					rowObjects[target.id] = update;
 					db.collection('dailyChecking')
@@ -483,7 +476,20 @@ const updateCounterAndOptions = event => {
 						})
 						.then(function () {
 							console.log('Tracking DB updated');
+							let x = counter.innerHTML,
+								y = goal.value;
+							x++;
+							counter.innerHTML = x;
+
+							if (x >= y) {
+								counter.classList.add('valid');
+								counter.classList.remove('invalid');
+							} else {
+								counter.classList.add('invalid');
+								counter.classList.remove('valid');
+							}
 							target.blur();
+							newToaster('Added', 'success')
 						})
 						.catch(function (error) {
 							console.error(error);
@@ -505,18 +511,17 @@ const updateCounterAndOptions = event => {
 							rowcount: rowcount,
 						})
 						.then(function () {
-							console.log('Tracking DB updated');
+							console.log('Row updated');
+							newToaster('Error', 'fail')
 						})
 						.catch(function (error) {
 							console.error(error);
 						});
 				}
-				newToaster('Added', 'success')
 			})
 			.catch(error => {
 				console.error(error);
-
-				newToaster('Failed', 'success')
+				newToaster('Failed', 'fail')
 			});
 
 		target.removeAttribute('disabled');
