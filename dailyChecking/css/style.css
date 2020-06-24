@@ -4,32 +4,115 @@
 	box-sizing: border-box;
 }
 
+body {
+	background-color: rgb(24, 24, 24);
+}
+
+form label {
+	color: white;
+}
+
+nav {
+	background-color: rgb(33, 33, 33);
+	font-size: x-large;
+	height: 80px;
+}
+
+#login-form {
+	position: relative;
+	right: 50px;
+	width: 500px;
+}
+
 nav a {
 	color: white;
 	text-decoration-line: none;
-	font-family: 'Indie Flower', cursive;
+	font-family: Georgia, 'Times New Roman', Times, serif;
+	padding: 5px 8px;
 }
 
 nav a:hover {
-	background-color: darkcyan;
+	box-shadow: 0 0 2px 2px rgba(3, 220, 248, 0.884);
+	border-radius: 5px;
+}
+
+.navSlash {
+	position: relative;
+	right: 100px;
+	height: 1px;
+	width: 114px;
+	transform: rotate(135deg);
+	background-color: rgba(3, 220, 248, 0.884);
+}
+
+nav form {
+	display: flex;
+	justify-content: flex-end;
+}
+
+#txt-user,
+#txt-pass,
+#login-button,
+#logout-button {
+	display: none;
+	margin-left: 7px;
+}
+
+#login-button,
+#logout-button {
+	padding: 0 3px;
+	font-family: 'Roboto', sans-serif;
+	font-size: 14px;
+	font-weight: 900 !important;
+	border: 1px solid black;
+	border-radius: 3px;
+}
+
+.navBottomBorder {
+	height: 1px;
+	background-color: rgba(3, 220, 248, 0.884);
 }
 
 form div {
-	margin: 0 3px;
-}
-
-#db-form div input,
-button {
-	height: 24px;
+	padding-right: 6px;
 }
 
 #db-body {
 	height: 100vh;
 }
 
+#db-form div input,
+#db-form button,
+#new-casino,
+#new-table,
+#add-table,
+#add-casino {
+	height: 35px;
+	font-size: larger;
+	border: 1px solid black;
+	background-color: rgb(231, 231, 231);
+	border-radius: 2px;
+}
+
+#tracking-from,
+#tracking-to {
+	width: 150px;
+}
+
+#tracking-name,
+#tracking-platform,
+#tracking-casino {
+	width: 200px;
+}
+
+#tracking-button {
+	width: 100px;
+	justify-content: center;
+}
+
 #db-data {
 	margin-top: 50px;
-	width: 878px;
+	width: 1030px;
 }
 
 tbody {
@@ -38,7 +121,9 @@ tbody {
 }
 
 tbody tr:nth-child(odd) td {
-	background-color: rgb(182, 182, 182);
+	background-color: rgb(88, 88, 88);
+	color: rgb(255, 255, 255);
+	border: 1px solid rgb(148, 142, 142);
 }
 
 td:nth-child(even) {
@@ -47,25 +132,47 @@ td:nth-child(even) {
 }
 
 td {
-	border: 1px solid black;
+	border: 1px solid rgb(63, 63, 63);
 	width: 20%;
 	text-align: center;
 	margin-bottom: 2px;
 }
 
+thead tr td {
+	height: 34px;
+	margin-bottom: 5px;
+	font-size: larger;
+	color: rgb(114, 114, 114);
+	line-height: 34px;
+	font-weight: bolder;
+}
+
 thead tr td:last-child {
-	width: 193px;
+	width: 224px;
 }
 
 #row-manipulator {
 	width: 100%;
-	padding-left: 270px;
+	padding-left: 219px;
 	margin-top: 5px;
 	margin-bottom: 20px;
 }
 
 #row-manipulator button {
+	font-family: 'Roboto', sans-serif;
+	font-size: 13px;
+	font-weight: 900 !important;
+	background-color: white !important;
+	color: black !important;
+	border: 1px solid black;
+	border-radius: 3px;
 	margin-left: 4px;
+	padding: 0 3px;
+	height: 25px;
+}
+
+#row-manipulator button:hover {
+	box-shadow: 0 0 3px 2px rgba(3, 220, 248, 0.884) !important;
 }
 
 #main-row {
@@ -78,12 +185,72 @@ thead tr td:last-child {
 	margin-top: 3px;
 }
 
+section form input[type='text'] {
+	border-radius: 2px;
+	text-indent: 2px;
+	height: 20px;
+	width: 200px;
+}
+
+#checkrows input,
+#checkrows span,
+#checkrows button {
+	font-family: 'Roboto', sans-serif;
+	font-weight: 600;
+}
+
+#main-row {
+	align-items: flex-end;
+}
+
+#counter-reset-container {
+	width: 27px;
+	padding: 0;
+}
+
+#reset-button {
+	height: 20px;
+	margin: 0 3px 5px 3px;
+	font-size: 13px;
+	padding-top: 1px;
+	background-color: white !important;
+	color: black !important;
+	border-radius: 3px;
+}
+
+#counter-0 {
+	width: 21px;
+	margin: 0 3px;
+	align-items: center;
+}
+
+#target-save-container {
+	width: 46px;
+	padding: 0;
+}
+
+#save-button {
+	width: 40px;
+	height: 20px;
+	margin: 0 0 5px 3px;
+	font-family: 'Roboto', sans-serif;
+	font-size: 12px;
+	font-weight: 900 !important;
+	background-color: white !important;
+	color: black !important;
+	border-radius: 3px;
+}
+
+section form input[type='number'] {
+	text-indent: 2px;
+	font-size: 15px;
+}
+
 .counter {
 	height: 100%;
 	width: 21px;
 	align-self: flex-end;
 	text-align: center;
-	border: 1px solid rgb(138, 138, 138);
 	padding: 0 2px;
 	margin: 0 3px;
 	font-size: 15px;
@@ -99,36 +266,44 @@ thead tr td:last-child {
 
 .submitButton {
 	height: 100%;
-	width: 50px;
+	width: 60px;
 	align-self: flex-end;
 	margin-left: 3px;
 }
 
-#main-row .counter,
-.target,
-.submitButton {
-	height: 20px;
+#checkrows form:nth-child(odd) input,
+#checkrows form:nth-child(odd) span,
+#checkrows form:nth-child(odd) button,
+tbody tr:nth-child(even) td,
+.l-decoration:nth-child(even) {
+	background-color: rgb(22, 22, 22);
+	color: rgb(170, 170, 170);
+	border: 1px solid rgb(63, 63, 63);
 }
 
-div form:nth-child(odd) input[type='text'] {
-	background-color: white;
-	border: 1px solid rgb(63, 63, 63);
-	border-radius: 2px;
-	height: 20px;
-	text-indent: 2px;
+#checkrows form:nth-child(even) input,
+#checkrows form:nth-child(even) span,
+#checkrows form:nth-child(even) button,
+tbody tr:nth-child(odd) td,
+.l-decoration:nth-child(odd) {
+	background-color: rgb(110, 110, 110);
+	color: rgb(0, 0, 0);
+	border: 1px solid rgb(148, 142, 142);
 }
 
-div form:nth-child(even) input[type='text'] {
-	background-color: rgb(118, 118, 118);
-	color: white;
-	border: 1px solid rgb(63, 63, 63);
+#checkrows form span {
+	color: rgb(201, 201, 201) !important;
+	border: 1px solid rgb(148, 142, 142) !important;
+}
+
+.highlight-this {
 	border-radius: 2px;
 	height: 20px;
-	text-indent: 2px;
+	border: 1px solid black;
 }
 
 .highlighted-row {
-	border-color: aqua !important;
+	box-shadow: 0 0 2px 2px rgba(3, 220, 248, 0.884) !important;
 }
 
 .location {
@@ -141,6 +316,10 @@ div form:nth-child(even) input[type='text'] {
 
 .flex {
 	display: flex;
+}
+
+.flex-grow {
+	flex-grow: 1;
 }
 
 .vertical {
@@ -205,14 +384,19 @@ div form:nth-child(even) input[type='text'] {
 	padding-left: 2px;
 }
 
-.invalid {
+.empty-value {
 	outline-color: red !important;
 }
 
-.valid {
-	background-color: rgb(126, 189, 126);
+.invalid {
+	background-color: rgb(151, 0, 0) !important;
 }
 
-.flex-grow {
-	flex-grow: 1;
+.valid {
+	background-color: rgb(1, 133, 1) !important;
+	box-shadow: 0 0 2px 2px rgba(3, 220, 248, 0.884) !important;
+}
+
+button:hover {
+	box-shadow: 0 0 2px 2px rgba(3, 220, 248, 0.884) !important;
 }
