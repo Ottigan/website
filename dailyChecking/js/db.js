@@ -37,12 +37,13 @@ const styleSheet = document.getElementById('style'),
 	auth = firebase.auth(),
 	db = firebase.firestore();
 
-let userUID;
-let dbTracking;
-let tablesDB;
-let casinosDB;
-let csvArray = '';
-let csvButton;
+let userUID,
+	dbTracking,
+	tablesDB,
+	casinosDB,
+	csvButton,
+	online = false,
+	csvArray = '';
 
 //Add login event
 loginButton.addEventListener('click', function () {
@@ -109,7 +110,7 @@ firebase.auth().onAuthStateChanged(dailyCheckingUser => {
 			default:
 				qa = '';
 		}
-		greeting.innerText = `Welcome, ${ qa }!`;
+		greeting.innerText = `Welcome, ${qa}!`;
 		greeting.style.cssText =
 			'margin-bottom: 3px; align-self: flex-end; color: white; visibility: visible; font-family: Georgia, "Times New Roman", Times, serif; font-weight: 400';
 		logoutButton.before(greeting);
@@ -120,50 +121,34 @@ firebase.auth().onAuthStateChanged(dailyCheckingUser => {
 		loginButton.style.display = 'none';
 
 		//fetching data for dynamic Table Name suggestions
-		const getData = function () {
-			db.collection('dailyChecking')
-				.doc('tables')
-				.get()
-				.then(function (doc) {
-					tablesDB = doc.data().names;
-				})
-				.catch(function (error) { });
+		db.collection('dailyChecking')
+			.doc('tables')
+			.get()
+			.then(function (doc) {
+				tablesDB = doc.data().names;
+			})
+			.catch(function (error) {
+				console.error(error);
+			});
 
-			//fetching data for dynamic Casino Name suggestions
-			db.collection('dailyChecking')
-				.doc('casinos')
-				.get()
-				.then(function (doc) {
-					casinosDB = doc.data().names;
-				})
-				.catch(function (error) { });
+		//fetching data for dynamic Casino Name suggestions
+		db.collection('dailyChecking')
+			.doc('casinos')
+			.get()
+			.then(function (doc) {
+				casinosDB = doc.data().names;
+			})
+			.catch(function (error) {
+				console.error(error);
+			});
 
-			//fetching data from all user profiles about the check performed
-			db.collection('dailyChecking')
-				.where('rowcount', '>=', 0)
-				.get()
-				.then(function (querySnapshot) {
-					querySnapshot.forEach(function (doc) {
-						// doc.data() is never undefined for query doc snapshots
-						if (doc.data().hasOwnProperty('tracking')) {
-							if (!dbTracking) {
-								dbTracking = doc.data().tracking;
-							} else {
-								dbTracking = dbTracking.concat(doc.data().tracking);
-							}
-						}
-					});
-				})
-				.catch(function (error) {
-					console.log('Error getting documents: ', error);
-				});
-		};
-		getData();
+		online = true;
 	} else {
 		logoutButton.style.display = 'none';
 		emailDiv.style.display = 'flex';
 		passwordDiv.style.display = 'flex';
 		loginButton.style.display = 'inline';
+		online = false;
 	}
 });
 
@@ -221,151 +206,185 @@ dbForm.addEventListener('click', updateOptions);
 dbForm.addEventListener('keyup', updateOptions);
 
 trackingSearchBtn.onclick = function () {
+	let loadingBar = document.createElement('div');
+	loadingBar.id = 'loading-bar';
+	loadingBar.innerHTML = '<div id="loading-body"></div>';
+	dbData.append(loadingBar);
+	setTimeout(() => {
+		document.getElementById('loading-bar').remove();
+	}, 2000);
+
 	tableBody.innerHTML = '';
 	csvArray = '';
+	dbTracking = '';
 	trackingSearchBtn.blur();
 	if (csvButton) {
 		csvButton.remove();
 	}
 
-	//Sorting in descending order the gathered check objects Oldest => Newest
-	dbTracking.sort((a, b) => b.when.seconds - a.when.seconds);
+	if (online) {
+		setTimeout(() => {
+			//fetching data from all user profiles about the check performed
+			db.collection('dailyChecking')
+				.where('rowcount', '>=', 0)
+				.get()
+				.then(function (data) {
+					data.forEach(function (doc) {
+						// doc.data() is never undefined for query doc snapshots
+						if (doc.data().hasOwnProperty('tracking')) {
+							// not possible to .concat an empty array
+							if (!dbTracking) {
+								dbTracking = doc.data().tracking;
+							} else {
+								dbTracking = dbTracking.concat(doc.data().tracking);
+							}
+						}
+					});
+					//Sorting in descending order the gathered check objects Oldest => Newest
+					dbTracking.sort((a, b) => b.when.seconds - a.when.seconds);
 
-	dbTracking.forEach(object => {
-		let qa;
-		switch (object.qa) {
-			case 'eckYksePcfdox9I4FLVwTe72bSk1':
-				qa = 'Janis Malcans';
-				break;
-			case '1BRPSY3Q0yOeI7ReCCrRuVx0Fdo2':
-				qa = 'Aleksandra Pancernaja';
-				break;
-			case '2Rvrq1fn5sdCWnpxZbT3lZrUbDm1':
-				qa = 'Anastasija Dmitrijeva';
-				break;
-			case 'w967NxXDmwUxMMhhKyQizzF5B8S2':
-				qa = 'Diana Anca';
-				break;
-			case '6pLL44pT1SaihfvEtT99tNuKDB42':
-				qa = 'Sanija Mikulska';
-				break;
-			case 'a6CtpqvK26SqM1sulP86gCL5jYB2':
-				qa = 'Elina Gailisa';
-				break;
-			case 'Y9MfBHGQ0YdC8k2XHBbQtgRQ6m72':
-				qa = 'Antons Cinakovs';
-				break;
-			case 'B1sw8yVyBfTuguw1tKizaHy7AFY2':
-				qa = 'Vladislavs Sokols';
-				break;
-			case 'sBQRKGFdyiXkTgkxOJzEEUfF8m32':
-				qa = 'Marks Lubinskis';
-				break;
-			default:
-				qa = '';
-		}
+					dbTracking.forEach(object => {
+						let qa;
+						switch (object.qa) {
+							case 'eckYksePcfdox9I4FLVwTe72bSk1':
+								qa = 'Janis Malcans';
+								break;
+							case '1BRPSY3Q0yOeI7ReCCrRuVx0Fdo2':
+								qa = 'Aleksandra Pancernaja';
+								break;
+							case '2Rvrq1fn5sdCWnpxZbT3lZrUbDm1':
+								qa = 'Anastasija Dmitrijeva';
+								break;
+							case 'w967NxXDmwUxMMhhKyQizzF5B8S2':
+								qa = 'Diana Anca';
+								break;
+							case '6pLL44pT1SaihfvEtT99tNuKDB42':
+								qa = 'Sanija Mikulska';
+								break;
+							case 'a6CtpqvK26SqM1sulP86gCL5jYB2':
+								qa = 'Elina Gailisa';
+								break;
+							case 'Y9MfBHGQ0YdC8k2XHBbQtgRQ6m72':
+								qa = 'Antons Cinakovs';
+								break;
+							case 'B1sw8yVyBfTuguw1tKizaHy7AFY2':
+								qa = 'Vladislavs Sokols';
+								break;
+							case 'sBQRKGFdyiXkTgkxOJzEEUfF8m32':
+								qa = 'Marks Lubinskis';
+								break;
+							default:
+								qa = '';
+						}
 
-		// using toISOString because the format is the easiest to adapt for Excel
-		let timeISO = new Date((object.when.seconds + 10800) * 1000).toISOString();
-		let date = timeISO.substring(0, timeISO.indexOf('T'));
-		let time = timeISO.substring(
-			timeISO.indexOf('T') + 1,
-			timeISO.indexOf('.')
-		);
-		let timeToString = date + ' ' + time;
+						// using toISOString because the format is the easiest to adapt for Excel
+						let timeISO = new Date(
+							(object.when.seconds + 10800) * 1000
+						).toISOString();
+						let date = timeISO.substring(0, timeISO.indexOf('T'));
+						let time = timeISO.substring(
+							timeISO.indexOf('T') + 1,
+							timeISO.indexOf('.')
+						);
+						let timeToString = date + ' ' + time;
 
-		// added 10800 seconds to adjust for GMT+3
-		let objectSeconds = object.when.seconds + 10800;
-		let fromSeconds =
-			Date.parse(trackingFrom.value) / 1000 ||
-			new Date().setDate(new Date().getDate() - 1) / 1000;
-		let toSeconds =
-			Date.parse(trackingTo.value) / 1000 ||
-			new Date().setDate(new Date().getDate() + 1) / 1000;
+						// added 10800 seconds to adjust for GMT+3
+						let objectSeconds = object.when.seconds + 10800;
+						let fromSeconds =
+							Date.parse(trackingFrom.value) / 1000 ||
+							new Date().setDate(new Date().getDate() - 1) / 1000;
+						let toSeconds =
+							Date.parse(trackingTo.value) / 1000 ||
+							new Date().setDate(new Date().getDate() + 1) / 1000;
 
-		const rowElement = document.createElement('tr');
-		rowElement.classList.add('flex');
-		rowElement.innerHTML = `<td>${ object.name }</td>
-								<td>${object.platform }</td>
-								<td>${object.casino }</td>
-								<td>${qa }</td>
-                                <td>${timeToString }</td>`;
+						const rowElement = document.createElement('tr');
+						rowElement.classList.add('flex');
+						rowElement.innerHTML = `<td>${object.name}</td>
+								<td>${object.platform}</td>
+								<td>${object.casino}</td>
+								<td>${qa}</td>
+                                <td>${timeToString}</td>`;
 
-		if (
-			fromSeconds <= objectSeconds &&
-			objectSeconds <= toSeconds &&
-			trackingName.value === object.name &&
-			trackingPlatform.value === object.platform &&
-			trackingCasino.value === object.casino
-		) {
-			tableBody.append(rowElement);
-			csvArray += `\n${ object.name },${ object.platform },${ object.casino },${ qa },${ timeToString }`;
-		} else if (
-			fromSeconds <= objectSeconds &&
-			objectSeconds <= toSeconds &&
-			trackingName.value === object.name &&
-			trackingPlatform.value === object.platform
-		) {
-			tableBody.append(rowElement);
-			csvArray += `\n${ object.name },${ object.platform },${ object.casino },${ qa },${ timeToString }`;
-		} else if (
-			fromSeconds <= objectSeconds &&
-			objectSeconds <= toSeconds &&
-			trackingCasino.value === object.casino &&
-			trackingPlatform.value === object.platform
-		) {
-			tableBody.append(rowElement);
-			csvArray += `\n${ object.name },${ object.platform },${ object.casino },${ qa },${ timeToString }`;
-		} else if (
-			fromSeconds <= objectSeconds &&
-			objectSeconds <= toSeconds &&
-			trackingName.value === object.name &&
-			trackingCasino.value === object.casino
-		) {
-			tableBody.append(rowElement);
-			csvArray += `\n${ object.name },${ object.platform },${ object.casino },${ qa },${ timeToString }`;
-		} else if (
-			fromSeconds <= objectSeconds &&
-			objectSeconds <= toSeconds &&
-			trackingName.value === object.name
-		) {
-			tableBody.append(rowElement);
-			csvArray += `\n${ object.name },${ object.platform },${ object.casino },${ qa },${ timeToString }`;
-		} else if (
-			fromSeconds <= objectSeconds &&
-			objectSeconds <= toSeconds &&
-			trackingCasino.value === object.casino
-		) {
-			tableBody.append(rowElement);
-			csvArray += `\n${ object.name },${ object.platform },${ object.casino },${ qa },${ timeToString }`;
-		} else if (
-			fromSeconds <= objectSeconds &&
-			objectSeconds <= toSeconds &&
-			trackingPlatform.value === object.platform
-		) {
-			tableBody.append(rowElement);
-			csvArray += `\n${ object.name },${ object.platform },${ object.casino },${ qa },${ timeToString }`;
-		} else if (
-			fromSeconds <= objectSeconds &&
-			objectSeconds <= toSeconds &&
-			!trackingName.value &&
-			!trackingPlatform.value &&
-			!trackingCasino.value
-		) {
-			tableBody.append(rowElement);
-			csvArray += `\n${ object.name },${ object.platform },${ object.casino },${ qa },${ timeToString }`;
-		}
-	});
+						if (
+							fromSeconds <= objectSeconds &&
+							objectSeconds <= toSeconds &&
+							trackingName.value === object.name &&
+							trackingPlatform.value === object.platform &&
+							trackingCasino.value === object.casino
+						) {
+							tableBody.append(rowElement);
+							csvArray += `\n${object.name},${object.platform},${object.casino},${qa},${timeToString}`;
+						} else if (
+							fromSeconds <= objectSeconds &&
+							objectSeconds <= toSeconds &&
+							trackingName.value === object.name &&
+							trackingPlatform.value === object.platform
+						) {
+							tableBody.append(rowElement);
+							csvArray += `\n${object.name},${object.platform},${object.casino},${qa},${timeToString}`;
+						} else if (
+							fromSeconds <= objectSeconds &&
+							objectSeconds <= toSeconds &&
+							trackingCasino.value === object.casino &&
+							trackingPlatform.value === object.platform
+						) {
+							tableBody.append(rowElement);
+							csvArray += `\n${object.name},${object.platform},${object.casino},${qa},${timeToString}`;
+						} else if (
+							fromSeconds <= objectSeconds &&
+							objectSeconds <= toSeconds &&
+							trackingName.value === object.name &&
+							trackingCasino.value === object.casino
+						) {
+							tableBody.append(rowElement);
+							csvArray += `\n${object.name},${object.platform},${object.casino},${qa},${timeToString}`;
+						} else if (
+							fromSeconds <= objectSeconds &&
+							objectSeconds <= toSeconds &&
+							trackingName.value === object.name
+						) {
+							tableBody.append(rowElement);
+							csvArray += `\n${object.name},${object.platform},${object.casino},${qa},${timeToString}`;
+						} else if (
+							fromSeconds <= objectSeconds &&
+							objectSeconds <= toSeconds &&
+							trackingCasino.value === object.casino
+						) {
+							tableBody.append(rowElement);
+							csvArray += `\n${object.name},${object.platform},${object.casino},${qa},${timeToString}`;
+						} else if (
+							fromSeconds <= objectSeconds &&
+							objectSeconds <= toSeconds &&
+							trackingPlatform.value === object.platform
+						) {
+							tableBody.append(rowElement);
+							csvArray += `\n${object.name},${object.platform},${object.casino},${qa},${timeToString}`;
+						} else if (
+							fromSeconds <= objectSeconds &&
+							objectSeconds <= toSeconds &&
+							!trackingName.value &&
+							!trackingPlatform.value &&
+							!trackingCasino.value
+						) {
+							tableBody.append(rowElement);
+							csvArray += `\n${object.name},${object.platform},${object.casino},${qa},${timeToString}`;
+						}
+					});
+					if (tableBody.childElementCount > 1) {
+						let csv = document.createElement('button');
+						csv.style.cssText = 'width: 50px; margin-top: 10px';
+						csv.innerHTML = 'CSV';
+						csv.id = 'csv-button';
+						csv.type = 'button';
 
-	if (tableBody.childElementCount > 1) {
-		let csv = document.createElement('button');
-		csv.style.cssText = 'width: 50px; margin-top: 10px';
-		csv.innerHTML = 'CSV';
-		csv.id = 'csv-button';
-		csv.type = 'button';
-
-		dbData.append(csv);
-		csvButton = document.getElementById('csv-button');
+						dbData.append(csv);
+						csvButton = document.getElementById('csv-button');
+					}
+				})
+				.catch(function (error) {
+					console.log('Error getting documents: ', error);
+				});
+		}, 2000);
 	}
 };
 

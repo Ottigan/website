@@ -595,6 +595,7 @@ tbody tr:nth-child(odd) td,
 }
 
 #db-data {
+	position: relative;
 	margin: 50px 0;
 	width: 1030px;
 }
@@ -602,6 +603,53 @@ tbody tr:nth-child(odd) td,
 #db-data tbody {
 	background-color: rgb(250, 250, 250);
 	border: 1px double black;
+}
+
+thead tr td {
+	height: 34px;
+	margin-bottom: 5px;
+	font-size: larger;
+	color: rgb(39, 39, 39);
+	background-color: rgb(190, 190, 190);
+	line-height: 34px;
+	font-weight: bolder;
+	border: 1px solid black;
+}
+
+thead tr td:first-child {
+	width: 209px;
+}
+
+thead tr td:last-child {
+	width: 226px;
+}
+
+#loading-bar {
+	position: absolute;
+	left: 39%;
+	bottom: 50%;
+	width: 208px;
+	height: 10px;
+	border: 1px solid black;
+	border-radius: 3px;
+}
+
+#loading-body {
+	width: 100%;
+	height: 100%;
+	background: linear-gradient(to right, rgb(170, 170, 170) 50%, white 50%);
+	background-size: 200% 100%;
+	animation: bg-fill 1.5s ease-out;
+	animation-iteration-count: infinite;
+}
+
+@keyframes bg-fill {
+	from {
+		background-position: right bottom;
+	}
+	to {
+		background-position: left bottom;
+	}
 }
 
 tbody {
@@ -629,25 +677,6 @@ tbody tr td:first-child {
 
 tbody tr td:last-child {
 	margin-right: 2px;
-}
-
-thead tr td {
-	height: 34px;
-	margin-bottom: 5px;
-	font-size: larger;
-	color: rgb(39, 39, 39);
-	background-color: rgb(190, 190, 190);
-	line-height: 34px;
-	font-weight: bolder;
-	border: 1px solid black;
-}
-
-thead tr td:first-child {
-	width: 209px;
-}
-
-thead tr td:last-child {
-	width: 226px;
 }
 
 .flex {

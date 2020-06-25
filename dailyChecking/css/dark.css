@@ -4,6 +4,10 @@
 	box-sizing: border-box;
 }
 
+:root {
+	--accent-color: rgb(17, 143, 160);
+}
+
 body {
 	background-color: rgb(34, 34, 34);
 }
@@ -15,7 +19,7 @@ body {
 		height: 2px;
 		width: 85px;
 		transform: rotate(135deg);
-		background-color: rgba(3, 220, 248, 0.884);
+		background-color: var(--accent-color);
 	}
 }
 
@@ -24,7 +28,7 @@ body {
 		background-color: rgb(20, 20, 20);
 		font-size: x-large;
 		height: 60px;
-		border-bottom: 2px inset rgba(3, 220, 248, 0.884);
+		border-bottom: 2px inset var(--accent-color);
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
@@ -45,7 +49,7 @@ body {
 	}
 
 	nav a:hover {
-		color: rgb(3, 220, 248);
+		color: var(--accent-color);
 	}
 
 	nav form {
@@ -121,7 +125,7 @@ body {
 		width: 64px;
 		padding: 3px;
 		border-radius: 29px;
-		border: 2px solid rgb(3, 220, 248);
+		border: 2px solid var(--accent-color);
 		background-color: rgb(71, 71, 71);
 		display: flex;
 		justify-content: space-between;
@@ -134,37 +138,37 @@ body {
 
 	@keyframes theme-btn-glow {
 		0% {
-			box-shadow: 0 0 3px 1px rgb(3, 220, 248);
+			box-shadow: 0 0 3px 1px var(--accent-color);
 		}
 		10% {
-			box-shadow: 0 0 4px 2px rgb(3, 220, 248);
+			box-shadow: 0 0 4px 2px var(--accent-color);
 		}
 		20% {
-			box-shadow: 0 0 5px 3px rgb(3, 220, 248);
+			box-shadow: 0 0 5px 3px var(--accent-color);
 		}
 		30% {
-			box-shadow: 0 0 6px 4px rgb(3, 220, 248);
+			box-shadow: 0 0 6px 4px var(--accent-color);
 		}
 		40% {
-			box-shadow: 0 0 7px 5px rgb(3, 220, 248);
+			box-shadow: 0 0 7px 5px var(--accent-color);
 		}
 		50% {
-			box-shadow: 0 0 8px 6px rgb(3, 220, 248);
+			box-shadow: 0 0 8px 6px var(--accent-color);
 		}
 		60% {
-			box-shadow: 0 0 7px 5px rgb(3, 220, 248);
+			box-shadow: 0 0 7px 5px var(--accent-color);
 		}
 		70% {
-			box-shadow: 0 0 6px 4px rgb(3, 220, 248);
+			box-shadow: 0 0 6px 4px var(--accent-color);
 		}
 		80% {
-			box-shadow: 0 0 5px 3px rgb(3, 220, 248);
+			box-shadow: 0 0 5px 3px var(--accent-color);
 		}
 		90% {
-			box-shadow: 0 0 4px 2px rgb(3, 220, 248);
+			box-shadow: 0 0 4px 2px var(--accent-color);
 		}
 		100% {
-			box-shadow: 0 0 3px 1px rgb(3, 220, 248);
+			box-shadow: 0 0 3px 1px var(--accent-color);
 		}
 	}
 
@@ -191,7 +195,7 @@ body {
 		background-color: rgb(20, 20, 20);
 		font-size: x-large;
 		height: 60px;
-		border-bottom: 2px inset rgba(3, 220, 248, 0.884);
+		border-bottom: 2px inset var(--accent-color);
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
@@ -205,7 +209,7 @@ body {
 	}
 
 	nav a:hover {
-		color: rgb(3, 220, 248);
+		color: var(--accent-color);
 	}
 
 	nav form {
@@ -238,7 +242,7 @@ body {
 	}
 
 	#menu-checkbox:hover + #burger-menu .burger-line {
-		background-color: rgb(3, 220, 248);
+		background-color: var(--accent-color);
 	}
 
 	.burger-line {
@@ -277,7 +281,7 @@ body {
 		left: -287px;
 		height: 150px;
 		background-color: rgb(20, 20, 20);
-		border: 2px solid rgba(3, 220, 248, 0.884);
+		border: 2px solid var(--accent-color);
 		border-top: none;
 		box-shadow: -2px -4px 2px rgb(20, 20, 20);
 		transition: transform linear 0.2s;
@@ -341,7 +345,7 @@ body {
 		width: 64px;
 		padding: 3px;
 		border-radius: 29px;
-		border: 2px solid rgb(3, 220, 248);
+		border: 2px solid var(--accent-color);
 		background-color: rgb(71, 71, 71);
 		display: flex;
 		justify-content: space-between;
@@ -354,37 +358,37 @@ body {
 
 	@keyframes theme-btn-glow {
 		0% {
-			box-shadow: 0 0 3px 1px rgb(3, 220, 248);
+			box-shadow: 0 0 3px 1px var(--accent-color);
 		}
 		10% {
-			box-shadow: 0 0 4px 2px rgb(3, 220, 248);
+			box-shadow: 0 0 4px 2px var(--accent-color);
 		}
 		20% {
-			box-shadow: 0 0 5px 3px rgb(3, 220, 248);
+			box-shadow: 0 0 5px 3px var(--accent-color);
 		}
 		30% {
-			box-shadow: 0 0 6px 4px rgb(3, 220, 248);
+			box-shadow: 0 0 6px 4px var(--accent-color);
 		}
 		40% {
-			box-shadow: 0 0 7px 5px rgb(3, 220, 248);
+			box-shadow: 0 0 7px 5px var(--accent-color);
 		}
 		50% {
-			box-shadow: 0 0 8px 6px rgb(3, 220, 248);
+			box-shadow: 0 0 8px 6px var(--accent-color);
 		}
 		60% {
-			box-shadow: 0 0 7px 5px rgb(3, 220, 248);
+			box-shadow: 0 0 7px 5px var(--accent-color);
 		}
 		70% {
-			box-shadow: 0 0 6px 4px rgb(3, 220, 248);
+			box-shadow: 0 0 6px 4px var(--accent-color);
 		}
 		80% {
-			box-shadow: 0 0 5px 3px rgb(3, 220, 248);
+			box-shadow: 0 0 5px 3px var(--accent-color);
 		}
 		90% {
-			box-shadow: 0 0 4px 2px rgb(3, 220, 248);
+			box-shadow: 0 0 4px 2px var(--accent-color);
 		}
 		100% {
-			box-shadow: 0 0 3px 1px rgb(3, 220, 248);
+			box-shadow: 0 0 3px 1px var(--accent-color);
 		}
 	}
 
@@ -417,15 +421,15 @@ form label {
 
 #checkrows input:hover,
 #checkrows button:hover {
-	border: 1px solid rgb(3, 220, 248) !important;
-	box-shadow: 0 0 2px 1px rgb(3, 220, 248);
+	border: 1px solid var(--accent-color) !important;
+	box-shadow: 0 0 2px 1px var(--accent-color);
 }
 
 #checkrows input:focus,
 #checkrows button:focus {
 	outline: none;
-	border: 1px solid rgb(3, 220, 248) !important;
-	box-shadow: 0 0 2px 2px rgb(3, 220, 248), 0 0 2px 1px rgb(0, 0, 0) inset;
+	border: 1px solid var(--accent-color) !important;
+	box-shadow: 0 0 2px 2px var(--accent-color), 0 0 2px 1px rgb(0, 0, 0) inset;
 }
 
 #main-row input,
@@ -628,8 +632,8 @@ tbody tr:nth-child(odd) td,
 }
 
 .highlighted-row {
-	border: 1px solid rgb(3, 220, 248) !important;
-	box-shadow: 0 0 2px 1px rgb(3, 220, 248);
+	border: 1px solid var(--accent-color) !important;
+	box-shadow: 0 0 2px 1px var(--accent-color);
 }
 
 .container {
@@ -670,6 +674,8 @@ tbody tr:nth-child(odd) td,
 }
 
 #db-data {
+	position: relative;
+
 	margin: 50px 0;
 	width: 1030px;
 }
@@ -677,6 +683,57 @@ tbody tr:nth-child(odd) td,
 #db-data tbody {
 	background-color: rgb(46, 46, 46);
 	border: 1px double rgb(77, 77, 77);
+}
+
+thead tr td {
+	height: 34px;
+	margin-bottom: 5px;
+	font-size: larger;
+	color: rgb(211, 211, 211);
+	background-color: rgb(0, 0, 0);
+	line-height: 34px;
+	font-weight: bolder;
+	border: 1px solid rgb(77, 77, 77);
+}
+
+thead tr td:first-child {
+	width: 209px;
+}
+
+thead tr td:last-child {
+	width: 226px;
+}
+
+#loading-bar {
+	position: absolute;
+	left: 39%;
+	bottom: 50%;
+	width: 208px;
+	height: 10px;
+	border: 1px solid rgb(0, 0, 0);
+	border-radius: 3px;
+}
+
+#loading-body {
+	width: 100%;
+	height: 100%;
+	background: linear-gradient(
+		to right,
+		var(--accent-color) 50%,
+		rgb(221, 221, 221) 50%
+	);
+	background-size: 200% 100%;
+	animation: bg-fill 1.5s ease-out;
+	animation-iteration-count: infinite;
+}
+
+@keyframes bg-fill {
+	from {
+		background-position: right bottom;
+	}
+	to {
+		background-position: left bottom;
+	}
 }
 
 tbody {
@@ -704,25 +761,6 @@ tbody tr td:first-child {
 
 tbody tr td:last-child {
 	margin-right: 2px;
-}
-
-thead tr td {
-	height: 34px;
-	margin-bottom: 5px;
-	font-size: larger;
-	color: rgb(211, 211, 211);
-	background-color: rgb(0, 0, 0);
-	line-height: 34px;
-	font-weight: bolder;
-	border: 1px solid rgb(77, 77, 77);
-}
-
-thead tr td:first-child {
-	width: 209px;
-}
-
-thead tr td:last-child {
-	width: 226px;
 }
 
 .flex {
@@ -808,9 +846,9 @@ thead tr td:last-child {
 
 .valid {
 	background-color: rgb(1, 133, 1) !important;
-	box-shadow: 0 0 2px 2px rgb(3, 220, 248) !important;
+	box-shadow: 0 0 2px 2px var(--accent-color) !important;
 }
 
 button:hover {
-	box-shadow: 0 0 2px 1px rgb(3, 220, 248);
+	box-shadow: 0 0 2px 1px var(--accent-color);
 }
