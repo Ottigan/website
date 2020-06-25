@@ -299,7 +299,7 @@ trackingSearchBtn.onclick = function () {
 			trackingCasino.value === object.casino
 		) {
 			tableBody.append(rowElement);
-			csvArray += `\n${ object.name };${ object.platform };${ object.casino };${ qa };${ timeToString }`;
+			csvArray += `\n${ object.name },${ object.platform },${ object.casino },${ qa },${ timeToString }`;
 		} else if (
 			fromSeconds <= objectSeconds &&
 			objectSeconds <= toSeconds &&
@@ -307,7 +307,7 @@ trackingSearchBtn.onclick = function () {
 			trackingPlatform.value === object.platform
 		) {
 			tableBody.append(rowElement);
-			csvArray += `\n${ object.name };${ object.platform };${ object.casino };${ qa };${ timeToString }`;
+			csvArray += `\n${ object.name },${ object.platform },${ object.casino },${ qa },${ timeToString }`;
 		} else if (
 			fromSeconds <= objectSeconds &&
 			objectSeconds <= toSeconds &&
@@ -315,7 +315,7 @@ trackingSearchBtn.onclick = function () {
 			trackingPlatform.value === object.platform
 		) {
 			tableBody.append(rowElement);
-			csvArray += `\n${ object.name };${ object.platform };${ object.casino };${ qa };${ timeToString }`;
+			csvArray += `\n${ object.name },${ object.platform },${ object.casino },${ qa },${ timeToString }`;
 		} else if (
 			fromSeconds <= objectSeconds &&
 			objectSeconds <= toSeconds &&
@@ -323,28 +323,28 @@ trackingSearchBtn.onclick = function () {
 			trackingCasino.value === object.casino
 		) {
 			tableBody.append(rowElement);
-			csvArray += `\n${ object.name };${ object.platform };${ object.casino };${ qa };${ timeToString }`;
+			csvArray += `\n${ object.name },${ object.platform },${ object.casino },${ qa },${ timeToString }`;
 		} else if (
 			fromSeconds <= objectSeconds &&
 			objectSeconds <= toSeconds &&
 			trackingName.value === object.name
 		) {
 			tableBody.append(rowElement);
-			csvArray += `\n${ object.name };${ object.platform };${ object.casino };${ qa };${ timeToString }`;
+			csvArray += `\n${ object.name },${ object.platform },${ object.casino },${ qa },${ timeToString }`;
 		} else if (
 			fromSeconds <= objectSeconds &&
 			objectSeconds <= toSeconds &&
 			trackingCasino.value === object.casino
 		) {
 			tableBody.append(rowElement);
-			csvArray += `\n${ object.name };${ object.platform };${ object.casino };${ qa };${ timeToString }`;
+			csvArray += `\n${ object.name },${ object.platform },${ object.casino },${ qa },${ timeToString }`;
 		} else if (
 			fromSeconds <= objectSeconds &&
 			objectSeconds <= toSeconds &&
 			trackingPlatform.value === object.platform
 		) {
 			tableBody.append(rowElement);
-			csvArray += `\n${ object.name };${ object.platform };${ object.casino };${ qa };${ timeToString }`;
+			csvArray += `\n${ object.name },${ object.platform },${ object.casino },${ qa },${ timeToString }`;
 		} else if (
 			fromSeconds <= objectSeconds &&
 			objectSeconds <= toSeconds &&
@@ -353,7 +353,7 @@ trackingSearchBtn.onclick = function () {
 			!trackingCasino.value
 		) {
 			tableBody.append(rowElement);
-			csvArray += `\n${ object.name };${ object.platform };${ object.casino };${ qa };${ timeToString }`;
+			csvArray += `\n${ object.name },${ object.platform },${ object.casino },${ qa },${ timeToString }`;
 		}
 	});
 
@@ -382,12 +382,11 @@ themeToggle.onclick = function () {
 };
 
 dbData.addEventListener('click', function (event) {
-	console.log(csvArray);
 	if (event.target.id === 'csv-button') {
 		let hiddenCSV = document.createElement('a');
 		hiddenCSV.href =
 			'data:text/csv;charset=utf-8,' +
-			encodeURI('Game Table;Platform;Casino;QA;Timestamp' + csvArray);
+			encodeURI('Game Table,Platform,Casino,QA,Timestamp' + csvArray);
 		hiddenCSV.target = '_blank';
 		hiddenCSV.download = 'daily checking data.csv';
 		hiddenCSV.click();
