@@ -253,6 +253,7 @@ body {
 		justify-content: space-around;
 		list-style: none;
 		position: absolute;
+		z-index: 1;
 		top: 60px;
 		left: -287px;
 		height: 150px;
@@ -483,7 +484,7 @@ form label {
 
 #row-manipulator {
 	width: 100%;
-	padding-left: 219px;
+	padding-left: 8px;
 	margin-top: 5px;
 	margin-bottom: 20px;
 }

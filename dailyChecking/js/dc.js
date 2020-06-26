@@ -193,7 +193,7 @@ firebase.auth().onAuthStateChanged(dailyCheckingUser => {
 									rowObjects[i].id
 								}" type="number" class="target highlight-this" value="${
 									rowObjects[i].target || 1
-								}" maxlength="2" min="1" max="12" />
+								}" maxlength="2" min="0" max="12" />
 								<button id="${
 									rowObjects[i].id
 								}" class="submitButton highlight-this" type="button">
@@ -589,6 +589,11 @@ const updateCounterAndOptions = event => {
 			.then(function (doc) {
 				let rowObjects = doc.data().rowObjects;
 				rowObjects.forEach(object => {
+					if (object.id > 0) {
+						object.color = document.getElementById(
+							`format-${object.id}`
+						).style.backgroundColor;
+					}
 					object.name = document.getElementById(`table-${object.id}`).value;
 					object.platform = document.getElementById(
 						`platform-${object.id}`
@@ -769,7 +774,8 @@ const updateCounterAndOptions = event => {
 		target.classList.contains('row-format') &&
 		event.type === 'click'
 	) {
-		if (document.getElementById('color-panel')) {
+		// toggling the panel if it is already open
+		if (target.childNodes.length > 1) {
 			document.getElementById('color-panel').remove();
 		} else {
 			document.querySelectorAll('#color-panel').forEach(item => {
