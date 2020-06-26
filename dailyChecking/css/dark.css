@@ -187,6 +187,18 @@ body {
 	#moon {
 		fill: rgb(255, 255, 255);
 	}
+
+	#checkrows {
+		position: relative;
+		width: 766px;
+	}
+
+	section form input[type='text'] {
+		border-radius: 2px;
+		text-indent: 2px;
+		height: 20px;
+		width: 200px;
+	}
 }
 
 @media screen and (max-width: 1689px) {
@@ -407,6 +419,18 @@ body {
 	#moon {
 		fill: rgb(255, 255, 255);
 	}
+
+	#checkrows {
+		position: relative;
+		width: 751px;
+	}
+
+	section form input[type='text'] {
+		border-radius: 2px;
+		text-indent: 2px;
+		height: 20px;
+		width: 195px;
+	}
 }
 
 form div {
@@ -556,11 +580,103 @@ form label {
 	margin-top: 3px;
 }
 
-section form input[type='text'] {
-	border-radius: 2px;
-	text-indent: 2px;
+.row-format {
+	position: absolute;
+	left: 0;
 	height: 20px;
-	width: 200px;
+	width: 10px;
+	padding: 0;
+	background-color: var(--accent-color);
+	box-shadow: inset 1px 0px 2px 0px black;
+	border: 1px solid black;
+	border-top-left-radius: 3px;
+	border-bottom-left-radius: 3px;
+}
+
+.row-format:hover {
+	cursor: pointer;
+}
+
+#color-panel {
+	cursor: auto;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-around;
+	align-content: space-around;
+	height: 80px;
+	width: 100px;
+	padding: 5px;
+	background-color: rgb(100, 100, 100);
+	border: 1px solid black;
+	box-shadow: 0 0 2px 1px black;
+	border-radius: 3px;
+}
+
+.color-option {
+	cursor: pointer;
+	height: 19px;
+	width: 19px;
+	border: 1px solid rgb(0, 0, 0);
+	box-shadow: 0 0 2px 0px black;
+	border-radius: 3px;
+}
+
+.color-option:hover {
+	box-shadow: 0 0 2px 1px black;
+}
+
+.option-one {
+	background-color: yellow;
+}
+.option-two {
+	background-color: violet;
+}
+.option-three {
+	background-color: rgb(212, 1, 1);
+}
+.option-four {
+	background-color: rgb(17, 143, 160);
+}
+.option-five {
+	background-color: darkred;
+}
+.option-six {
+	background-color: cyan;
+}
+.option-seven {
+	background-color: darkorange;
+}
+.option-eight {
+	background-color: white;
+}
+.option-nine {
+	background-color: lightblue;
+}
+.option-ten {
+	background-color: lightgreen;
+}
+.option-eleven {
+	background-color: royalblue;
+}
+.option-twelve {
+	background-color: rgb(167, 0, 167);
+}
+
+.color-apply {
+	cursor: pointer;
+	text-align: center;
+	font-family: 'Roboto', sans-serif;
+	font-size: 14px;
+	font-weight: 700;
+	color: black !important;
+	flex-grow: 1;
+	border: 1px solid black;
+	border-radius: 3px;
+	background: linear-gradient(
+		to top,
+		rgba(0, 0, 0, 0.507) 5%,
+		white 95%
+	) !important;
 }
 
 #checkrows input,
