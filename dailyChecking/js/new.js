@@ -97,7 +97,7 @@ firebase.auth().onAuthStateChanged(dailyCheckingUser => {
 			default:
 				qa = '';
 		}
-		greeting.innerText = `Welcome, ${ qa }!`;
+		greeting.innerText = `Welcome, ${qa}!`;
 		greeting.style.cssText =
 			'margin-bottom: 3px; align-self: flex-end; color: white; visibility: visible; font-family: Georgia, "Times New Roman", Times, serif; font-weight: 400';
 		logoutButton.before(greeting);
@@ -184,7 +184,7 @@ const addTableListItem = item => {
 	// listItem.innerText = item;
 	listItem.style.paddingLeft = '2px';
 	listItem.classList.add('l-decoration', 'flex', 'jc-sb', 'ai-c', 'list-item');
-	listItem.innerHTML = `${ item }<button type="button" style="width: 10%" class="remove">x</button>`;
+	listItem.innerHTML = `${item}<button type="button" style="width: 10%" class="remove">x</button>`;
 	tableList.prepend(listItem);
 };
 
@@ -216,7 +216,7 @@ addCasinoBtn.onclick = function () {
 const addCasinoListItem = item => {
 	const listItem = document.createElement('li');
 	listItem.classList.add('l-decoration', 'flex', 'jc-sb', 'ai-c', 'list-item');
-	listItem.innerHTML = `${ item }<button type="button" style="width: 10%" class="remove">x</button>`;
+	listItem.innerHTML = `${item}<button type="button" style="width: 10%" class="remove">x</button>`;
 	casinoList.prepend(listItem);
 };
 
