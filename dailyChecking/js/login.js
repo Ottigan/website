@@ -29,7 +29,7 @@ loginForm.addEventListener('submit', event => {
 
 	authPromise
 		.then(function () {
-			window.location.replace('main.html');
+			window.location.replace('dc.html');
 		})
 		.catch(error => {
 			console.error(error.message);
