@@ -2,27 +2,22 @@
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-	apiKey: 'AIzaSyCOiJc8EKT9DyXyuAKPeKpJLnvYs_vINFU',
-	authDomain: 'starlit-braid-276207.firebaseapp.com',
-	databaseURL: 'https://starlit-braid-276207.firebaseio.com',
-	projectId: 'starlit-braid-276207',
-	storageBucket: 'starlit-braid-276207.appspot.com',
-	messagingSenderId: '30277815528',
-	appId: '1:30277815528:web:517d7d0743d3d5530a4d5d',
+	apiKey: 'AIzaSyA3iWhjLXUOmjnidixx6GC_DT5M2Ddt4bI',
+	authDomain: 'daily-checking.firebaseapp.com',
+	databaseURL: 'https://daily-checking.firebaseio.com',
+	projectId: 'daily-checking',
+	storageBucket: 'daily-checking.appspot.com',
+	messagingSenderId: '79540097878',
+	appId: '1:79540097878:web:b847d77934b24aad0efcf7',
 };
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 
-const header = document.querySelector('header'),
-	loginForm = document.getElementById('login-form'),
-	emailDiv = document.getElementById('email-div'),
-	passwordDiv = document.getElementById('password-div'),
-	txtUser = document.getElementById('txt-user'),
-	txtPass = document.getElementById('txt-pass'),
-	loginButton = document.getElementById('login-button'),
-	logoutButton = document.getElementById('logout-button'),
+const styleSheet = document.getElementById('style'),
+	header = document.querySelector('header'),
+	audioAlarm = document.getElementById('alarm'),
+	logOutButton = document.getElementById('logout-button'),
 	popOutBtn = document.getElementById('pop-out'),
-	styleSheet = document.getElementById('style'),
 	themeToggle = document.querySelector('.theme-label'),
 	themeSwitch = document.querySelector('#switch'),
 	theBall = document.querySelector('.ball'),
@@ -45,221 +40,209 @@ let tablesDB;
 let casinosDB;
 let inputElements = document.querySelectorAll('.inputElement');
 
-//Add login event
-loginForm.addEventListener('submit', event => {
-	event.preventDefault();
-	const email = txtUser.value;
-	const pass = txtPass.value;
-	const authPromise = auth.signInWithEmailAndPassword(email, pass);
+setInterval(() => {
+	let day = new Date().getDay();
+	let hours = new Date().getHours();
+	let minutes = new Date().getMinutes();
+	let seconds = new Date().getSeconds();
+	// audioAlarm.loop = true;
 
-	authPromise
-		.then(function () {
-			console.log('Login successful!');
-			txtUser.classList.remove('empty-value');
-			txtPass.classList.remove('empty-value');
-		})
-		.catch(error => {
-			console.error(error.message);
-			if (
-				error.message ===
-				'There is no user record corresponding to this identifier. The user may have been deleted.'
-			) {
-				txtUser.classList.add('empty-value');
-				txtUser.focus();
-			} else if (
-				error.message ===
-				'The password is invalid or the user does not have a password.'
-			) {
-				txtPass.classList.add('empty-value');
-				txtPass.focus();
-			}
-		});
-});
+	// console.log(day);
+	// console.log(hours);
+	// console.log(minutes);
+	// console.log(seconds);
+
+	if (
+		hours === 10 &&
+		minutes === 0 &&
+		seconds === 0 &&
+		(day !== 6 || day !== 7)
+	) {
+		audioAlarm.play();
+		setTimeout(() => {
+			alert(
+				'Wake up! MNGs are ass... I get it, but Blackjack Lounge 4 should be OPEN!'
+			);
+		}, 1000);
+	} else if (
+		hours === 16 &&
+		minutes === 0 &&
+		seconds === 0 &&
+		(day !== 6 || day !== 7)
+	) {
+		audioAlarm.play();
+		setTimeout(() => {
+			alert('Time for Blackjack Lounge 6 to rise from the ashes yet again!');
+		}, 1000);
+	} else if (hours === 17 && minutes === 0 && seconds === 0) {
+		audioAlarm.play();
+		setTimeout(() => {
+			alert('Stop being a lazy ass and go check ITALIAN tables!');
+		}, 1000);
+	} else if (hours === 18 && minutes === 0 && seconds === 0) {
+		audioAlarm.play();
+		setTimeout(() => {
+			alert('Go and check Fuuuufikon!');
+		}, 1000);
+	} else if (hours === 19 && minutes === 0 && seconds === 0) {
+		audioAlarm.play();
+		setTimeout(() => {
+			alert("The Brits are coming and BREXIT won't save us!");
+		}, 1000);
+	} else if (hours === 22 && minutes === 0 && seconds === 0) {
+		audioAlarm.play();
+		setTimeout(() => {
+			alert(
+				"SIA BJ 1 and Payback should be ready! Fingers crossed that the Tricaster hasn't choked..."
+			);
+		}, 1000);
+	}
+}, 1000);
 
 firebase.auth().onAuthStateChanged(dailyCheckingUser => {
 	if (dailyCheckingUser) {
 		//current user valid option: firebase.auth().currentUser.uid
 		userUID = dailyCheckingUser.uid;
-		let greeting = document.createElement('h6');
-		let qa;
-		switch (userUID) {
-			case 'eckYksePcfdox9I4FLVwTe72bSk1':
-				qa = 'Ottigan';
-				break;
-			case '1BRPSY3Q0yOeI7ReCCrRuVx0Fdo2':
-				qa = 'Unicorn';
-				break;
-			case '2Rvrq1fn5sdCWnpxZbT3lZrUbDm1':
-				qa = 'Martiwka';
-				break;
-			case 'w967NxXDmwUxMMhhKyQizzF5B8S2':
-				qa = 'Boss';
-				break;
-			case '6pLL44pT1SaihfvEtT99tNuKDB42':
-				qa = 'Sauļuk';
-				break;
-			case 'a6CtpqvK26SqM1sulP86gCL5jYB2':
-				qa = 'Sette e Mezzo';
-				break;
-			case 'Y9MfBHGQ0YdC8k2XHBbQtgRQ6m72':
-				qa = '4chan.org/g/audio_god';
-				break;
-			case 'B1sw8yVyBfTuguw1tKizaHy7AFY2':
-				qa = 'Falcon';
-				break;
-			case 'sBQRKGFdyiXkTgkxOJzEEUfF8m32':
-				qa = 'Mr.Ponytail';
-				break;
-			default:
-				qa = '';
-		}
-		greeting.innerText = `Welcome, ${qa}!`;
-		greeting.style.cssText =
-			'margin-bottom: 3px; align-self: flex-end; color: white; visibility: visible; font-family: Georgia, "Times New Roman", Times, serif; font-weight: 400';
-		logoutButton.before(greeting);
 
-		logoutButton.style.display = 'inline';
-		emailDiv.style.display = 'none';
-		passwordDiv.style.display = 'none';
-		loginButton.style.display = 'none';
+		db.collection('dailyChecking')
+			.doc(userUID)
+			.get()
+			.then(function (doc) {
+				let qa = doc.data().nickname[0];
+				let greeting = document.createElement('h6');
 
-		const getData = function () {
-			db.collection('dailyChecking')
-				.doc('tables')
-				.get()
-				.then(function (doc) {
-					tablesDB = doc.data().names;
-				})
-				.catch(function (error) {});
+				greeting.innerText = `Welcome, ${qa}!`;
+				greeting.classList.add('greeting');
+				logOutButton.before(greeting);
+			})
+			.catch(function (error) {
+				console.error(error);
+			});
 
-			db.collection('dailyChecking')
-				.doc('casinos')
-				.get()
-				.then(function (doc) {
-					casinosDB = doc.data().names;
-				})
-				.catch(function (error) {});
+		db.collection('dailyChecking')
+			.doc('tables')
+			.get()
+			.then(function (doc) {
+				tablesDB = doc.data().names;
+			})
+			.catch(function (error) {});
 
-			db.collection('dailyChecking')
-				.doc(userUID)
-				.get()
-				.then(function (doc) {
-					if (doc.exists) {
-						let rows = doc.data().rowcount;
-						let rowObjects = doc.data().rowObjects;
-						let i = 0;
-						do {
-							if (i === 0) {
-								document.querySelector(`#table-${i}`).value =
-									rowObjects[i].name;
-								document.querySelector(`#platform-${i}`).value =
-									rowObjects[i].platform;
-								document.querySelector(`#casino-${i}`).value =
-									rowObjects[i].casino;
-								document.querySelector(`#counter-${i}`).innerHTML =
-									rowObjects[i].counter;
-							} else if (i > 0) {
-								const rowItem = document.createElement('form');
-								rowItem.classList.add('flex', 'jc-c', 'table-row');
-								rowItem.innerHTML = `
+		db.collection('dailyChecking')
+			.doc('casinos')
+			.get()
+			.then(function (doc) {
+				casinosDB = doc.data().names;
+			})
+			.catch(function (error) {});
+
+		db.collection('dailyChecking')
+			.doc(userUID)
+			.get()
+			.then(function (doc) {
+				if (doc.exists) {
+					let rowObjects = doc.data().rowObjects;
+					let i = 0;
+					do {
+						if (i === 0) {
+							document.querySelector(`#table-${i}`).value = rowObjects[i].name;
+							document.querySelector(`#platform-${i}`).value =
+								rowObjects[i].platform;
+							document.querySelector(`#casino-${i}`).value =
+								rowObjects[i].casino;
+							document.querySelector(`#counter-${i}`).innerHTML =
+								rowObjects[i].counter;
+						} else if (i > 0) {
+							const rowItem = document.createElement('form');
+							rowItem.id = `row-${rowObjects[i].id}`;
+							rowItem.setAttribute('draggable', true);
+							rowItem.classList.add('flex', 'jc-c', 'table-row');
+							rowItem.innerHTML = `
 								<div id="format-${
 									rowObjects[i].id
-								}" class="row-format" style="background-color: ${
-									rowObjects[i].color
-								}">
+								}" class="drag row-format" style="background-color: ${
+								rowObjects[i].color
+							}">
 								</div>
 								<div>
-									<input type="text" name="table" pattern="[a-zA-Z0-9 ]+" list="names" class="inputElement highlight-this table-name" autocomplete="off" id="table-${
+									<input type="text" name="table" pattern="[a-zA-Z0-9 ]+" list="names" class="drag inputElement highlight-this table-name" autocomplete="off" id="table-${
 										rowObjects[i].id
 									}" value="${rowObjects[i].name}"/>
 								</div>
 								<div>
 									<input id="platform-${
 										rowObjects[i].id
-									}" class="highlight-this platform-name" value="${
-									rowObjects[i].platform
-								}" name="platform" type="text" list="platforms" autocomplete="off"/>
+									}" class="drag highlight-this platform-name" value="${
+								rowObjects[i].platform
+							}" name="platform" type="text" list="platforms" autocomplete="off"/>
 								</div>
 								<div>
-									<input type="text" name="casino" list="casinos" class="inputElement highlight-this casino-name" autocomplete="off" id="casino-${
+									<input type="text" name="casino" list="casinos" class="drag inputElement highlight-this casino-name" autocomplete="off" id="casino-${
 										rowObjects[i].id
 									}" value="${rowObjects[i].casino.toLowerCase()}"/>
 								</div>
-								<span id="counter-${rowObjects[i].id}" class="counter highlight-this">${
-									rowObjects[i].counter || 0
-								}
+								<span id="counter-${rowObjects[i].id}" class="drag counter highlight-this">${
+								rowObjects[i].counter || 0
+							}
 								</span>
 								<input id="target-${
 									rowObjects[i].id
-								}" type="number" class="target highlight-this" value="${
-									rowObjects[i].target || 1
-								}" maxlength="2" min="0" max="12" />
+								}" type="number" class="drag target highlight-this" value="${
+								rowObjects[i].target || 1
+							}" maxlength="2" min="0" max="12" />
 								<button id="${
 									rowObjects[i].id
-								}" class="submitButton highlight-this" type="button">
+								}" class="drag submitButton highlight-this" type="button">
 									Submit
 								</button>`;
-								rowManip.before(rowItem);
-							}
-							i++;
-						} while (i <= rows);
-						inputElements = document.querySelectorAll('input');
-						tableRows = document.querySelectorAll('.table-row');
+							rowManip.before(rowItem);
+						}
+						i++;
+					} while (i <= rowObjects.length - 1);
+					inputElements = document.querySelectorAll('input');
+					tableRows = document.querySelectorAll('.table-row');
 
-						let counter = document.querySelectorAll(`.counter`),
-							goal = document.querySelectorAll(`.target`);
+					let counter = document.querySelectorAll(`.counter`),
+						goal = document.querySelectorAll(`.target`);
 
-						for (let i = 0; i < counter.length; i++) {
-							let x = Number.parseInt(counter[i].innerHTML),
-								y = goal[i].value;
+					for (let i = 0; i < counter.length; i++) {
+						let x = Number.parseInt(counter[i].innerHTML),
+							y = goal[i].value;
 
-							if (x >= y) {
-								counter[i].classList.add('valid');
-								counter[i].classList.remove('invalid');
-							} else {
-								counter[i].classList.add('invalid');
-								counter[i].classList.remove('valid');
-							}
+						if (x >= y) {
+							counter[i].classList.add('valid');
+							counter[i].classList.remove('invalid');
+						} else {
+							counter[i].classList.add('invalid');
+							counter[i].classList.remove('valid');
 						}
 					}
-				})
-				.catch(function (error) {
-					console.log('Error getting document:', error);
-				});
-		};
-		getData();
+				}
+			})
+			.catch(function (error) {
+				console.log('Error getting document:', error);
+			});
 	} else {
-		logoutButton.style.display = 'none';
-		emailDiv.style.display = 'flex';
-		passwordDiv.style.display = 'flex';
-		loginButton.style.display = 'inline';
+		window.location.replace('.');
 	}
 });
 
-logoutButton.addEventListener('click', function () {
-	auth.signOut().then(function () {
-		document.querySelector('h6').remove();
-		logoutButton.classList = 'hide-logout';
-		document.getElementById('table-0').value = '';
-		document.getElementById('platform-0').value = '';
-		document.getElementById('casino-0').value = '';
-		document.querySelectorAll('.table-row').forEach(row => row.remove());
-	});
+logOutButton.addEventListener('click', function () {
+	auth.signOut().then(function () {});
 });
 
 function newToaster(text, type) {
-	let SpanToaster = document.createElement('span');
-	SpanToaster.innerHTML = text;
+	let toasterMessage = document.createElement('span');
+	toasterMessage.innerHTML = text;
 	if (type === 'success') {
-		SpanToaster.classList = 'successSubmitToaster';
+		toasterMessage.classList = 'successSubmitToaster';
 	} else if (type === 'fail') {
-		SpanToaster.classList = 'failSubmitToaster';
+		toasterMessage.classList = 'failSubmitToaster';
 	}
 
-	header.append(SpanToaster);
+	header.append(toasterMessage);
 
 	setTimeout(function () {
-		SpanToaster.remove();
+		toasterMessage.remove();
 	}, 3000);
 }
 
@@ -275,14 +258,14 @@ const manipRows = event => {
 			.doc(userUID)
 			.get()
 			.then(function (doc) {
-				let data = doc.data().rowcount;
 				let objectArray = doc.data().rowObjects;
-				let deleteObject = objectArray.find(value => value.id === data);
-				if (data > 0) {
+				let deleteObject = objectArray.find(
+					value => value.id === objectArray.length - 1
+				);
+				if (objectArray.length - 1 > 0) {
 					db.collection('dailyChecking')
 						.doc(userUID)
 						.update({
-							rowcount: firebase.firestore.FieldValue.increment(-1),
 							rowObjects: firebase.firestore.FieldValue.arrayRemove(
 								deleteObject
 							),
@@ -299,70 +282,62 @@ const manipRows = event => {
 				}
 			})
 			.catch(function (error) {
-				console.log('Failed retrieving rowcount:', error);
+				console.error('Failed retrieving rowObjects:', error);
 				target.removeAttribute('disabled');
 			});
 	} else if (target.innerHTML === 'Add') {
 		target.setAttribute('disabled', 'disabled');
+
 		db.collection('dailyChecking')
 			.doc(userUID)
-			.update({
-				rowcount: firebase.firestore.FieldValue.increment(1),
-			})
-			.then(function () {
-				db.collection('dailyChecking')
-					.doc(userUID)
-					.get()
-					.then(function (doc) {
-						let id = doc.data().rowcount;
-						const rowItem = document.createElement('form');
-						rowItem.classList.add('flex', 'jc-c', 'table-row');
-						rowItem.innerHTML = `<div id="format-${id}" class="row-format" style="background-color: rgb(255, 255, 255);"></div>
+			.get()
+			.then(function (doc) {
+				let id = doc.data().rowObjects.length;
+				const rowItem = document.createElement('form');
+				rowItem.id = `row-${id}`;
+				rowItem.setAttribute('draggable', true);
+				rowItem.classList.add('flex', 'jc-c', 'table-row');
+				rowItem.innerHTML = `<div id="format-${id}" class="row-format"></div>
 							<div>
-							<input type="text" name="table" list="names" class="inputElement" autocomplete="off" pattern="[a-zA-Z0-9]+" id="table-${id}" />
+							<input id="table-${id}" class="inputElement highlight-this table-name" type="text" name="table" list="names" autocomplete="off" pattern="[a-zA-Z0-9]+"/>
 							</div>
 							<div>
-							<input id="platform-${id}" name="platform" type="text" list="platforms" autocomplete="off"/>
+							<input id="platform-${id}" class="highlight-this platform-name" name="platform" type="text" list="platforms" autocomplete="off"/>
 							</div>
 							<div>
-							<input type="text" name="casino" id="casino-${id}" list="casinos" class="inputElement" autocomplete="off"/>
+							<input id="casino-${id}" class="inputElement highlight-this casino-name" type="text" name="casino"  list="casinos" autocomplete="off"/>
 							</div>
 							<span id="counter-${id}" class="counter highlight-this invalid">0</span>
-							<input id="target-${id}" type="number" class="target highlight-this" value="1" maxlength="2" min="0" max="12" />
-							<button id="${id}" class="submitButton" type="button">
+							<input id="target-${id}" class="target highlight-this" type="number" value="1" maxlength="2" min="0" max="12" />
+							<button id="${id}" class="submitButton highlight-this" type="button">
 							Submit
 							</button>`;
-						rowManip.before(rowItem);
-						db.collection('dailyChecking')
-							.doc(userUID)
-							.update({
-								rowObjects: firebase.firestore.FieldValue.arrayUnion({
-									id: id,
-									name: '',
-									platform: '',
-									casino: '',
-									counter: 0,
-									target: 1,
-									color: 'rgb(17, 143, 160)',
-								}),
-							})
-							.then(function () {
-								console.log('Row successfully added!');
-								tableRows = document.querySelectorAll('.table-row');
-								target.removeAttribute('disabled');
-							})
-							.catch(function (error) {
-								console.error('Error adding Object row: ', error);
-								target.removeAttribute('disabled');
-							});
+				rowManip.before(rowItem);
+				db.collection('dailyChecking')
+					.doc(userUID)
+					.update({
+						rowObjects: firebase.firestore.FieldValue.arrayUnion({
+							id: id,
+							name: '',
+							platform: '',
+							casino: '',
+							counter: 0,
+							target: 1,
+							color: '',
+						}),
+					})
+					.then(function () {
+						console.log('Row successfully added!');
+						tableRows = document.querySelectorAll('.table-row');
+						target.removeAttribute('disabled');
 					})
 					.catch(function (error) {
-						console.error('Failed retrieving rowcount:', error);
+						console.error('Error adding rowObject: ', error);
 						target.removeAttribute('disabled');
 					});
 			})
 			.catch(function (error) {
-				console.error('Error incrementing rowcount: ', error);
+				console.error('Failed retrieving current rowObjects:', error);
 				target.removeAttribute('disabled');
 			});
 	}
@@ -434,7 +409,7 @@ const updateCounterAndOptions = event => {
 			counter.classList.add('highlighted-row');
 			targetNumber.classList.add('highlighted-row');
 			submitButton.classList.add('highlighted-row');
-		} else if (event.type === 'mouseout') {
+		} else if (event.type === 'mouseout' || event.type === 'click') {
 			tableName.classList.remove('highlighted-row');
 			platform.classList.remove('highlighted-row');
 			casino.classList.remove('highlighted-row');
@@ -453,8 +428,6 @@ const updateCounterAndOptions = event => {
 			counter = document.querySelector(`#counter-${target.id}`),
 			goal = document.querySelector(`#target-${target.id}`);
 
-		let counterNumber = Number.parseInt(counter.innerHTML) + 1;
-
 		//getting the entire firestore array, because you can't update specific values in the cloud
 		db.collection('dailyChecking')
 			//changing the following userUID helps copying row state between users
@@ -463,31 +436,49 @@ const updateCounterAndOptions = event => {
 			.then(function (doc) {
 				if (tableName != '' && platform != '' && casino != '') {
 					let rowObjects = doc.data().rowObjects;
-					let rowcount = doc.data().rowcount;
-					let update = rowObjects[target.id];
+					let persona = doc.data().nameSurname;
 					let clientTime = new Date();
-					update.casino = casino;
-					update.name = tableName;
-					update.platform = platform;
-					update.counter = counterNumber;
-					update.target = Number.parseInt(goal.value);
-					rowObjects[target.id] = update;
+
+					rowObjects.forEach(object => {
+						if (object.id > 0) {
+							object.color = document.getElementById(
+								`format-${object.id}`
+							).style.backgroundColor;
+
+							if (object.id == Number.parseInt(target.id)) {
+								object.counter = Number.parseInt(
+									document.getElementById(`counter-${object.id}`).innerHTML
+								);
+
+								object.counter++;
+							}
+							object.target = Number.parseInt(
+								document.getElementById(`target-${object.id}`).value
+							);
+						}
+						object.name = document.getElementById(`table-${object.id}`).value;
+						object.platform = document.getElementById(
+							`platform-${object.id}`
+						).value;
+						object.casino = document.getElementById(
+							`casino-${object.id}`
+						).value;
+					});
 					db.collection('dailyChecking')
 						.doc(userUID)
 						.update({
 							rowObjects: rowObjects,
-							rowcount: rowcount,
 							tracking: firebase.firestore.FieldValue.arrayUnion({
 								name: tableName,
 								platform: platform,
 								casino: casino,
-								qa: userUID,
+								qa: persona,
+								id: target.id,
 								when: clientTime,
 							}),
 						})
 						.then(function () {
-							console.log('Tracking DB updated');
-							let x = counter.innerHTML,
+							let x = Number.parseInt(counter.innerHTML),
 								y = goal.value;
 							x++;
 							counter.innerHTML = x;
@@ -499,15 +490,18 @@ const updateCounterAndOptions = event => {
 								counter.classList.add('invalid');
 								counter.classList.remove('valid');
 							}
-							target.blur();
 							newToaster('Added', 'success');
+							target.blur();
+							target.removeAttribute('disabled');
 						})
 						.catch(function (error) {
+							newToaster('Error', 'fail');
+							target.blur();
+							target.removeAttribute('disabled');
 							console.error(error);
 						});
 				} else {
 					let rowObjects = doc.data().rowObjects;
-					let rowcount = doc.data().rowcount;
 					let update = rowObjects[target.id];
 					update.casino = casino;
 					update.name = tableName;
@@ -519,23 +513,26 @@ const updateCounterAndOptions = event => {
 						.doc(userUID)
 						.update({
 							rowObjects: rowObjects,
-							rowcount: rowcount,
 						})
 						.then(function () {
-							console.log('Row updated');
-							newToaster('Error', 'fail');
+							newToaster('Updated', 'success');
+							target.blur();
+							target.removeAttribute('disabled');
 						})
 						.catch(function (error) {
+							newToaster('Error', 'fail');
+							target.blur();
+							target.removeAttribute('disabled');
 							console.error(error);
 						});
 				}
 			})
 			.catch(error => {
+				newToaster('Error', 'fail');
+				target.blur();
+				target.removeAttribute('disabled');
 				console.error(error);
-				newToaster('Failed', 'fail');
 			});
-
-		target.removeAttribute('disabled');
 	} else if (target.id === 'save-button' && event.type === 'click') {
 		let newTableRowOrder = [];
 
@@ -554,16 +551,25 @@ const updateCounterAndOptions = event => {
 		//Re-assigning values to DOM elements
 		for (let i = 0; i < newTableRowOrder.length; i++) {
 			// DIVs and SPANs are not elements, thus need to be accessed through children
+			tableRows[i].id = newTableRowOrder[i].id;
+			tableRows[i].children[0].id = newTableRowOrder[i].children[0].id;
 			tableRows[i].children[0].style.backgroundColor =
 				newTableRowOrder[i].children[0].style.backgroundColor;
+			tableRows[i][0].id = newTableRowOrder[i][0].id;
 			tableRows[i][0].value = newTableRowOrder[i][0].value;
+			tableRows[i][1].id = newTableRowOrder[i][1].id;
 			tableRows[i][1].value = newTableRowOrder[i][1].value;
+			tableRows[i][2].id = newTableRowOrder[i][2].id;
 			tableRows[i][2].value = newTableRowOrder[i][2].value;
+			tableRows[i].children[4].id = newTableRowOrder[i].children[4].id;
 			tableRows[i].children[4].innerText =
 				newTableRowOrder[i].children[4].innerText;
+			tableRows[i][3].id = newTableRowOrder[i][3].id;
 			tableRows[i][3].value = newTableRowOrder[i][3].value;
+			tableRows[i][4].id = newTableRowOrder[i][4].id;
 		}
 
+		tableRows = document.querySelectorAll('.table-row');
 		allCounters = document.querySelectorAll('.counter');
 		allTargets = document.querySelectorAll('.target');
 
@@ -588,26 +594,25 @@ const updateCounterAndOptions = event => {
 			.get()
 			.then(function (doc) {
 				let rowObjects = doc.data().rowObjects;
-				rowObjects.forEach(object => {
-					if (object.id > 0) {
-						object.color = document.getElementById(
-							`format-${object.id}`
-						).style.backgroundColor;
-					}
-					object.name = document.getElementById(`table-${object.id}`).value;
-					object.platform = document.getElementById(
-						`platform-${object.id}`
-					).value;
-					object.casino = document.getElementById(`casino-${object.id}`).value;
-					if (object.id > 0) {
-						object.counter = Number.parseInt(
-							document.getElementById(`counter-${object.id}`).innerHTML
-						);
-						object.target = Number.parseInt(
-							document.getElementById(`target-${object.id}`).value
-						);
-					}
-				});
+
+				for (let i = 0; i < tableRows.length; i++) {
+					rowObjects[i + 1].id = tableRows[i].id.substring(
+						tableRows[i].id.indexOf('-') + 1
+					);
+					rowObjects[i + 1].color =
+						tableRows[i].children[0].style.backgroundColor;
+
+					rowObjects[i + 1].name = tableRows[i][0].value;
+
+					rowObjects[i + 1].platform = tableRows[i][1].value;
+
+					rowObjects[i + 1].casino = tableRows[i][2].value;
+
+					rowObjects[i + 1].counter = Number.parseInt(
+						tableRows[i].children[4].innerHTML
+					);
+					rowObjects[i + 1].target = Number.parseInt(tableRows[i][3].value);
+				}
 
 				db.collection('dailyChecking')
 					.doc(userUID)
@@ -625,8 +630,6 @@ const updateCounterAndOptions = event => {
 				console.log(error);
 			});
 	} else if (target.id === 'reset-button' && event.type === 'click') {
-		let goal = document.querySelectorAll('.target');
-
 		//getting the entire firestore array, because you can't update specific values in the cloud
 		db.collection('dailyChecking')
 			//changing the following userUID helps copying row state between users
@@ -697,74 +700,55 @@ const updateCounterAndOptions = event => {
 				.get()
 				.then(function (doc) {
 					let rowObjects = doc.data().rowObjects;
-					let rowcount = doc.data().rowcount;
 					let tracking = doc.data().tracking;
 					let lastTracked = tracking.pop();
 
+					// Decrementing counter for the corresponding Object
+					rowObjects[
+						rowObjects.findIndex(object => object.id === lastTracked.id)
+					].counter--;
+
 					//updating row counter value in the DB
-					let i = 0;
-					do {
-						if (
-							lastTracked.name === rowObjects[i].name &&
-							lastTracked.platform === rowObjects[i].platform &&
-							lastTracked.casino === rowObjects[i].casino
-						) {
-							rowObjects[i].counter--;
-							break;
-						}
-						i++;
-					} while (i < rowObjects.length - 1);
 					db.collection('dailyChecking')
 						.doc(userUID)
 						.update({
 							rowObjects: rowObjects,
-							rowcount: rowcount,
 							tracking: tracking,
 						})
 						.then(function () {
-							let allGameTables = document.querySelectorAll('.table-name');
-							let allPlatforms = document.querySelectorAll('.platform-name');
-							let allCasinos = document.querySelectorAll('.casino-name');
+							let matchedCounter = document.getElementById(
+								`counter-${lastTracked.id}`
+							);
+							let matchedCountersTarget = document.getElementById(
+								`target-${lastTracked.id}`
+							);
 
-							//i = 1 to ignore main-row
-							let i = 0;
+							matchedCounter.innerHTML--;
 
-							do {
-								if (
-									lastTracked.name === allGameTables[i].value &&
-									lastTracked.platform === allPlatforms[i].value &&
-									lastTracked.casino === allCasinos[i].value
-								) {
-									let matchedCounter = document.getElementById(`counter-${i}`);
-									let matchedCountersTarget = document.getElementById(
-										`target-${i}`
-									);
+							if (
+								Number.parseInt(matchedCounter.innerHTML) >=
+								matchedCountersTarget.value
+							) {
+								matchedCounter.classList.add('valid');
+								matchedCounter.classList.remove('invalid');
+							} else {
+								matchedCounter.classList.add('invalid');
+								matchedCounter.classList.remove('valid');
+							}
 
-									matchedCounter.innerHTML--;
-
-									if (matchedCounter.innerHTML >= matchedCountersTarget.value) {
-										matchedCounter.classList.add('valid');
-										matchedCounter.classList.remove('invalid');
-									} else {
-										matchedCounter.classList.add('invalid');
-										matchedCounter.classList.remove('valid');
-									}
-
-									newToaster('Removed', 'success');
-									target.removeAttribute('disabled');
-									break;
-								}
-								i++;
-							} while (i < allGameTables.length - 1);
+							newToaster('Removed', 'success');
+							target.removeAttribute('disabled');
 						})
 						.catch(error => {
+							newToaster('Retry', 'fail');
 							target.removeAttribute('disabled');
-							console.log(error);
+							console.error(error);
 						});
 				})
 				.catch(error => {
+					newToaster('Retry', 'fail');
 					target.removeAttribute('disabled');
-					console.log(error);
+					console.error(error);
 				});
 		} else {
 			newToaster('Invalid', 'fail');
@@ -838,15 +822,179 @@ const clearInputValues = event => {
 	}
 };
 
+const moveRows = event => {
+	if (event.type === 'dragstart') {
+		event.dataTransfer.setData('text', event.target.closest('.table-row').id);
+
+		let targetID = event.dataTransfer.getData('text');
+		let currentRowIndex;
+
+		document.getElementById(targetID).classList.add('move-rows-target-up');
+
+		for (let i = 0; i < tableRows.length; i++) {
+			if (tableRows[i].id === targetID) {
+				currentRowIndex = i;
+			}
+		}
+
+		for (let i = currentRowIndex; i < tableRows.length - 1; i++) {
+			tableRows[i + 1].classList.add('move-rows-target-down');
+		}
+	} else if (
+		event.type === 'dragenter' &&
+		event.target.classList.contains('drag') &&
+		!event.target
+			.closest('.table-row')
+			.classList.contains('move-rows-target-up')
+	) {
+		let direction = 'up';
+
+		event.target
+			.closest('.table-row')
+			.classList.contains('move-rows-target-down')
+			? (direction = 'down')
+			: (direction = 'up');
+
+		if (document.getElementById('temp-row')) {
+			document.getElementById('temp-row').remove();
+		}
+
+		let tempRow = document.createElement('div');
+		tempRow.id = 'temp-row';
+		tempRow.classList.add(event.target.id);
+		tempRow.style.width = '100%';
+		tempRow.style.height = '20px';
+		tempRow.style.backgroundColor = 'white';
+		tempRow.style.border = '1px dotted black';
+		tempRow.style.borderRadius = '3px';
+		tempRow.style.marginTop = '3px';
+
+		switch (direction) {
+			case 'up':
+				event.target.closest('.table-row').before(tempRow);
+				break;
+			case 'down':
+				event.target.closest('.table-row').after(tempRow);
+				break;
+			default:
+				break;
+		}
+	} else if (event.type === 'dragover') {
+		event.preventDefault();
+	} else if (event.type === 'dragleave') {
+	} else if (event.type === 'drop' && event.target.id === 'temp-row') {
+		event.preventDefault();
+
+		let data = event.dataTransfer.getData('text');
+		document.getElementById(data).classList.remove('move-rows-target-up');
+
+		for (let i = 1; i <= tableRows.length; i++) {
+			document
+				.getElementById('row-' + i)
+				.classList.remove('move-rows-target-down');
+		}
+
+		event.target.before(document.getElementById(data));
+		event.target.remove();
+		event.dataTransfer.clearData();
+
+		tableRows = document.querySelectorAll('.table-row');
+
+		//=================================================================
+
+		// Following code re-apply IDs in ascending order
+
+		//=================================================================
+
+		// //Re-assigning values to DOM elements
+		// for (let i = 0; i < tableRows.length; i++) {
+		// 	// DIVs and SPANs are not elements, thus need to be accessed through children
+		// 	tableRows[i].id = 'row-' + (i + 1);
+		// 	tableRows[i].children[0].id = 'format-' + (i + 1);
+		// 	tableRows[i][0].id = 'table-' + (i + 1);
+		// 	tableRows[i][1].id = 'platform-' + (i + 1);
+		// 	tableRows[i][2].id = 'casino-' + (i + 1);
+		// 	tableRows[i].children[4].id = 'counter-' + (i + 1);
+		// 	tableRows[i][3].id = 'target-' + (i + 1);
+		// 	tableRows[i][4].id = i + 1;
+		// }
+
+		// tableRows = document.querySelectorAll('.table-row');
+
+		//=================================================================
+
+		// getting the entire firestore array, because you can't update specific values in the cloud
+		db.collection('dailyChecking')
+			//changing the following userUID helps copying row state between users
+			.doc(userUID)
+			.get()
+			.then(function (doc) {
+				let rowObjects = doc.data().rowObjects;
+
+				for (let i = 0; i < tableRows.length; i++) {
+					rowObjects[i + 1].id = tableRows[i].id.substring(
+						tableRows[i].id.indexOf('-') + 1
+					);
+					rowObjects[i + 1].color =
+						tableRows[i].children[0].style.backgroundColor;
+
+					rowObjects[i + 1].name = tableRows[i][0].value;
+
+					rowObjects[i + 1].platform = tableRows[i][1].value;
+
+					rowObjects[i + 1].casino = tableRows[i][2].value;
+
+					rowObjects[i + 1].counter = Number.parseInt(
+						tableRows[i].children[4].innerHTML
+					);
+					rowObjects[i + 1].target = Number.parseInt(tableRows[i][3].value);
+				}
+
+				db.collection('dailyChecking')
+					.doc(userUID)
+					.update({
+						rowObjects: rowObjects,
+					})
+					.then(function () {})
+					.catch(function (error) {
+						console.error(error);
+					});
+			})
+			.catch(error => {
+				console.error(error);
+			});
+	} else if (event.type === 'drop' && event.target.id !== 'temp-row') {
+		if (document.getElementById('temp-row')) {
+			document.getElementById('temp-row').remove();
+
+			let data = event.dataTransfer.getData('text');
+			document.getElementById(data).classList.remove('move-rows-target-up');
+
+			for (let i = 1; i <= tableRows.length; i++) {
+				document
+					.getElementById('row-' + i)
+					.classList.remove('move-rows-target-down');
+			}
+			tableRows = document.querySelectorAll('.table-row');
+		}
+	}
+};
+
 //Added another eventlistener due to DOM Event delegation
 checkRows.addEventListener('click', updateCounterAndOptions);
 checkRows.addEventListener('keyup', updateCounterAndOptions);
 checkRows.addEventListener('mouseover', updateCounterAndOptions);
 checkRows.addEventListener('mouseout', updateCounterAndOptions);
 checkRows.addEventListener('change', updateCounterAndOptions);
-//using focusin over focus because the it bubbles through the checkRows,
+//using focusin over focus because it bubbles through the checkRows,
 //thus there is no need to assign multiple elements
 checkRows.addEventListener('focusin', clearInputValues);
+
+document.body.addEventListener('dragstart', moveRows);
+document.body.addEventListener('dragenter', moveRows);
+document.body.addEventListener('dragover', moveRows);
+document.body.addEventListener('dragleave', moveRows);
+document.body.addEventListener('drop', moveRows);
 
 popOutBtn.onclick = function () {
 	window.open(

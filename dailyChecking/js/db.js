@@ -1,28 +1,23 @@
 'use strict';
 // Firebase configuration
 const firebaseConfig = {
-	apiKey: 'AIzaSyCOiJc8EKT9DyXyuAKPeKpJLnvYs_vINFU',
-	authDomain: 'starlit-braid-276207.firebaseapp.com',
-	databaseURL: 'https://starlit-braid-276207.firebaseio.com',
-	projectId: 'starlit-braid-276207',
-	storageBucket: 'starlit-braid-276207.appspot.com',
-	messagingSenderId: '30277815528',
-	appId: '1:30277815528:web:517d7d0743d3d5530a4d5d',
+	apiKey: 'AIzaSyA3iWhjLXUOmjnidixx6GC_DT5M2Ddt4bI',
+	authDomain: 'daily-checking.firebaseapp.com',
+	databaseURL: 'https://daily-checking.firebaseio.com',
+	projectId: 'daily-checking',
+	storageBucket: 'daily-checking.appspot.com',
+	messagingSenderId: '79540097878',
+	appId: '1:79540097878:web:b847d77934b24aad0efcf7',
 };
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 
 const styleSheet = document.getElementById('style'),
+	logOutButton = document.getElementById('logout-button'),
+	popOutBtn = document.getElementById('pop-out'),
 	themeToggle = document.querySelector('.theme-label'),
 	themeSwitch = document.querySelector('#switch'),
 	theBall = document.querySelector('.ball'),
-	loginForm = document.getElementById('login-form'),
-	emailDiv = document.getElementById('email-div'),
-	passwordDiv = document.getElementById('password-div'),
-	txtUser = document.getElementById('txt-user'),
-	txtPass = document.getElementById('txt-pass'),
-	loginButton = document.getElementById('login-button'),
-	logoutButton = document.getElementById('logout-button'),
 	trackingFrom = document.querySelector('#tracking-from'),
 	trackingTo = document.querySelector('#tracking-to'),
 	trackingName = document.querySelector('#tracking-name'),
@@ -45,80 +40,24 @@ let userUID,
 	online = false,
 	csvArray = '';
 
-//Add login event
-loginButton.addEventListener('click', function () {
-	const email = txtUser.value;
-	const pass = txtPass.value;
-	const authPromise = auth.signInWithEmailAndPassword(email, pass);
-
-	authPromise
-		.then(function () {
-			console.log('Login successful!');
-			txtUser.classList.remove('empty-value');
-			txtPass.classList.remove('empty-value');
-		})
-		.catch(error => {
-			console.error(error.message);
-			if (
-				error.message ===
-				'There is no user record corresponding to this identifier. The user may have been deleted.'
-			) {
-				txtUser.classList.add('empty-value');
-				txtUser.focus();
-			} else if (
-				error.message ===
-				'The password is invalid or the user does not have a password.'
-			) {
-				txtPass.classList.add('empty-value');
-				txtPass.focus();
-			}
-		});
-});
-
 firebase.auth().onAuthStateChanged(dailyCheckingUser => {
 	if (dailyCheckingUser) {
 		userUID = dailyCheckingUser.uid;
-		let greeting = document.createElement('h6');
-		let qa;
-		switch (userUID) {
-			case 'eckYksePcfdox9I4FLVwTe72bSk1':
-				qa = 'Ottigan';
-				break;
-			case '1BRPSY3Q0yOeI7ReCCrRuVx0Fdo2':
-				qa = 'Unicorn';
-				break;
-			case '2Rvrq1fn5sdCWnpxZbT3lZrUbDm1':
-				qa = 'Martiwka';
-				break;
-			case 'w967NxXDmwUxMMhhKyQizzF5B8S2':
-				qa = 'Boss';
-				break;
-			case '6pLL44pT1SaihfvEtT99tNuKDB42':
-				qa = 'Sauļuk';
-				break;
-			case 'a6CtpqvK26SqM1sulP86gCL5jYB2':
-				qa = 'Sette e Mezzo';
-				break;
-			case 'Y9MfBHGQ0YdC8k2XHBbQtgRQ6m72':
-				qa = '4chan.org/g/audio_god';
-				break;
-			case 'B1sw8yVyBfTuguw1tKizaHy7AFY2':
-				qa = 'Falcon';
-			case 'sBQRKGFdyiXkTgkxOJzEEUfF8m32':
-				qa = 'Mr.Ponytail';
-				break;
-			default:
-				qa = '';
-		}
-		greeting.innerText = `Welcome, ${qa}!`;
-		greeting.style.cssText =
-			'margin-bottom: 3px; align-self: flex-end; color: white; visibility: visible; font-family: Georgia, "Times New Roman", Times, serif; font-weight: 400';
-		logoutButton.before(greeting);
 
-		logoutButton.style.display = 'inline';
-		emailDiv.style.display = 'none';
-		passwordDiv.style.display = 'none';
-		loginButton.style.display = 'none';
+		db.collection('dailyChecking')
+			.doc(userUID)
+			.get()
+			.then(function (doc) {
+				let qa = doc.data().nickname[0];
+				let greeting = document.createElement('h6');
+
+				greeting.innerText = `Welcome, ${qa}!`;
+				greeting.classList.add('greeting');
+				logOutButton.before(greeting);
+			})
+			.catch(function (error) {
+				console.error(error);
+			});
 
 		//fetching data for dynamic Table Name suggestions
 		db.collection('dailyChecking')
@@ -144,19 +83,12 @@ firebase.auth().onAuthStateChanged(dailyCheckingUser => {
 
 		online = true;
 	} else {
-		logoutButton.style.display = 'none';
-		emailDiv.style.display = 'flex';
-		passwordDiv.style.display = 'flex';
-		loginButton.style.display = 'inline';
-		online = false;
+		window.location.replace('.');
 	}
 });
 
-logoutButton.addEventListener('click', function () {
-	auth.signOut().then(function () {
-		document.querySelector('h6').remove();
-		logoutButton.classList = 'hide-logout';
-	});
+logOutButton.addEventListener('click', function () {
+	auth.signOut().then(function () {});
 });
 
 const updateOptions = event => {
@@ -210,9 +142,6 @@ trackingSearchBtn.onclick = function () {
 	loadingBar.id = 'loading-bar';
 	loadingBar.innerHTML = '<div id="loading-body"></div>';
 	dbData.append(loadingBar);
-	setTimeout(() => {
-		document.getElementById('loading-bar').remove();
-	}, 2000);
 
 	tableBody.innerHTML = '';
 	csvArray = '';
@@ -223,10 +152,11 @@ trackingSearchBtn.onclick = function () {
 	}
 
 	if (online) {
+		// Timeout added for better visual transition, otherwise the info loads too fast...
 		setTimeout(() => {
 			//fetching data from all user profiles about the check performed
 			db.collection('dailyChecking')
-				.where('rowcount', '>=', 0)
+				.orderBy('tracking')
 				.get()
 				.then(function (data) {
 					data.forEach(function (doc) {
@@ -240,43 +170,14 @@ trackingSearchBtn.onclick = function () {
 							}
 						}
 					});
-					//Sorting in descending order the gathered check objects Oldest => Newest
+
+					// when data is stored we remove the bar
+					document.getElementById('loading-bar').remove();
+
+					//Sorting in descending order the gathered check objects Newest => Oldest
 					dbTracking.sort((a, b) => b.when.seconds - a.when.seconds);
 
 					dbTracking.forEach(object => {
-						let qa;
-						switch (object.qa) {
-							case 'eckYksePcfdox9I4FLVwTe72bSk1':
-								qa = 'Janis Malcans';
-								break;
-							case '1BRPSY3Q0yOeI7ReCCrRuVx0Fdo2':
-								qa = 'Aleksandra Pancernaja';
-								break;
-							case '2Rvrq1fn5sdCWnpxZbT3lZrUbDm1':
-								qa = 'Anastasija Dmitrijeva';
-								break;
-							case 'w967NxXDmwUxMMhhKyQizzF5B8S2':
-								qa = 'Diana Anca';
-								break;
-							case '6pLL44pT1SaihfvEtT99tNuKDB42':
-								qa = 'Sanija Mikulska';
-								break;
-							case 'a6CtpqvK26SqM1sulP86gCL5jYB2':
-								qa = 'Elina Gailisa';
-								break;
-							case 'Y9MfBHGQ0YdC8k2XHBbQtgRQ6m72':
-								qa = 'Antons Cinakovs';
-								break;
-							case 'B1sw8yVyBfTuguw1tKizaHy7AFY2':
-								qa = 'Vladislavs Sokols';
-								break;
-							case 'sBQRKGFdyiXkTgkxOJzEEUfF8m32':
-								qa = 'Marks Lubinskis';
-								break;
-							default:
-								qa = '';
-						}
-
 						// using toISOString because the format is the easiest to adapt for Excel
 						let timeISO = new Date(
 							(object.when.seconds + 10800) * 1000
@@ -302,7 +203,7 @@ trackingSearchBtn.onclick = function () {
 						rowElement.innerHTML = `<td>${object.name}</td>
 								<td>${object.platform}</td>
 								<td>${object.casino}</td>
-								<td>${qa}</td>
+								<td>${object.qa}</td>
                                 <td>${timeToString}</td>`;
 
 						if (
@@ -313,7 +214,7 @@ trackingSearchBtn.onclick = function () {
 							trackingCasino.value === object.casino
 						) {
 							tableBody.append(rowElement);
-							csvArray += `\n${object.name},${object.platform},${object.casino},${qa},${timeToString}`;
+							csvArray += `\n${object.name},${object.platform},${object.casino},${object.qa},${timeToString}`;
 						} else if (
 							fromSeconds <= objectSeconds &&
 							objectSeconds <= toSeconds &&
@@ -321,7 +222,7 @@ trackingSearchBtn.onclick = function () {
 							trackingPlatform.value === object.platform
 						) {
 							tableBody.append(rowElement);
-							csvArray += `\n${object.name},${object.platform},${object.casino},${qa},${timeToString}`;
+							csvArray += `\n${object.name},${object.platform},${object.casino},${object.qa},${timeToString}`;
 						} else if (
 							fromSeconds <= objectSeconds &&
 							objectSeconds <= toSeconds &&
@@ -329,7 +230,7 @@ trackingSearchBtn.onclick = function () {
 							trackingPlatform.value === object.platform
 						) {
 							tableBody.append(rowElement);
-							csvArray += `\n${object.name},${object.platform},${object.casino},${qa},${timeToString}`;
+							csvArray += `\n${object.name},${object.platform},${object.casino},${object.qa},${timeToString}`;
 						} else if (
 							fromSeconds <= objectSeconds &&
 							objectSeconds <= toSeconds &&
@@ -337,28 +238,28 @@ trackingSearchBtn.onclick = function () {
 							trackingCasino.value === object.casino
 						) {
 							tableBody.append(rowElement);
-							csvArray += `\n${object.name},${object.platform},${object.casino},${qa},${timeToString}`;
+							csvArray += `\n${object.name},${object.platform},${object.casino},${object.qa},${timeToString}`;
 						} else if (
 							fromSeconds <= objectSeconds &&
 							objectSeconds <= toSeconds &&
 							trackingName.value === object.name
 						) {
 							tableBody.append(rowElement);
-							csvArray += `\n${object.name},${object.platform},${object.casino},${qa},${timeToString}`;
+							csvArray += `\n${object.name},${object.platform},${object.casino},${object.qa},${timeToString}`;
 						} else if (
 							fromSeconds <= objectSeconds &&
 							objectSeconds <= toSeconds &&
 							trackingCasino.value === object.casino
 						) {
 							tableBody.append(rowElement);
-							csvArray += `\n${object.name},${object.platform},${object.casino},${qa},${timeToString}`;
+							csvArray += `\n${object.name},${object.platform},${object.casino},${object.qa},${timeToString}`;
 						} else if (
 							fromSeconds <= objectSeconds &&
 							objectSeconds <= toSeconds &&
 							trackingPlatform.value === object.platform
 						) {
 							tableBody.append(rowElement);
-							csvArray += `\n${object.name},${object.platform},${object.casino},${qa},${timeToString}`;
+							csvArray += `\n${object.name},${object.platform},${object.casino},${object.qa},${timeToString}`;
 						} else if (
 							fromSeconds <= objectSeconds &&
 							objectSeconds <= toSeconds &&
@@ -367,7 +268,7 @@ trackingSearchBtn.onclick = function () {
 							!trackingCasino.value
 						) {
 							tableBody.append(rowElement);
-							csvArray += `\n${object.name},${object.platform},${object.casino},${qa},${timeToString}`;
+							csvArray += `\n${object.name},${object.platform},${object.casino},${object.qa},${timeToString}`;
 						}
 					});
 					if (tableBody.childElementCount > 1) {
@@ -384,8 +285,19 @@ trackingSearchBtn.onclick = function () {
 				.catch(function (error) {
 					console.log('Error getting documents: ', error);
 				});
-		}, 2000);
+		}, 1200);
 	}
+};
+
+popOutBtn.onclick = function () {
+	window.open(
+		document.URL,
+		'targetWindow',
+		`width=990,
+		height=982,
+		left=2842,
+		top=0`
+	);
 };
 
 themeToggle.onclick = function () {

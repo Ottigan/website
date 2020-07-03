@@ -8,6 +8,7 @@
 			href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap"
 			rel="stylesheet"
 		/>
+		<link rel="icon" href="./assets/favicon.ico" />
 		<link id="style" rel="stylesheet" href="css/light.css" />
 		<script src="js/cookies.js"></script>
 	</head>
@@ -15,6 +16,10 @@
 	<body>
 		<header>
 			<nav>
+				<img
+					src="./assets/logo.png"
+					alt="Logo containing a chekmark and words - Daily Checking"
+				/>
 				<div id="burger-container">
 					<input type="checkbox" id="menu-checkbox" />
 					<div id="burger-menu">
@@ -25,38 +30,26 @@
 					<ul class="nav-list">
 						<li><a id="dc" href="main.html">Daily Checking</a></li>
 						<li><a id="tracking" href="db.html">Tracking DB</a></li>
-						<li>
-							<a id="new-product" href="#" style="text-decoration: underline;"
-								>Add New Table/Casino</a
-							>
+						<li class="current-location">
+							<a id="new-product" href="#">Add New Table/Casino</a>
 						</li>
 					</ul>
 				</div>
 				<div class="navSlash"></div>
-				<form id="login-form" action="" method="">
-					<div id="email-div" class="flex vertical">
-						<label for="txt-user">Email</label>
-						<input
-							id="txt-user"
-							name="user"
-							type="email"
-							autocomplete="username"
-						/>
-					</div>
-					<div id="password-div" class="flex vertical">
-						<label for="txt-pass">Password</label>
-						<input
-							id="txt-pass"
-							name="pass"
-							type="password"
-							autocomplete="current-password"
-						/>
-					</div>
-					<button id="login-button" type="button">Log In</button>
+				<div id="log-out-container">
 					<button id="logout-button" type="button">
 						Log Out
 					</button>
-				</form>
+				</div>
+				<svg
+					id="pop-out"
+					style="width: 38px; height: 38px;"
+					viewBox="0 0 24 24"
+				>
+					<path
+						d="M14,3V5H17.59L7.76,14.83L9.17,16.24L19,6.41V10H21V3M19,19H5V5H12V3H5C3.89,3 3,3.9 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V12H19V19Z"
+					/>
+				</svg>
 				<div class="toggle-container">
 					<input type="checkbox" id="switch" name="theme" />
 					<label for="switch" class="theme-label">
@@ -89,7 +82,7 @@
 		</header>
 		<section style="margin-top: 50px;" class="flex jc-c">
 			<div class="flex vertical">
-				<div style="margin-bottom: 5px;" class="container flex jc-sb">
+				<div id="new-item-container" class="container flex jc-sb">
 					<form action="" style="width: 45%; margin: 0 3px 0 0;" class="flex">
 						<div class="flex flex-grow">
 							<input
@@ -129,7 +122,6 @@
 						</button>
 					</form>
 				</div>
-				<hr />
 				<div style="margin-top: 20px;" class="flex jc-sb">
 					<div style="width: 45%;">
 						<ul id="table-list" class="ls-none"></ul>
